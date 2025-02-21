@@ -11,6 +11,8 @@ type MigrationFn = ({
 export const enableThreadMessageTtsKey: MigrationFn = async ({
   oldRawSettings,
 }) => {
+  console.log("[ExtUpdateMigrations] Enable Thread Message TTS Key");
+
   return produce(oldRawSettings, (draft) => {
     draft.plugins["thread:messageTts"] = {
       enabled: true,

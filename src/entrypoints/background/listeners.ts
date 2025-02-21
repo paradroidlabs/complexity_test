@@ -4,15 +4,9 @@ import { onMessage } from "webext-bridge/background";
 import { APP_CONFIG } from "@/app.config";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { ExtensionLocalStorageApi } from "@/services/extension-local-storage/extension-local-storage-api";
-import {
-  ExtensionLocalStorage,
-  ExtensionLocalStorageSchema,
-} from "@/services/extension-local-storage/extension-local-storage.types";
 import { hasRequiredPermissions } from "@/services/pplx-theme-preloader";
-import { errorWrapper } from "@/utils/error-wrapper";
 import { ExtensionVersion } from "@/utils/ext-version";
 import { getThemeCss } from "@/utils/pplx-theme-loader-utils";
-import { EXT_UPDATE_MIGRATIONS } from "@/utils/update-migrations";
 import { getOptionsPageUrl } from "@/utils/utils";
 
 export type BackgroundEvents = {
@@ -26,8 +20,6 @@ export function setupBackgroundListeners() {
   extensionIconActionListener();
 
   onboardingFlowTrigger();
-
-  updateMigrations();
 
   invalidateCdnCache();
 
@@ -136,43 +128,4 @@ function extensionIconActionListener() {
       chrome.tabs.create({ url: "https://perplexity.ai/" });
     else chrome.runtime.openOptionsPage();
   });
-}
-
-function updateMigrations() {
-  chrome.runtime.onInstalled.addListener(
-    async ({ reason, previousVersion }) => {
-      if (reason !== chrome.runtime.OnInstalledReason.UPDATE) return;
-
-      if (!previousVersion) return;
-
-      console.log("Upgraded from", previousVersion, "to", APP_CONFIG.VERSION);
-
-      const migrations = Object.entries(EXT_UPDATE_MIGRATIONS);
-
-      let migratedSettings: ExtensionLocalStorage | null = null;
-
-      for (const [version, migrationFns] of migrations) {
-        if (new ExtensionVersion(version).isNewerThan(previousVersion)) {
-          for (const migrationFn of migrationFns) {
-            const oldRawSettings =
-              migratedSettings ?? (await ExtensionLocalStorageApi.get());
-            const [newSettings, error] = await errorWrapper(
-              (): Promise<ExtensionLocalStorage> =>
-                migrationFn({ oldRawSettings }),
-            )();
-
-            if (error) continue;
-
-            migratedSettings = newSettings;
-          }
-        }
-      }
-
-      if (migratedSettings) {
-        ExtensionLocalStorageApi.set(
-          ExtensionLocalStorageSchema.parse(migratedSettings),
-        );
-      }
-    },
-  );
 }
