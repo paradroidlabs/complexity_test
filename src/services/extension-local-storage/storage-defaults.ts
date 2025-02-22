@@ -1,9 +1,9 @@
+import { APP_CONFIG } from "@/app.config";
 import { getPlatform } from "@/hooks/usePlatformDetection";
 import { ExtensionLocalStorage } from "@/services/extension-local-storage/extension-local-storage.types";
-import packageJson from "~/package.json";
 
 export const DEFAULT_STORAGE: ExtensionLocalStorage = {
-  schemaVersion: packageJson.version,
+  schemaVersion: APP_CONFIG.VERSION,
   showPostUpdateReleaseNotesPopup: false,
   isPostUpdateReleaseNotesPopupDismissed: false,
   plugins: {

@@ -37,22 +37,19 @@ export function setPathToUndefined({
   paths: string[];
   obj: Record<string, any>;
 }): Record<string, any> {
-  // Create a deep copy of the object to avoid mutations
-  const result = JSON.parse(JSON.stringify(obj));
+  const result = cloneDeep(obj);
 
   let current = result;
 
-  // Traverse through all paths except the last one
   for (let i = 0; i < paths.length - 1; i++) {
     const path = paths[i];
     if (path != null && typeof current[path] === "object") {
       current = current[path];
     } else {
-      return result; // Return if path doesn't exist
+      return result;
     }
   }
 
-  // Set the last path to undefined
   if (paths.length > 0) {
     const lastPath = paths[paths.length - 1];
     if (

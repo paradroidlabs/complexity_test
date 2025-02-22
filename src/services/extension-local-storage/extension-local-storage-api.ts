@@ -1,8 +1,8 @@
 import { ExtensionLocalStorage } from "@/services/extension-local-storage/extension-local-storage.types";
 
 export class ExtensionLocalStorageApi {
-  static async get(): Promise<ExtensionLocalStorage> {
-    return (await chrome.storage.local.get()) as ExtensionLocalStorage;
+  static async get(): Promise<unknown> {
+    return await chrome.storage.local.get();
   }
   static async set(store: ExtensionLocalStorage) {
     await chrome.storage.local.set(store);

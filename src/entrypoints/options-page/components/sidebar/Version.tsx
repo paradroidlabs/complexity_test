@@ -1,6 +1,6 @@
+import { APP_CONFIG } from "@/app.config";
 import { toast } from "@/components/ui/use-toast";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
-import packageJson from "~/package.json";
 
 export default function Version() {
   const { mutation, settings } = useExtensionLocalStorage();
@@ -44,7 +44,7 @@ export default function Version() {
       className="x-mx-auto x-mb-4 x-w-fit x-text-xs x-text-muted-foreground"
       onClick={handleClick}
     >
-      v{packageJson.version}
+      v{APP_CONFIG.VERSION}
     </div>
   );
 }

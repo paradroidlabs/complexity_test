@@ -13,7 +13,6 @@ import {
 import { Image } from "@/components/ui/image";
 import { toast } from "@/components/ui/use-toast";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
-import packageJson from "~/package.json";
 
 export default function ExtensionUpdateInfoDialogWrapper({
   children,
@@ -38,7 +37,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
         </DialogDescription>
         <div className="x-flex x-flex-col x-gap-2">
           <div className="x-mx-auto x-my-0 x-flex x-items-center x-gap-2 x-rounded-md x-border x-border-border/50 x-bg-secondary x-p-4">
-            <div className="">{packageJson.version}</div>
+            <div className="">{APP_CONFIG.VERSION}</div>
             <LuArrowRight className="x-size-4 x-text-muted-foreground" />
             <div className="x-text-xl x-font-semibold x-text-primary">
               {latestVersion}
@@ -46,7 +45,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
           </div>
 
           <div
-            className="x-mx-auto x-flex x-cursor-pointer x-items-center x-gap-2 x-text-muted-foreground hover:x-text-foreground x-underline"
+            className="x-mx-auto x-flex x-cursor-pointer x-items-center x-gap-2 x-text-muted-foreground x-underline hover:x-text-foreground"
             role="link"
             onClick={() => {
               if (!latestVersion) return;

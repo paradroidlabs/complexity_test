@@ -97,7 +97,7 @@ function invalidateCdnCache() {
     async ({ reason, previousVersion }) => {
       if (reason !== chrome.runtime.OnInstalledReason.UPDATE) return;
 
-      const oldRawSettings = await ExtensionLocalStorageApi.get();
+      const oldRawSettings = await ExtensionLocalStorageService.get();
 
       ExtensionLocalStorageApi.set(
         produce(oldRawSettings, (draft) => {

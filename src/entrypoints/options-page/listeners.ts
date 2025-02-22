@@ -1,15 +1,11 @@
 import { APP_CONFIG } from "@/app.config";
-import {
-  ExtensionLocalStorageService,
-  fetchExtensionLocalStorageData,
-} from "@/services/extension-local-storage";
+import { fetchExtensionLocalStorageData } from "@/services/extension-local-storage";
 import { ExtensionPermissionsService } from "@/services/extension-permissions";
 import { getPplxThemePreloaderService } from "@/services/pplx-theme-preloader";
 import { getThemeCss } from "@/utils/pplx-theme-loader-utils";
 import { queryClient } from "@/utils/ts-query-client";
 
 export function setupOptionPageListeners() {
-  ExtensionLocalStorageService.initializeReactiveStore();
   ExtensionPermissionsService.setupReactiveListeners();
 
   const theme = window.matchMedia("(prefers-color-scheme: dark)").matches

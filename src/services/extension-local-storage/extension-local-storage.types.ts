@@ -1,14 +1,14 @@
 import { z } from "zod";
 
+import { APP_CONFIG } from "@/app.config";
 import { EXTENSION_ICON_ACTIONS } from "@/data/dashboard/extension-storage";
 import {
   PluginsSchema,
   PluginId,
 } from "@/services/extension-local-storage/plugins.types";
-import packageJson from "~/package.json";
 
 export const ExtensionLocalStorageSchema = z.object({
-  schemaVersion: z.literal(packageJson.version),
+  schemaVersion: z.literal(APP_CONFIG.VERSION),
   showPostUpdateReleaseNotesPopup: z.boolean(),
   isPostUpdateReleaseNotesPopupDismissed: z.boolean(),
   plugins: PluginsSchema,

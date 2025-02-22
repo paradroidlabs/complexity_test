@@ -1,6 +1,9 @@
 import { produce } from "immer";
 
+import { APP_CONFIG } from "@/app.config";
 import { ExtensionLocalStorage } from "@/services/extension-local-storage/extension-local-storage.types";
+import { errorWrapper } from "@/utils/error-wrapper";
+import { ExtensionVersion } from "@/utils/ext-version";
 
 type MigrationFn = ({
   oldRawSettings,
@@ -114,3 +117,36 @@ export const EXT_UPDATE_MIGRATIONS: Record<string, MigrationFn[]> = {
   "1.4.2.0": [migrateInstantRewriteButtonKey, migrateHideHomepageWidgetsKey],
   "1.6.8.0": [enableThreadMessageTtsKey],
 };
+
+export async function migrateSchemas({
+  previousVersion,
+  rawSettings,
+}: {
+  previousVersion: string;
+  rawSettings: ExtensionLocalStorage;
+}) {
+  if (!previousVersion) return rawSettings;
+
+  console.log("Migrate schema from", previousVersion, "to", APP_CONFIG.VERSION);
+
+  const migrations = Object.entries(EXT_UPDATE_MIGRATIONS);
+
+  let migratedSettings: ExtensionLocalStorage = rawSettings;
+
+  for (const [version, migrationFns] of migrations) {
+    if (new ExtensionVersion(version).isNewerThan(previousVersion)) {
+      for (const migrationFn of migrationFns) {
+        const [newSettings, error] = await errorWrapper(
+          (): Promise<ExtensionLocalStorage> =>
+            migrationFn({ oldRawSettings: migratedSettings }),
+        )();
+
+        if (error || !newSettings) continue;
+
+        migratedSettings = newSettings;
+      }
+    }
+  }
+
+  return migratedSettings;
+}
