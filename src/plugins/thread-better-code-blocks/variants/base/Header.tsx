@@ -1,3 +1,5 @@
+import { LuLoaderCircle } from "react-icons/lu";
+
 import CopyButton from "@/components/CopyButton";
 import { Separator } from "@/components/ui/separator";
 import { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
@@ -69,7 +71,16 @@ const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
       </div>
 
       <div className="x-flex x-items-center x-gap-4">
-        {!isInFlight && (
+        {isInFlight ? (
+          <div className="x-flex x-items-center x-gap-2">
+            {fineGrainedSettings?.placeholderText?.loading && (
+              <div className="x-animate-pulse">
+                {fineGrainedSettings?.placeholderText?.loading}
+              </div>
+            )}
+            <LuLoaderCircle className="x-size-4 x-animate-spin" />
+          </div>
+        ) : (
           <>
             <CanvasSimpleModeRenderButton />
             {isHorizontalOverflowing && <WrapToggleButton />}
