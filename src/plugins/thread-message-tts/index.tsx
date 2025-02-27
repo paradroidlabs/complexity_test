@@ -90,6 +90,9 @@ export default function ThreadMessageTtsButton({
         backendUuid,
         voice: selectedVoice,
         onBufferUpdate: (chunk: Int16Array) => player.addChunk(chunk),
+        onError: () => {
+          setPlaying(false);
+        },
       });
     },
     [playing, player, messageBlockIndex, stopTts, playTts],

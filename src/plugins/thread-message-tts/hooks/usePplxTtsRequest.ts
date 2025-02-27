@@ -20,10 +20,12 @@ export default function usePplxTtsRequest() {
       backendUuid,
       voice,
       onBufferUpdate,
+      onError,
     }: {
       backendUuid: string;
       voice?: TtsVoice;
       onBufferUpdate?: (chunk: Int16Array) => void;
+      onError?: () => void;
     }) => {
       socketRef.current =
         await InternalWebSocketManager.getInstance().handShake({
@@ -45,6 +47,21 @@ export default function usePplxTtsRequest() {
         }
       };
 
+      const handleError = (packet: unknown) => {
+        if (
+          packet != null &&
+          typeof packet === "object" &&
+          "data" in packet &&
+          Array.isArray(packet.data) &&
+          packet.data.length > 1 &&
+          "status" in packet.data[1] &&
+          packet.data[1].status === "failed"
+        ) {
+          onError?.();
+        }
+      };
+
+      socket.io.on("packet", handleError);
       socket.on("audio", handleAudio);
 
       await socket.emitWithAck("voice_over", {
@@ -56,6 +73,7 @@ export default function usePplxTtsRequest() {
       });
 
       socket.off("audio", handleAudio);
+      socket.io.off("packet", handleError);
 
       socket.disconnect();
     },

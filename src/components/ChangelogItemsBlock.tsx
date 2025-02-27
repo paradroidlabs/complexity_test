@@ -8,7 +8,7 @@ const blockVariants = cva("x-my-2 x-rounded-md x-p-4", {
     variant: {
       new: "x-bg-primary/10 [&_[data-releasenote-part='header']]:x-text-primary [&_strong]:x-text-foreground",
       "bug-fix":
-        "x-bg-destructive/10 [&_[data-releasenote-part='header']]:x-text-destructive [&_strong]:x-text-foreground",
+        "x-bg-success/10 [&_[data-releasenote-part='header']]:x-text-success [&_strong]:x-text-success-foreground",
       improvement:
         "x-bg-success/10 [&_[data-releasenote-part='header']]:x-text-success [&_strong]:x-text-success-foreground",
       change: "x-bg-secondary x-text-foreground",
