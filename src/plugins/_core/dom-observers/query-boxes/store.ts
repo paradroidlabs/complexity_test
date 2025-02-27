@@ -18,6 +18,7 @@ export type QueryBoxesDomObserverStoreType = {
   followUp: {
     $followUpQueryBox: JQuery<HTMLElement> | null;
   };
+  activeModelSelector: JQuery<HTMLElement> | null;
 
   resetStore: () => void;
 };
@@ -43,6 +44,7 @@ export const queryBoxesDomObserverStore =
           followUp: {
             $followUpQueryBox: null,
           },
+          activeModelSelector: null,
           resetStore: () => {
             set({
               main: {
@@ -53,6 +55,7 @@ export const queryBoxesDomObserverStore =
               followUp: {
                 $followUpQueryBox: null,
               },
+              activeModelSelector: null,
             });
           },
         }),

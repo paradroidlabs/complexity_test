@@ -9,6 +9,7 @@ const OBSERVER_IDS = [
   "queryBoxes:collection",
   "queryBoxes:followUp",
   "queryBoxes:modal",
+  "queryBoxes:activeModelSelector",
 
   "home",
   "home:languageSelector",

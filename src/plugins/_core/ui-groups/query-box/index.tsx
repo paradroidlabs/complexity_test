@@ -4,6 +4,7 @@ import { useInsertCss } from "@/hooks/useInsertCss";
 import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
 import followUpQueryBoxCss from "@/plugins/_core/ui-groups/query-box/follow-up-query-box.css?inline";
 import FollowUpQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/FollowUp";
+import { useForceSyncActiveNativeModelSelector } from "@/plugins/_core/ui-groups/query-box/hooks/useForceSyncActiveNativeModelSelector";
 import MainQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/Main";
 import mainQueryBoxCss from "@/plugins/_core/ui-groups/query-box/main-query-box.css?inline";
 import MainModalQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/MainModal";
@@ -20,6 +21,7 @@ const shouldEnableToolbar = shouldEnableUiGroup({
 
 export default function QueryBoxWrapper() {
   useInsertToolbarCss();
+  useForceSyncActiveNativeModelSelector();
 
   return (
     <CsUiPluginsGuard additionalCheck={() => shouldEnableToolbar}>

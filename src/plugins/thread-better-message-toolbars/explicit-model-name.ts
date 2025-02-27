@@ -2,6 +2,7 @@ import { sendMessage } from "webext-bridge/content-script";
 
 import { languageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { pplxCookiesStore } from "@/data/pplx-cookies-store";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
@@ -37,9 +38,7 @@ async function displayModelBadge({
     return;
   }
 
-  const $exisitingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
-
-  if (!$bottomBar.length || $exisitingBadge.length) return;
+  if (!$bottomBar.length) return;
 
   const modelCode = await sendMessage(
     "reactVdom:getMessageDisplayModelCode",
@@ -52,16 +51,13 @@ async function displayModelBadge({
   const model = languageModels.find((model) => model.code === modelCode);
   if (!model) return;
 
-  const $target = $answerHeading.find('[color="super"]');
-  if (!$target.length) {
-    return;
-  }
+  const $exisitingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
 
-  // Hide original model tooltip and the "Answer" text
-  $bottomBar
-    .find("button:has(svg.tabler-icon-cpu)")
-    .parent()
-    .addClass("x-hidden");
+  if ($exisitingBadge.length) return;
+
+  // Hide the "Answer" text
+  const $target = $answerHeading.find('[color="super"]');
+  if (!$target.length) return;
   $target.find(":nth-child(2)").addClass("x-hidden");
 
   const modelNameElement = createModelBadge(model.label);
@@ -113,6 +109,26 @@ csLoaderRegistry.register({
       },
       {
         equalityFn: deepEqual,
+      },
+    );
+
+    pplxCookiesStore.subscribe(
+      (store) => store.cookies,
+      (cookies) => {
+        const isIncognito =
+          cookies.find((cookie) => cookie.name === "pplx.is-incognito")
+            ?.value === "true";
+
+        if (isIncognito) return;
+
+        threadMessageBlocksDomObserverStore
+          .getState()
+          .messageBlocks?.forEach((messageBlock) => {
+            messageBlock.nodes.$bottomBar
+              .find("button:has(svg.tabler-icon-cpu)")
+              .parent()
+              .addClass("x-hidden");
+          });
       },
     );
   },
