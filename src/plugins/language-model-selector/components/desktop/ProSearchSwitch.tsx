@@ -1,4 +1,4 @@
-import Tooltip from "@/components/Tooltip";
+import ProSearchIcon from "@/components/icons/ProSearchIcon";
 import { Switch } from "@/components/ui/switch";
 import {
   isFastLanguageModelCode,
@@ -43,22 +43,31 @@ export default function ProSearchSwitch({
   );
 
   return (
-    <Tooltip
-      content={t(
-        "plugin-model-selectors:languageModelSelector.proSearch.tooltip",
-      )}
-      positioning={{
-        placement: "right",
-      }}
-    >
+    <div className="x-flex x-w-full x-items-center x-justify-between x-gap-4">
+      <div
+        className={cn(
+          "x-items-start x-flex x-gap-2 x-transition-all",
+          isProSearchEnabled && "x-text-primary",
+        )}
+      >
+        <ProSearchIcon className="x-size-4" />
+        <div className="x-flex x-flex-col x-gap-y-0.5">
+          <div className="x-text-sm x-font-medium">Pro Search</div>
+          <div className="x-text-xs x-text-muted-foreground">
+            {t(
+              "plugin-model-selectors:languageModelSelector.proSearch.tooltip",
+            )}
+          </div>
+        </div>
+      </div>
       <Switch
+        size="sm"
         checked={isProSearchEnabled}
-        textLabel="Pro Search"
         onCheckedChange={({ checked }) => {
           setIsProSearchEnabled(checked);
           handleToggleOff(checked);
         }}
       />
-    </Tooltip>
+    </div>
   );
 }

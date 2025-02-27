@@ -11,9 +11,10 @@ export default function DesktopContent({
   return (
     <SelectContent className="custom-scrollbar x-flex x-max-h-[45vh] x-items-start x-justify-between x-gap-2 x-overflow-y-auto x-p-2">
       <div>
-        <div className="x-my-2 x-ml-1 x-w-max">
+        <div className="x-m-2">
           <ProSearchSwitch setHighlightedItem={setHighlightedItem} />
         </div>
+        <div className="x-mx-auto x-my-4 x-h-px x-w-[90%] x-bg-border" />
         <div className="x-flex x-items-start x-gap-2">
           <FastLanguageModels />
           <ReasoningLanguageModels />

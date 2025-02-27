@@ -23,7 +23,7 @@ const thumbVariants = cva(
   {
     variants: {
       size: {
-        sm: "x-h-3.5 x-w-3.5 data-[state=checked]:x-translate-x-[17px] data-[state=unchecked]:x-translate-x-0.5",
+        sm: "x-h-3.5 x-w-3.5 data-[state=checked]:x-translate-x-[18px] data-[state=unchecked]:x-translate-x-1",
         base: "x-h-4 x-w-4 data-[state=checked]:x-translate-x-6 data-[state=unchecked]:x-translate-x-1",
         lg: "x-h-5 x-w-5 data-[state=checked]:x-translate-x-[27px] data-[state=unchecked]:x-translate-x-0.5",
       },
