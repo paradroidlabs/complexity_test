@@ -2,13 +2,16 @@ import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export default function useObserver() {
-  const $bookmarkButton = useThreadDomObserverStore(
-    (state) => state.$bookmarkButton,
+  const $overflowMenuButtonWrapper = useThreadDomObserverStore(
+    (state) => state.$overflowMenuButtonWrapper,
     deepEqual,
   );
 
   return useMemo(() => {
-    if ($bookmarkButton == null || !$bookmarkButton.length) {
+    if (
+      $overflowMenuButtonWrapper == null ||
+      !$overflowMenuButtonWrapper.length
+    ) {
       $(
         `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
       ).remove();
@@ -16,7 +19,7 @@ export default function useObserver() {
       return null;
     }
 
-    const $wrapper = $bookmarkButton.parent();
+    const $wrapper = $($overflowMenuButtonWrapper[0]).parent();
 
     const $existingPortalContainer = $wrapper.find(
       `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
@@ -31,5 +34,5 @@ export default function useObserver() {
     $wrapper.append($portalContainer);
 
     return $portalContainer[0];
-  }, [$bookmarkButton]);
+  }, [$overflowMenuButtonWrapper]);
 }

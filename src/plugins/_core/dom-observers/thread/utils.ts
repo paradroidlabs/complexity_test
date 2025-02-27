@@ -26,7 +26,7 @@ export function findNavbar() {
   });
 }
 
-export function findBookmarkButton() {
+export function findOverflowMenuButtonWrapper() {
   const $navbar = threadDomObserverStore.getState().$navbar;
 
   if (!$navbar || !$navbar.length) return;
@@ -37,7 +37,7 @@ export function findBookmarkButton() {
 
   if (!$overflowMenuButtonWrapper.length) {
     threadDomObserverStore.setState({
-      $bookmarkButton: null,
+      $overflowMenuButtonWrapper: null,
     });
 
     return;
@@ -45,16 +45,16 @@ export function findBookmarkButton() {
 
   if (
     $overflowMenuButtonWrapper.internalComponentAttr() ===
-    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.BOOKMARK_BUTTON
+    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER
   )
     return;
 
   $overflowMenuButtonWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.BOOKMARK_BUTTON,
+    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER,
   );
 
   threadDomObserverStore.setState({
-    $bookmarkButton: $overflowMenuButtonWrapper,
+    $overflowMenuButtonWrapper,
   });
 }
 

@@ -117,7 +117,7 @@ export const DOM_SELECTORS = {
     THREAD_TITLE:
       ".min-w-0 .cursor-pointer.transition.duration-300.hover\\:opacity-70",
     THREAD_TITLE_INPUT: 'input[placeholder="Untitled"]',
-    OVERFLOW_MENU_BUTTON_WRAPPER: "div:has(>span>button:has(svg.fa-ellipsis))",
+    OVERFLOW_MENU_BUTTON_WRAPPER: "div:has(>span>button):has(svg.fa-ellipsis)",
   },
 } as const;
 
@@ -144,7 +144,7 @@ export const INTERNAL_ATTRIBUTES = {
     NAVBAR: "thread-navbar",
     NAVBAR_CHILD: {
       EXPORT_THREAD_BUTTON: "thread-export-button",
-      BOOKMARK_BUTTON: "thread-bookmark-button",
+      OVERFLOW_MENU_BUTTON_WRAPPER: "thread-overflow-menu-button-wrapper",
     },
     WRAPPER: "thread-wrapper",
     POPPER: {

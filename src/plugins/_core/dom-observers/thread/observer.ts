@@ -3,7 +3,7 @@ import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import {
-  findBookmarkButton,
+  findOverflowMenuButtonWrapper,
   findNavbar,
   findPopper,
   findWrapper,
@@ -59,7 +59,7 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
         },
         {
           id: "thread:navbar:bookmarkButton",
-          callback: findBookmarkButton,
+          callback: findOverflowMenuButtonWrapper,
         },
       ]);
     },
