@@ -55,10 +55,15 @@ async function displayModelBadge({
 
   if ($exisitingBadge.length) return;
 
-  // Hide the "Answer" text
+  // Hide the native badge and the "Answer" text
   const $target = $answerHeading.find('[color="super"]');
   if (!$target.length) return;
+
   $target.find(":nth-child(2)").addClass("x-hidden");
+  $bottomBar
+    .find("button:has(svg.tabler-icon-cpu)")
+    .parent()
+    .addClass("x-hidden");
 
   const modelNameElement = createModelBadge(model.label);
   $target.append(modelNameElement);
