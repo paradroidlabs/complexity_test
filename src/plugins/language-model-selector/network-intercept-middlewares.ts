@@ -4,9 +4,9 @@ import { pluginGuardsStore } from "@/components/plugins-guard/store";
 import { isReasoningLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
 import {
-  encodeWebSocketData,
-  parseWebSocketData,
-} from "@/plugins/_core/network-intercept/web-socket-message-parser";
+  encodePerplexityAskEvent,
+  parsePerplexityAskEvent,
+} from "@/plugins/_core/network-intercept/utils/parse-perplexity-ask-event";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
@@ -29,41 +29,34 @@ csLoaderRegistry.register({
       networkInterceptMiddlewareManager.updateMiddleware({
         id: "force-change-language-model",
         middlewareFn({ data, skip }) {
-          if (data.type === "network-intercept:fetchEvent") {
+          const isWSSend =
+            data.type === "network-intercept:webSocketEvent" &&
+            data.event === "send";
+          const isSSESend =
+            data.type === "network-intercept:fetchEvent" &&
+            data.event === "request";
+
+          if (!isWSSend && !isSSESend) {
             return skip();
           }
 
-          const wsMessage = parseWebSocketData(data.payload.data);
-          const payload = wsMessage.payload;
+          const parsedData = parsePerplexityAskEvent({
+            rawData: data.payload.data,
+            url: data.payload.url,
+          });
 
-          const hasValidMessageStructure =
-            wsMessage.messageId != null &&
-            Array.isArray(payload) &&
-            payload.length > 0 &&
-            payload[0] != null;
+          if (parsedData == null) return skip();
 
-          if (!hasValidMessageStructure) {
-            return skip();
-          }
-
-          if (payload.length < 3) {
-            return skip();
-          }
-
-          const isPerplexityAskMessage = payload[0] === "perplexity_ask";
-
-          if (!isPerplexityAskMessage) return skip();
-
-          const isRetry = payload[2].query_source == "retry";
+          const isRetry = parsedData.params.query_source == "retry";
 
           const settings = ExtensionLocalStorageService.getCachedSync();
 
-          const newPayload = produce(payload, (draft) => {
-            draft[2].timezone =
+          const newPayload = produce(parsedData.params, (draft: any) => {
+            draft.timezone =
               settings.devMode &&
               settings.plugins["queryBox:languageModelSelector"].changeTimezone
                 ? "America/Los_Angeles"
-                : payload[2].timezone;
+                : parsedData.params.timezone;
 
             if (!isRetry) {
               const { isProSearchEnabled, selectedLanguageModel } =
@@ -73,43 +66,21 @@ csLoaderRegistry.register({
                 selectedLanguageModel,
               );
 
-              draft[2].model_preference = selectedLanguageModel;
-              draft[2].mode =
+              draft.model_preference = selectedLanguageModel;
+              draft.mode =
                 isProSearchEnabled || isReasoningMode ? "copilot" : "concise";
             }
           });
 
-          return encodeWebSocketData({
-            type: "message",
-            data: `${wsMessage.messageId}${JSON.stringify(newPayload)}`,
-          });
-        },
-      });
-
-      networkInterceptMiddlewareManager.updateMiddleware({
-        id: "persist-reasoning-model",
-        middlewareFn({ data, skip }) {
-          if (
-            data.type !== "network-intercept:fetchEvent" ||
-            data.event !== "request"
-          ) {
-            return skip();
-          }
-
-          const isSaveSettingsRequest = data.payload.url.includes(
-            "/rest/user/save-settings",
-          );
-
-          if (!isSaveSettingsRequest) return skip();
-
-          const parsedPayload = JSON.parse(data.payload.data);
-
-          const newPayload = produce(parsedPayload, (draft: any) => {
-            draft.updated_settings.default_model =
-              sharedQueryBoxStore.getState().selectedLanguageModel;
+          const newEncodedPayload = encodePerplexityAskEvent({
+            newPayload: {
+              ...parsedData,
+              params: newPayload,
+            },
+            url: data.payload.url,
           });
 
-          return JSON.stringify(newPayload);
+          return newEncodedPayload;
         },
       });
     });
