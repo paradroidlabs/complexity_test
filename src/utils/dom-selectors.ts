@@ -92,7 +92,8 @@ export const DOM_SELECTORS = {
       ARBITRARY: "textarea[placeholder][autocomplete]",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
-    SUBMIT_BUTTON: 'button[aria-label="Submit"]',
+    SUBMIT_BUTTON:
+      'button[aria-label="Submit"], button:has(svg[data-icon="square"])',
     FORK_BUTTON: 'button svg[data-icon="code-fork"]',
     /** The floating container that wraps the query box */
     WRAPPER: ".grow.block",

@@ -40,6 +40,8 @@ export const LOADER_IDS = [
   "plugin:thread:canvas:resetOpenStateOnRouteChange",
   "plugin:thread:canvas:codeBlockPlaceholdersData",
   "plugin:thread:dragAndDropFileToUploadInThread",
+  "plugin:thread:rawHeadings",
+  "plugin:thread:dynamicQueryFontSize",
   "plugin:thread:collapseEmptyThreadVisualCols",
   "plugin:thread:betterMessageToolbars:explicitModelName",
   "plugin:thread:betterMessageToolbars:messageWordsAndCharactersCount",
@@ -59,8 +61,6 @@ export const LOADER_IDS = [
 
   "plugin:home:customSlogan",
   "plugin:home:hideHomepageWidgets",
-
-  "plugin:thread:rawHeadings",
 
   "store:colorScheme",
   "store:pplxCookies",

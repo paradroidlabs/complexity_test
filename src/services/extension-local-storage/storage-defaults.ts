@@ -59,6 +59,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       wordsAndCharactersCount: true,
       tokensCount: false,
       collapsibleQuery: false,
+      dynamicQueryFontSize: true,
     },
     "thread:messageTts": {
       enabled: false,

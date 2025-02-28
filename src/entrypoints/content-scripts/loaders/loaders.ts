@@ -42,7 +42,7 @@ import "@/plugins/thread-better-message-toolbars/collapsible-query/populate-orig
 import "@/plugins/instant-rewrite-button/native-btn-bind";
 import "@/plugins/custom-thread-container-width";
 import "@/plugins/thread-raw-headings";
-
+import "@/plugins/thread-better-message-toolbars/dynamic-query-font-size";
 // Home Plugins
 import "@/plugins/home-custom-slogan";
 import "@/plugins/hide-homepage-widgets";
