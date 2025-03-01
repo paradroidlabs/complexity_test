@@ -52,7 +52,7 @@ export class PplxApiService {
       throw new Error("Cloudflare timeout");
     }
 
-    const parsedJson = PplxUserSettingsApiResponseSchema.parse(
+    const parsedJson = PplxUserSettingsApiResponseSchema.passthrough().parse(
       jsonUtils.safeParse(respText),
     );
 
