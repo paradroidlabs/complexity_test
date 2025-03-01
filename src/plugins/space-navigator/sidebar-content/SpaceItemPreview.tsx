@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useCommandState } from "cmdk";
 import { LuLink, LuPin, LuPinOff } from "react-icons/lu";
 
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Tooltip from "@/components/Tooltip";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import SpaceItemFile from "@/plugins/space-navigator/sidebar-content/SpaceItemFile";
 import {
   usePinSpaceMutation,
@@ -71,9 +71,9 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
               "plugin-space-navigator:spaceNavigator.spaceItem.details.instructions",
             )}
           </div>
-          <ScrollArea className="x-whitespace-pre-wrap x-rounded-md x-bg-secondary">
-            <div className="x-max-h-[200px] x-p-2">{space.instructions}</div>
-          </ScrollArea>
+          <div className="custom-scrollbar x-max-h-[240px] x-overflow-y-auto x-rounded-md x-bg-secondary x-p-2">
+            <MarkdownRenderer markdown={space.instructions} />
+          </div>
         </div>
       )}
       {space.focused_web_config &&

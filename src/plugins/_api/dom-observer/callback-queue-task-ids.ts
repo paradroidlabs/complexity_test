@@ -15,7 +15,7 @@ export const CALLBACK_QUEUE_TASK_IDS = [
   "queryBoxes:collection",
   "queryBoxes:followUp",
   "queryBoxes:modal",
-  "queryBoxes:activeModelSelector",
+  "queryBoxes:$pplxComponentsWrapper",
 
   "thread",
   "thread:navbar",

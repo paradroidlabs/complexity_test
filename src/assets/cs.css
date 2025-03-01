@@ -10,3 +10,10 @@
 body#__next {
   @apply x-font-sans;
 }
+
+[data-cplx-component="thread-wrapper"] {
+  & > *:not(.fixed) {
+    width: calc(var(--thread-width) + 4rem);
+    margin: 0 auto;
+  }
+}

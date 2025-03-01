@@ -3,7 +3,7 @@ import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import {
-  findActiveModelSelector,
+  findPplxComponentsWrapper,
   findFollowUpQueryBox,
   findMainModalQueryBox,
   findMainQueryBox,
@@ -18,7 +18,7 @@ const cleanup = () => {
   DomObserver.destroy("queryBoxes:collection");
   DomObserver.destroy("queryBoxes:followUp");
   DomObserver.destroy("queryBoxes:modal");
-  DomObserver.destroy("queryBoxes:activeModelSelector");
+  DomObserver.destroy("queryBoxes:$pplxComponentsWrapper");
 };
 
 csLoaderRegistry.register({
@@ -118,13 +118,13 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       ),
   });
 
-  DomObserver.create("queryBoxes:activeModelSelector", {
+  DomObserver.create("queryBoxes:$pplxComponentsWrapper", {
     target: document.body,
     config: { childList: true, subtree: true },
     onMutation: () =>
       CallbackQueue.getInstance().enqueue(
-        findActiveModelSelector,
-        "queryBoxes:activeModelSelector",
+        findPplxComponentsWrapper,
+        "queryBoxes:$pplxComponentsWrapper",
       ),
   });
 }

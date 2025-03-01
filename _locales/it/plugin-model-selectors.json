@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Scegli modello linguistico",
     "proSearch": {
-      "tooltip": "Ottieni fino a 3 fonti web"
+      "tooltip": "3 volte più fonti e risposte dettagliate"
     },
     "reasoningModels": {
       "label": "Modelli di ragionamento",

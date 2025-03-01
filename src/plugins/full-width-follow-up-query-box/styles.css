@@ -1,6 +1,6 @@
-body[location="thread"] {
+body[location="thread"] [data-cplx-component="thread-wrapper"] {
   .pointer-events-none.fixed.bottom-mobileNavHeight
-    > .pointer-events-auto.md\:col-span-8 {
+    .pointer-events-auto.md\:col-span-8 {
     grid-column: span 12 / span 12;
   }
 

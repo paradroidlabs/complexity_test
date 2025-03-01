@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "भाषा मॉडल चुनें",
     "proSearch": {
-      "tooltip": "3 तक वेब स्रोत प्राप्त करें"
+      "tooltip": "3 गुना अधिक स्रोत और विस्तृत उत्तर"
     },
     "reasoningModels": {
       "label": "तर्क मॉडल",

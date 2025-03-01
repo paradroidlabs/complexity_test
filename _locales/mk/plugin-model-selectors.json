@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Избери јазичен модел",
     "proSearch": {
-      "tooltip": "Добијте до 3 веб извори"
+      "tooltip": "3 пати повеќе извори и детални одговори"
     },
     "reasoningModels": {
       "label": "Модели за резонирање",

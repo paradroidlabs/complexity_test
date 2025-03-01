@@ -24,7 +24,7 @@ body[data-cplx-canvas-active-panel] {
     height: max-content;
   }
 
-  .max-w-threadWidth {
+  [data-cplx-component="thread-wrapper"] {
     max-width: 100% !important;
   }
 }

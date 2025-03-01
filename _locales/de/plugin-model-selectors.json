@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Sprachmodell auswählen",
     "proSearch": {
-      "tooltip": "Bis zu 3 Webquellen erhalten"
+      "tooltip": "3-mal mehr Quellen und detaillierte Antworten"
     },
     "reasoningModels": {
       "label": "Reasoning-Modelle",

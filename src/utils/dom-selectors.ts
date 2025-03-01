@@ -19,14 +19,16 @@ export const DOM_SELECTORS = {
   },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
-    WRAPPER: "div:has(>.max-w-threadWidth):first",
     NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
+    WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
     /** The container that wraps all messages */
     CONTAINER: {
       /** Normal thread*/
-      NORMAL: ".max-w-threadWidth:last",
+      NORMAL:
+        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child",
       /** Branched thread */
-      BRANCHED: ".max-w-threadWidth:last",
+      BRANCHED:
+        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child",
     },
     MESSAGE: {
       WRAPPER: ".grid-cols-12",
@@ -93,7 +95,7 @@ export const DOM_SELECTORS = {
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:
-      'button[aria-label="Submit"], button:has(svg[data-icon="square"])',
+      'button[aria-label="Submit"], button:has(svg.tabler-icon-square)',
     FORK_BUTTON: 'button svg[data-icon="code-fork"]',
     /** The floating container that wraps the query box */
     WRAPPER: ".grow.block",

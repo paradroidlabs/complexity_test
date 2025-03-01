@@ -6,7 +6,7 @@ import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
 import { scrollToElement } from "@/utils/utils";
 
-export const PANEL_WIDTH = 250;
+export const PANEL_WIDTH = 200;
 
 type TocItem = {
   id: string;
@@ -117,18 +117,18 @@ const TocItem = memo(function TocItem({
 
   return (
     <div
-      className="x-flex x-cursor-pointer x-items-center x-gap-4"
+      className="x-flex x-cursor-pointer x-gap-4"
       title={title}
       onClick={onClick}
     >
       <div
-        className={cn("x-h-5 x-min-w-[2px] x-rounded-full", {
+        className={cn("x-min-h-5 x-min-w-[2px] x-rounded-full", {
           "x-bg-foreground": item.isActive,
           "x-bg-muted-foreground": !item.isActive,
         })}
       />
       <div
-        className={cn("x-block x-truncate x-text-sm x-transition-colors", {
+        className={cn("x-line-clamp-2 x-text-sm x-transition-colors", {
           "x-font-medium x-text-foreground": item.isActive,
           "x-text-muted-foreground hover:x-text-foreground": !item.isActive,
         })}

@@ -51,6 +51,7 @@ export const LOADER_IDS = [
 
   "plugin:queryBox:initSharedStore",
   "plugin:queryBox:languageModelSelector:respectSpaceModel",
+  "plugin:queryBox:languageModelSelector:syncNativeModelSelector",
   "plugin:queryBox:promptHistory:networkInterceptMiddleware",
   "plugin:queryBox:promptHistory:listeners",
   "plugin:queryBox:noFileCreationOnPaste",

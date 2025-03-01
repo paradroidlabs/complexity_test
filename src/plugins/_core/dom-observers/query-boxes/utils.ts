@@ -82,12 +82,12 @@ export async function findFollowUpQueryBox() {
   });
 }
 
-export function findActiveModelSelector() {
-  const $modelSelector = UiUtils.getActiveQueryBox().find(
+export function findPplxComponentsWrapper() {
+  const $target = UiUtils.getActiveQueryBox().find(
     `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER}"]`,
   );
 
   queryBoxesDomObserverStore.setState({
-    activeModelSelector: $modelSelector,
+    $pplxComponentsWrapper: $target,
   });
 }

@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "选择语言模型",
     "proSearch": {
-      "tooltip": "获取最多3个网络来源"
+      "tooltip": "3倍更多来源和详细回答"
     },
     "reasoningModels": {
       "label": "推理模型",

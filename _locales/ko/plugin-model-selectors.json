@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "언어 모델 선택",
     "proSearch": {
-      "tooltip": "최대 3개의 웹 소스 확보"
+      "tooltip": "3배 더 많은 소스와 상세한 답변"
     },
     "reasoningModels": {
       "label": "추론 모델",

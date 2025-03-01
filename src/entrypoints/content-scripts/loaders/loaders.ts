@@ -25,6 +25,7 @@ import "@/plugins/_core/dom-observers/settings-page/observers";
 // Query Box Plugins
 import "@/plugins/language-model-selector/network-intercept-middlewares";
 import "@/plugins/language-model-selector/respect-space-model";
+import "@/plugins/language-model-selector/sync-native-model-selector";
 import "@/plugins/_core/ui-groups/query-box/shared-store";
 import "@/plugins/prompt-history/network-intercept-middlewares";
 import "@/plugins/prompt-history/listeners";

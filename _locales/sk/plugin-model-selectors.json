@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Vybrať jazykový model",
     "proSearch": {
-      "tooltip": "Získajte až 3 webové zdroje"
+      "tooltip": "3-krát viac zdrojov a podrobné odpovede"
     },
     "reasoningModels": {
       "label": "Modely uvažovania",

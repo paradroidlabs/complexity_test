@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Nyelvi modell választása",
     "proSearch": {
-      "tooltip": "Akár 3 webes forrás beszerzése"
+      "tooltip": "3-szor több forrás és részletes válaszok"
     },
     "reasoningModels": {
       "label": "Következtető modellek",

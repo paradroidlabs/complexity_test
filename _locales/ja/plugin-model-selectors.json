@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "言語モデルを選択",
     "proSearch": {
-      "tooltip": "最大3つのWeb情報源を取得"
+      "tooltip": "3倍の情報源と詳細な回答"
     },
     "reasoningModels": {
       "label": "推論モデル",

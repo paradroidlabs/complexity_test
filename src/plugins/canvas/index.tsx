@@ -60,7 +60,7 @@ export default function CanvasWrapper() {
           "x-fixed x-right-8 x-my-8 x-h-[calc(100dvh-var(--navbar-height)-11rem)] x-overflow-hidden x-rounded-md x-border x-border-border/50 x-bg-secondary x-text-sm x-transition-all x-animate-in x-fade-in x-slide-in-from-right",
           "xl:x-sticky xl:x-top-6 xl:x-my-0 xl:x-mt-6 xl:x-h-[calc(100dvh-var(--navbar-height)-4rem)]",
           {
-            "x-w-[80vw] xl:x-w-[200%]": isCanvasOpen,
+            "x-w-[75vw] xl:x-w-[200%]": isCanvasOpen,
             "x-w-[30vw] xl:x-w-[20%] xl:x-min-w-[400px]": isCanvasListOpen,
           },
         )}

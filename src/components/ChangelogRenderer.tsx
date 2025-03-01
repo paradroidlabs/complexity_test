@@ -1,12 +1,10 @@
 import { HTMLAttributes, ComponentPropsWithoutRef } from "react";
-import ReactMarkdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
 
 import ChangelogItemsBlock from "@/components/ChangelogItemsBlock";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 type ChangelogComponents = ComponentPropsWithoutRef<
-  typeof ReactMarkdown
+  typeof MarkdownRenderer
 >["components"];
 
 export default function ChangelogRenderer({
@@ -16,33 +14,24 @@ export default function ChangelogRenderer({
 }: {
   changelog: string;
 } & HTMLAttributes<HTMLDivElement>) {
+  const changelogComponents = {
+    "items-block": ChangelogItemsBlock,
+    link: () => <div />,
+    img: ({ src, alt }: { src?: string; alt?: string }) => (
+      <img
+        src={src}
+        alt={alt}
+        className="x-max-w-[1000px] x-rounded-md x-border x-border-border/50"
+      />
+    ),
+  } as ChangelogComponents;
+
   return (
-    <div
-      className={cn(
-        "x-prose x-flex x-max-w-max x-flex-col dark:x-prose-invert",
-        className,
-      )}
+    <MarkdownRenderer
+      markdown={changelog}
+      components={changelogComponents}
+      className={className}
       {...props}
-    >
-      <ReactMarkdown
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={
-          {
-            "items-block": ChangelogItemsBlock,
-            link: () => <div />,
-            img: ({ src, alt }) => (
-              <img
-                src={src}
-                alt={alt}
-                className="x-max-w-[1000px] x-rounded-md x-border x-border-border/50"
-              />
-            ),
-          } as ChangelogComponents
-        }
-      >
-        {changelog}
-      </ReactMarkdown>
-    </div>
+    />
   );
 }

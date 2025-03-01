@@ -9,7 +9,7 @@ export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
 
   const children = Array.from($messagesContainer[0].children).filter(
     (child) =>
-      child.querySelector(DOM_SELECTORS.THREAD.MESSAGE.WRAPPER) !== null,
+      child.querySelector(DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL) !== null,
   );
 
   const messageBlocks = await Promise.all(

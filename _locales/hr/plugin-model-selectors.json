@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Odaberi jezični model",
     "proSearch": {
-      "tooltip": "Dohvati do 3 web izvora"
+      "tooltip": "3 puta više izvora i detaljni odgovori"
     },
     "reasoningModels": {
       "label": "Modeli zaključivanja",

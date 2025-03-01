@@ -39,6 +39,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     let threadWrapperWidth = 0;
     $children.each((_, child) => {
+      if (child.classList.contains("fixed")) return;
       const width = $(child).width();
       if (width != null) threadWrapperWidth += width;
     });
@@ -53,12 +54,12 @@ export function usePanelPosition(): UsePanelPosition | null {
       return;
     }
 
-    const panelRightEdge = left + threadWrapperWidth + PANEL_WIDTH + 75;
+    const panelRightEdge = left + threadWrapperWidth + PANEL_WIDTH + 32;
 
     return {
       position: {
         top: stickyHeaderHeight + 40,
-        left: threadWrapperWidth + left + 55,
+        left: threadWrapperWidth + left,
       },
       isFloating: panelRightEdge > window.innerWidth,
     };
