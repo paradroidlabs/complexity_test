@@ -1,4 +1,3 @@
-import { GoKebabHorizontal, GoStar, GoStarFill } from "react-icons/go";
 import { LuTriangleAlert } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 
@@ -13,12 +12,6 @@ import {
   CardFooter,
   CardContent,
 } from "@/components/ui/card";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { Ul } from "@/components/ui/typography";
 import { PLUGINS_METADATA } from "@/data/plugins-data/plugins-data";
@@ -113,48 +106,6 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
               Details
             </Button>
           )}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <GoKebabHorizontal className="x-size-4" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem
-                value="favorite"
-                onClick={() => {
-                  mutation.mutate((draft) => {
-                    if (settings?.favoritePluginIds == null) return;
-
-                    const currentState =
-                      settings.favoritePluginIds.includes(pluginId);
-
-                    if (currentState) {
-                      draft.favoritePluginIds = draft.favoritePluginIds!.filter(
-                        (id) => id !== pluginId,
-                      );
-                    } else {
-                      draft.favoritePluginIds.push(pluginId);
-                    }
-                  });
-                }}
-              >
-                <span className="x-flex x-items-center">
-                  {settings?.favoritePluginIds?.includes(pluginId) ? (
-                    <>
-                      <GoStarFill className="x-mr-2 x-h-4 x-w-4 x-text-yellow-500" />
-                      Remove from favorites
-                    </>
-                  ) : (
-                    <>
-                      <GoStar className="x-mr-2 x-h-4 x-w-4" />
-                      Add to favorites
-                    </>
-                  )}
-                </span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </div>
 
         {settings?.plugins[pluginId].enabled &&

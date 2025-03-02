@@ -129,7 +129,6 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       enabled: false,
     },
   },
-  favoritePluginIds: [],
   preloadTheme: false,
   theme: "complexity",
   energySavingMode: false,

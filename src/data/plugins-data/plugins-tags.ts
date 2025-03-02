@@ -1,5 +1,28 @@
 export type PluginTagValues = keyof typeof PLUGIN_TAGS;
 
+export type PluginCategory = keyof typeof PLUGIN_CATEGORIES;
+
+export const PLUGIN_CATEGORIES = {
+  queryBox: {
+    label: "Query Box Utilities",
+    description: "Add functionalities/tweaks to the query box",
+  },
+  thread: {
+    label: "Thread Utilities",
+    description:
+      "Provide extra functionalities, productivity tweaks to the AI conversation thread",
+  },
+  sidebar: {
+    label: "Sidebar Utilities",
+    description:
+      "Add extra functionalities, productivity tweaks to the sidebar",
+  },
+  misc: {
+    label: "Miscellaneous",
+    description: "Personal preferences",
+  },
+} as const;
+
 export const PLUGIN_TAGS = {
   ui: {
     label: "Appearance",

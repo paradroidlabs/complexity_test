@@ -62,10 +62,9 @@ export default function PluginsEnableSet() {
 
         {!isDefaultSettings && (
           <div className="x-flex x-flex-col x-gap-2">
-            <div className="x-text-sm x-text-muted-foreground">
-              We noticed that you have modified the plugins settings. Presets
-              will override your current settings. Please make sure to save your
-              current settings before applying.
+            <div className="x-text-sm x-text-yellow-300">
+              Presets will override your current settings. Please make sure to
+              save your current settings before applying.
             </div>
           </div>
         )}

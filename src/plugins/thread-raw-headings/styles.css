@@ -1,4 +1,4 @@
-body[location="thread"] {
+body[location="thread"] [data-cplx-component="message-block-answer"] {
   h2,
   h3,
   h4,

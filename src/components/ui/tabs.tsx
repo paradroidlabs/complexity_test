@@ -27,7 +27,7 @@ const TabsList = ({ className, ...props }: ArkTabs.ListProps) => (
   <ArkTabs.List
     className={cn(
       "x-inline-flex x-items-center x-justify-center x-rounded-md x-p-1 x-text-muted-foreground",
-      "data-[orientation=horizontal]:x-flex-wrap data-[orientation=horizontal]:x-gap-2",
+      "data-[orientation=horizontal]:x-flex-wrap",
       "data-[orientation=vertical]:x-h-max data-[orientation=vertical]:x-flex-col data-[orientation=vertical]:x-gap-1",
       className,
     )}

@@ -32,7 +32,10 @@ const MemoizedWrapper = memo(function MemoizedWrapper({
 }) {
   return (
     <div className="x-flex x-items-center x-gap-1">
-      <CsUiPluginsGuard dependentPluginIds={["thread:messageTts"]}>
+      <CsUiPluginsGuard
+        requiresLoggedIn
+        dependentPluginIds={["thread:messageTts"]}
+      >
         <ThreadMessageTtsButton messageBlockIndex={messageBlockIndex} />
       </CsUiPluginsGuard>
       <CsUiPluginsGuard

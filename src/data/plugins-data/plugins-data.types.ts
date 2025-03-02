@@ -1,4 +1,7 @@
-import { PluginTagValues } from "@/data/plugins-data/plugins-tags";
+import {
+  PluginCategory,
+  PluginTagValues,
+} from "@/data/plugins-data/plugins-tags";
 import { PluginId } from "@/services/extension-local-storage/plugins.types";
 
 export type CoreObserverId = (typeof CORE_OBSERVERS)[number];
@@ -40,7 +43,8 @@ export type CplxPluginMetadata = Record<
     routeSegment: string;
     title: string;
     description: React.ReactNode;
-    tags?: PluginTagValues[];
+    tags: PluginTagValues[];
+    categories: PluginCategory[];
     uiGroup?: UiGroup[];
     dependentDomObservers?: CoreObserverId[];
     dependentCorePlugins?: CorePluginId[];
