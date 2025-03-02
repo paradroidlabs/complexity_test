@@ -192,12 +192,6 @@ const initializeAutonomousMode = () => {
       equalityFn: deepEqual,
     },
   );
-
-  canvasStore.subscribe((state, prevState) => {
-    if (state.isCanvasListOpen && prevState.selectedCodeBlockLocation != null) {
-      setTimeout(() => window.dispatchEvent(new Event("resize")), 300);
-    }
-  });
 };
 
 const updateCanvasBlocks = ({
@@ -254,15 +248,14 @@ const handleCanvasBlockClick = (location: CodeBlockLocation) => {
 };
 
 const emitResizeEvent = () => {
-  canvasStore.subscribe(
-    (state) => ({
-      isCanvasOpen: state.selectedCodeBlockLocation != null,
-      isCanvasListOpen: state.isCanvasListOpen,
-    }),
-    () => {
-      window.dispatchEvent(new Event("resize"));
-    },
-  );
+  canvasStore.subscribe((state, prevState) => {
+    if (
+      state.selectedCodeBlockLocation !== prevState.selectedCodeBlockLocation ||
+      state.isCanvasListOpen !== prevState.isCanvasListOpen
+    ) {
+      setTimeout(() => window.dispatchEvent(new Event("resize")), 300);
+    }
+  });
 };
 
 const closeOnRouteChange = () => {

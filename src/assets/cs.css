@@ -13,7 +13,7 @@ body#__next {
 
 [data-cplx-component="thread-wrapper"] {
   & > *:not(.fixed) {
-    width: calc(var(--thread-width) + 4rem);
+    max-width: calc(var(--thread-width) + 4rem);
     margin: 0 auto;
   }
 }
