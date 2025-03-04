@@ -343,18 +343,10 @@ export function injectMainWorldScriptBlock({
   });
 }
 
-export function waitForDocumentReady() {
-  return new Promise((resolve) => {
-    if (
-      document.readyState === "complete" &&
-      document.head != null &&
-      document.body != null
-    ) {
-      resolve(null);
-    } else {
-      $(resolve);
-    }
-  });
+export async function waitForDocumentReady() {
+  while (document.head == null || document.body == null) {
+    await sleep(100);
+  }
 }
 
 export function insertCss({

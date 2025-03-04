@@ -36,7 +36,7 @@ export default function SpaceCardPinButton({
 
   return (
     <div
-      className="x-absolute x-bottom-2 x-right-2 x-animate-in x-fade-in"
+      className="x-absolute x-top-2 x-right-2 x-animate-in x-fade-in"
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();

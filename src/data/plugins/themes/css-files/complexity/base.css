@@ -24,12 +24,7 @@ body#__next {
 
   /* Inline Code */
   code:not(pre code) {
-    &::before,
-    &::after {
-      content: "";
-    }
-
-    @apply x-rounded-md x-bg-secondary x-px-1 x-py-0.5 x-text-primary;
+    @apply x-text-primary;
   }
 
   font-variant-ligatures: none;

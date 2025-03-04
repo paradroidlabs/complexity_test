@@ -130,7 +130,7 @@ export default function ThreadMessageTtsButton({
       <Tooltip content={playing ? t("misc.stop") : t("misc.speakAloud")}>
         <DropdownMenuTrigger asChild>
           <div
-            className="x-cursor-pointer x-rounded-md x-p-2 x-text-muted-foreground x-transition-all hover:x-bg-secondary hover:x-text-foreground active:x-scale-95"
+            className="x-cursor-pointer x-rounded-md x-p-2 x-text-muted-foreground x-transition-all hover:x-bg-muted/50 hover:x-text-foreground active:x-scale-95"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();

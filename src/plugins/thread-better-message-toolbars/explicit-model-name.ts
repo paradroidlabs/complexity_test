@@ -51,9 +51,9 @@ async function displayModelBadge({
   const model = languageModels.find((model) => model.code === modelCode);
   if (!model) return;
 
-  const $exisitingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
+  const $existingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
 
-  if ($exisitingBadge.length) return;
+  if ($existingBadge.length) return;
 
   // Hide the native badge and the "Answer" text
   const $target = $answerHeading.find('[color="super"]');
@@ -129,6 +129,12 @@ csLoaderRegistry.register({
         threadMessageBlocksDomObserverStore
           .getState()
           .messageBlocks?.forEach((messageBlock) => {
+            const $existingBadge = messageBlock.nodes.$answerHeading.find(
+              MODEL_BADGE_COMPONENT_SELECTOR,
+            );
+
+            if (!$existingBadge.length) return;
+
             messageBlock.nodes.$bottomBar
               .find("button:has(svg.tabler-icon-cpu)")
               .parent()

@@ -130,4 +130,8 @@ function removeStaticCssFilesFromManifest(done) {
   done();
 }
 
-export { createPackage, rootifyOptionsPageHTMLEntries, removeStaticCssFilesFromManifest };
+export {
+  createPackage,
+  rootifyOptionsPageHTMLEntries,
+  removeStaticCssFilesFromManifest,
+};

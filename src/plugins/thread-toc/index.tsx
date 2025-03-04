@@ -1,12 +1,12 @@
 import { LuX } from "react-icons/lu";
 
-import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
+import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
 import { scrollToElement } from "@/utils/utils";
 
-export const PANEL_WIDTH = 200;
+export const PANEL_WIDTH = 230;
 
 type TocItem = {
   id: string;
@@ -15,10 +15,14 @@ type TocItem = {
 };
 
 export default function ThreadTocWrapper() {
-  const { isMobile } = useIsMobileStore();
-
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useHandleTouch({
+    containerRef,
+    isOpen,
+    setIsOpen,
+  });
 
   const tocItems = useThreadTocItems();
   const { position, isFloating } = usePanelPosition() ?? {};
@@ -37,26 +41,6 @@ export default function ThreadTocWrapper() {
   ) as React.CSSProperties;
 
   const shouldShowToc = tocItems.length > 1 && !!position;
-
-  useEffect(() => {
-    if (!isMobile) return;
-
-    function handleClickOutside(event: MouseEvent) {
-      if (
-        containerRef.current &&
-        !containerRef.current.contains(event.target as Node) &&
-        isOpen
-      ) {
-        setIsOpen(false);
-      }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isMobile, isOpen]);
 
   if (!shouldShowToc) return null;
 

@@ -23,13 +23,15 @@ const cleanup = () => {
 
 csLoaderRegistry.register({
   id: "coreDomObserver:queryBoxes",
-  dependencies: [
-    "cache:extensionLocalStorage",
-    "cache:pluginsStates",
-    "plugins:core",
-    "messaging:spaRouter",
-  ],
+  dependencies: ["cache:extensionLocalStorage", "messaging:spaRouter"],
   loader: () => {
+    if (
+      !shouldEnableCoreObserver({
+        coreObserverId: "coreDomObserver:queryBoxes",
+      })
+    )
+      return;
+
     observeQueryBoxes(whereAmI());
     spaRouteChangeCompleteSubscribe((url) => {
       observeQueryBoxes(whereAmI(url));
