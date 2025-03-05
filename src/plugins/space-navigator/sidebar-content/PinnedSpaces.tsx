@@ -13,6 +13,7 @@ import { getPinnedSpacesService } from "@/services/indexed-db/pinned-spaces";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import { Space } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { queryClient } from "@/utils/ts-query-client";
 import { emojiCodeToString } from "@/utils/utils";
 
@@ -180,7 +181,8 @@ export default function SidebarPinnedSpaces() {
   return (
     <div
       className={cn(
-        "custom-scrollbar x-max-h-[200px] x-overflow-y-auto",
+        PPLX_SCROLLBAR_CLASSES,
+        "x-max-h-[200px] x-overflow-y-auto",
         isCollapsed && "x-hidden",
       )}
     >

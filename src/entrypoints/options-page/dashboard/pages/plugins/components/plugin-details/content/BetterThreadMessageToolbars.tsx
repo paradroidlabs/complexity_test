@@ -77,6 +77,22 @@ export default function BetterThreadMessageToolbarsPluginDetails() {
             className="x-items-start"
             textLabel={
               <div>
+                <div>Hide Unnecessary Buttons</div>
+                <div className="x-text-sm x-text-muted-foreground">
+                  Hide Thumbs Up/Down buttons
+                </div>
+              </div>
+            }
+            checked={
+              settings?.plugins["thread:betterMessageToolbars"]
+                .hideUnnecessaryButtons
+            }
+            onCheckedChange={handleCheckedChange("hideUnnecessaryButtons")}
+          />
+          <Switch
+            className="x-items-start"
+            textLabel={
+              <div>
                 <div>Word and Character Count</div>
                 <div className="x-text-sm x-text-muted-foreground">
                   Show words and characters count

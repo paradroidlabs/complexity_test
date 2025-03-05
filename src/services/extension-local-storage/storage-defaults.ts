@@ -56,6 +56,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       sticky: true,
       editQueryButton: false,
       explicitModelName: true,
+      hideUnnecessaryButtons: false,
       wordsAndCharactersCount: true,
       tokensCount: false,
     },
@@ -63,7 +64,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       enabled: false,
       voice: "Mike",
     },
-    "thread:instantRewriteButton": {
+    "thread:betterRewriteDropdowns": {
       enabled: false,
     },
     "thread:betterCodeBlocks": {

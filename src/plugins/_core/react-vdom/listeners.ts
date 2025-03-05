@@ -1,6 +1,7 @@
 import { onMessage } from "webext-bridge/window";
 
 import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { PplxWebResult } from "@/utils/thread-export";
@@ -9,6 +10,7 @@ import { getReactFiberKey } from "@/utils/utils";
 export type ReactVdomEvents = {
   "reactVdom:getMessageModelPreferences": (params: { index: number }) => {
     displayModel: LanguageModelCode;
+    mode: string;
   } | null;
   "reactVdom:getMessageDisplayModelCode": (params: {
     index: number;
@@ -64,8 +66,8 @@ export function setupReactVdomListeners() {
     if (error || preferences == null) return null;
 
     return {
-      // mode: preferences.mode,
       // isProReasoningMode: preferences.is_pro_reasoning_mode,
+      mode: preferences.mode,
       displayModel: preferences.display_model,
     };
   });
@@ -243,15 +245,28 @@ export function setupReactVdomListeners() {
 
     if (fiberNode == null) return;
 
+    const isMobile = isMobileStore.getState().isMobile;
+
     const [items, error] = errorWrapper(() =>
       findReactFiberNodeValue({
         fiberNode,
-        condition: (node) => node.return.return.memoizedProps.items != null,
-        select: (node) =>
-          node.return.return.memoizedProps.items as {
+        condition: (node) => {
+          if (!isMobile) return node.return.return.memoizedProps.items != null;
+
+          return node.return.memoizedProps.items != null;
+        },
+        select: (node) => {
+          if (!isMobile)
+            return node.return.return.memoizedProps.items as {
+              onClick: () => void;
+              value: "default" | "pro" | LanguageModelCode;
+            }[];
+
+          return node.return.memoizedProps.items as {
             onClick: () => void;
             value: "default" | "pro" | LanguageModelCode;
-          }[],
+          }[];
+        },
       }),
     )();
 

@@ -19,8 +19,7 @@
     "characters": "znakova",
     "expand": "Proširi",
     "collapse": "Sažmi",
-    "instantRewriteShort": "Prepiši",
-    "instantRewrite": "Prepiši s istim modelom",
+    "rewrite": "Prepiši",
     "speakAloud": "Pročitaj naglas",
     "stop": "Zaustavi"
   },

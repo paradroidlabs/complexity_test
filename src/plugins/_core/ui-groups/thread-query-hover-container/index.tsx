@@ -1,7 +1,6 @@
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { Portal } from "@/components/ui/portal";
-import { useCreatePortalContainer as useCreatePortalContainers } from "@/plugins/_core/ui-groups/thread-query-hover-container/useCreatePortalContainers";
-import InstantRewriteButton from "@/plugins/instant-rewrite-button";
+import { useCreatePortalContainers } from "@/plugins/_core/ui-groups/thread-query-hover-container/useCreatePortalContainers";
 import QueryWordsAndCharactersCount from "@/plugins/thread-better-message-toolbars/query-words-and-characters-count";
 
 export default function ThreadQueryHoverContainerExtraButtonsWrapper() {
@@ -18,10 +17,6 @@ export default function ThreadQueryHoverContainerExtraButtonsWrapper() {
           }
         >
           <QueryWordsAndCharactersCount messageBlockIndex={index} />
-          <Divider />
-        </CsUiPluginsGuard>
-        <CsUiPluginsGuard dependentPluginIds={["thread:instantRewriteButton"]}>
-          <InstantRewriteButton messageBlockIndex={index} />
           <Divider />
         </CsUiPluginsGuard>
       </div>

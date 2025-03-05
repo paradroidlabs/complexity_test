@@ -1,53 +1,28 @@
 import ProSearchIcon from "@/components/icons/ProSearchIcon";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
-import {
-  isFastLanguageModelCode,
-  isReasoningLanguageModelCode,
-} from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import usePplxUserSettings from "@/hooks/usePplxUserSettings";
-import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
+import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 
-export default function ProSearchSwitch({
-  setHighlightedItem,
-}: {
-  setHighlightedItem: (item: string) => void;
-}) {
-  const { selectedLanguageModel } = useSharedQueryBoxStore((store) => ({
-    selectedLanguageModel: store.selectedLanguageModel,
-  }));
+export default function ProSearchSwitch() {
+  const context = use(LanguageModelSelectorContext);
 
-  const { isProSearchEnabled, setIsProSearchEnabled } = useSharedQueryBoxStore(
-    (store) => ({
-      isProSearchEnabled: store.isProSearchEnabled,
-      setIsProSearchEnabled: store.setIsProSearchEnabled,
-    }),
-  );
+  if (!context) throw new Error("LanguageModelSelectorContext not found");
 
-  const { data: userSettings } = usePplxUserSettings();
+  const { isProSearchEnabled, setIsProSearchEnabled, component } = context;
 
-  const handleToggleOff = useCallback(
-    (checked: boolean) => {
-      if (checked) return;
+  const indicator = useMemo(() => {
+    if (component === "select") {
+      return <Switch size="sm" checked={isProSearchEnabled} />;
+    }
 
-      if (!isReasoningLanguageModelCode(selectedLanguageModel)) return;
-
-      if (
-        userSettings?.default_model == null ||
-        !isFastLanguageModelCode(userSettings?.default_model)
-      )
-        return;
-
-      setHighlightedItem(userSettings?.default_model);
-    },
-    [selectedLanguageModel, setHighlightedItem, userSettings?.default_model],
-  );
+    return <Checkbox size="lg" checked={isProSearchEnabled} />;
+  }, [component, isProSearchEnabled]);
 
   return (
     <div
-      className="x-flex x-w-full x-items-center x-justify-between x-gap-4 x-p-4"
+      className="x-flex x-w-full x-items-start x-justify-between x-gap-4 x-p-4"
       onClick={() => {
         setIsProSearchEnabled(!isProSearchEnabled);
-        handleToggleOff(isProSearchEnabled);
       }}
     >
       <div
@@ -66,7 +41,7 @@ export default function ProSearchSwitch({
           </div>
         </div>
       </div>
-      <Switch checked={isProSearchEnabled} />
+      {indicator}
     </div>
   );
 }

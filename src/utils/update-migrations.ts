@@ -37,19 +37,6 @@ export const migrateHideHomepageWidgetsKey: MigrationFn = async ({
   });
 };
 
-export const migrateInstantRewriteButtonKey: MigrationFn = async ({
-  oldRawSettings,
-}) => {
-  console.log("[ExtUpdateMigrations] Migrate Instant Rewrite Button key");
-
-  return produce(oldRawSettings, (draft) => {
-    draft.plugins["thread:instantRewriteButton"] = {
-      enabled: (oldRawSettings.plugins["thread:betterMessageToolbars"] as any)
-        .instantRewriteButton,
-    };
-  });
-};
-
 export const migrateShowPostUpdateReleaseNotesPopupKey: MigrationFn = async ({
   oldRawSettings,
 }) => {
@@ -114,7 +101,7 @@ export const EXT_UPDATE_MIGRATIONS: Record<string, MigrationFn[]> = {
   "1.3.2.0": [migrateSpaceNavigatorKey],
   "1.3.3.0": [migrateSlashCommandMenuKey],
   "1.3.5.0": [migrateShowPostUpdateReleaseNotesPopupKey],
-  "1.4.2.0": [migrateInstantRewriteButtonKey, migrateHideHomepageWidgetsKey],
+  "1.4.2.0": [migrateHideHomepageWidgetsKey],
   "1.6.8.0": [enableThreadMessageTtsKey],
 };
 

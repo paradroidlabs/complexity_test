@@ -29,8 +29,6 @@ export const CALLBACK_QUEUE_TASK_IDS = [
   "spacesPage:spaceCard",
 
   "settingsPage:topNavWrapper",
-
-  "plugin:instantRewriteButton:handleInstantRewrite",
 ] as const;
 
 export type CallbackQueueTaskId = (typeof CALLBACK_QUEUE_TASK_IDS)[number];

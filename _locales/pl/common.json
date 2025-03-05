@@ -19,8 +19,7 @@
     "characters": "znaków",
     "expand": "Rozwiń",
     "collapse": "Zwiń",
-    "instantRewriteShort": "Przepisz",
-    "instantRewrite": "Przepisz tym samym modelem",
+    "rewrite": "Przepisz",
     "speakAloud": "Przeczytaj na głos",
     "stop": "Zatrzymaj"
   },

@@ -1,0 +1,3 @@
+[data-cplx-component="message-block-bottom-bar"] > :first-child > :last-child {
+  display: none;
+}

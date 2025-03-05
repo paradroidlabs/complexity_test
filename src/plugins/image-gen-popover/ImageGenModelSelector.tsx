@@ -16,6 +16,7 @@ import usePplxUserSettings from "@/hooks/usePplxUserSettings";
 import { useImageGenModelSelectorStore } from "@/plugins/image-gen-popover/store";
 import { isReactNode } from "@/types/utils.types";
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export default function ImageGenModelSelector() {
   const { data: pplxUserSettings } = usePplxUserSettings();
@@ -62,7 +63,12 @@ export default function ImageGenModelSelector() {
           </div>
         </SelectTrigger>
       </Tooltip>
-      <SelectContent className="custom-scrollbar x-max-h-[500px] x-max-w-[200px] x-overflow-auto x-font-sans">
+      <SelectContent
+        className={cn(
+          PPLX_SCROLLBAR_CLASSES,
+          "x-max-h-[500px] x-max-w-[200px] x-overflow-auto x-font-sans",
+        )}
+      >
         {imageGenModels.map((model) => {
           const Icon = imageGenModelIcons[model.code];
           return (

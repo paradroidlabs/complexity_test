@@ -19,8 +19,7 @@
     "characters": "karakter",
     "expand": "Kibontás",
     "collapse": "Összecsukás",
-    "instantRewriteShort": "Átírás",
-    "instantRewrite": "Átírás ugyanazzal a modellel",
+    "rewrite": "Átírás",
     "speakAloud": "Felolvasás",
     "stop": "Leállítás"
   },

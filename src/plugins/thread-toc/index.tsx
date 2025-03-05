@@ -4,6 +4,7 @@ import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { scrollToElement } from "@/utils/utils";
 
 export const PANEL_WIDTH = 230;
@@ -52,7 +53,8 @@ export default function ThreadTocWrapper() {
       <div
         ref={containerRef}
         className={cn(
-          "x-custom-scrollbar x-fixed x-top-[--panel-top]",
+          PPLX_SCROLLBAR_CLASSES,
+          "x-fixed x-top-[--panel-top]",
           "x-w-[--panel-width] x-overflow-y-auto",
           {
             "x-max-h-[60vh]": isFloating,

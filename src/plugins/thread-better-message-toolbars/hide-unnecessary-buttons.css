@@ -1,0 +1,6 @@
+[data-cplx-component="message-block-bottom-bar"] {
+  button:has(svg.tabler-icon-thumb-up),
+  button:has(svg.tabler-icon-thumb-down) {
+    display: none;
+  }
+}

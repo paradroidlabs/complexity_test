@@ -19,8 +19,7 @@
     "characters": "znaků",
     "expand": "Rozbalit",
     "collapse": "Sbalit",
-    "instantRewriteShort": "Přepsat",
-    "instantRewrite": "Přepsat se stejným modelem",
+    "rewrite": "Přepsat",
     "speakAloud": "Přečíst nahlas",
     "stop": "Zastavit"
   },

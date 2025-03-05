@@ -2,7 +2,7 @@ import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-obse
 
 const OBSERVER_ID = "query-hover-container-cplx-toolbars-wrapper";
 
-export function useCreatePortalContainer(): (Element | null)[] {
+export function useCreatePortalContainers(): (Element | null)[] {
   const messageBlocks = useThreadMessageBlocksDomObserverStore(
     (state) => state.messageBlocks,
     deepEqual,

@@ -19,8 +19,7 @@
     "characters": "अक्षर",
     "expand": "विस्तार करें",
     "collapse": "संक्षिप्त करें",
-    "instantRewriteShort": "पुनर्लेखन",
-    "instantRewrite": "समान मॉडल से पुनर्लेखन",
+    "rewrite": "पुनर्लेखन",
     "speakAloud": "जोर से पढ़ें",
     "stop": "रोकें"
   },

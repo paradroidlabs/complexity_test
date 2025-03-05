@@ -5,15 +5,23 @@ import {
   fastLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
-import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import {
+  isFastLanguageModelCode,
+  isReasoningLanguageModelCode,
+  LanguageModelCode,
+} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import useBindBetterLanguageModelSelectorHotKeys from "@/plugins/_core/ui-groups/query-box/hooks/useBindHotKeys";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
+import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { useColumnNavigation } from "@/plugins/language-model-selector/hooks/useColumnNavigation";
+import { PplxUserSettingsApiResponse } from "@/services/pplx-api/pplx-api.types";
+import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
+import { queryClient } from "@/utils/ts-query-client";
 import { UiUtils } from "@/utils/ui-utils";
 
 const selectItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
@@ -25,20 +33,22 @@ const selectItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
 
 export default function BetterLanguageModelSelectorWrapper() {
   const { isMobile } = useIsMobileStore();
-
-  const { selectedLanguageModel, setSelectedLanguageModel } =
-    useSharedQueryBoxStore((store) => ({
-      selectedLanguageModel: store.selectedLanguageModel,
-      setSelectedLanguageModel: store.setSelectedLanguageModel,
-    }));
-
+  const {
+    selectedLanguageModel,
+    setSelectedLanguageModel,
+    isProSearchEnabled,
+    setIsProSearchEnabled,
+  } = useSharedQueryBoxStore((store) => ({
+    selectedLanguageModel: store.selectedLanguageModel,
+    setSelectedLanguageModel: store.setSelectedLanguageModel,
+    isProSearchEnabled: store.isProSearchEnabled,
+    setIsProSearchEnabled: store.setIsProSearchEnabled,
+  }));
   const [highlightedItem, setHighlightedItem] = useState<LanguageModelCode>(
     selectedLanguageModel,
   );
-
   const [isOpen, setIsOpen] = useState(false);
-
-  useColumnNavigation({
+  const hotkeyRef = useColumnNavigation({
     highlightedItem,
     setHighlightedItem,
     enabled: isOpen,
@@ -63,7 +73,6 @@ export default function BetterLanguageModelSelectorWrapper() {
       onOpenChange={({ open }) => setIsOpen(open)}
       onValueChange={({ value }) => {
         setSelectedLanguageModel(value[0] as LanguageModelCode);
-
         setTimeout(() => {
           UiUtils.getActiveQueryBoxTextarea().trigger("focus");
         }, 100);
@@ -75,7 +84,6 @@ export default function BetterLanguageModelSelectorWrapper() {
         if (event.key === Key.Escape) {
           event.preventDefault();
           event.stopPropagation();
-
           setTimeout(() => {
             UiUtils.getActiveQueryBoxTextarea().trigger("focus");
           }, 100);
@@ -85,19 +93,47 @@ export default function BetterLanguageModelSelectorWrapper() {
       <SelectTrigger variant="noStyle" className="x-m-0 x-p-0">
         <BetterLanguageModelSelectorTriggerButton />
       </SelectTrigger>
-      {isMobile ? (
-        <SelectContext>
-          {({ open, setOpen }) => (
-            <MobileContent
-              open={open}
-              setHighlightedItem={setHighlightedItem}
-              onOpenChange={({ open }) => setOpen(open)}
-            />
-          )}
-        </SelectContext>
-      ) : (
-        <DesktopContent setHighlightedItem={setHighlightedItem} />
-      )}
+      <LanguageModelSelectorContext
+        value={{
+          component: "select",
+          isProSearchEnabled,
+          hotkeyRef,
+          setIsProSearchEnabled: (isEnabled) => {
+            setIsProSearchEnabled(isEnabled);
+
+            if (isEnabled) return;
+
+            if (!isReasoningLanguageModelCode(selectedLanguageModel)) return;
+
+            const userSettings =
+              queryClient.getQueryData<PplxUserSettingsApiResponse>(
+                pplxApiQueries.userSettings.queryKey,
+              );
+
+            if (
+              userSettings?.default_model == null ||
+              !isFastLanguageModelCode(userSettings?.default_model)
+            )
+              return;
+
+            setHighlightedItem(userSettings?.default_model);
+          },
+          setHighlightedItem,
+        }}
+      >
+        {isMobile ? (
+          <SelectContext>
+            {({ open, setOpen }) => (
+              <MobileContent
+                open={open}
+                onOpenChange={({ open }) => setOpen(open)}
+              />
+            )}
+          </SelectContext>
+        ) : (
+          <DesktopContent />
+        )}
+      </LanguageModelSelectorContext>
     </Select>
   );
 }

@@ -8,7 +8,6 @@ import {
   migrateSlashCommandMenuKey,
   migrateSpaceNavigatorKey,
   migrateShowPostUpdateReleaseNotesPopupKey,
-  migrateInstantRewriteButtonKey,
   migrateHideHomepageWidgetsKey,
 } from "@/utils/update-migrations";
 
@@ -108,28 +107,6 @@ describe("enableThemePreloader", () => {
     });
 
     expect(newSettings.preloadTheme).toBe(false);
-  });
-});
-
-describe("migrateInstantRewriteButton", () => {
-  it("should migrate instant rewrite button settings from betterMessageToolbars", async () => {
-    const oldRawSettings: ExtensionLocalStorage = produce(
-      DEFAULT_STORAGE,
-      (draft) => {
-        (draft.plugins["thread:betterMessageToolbars"] as any) = {
-          ...draft.plugins["thread:betterMessageToolbars"],
-          instantRewriteButton: true,
-        };
-      },
-    );
-
-    const newSettings = await migrateInstantRewriteButtonKey({
-      oldRawSettings,
-    });
-
-    expect(newSettings.plugins["thread:instantRewriteButton"]).toEqual({
-      enabled: true,
-    });
   });
 });
 

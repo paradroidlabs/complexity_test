@@ -18,9 +18,8 @@
     "words": "palabras",
     "characters": "caracteres",
     "expand": "Expandir",
-    "collapse": "Colapsar",
-    "instantRewriteShort": "Reescribir",
-    "instantRewrite": "Reescribir con el mismo modelo",
+    "collapse": "Contraer",
+    "rewrite": "Reescribir",
     "speakAloud": "Leer en voz alta",
     "stop": "Detener"
   },

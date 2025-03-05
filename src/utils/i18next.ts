@@ -49,7 +49,6 @@ export const webStoreLangsMap = {
 
 type PluginResources = {
   common: any;
-  "plugin-focus-selector": any;
   "plugin-model-selectors": any;
   "plugin-drag-n-drop-file-to-upload-in-thread": any;
   "plugin-export-thread": any;
@@ -74,9 +73,6 @@ async function loadLanguageResources(
 
   const imports = {
     common: import(`~/_locales/${langFolderName}/common.json`),
-    "plugin-focus-selector": import(
-      `~/_locales/${langFolderName}/plugin-focus-selector.json`
-    ),
     "plugin-model-selectors": import(
       `~/_locales/${langFolderName}/plugin-model-selectors.json`
     ),
@@ -164,7 +160,6 @@ export async function initializeI18next() {
     defaultNS: "common",
     ns: [
       "common",
-      "plugin-focus-selector",
       "plugin-model-selectors",
       "plugin-drag-n-drop-file-to-upload-in-thread",
       "plugin-export-thread",

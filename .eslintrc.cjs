@@ -171,8 +171,8 @@ module.exports = {
             from: "plugin",
             allow: [
               "shared",
-              "plugin",
               "plugin-core",
+              "plugin",
               ["plugin", { pluginName: "${from.pluginName}" }],
             ],
           },

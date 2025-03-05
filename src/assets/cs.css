@@ -16,4 +16,6 @@ body#__next {
     max-width: calc(var(--thread-width) + 4rem);
     margin: 0 auto;
   }
+
+  padding-bottom: 0;
 }

@@ -19,9 +19,8 @@
     "characters": "знаци",
     "expand": "Прошири",
     "collapse": "Собери",
-    "instantRewriteShort": "Препиши",
-    "instantRewrite": "Препиши со истиот модел",
-    "speakAloud": "Читај на глас",
+    "rewrite": "Препиши",
+    "speakAloud": "Прочитај на глас",
     "stop": "Стоп"
   },
   "releaseNotes": {

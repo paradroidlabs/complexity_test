@@ -51,7 +51,7 @@ csLoaderRegistry.register({
 
           const settings = ExtensionLocalStorageService.getCachedSync();
 
-          const newPayload = produce(parsedData.params, (draft: any) => {
+          const newParams = produce(parsedData.params, (draft: any) => {
             draft.timezone =
               settings.devMode &&
               settings.plugins["queryBox:languageModelSelector"].changeTimezone
@@ -75,7 +75,7 @@ csLoaderRegistry.register({
           const newEncodedPayload = encodePerplexityAskEvent({
             newPayload: {
               ...parsedData,
-              params: newPayload,
+              params: newParams,
             },
             url: data.payload.url,
           });

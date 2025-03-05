@@ -12,6 +12,7 @@ import {
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import { Space } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
   const space: Space | undefined = useCommandState((state) => {
@@ -71,7 +72,12 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
               "plugin-space-navigator:spaceNavigator.spaceItem.details.instructions",
             )}
           </div>
-          <div className="custom-scrollbar x-max-h-[240px] x-overflow-y-auto x-rounded-md x-bg-secondary x-p-2">
+          <div
+            className={cn(
+              PPLX_SCROLLBAR_CLASSES,
+              "x-max-h-[240px] x-overflow-y-auto x-rounded-md x-bg-secondary x-p-2",
+            )}
+          >
             <MarkdownRenderer markdown={space.instructions} />
           </div>
         </div>

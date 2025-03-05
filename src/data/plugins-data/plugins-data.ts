@@ -134,22 +134,20 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:messageTts": {
     id: "thread:messageTts",
     routeSegment: "thread-message-tts",
-    title: "Thread Message TTS",
+    title: "Message TTS",
     description: "Enable text-to-speech for messages in threads",
     categories: ["thread"],
     tags: ["new", "experimental", "ui", "ux"],
     dependentDomObservers: ["coreDomObserver:thread:messageBlocks"],
     dependentCorePlugins: ["spaRouter", "reactVdom"],
   },
-  "thread:instantRewriteButton": {
-    id: "thread:instantRewriteButton",
-    routeSegment: "thread-instant-rewrite-button",
-    title: "Instant Thread Message Rewrite Buttons",
-    description:
-      "Rewrite messages with the same model without opening the original Rewrite dropdown menu",
+  "thread:betterRewriteDropdowns": {
+    id: "thread:betterRewriteDropdowns",
+    routeSegment: "thread-better-rewrite-dropdowns",
+    title: "Better Rewrite Dropdowns",
+    description: "A better dropdown for rewriting messages",
     categories: ["thread"],
-    tags: ["ui", "ux"],
-    uiGroup: ["thread:messageBlocks:queryHoverContainer"],
+    tags: ["new", "experimental", "ui", "ux", "pplxPro"],
     dependentDomObservers: ["coreDomObserver:thread:messageBlocks"],
     dependentCorePlugins: ["spaRouter", "reactVdom"],
   },
@@ -204,7 +202,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:dragAndDropFileToUploadInThread": {
     id: "thread:dragAndDropFileToUploadInThread",
     routeSegment: "thread-drag-and-drop-file-to-upload-in-thread",
-    title: "Drag and Drop File(s) to Upload in a thread",
+    title: "Drag and Drop File(s) to Upload",
     description:
       "Treat the whole thread page as a drop zone and allow you to directly drag & drop file(s) to upload them as attachment(s)",
     categories: ["thread"],

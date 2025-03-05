@@ -44,7 +44,6 @@ export const LOADER_IDS = [
   "plugin:thread:collapseEmptyThreadVisualCols",
   "plugin:thread:betterMessageToolbars:explicitModelName",
   "plugin:thread:betterMessageToolbars:messageWordsAndCharactersCount",
-  "plugin:thread:instantRewriteButton:nativeBtnBind",
   "plugin:thread:customThreadContainerWidth",
 
   "plugin:spaceNavigator:networkInterceptMiddleware",

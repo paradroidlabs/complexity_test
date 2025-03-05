@@ -51,10 +51,6 @@ async function displayModelBadge({
   const model = languageModels.find((model) => model.code === modelCode);
   if (!model) return;
 
-  const $existingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
-
-  if ($existingBadge.length) return;
-
   // Hide the native badge and the "Answer" text
   const $target = $answerHeading.find('[color="super"]');
   if (!$target.length) return;
@@ -64,6 +60,10 @@ async function displayModelBadge({
     .find("button:has(svg.tabler-icon-cpu)")
     .parent()
     .addClass("x-hidden");
+
+  const $existingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
+
+  if ($existingBadge.length) return;
 
   const modelNameElement = createModelBadge(model.label);
   $target.append(modelNameElement);

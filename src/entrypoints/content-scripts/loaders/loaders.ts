@@ -39,7 +39,6 @@ import "@/plugins/drag-n-drop-file-to-upload-in-thread";
 import "@/plugins/collapse-empty-thread-visual-cols";
 import "@/plugins/thread-better-message-toolbars/explicit-model-name";
 import "@/plugins/thread-better-message-toolbars/message-words-and-characters-count";
-import "@/plugins/instant-rewrite-button/native-btn-bind";
 import "@/plugins/custom-thread-container-width";
 import "@/plugins/thread-raw-headings";
 

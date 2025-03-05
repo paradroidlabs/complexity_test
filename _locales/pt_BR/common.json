@@ -19,8 +19,7 @@
     "characters": "caracteres",
     "expand": "Expandir",
     "collapse": "Recolher",
-    "instantRewriteShort": "Reescrever",
-    "instantRewrite": "Reescrever com o mesmo modelo",
+    "rewrite": "Reescrever",
     "speakAloud": "Ler em voz alta",
     "stop": "Parar"
   },

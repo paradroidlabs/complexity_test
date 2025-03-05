@@ -19,9 +19,8 @@
     "characters": "Zeichen",
     "expand": "Erweitern",
     "collapse": "Einklappen",
-    "instantRewriteShort": "Neu schreiben",
-    "instantRewrite": "Mit gleichem Modell neu schreiben",
-    "speakAloud": "Laut vorlesen",
+    "rewrite": "Umschreiben",
+    "speakAloud": "Vorlesen",
     "stop": "Stopp"
   },
   "releaseNotes": {

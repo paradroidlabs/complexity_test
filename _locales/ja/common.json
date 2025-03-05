@@ -19,9 +19,8 @@
     "characters": "文字",
     "expand": "展開",
     "collapse": "折りたたむ",
-    "instantRewriteShort": "書き直す",
-    "instantRewrite": "同じモデルで書き直す",
-    "speakAloud": "音声読み上げ",
+    "rewrite": "書き直す",
+    "speakAloud": "音声で読み上げ",
     "stop": "停止"
   },
   "releaseNotes": {

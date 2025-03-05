@@ -15,12 +15,11 @@
     }
   },
   "misc": {
-    "words": "词",
+    "words": "字数",
     "characters": "字符",
     "expand": "展开",
-    "collapse": "折叠",
-    "instantRewriteShort": "重写",
-    "instantRewrite": "使用相同模型重写",
+    "collapse": "收起",
+    "rewrite": "重写",
     "speakAloud": "朗读",
     "stop": "停止"
   },

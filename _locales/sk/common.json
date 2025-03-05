@@ -19,8 +19,7 @@
     "characters": "znakov",
     "expand": "Rozbaliť",
     "collapse": "Zbaliť",
-    "instantRewriteShort": "Prepísať",
-    "instantRewrite": "Prepísať s rovnakým modelom",
+    "rewrite": "Prepísať",
     "speakAloud": "Prečítať nahlas",
     "stop": "Zastaviť"
   },

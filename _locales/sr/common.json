@@ -19,10 +19,9 @@
     "characters": "знакова",
     "expand": "Прошири",
     "collapse": "Скупи",
-    "instantRewriteShort": "Препиши",
-    "instantRewrite": "Препиши истим моделом",
-    "speakAloud": "Проčitaj naglas",
-    "stop": "Zaustavi"
+    "rewrite": "Препиши",
+    "speakAloud": "Прочитај наглас",
+    "stop": "Заустави"
   },
   "releaseNotes": {
     "title": "Ажурирано на v{{version}}",
