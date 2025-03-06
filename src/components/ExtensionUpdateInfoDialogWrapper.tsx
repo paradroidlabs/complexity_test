@@ -13,6 +13,7 @@ import {
 import { Image } from "@/components/ui/image";
 import { toast } from "@/components/ui/use-toast";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { ExtensionVersion } from "@/utils/ext-version";
 
 export default function ExtensionUpdateInfoDialogWrapper({
   children,
@@ -23,7 +24,13 @@ export default function ExtensionUpdateInfoDialogWrapper({
     ...cplxApiQueries.versions,
   });
 
-  const latestVersion = versions?.latest;
+  if (!versions) return null;
+
+  const latestVersion = versions.latest;
+  const latestVersionWithChangelog =
+    versions.changelogEntries.find((entry) =>
+      new ExtensionVersion(entry).isOlderThanOrEqualTo(latestVersion),
+    ) ?? versions.changelogEntries[0]!;
 
   return (
     <Dialog>
@@ -53,7 +60,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
               sendMessage(
                 "bg:openDirectReleaseNotes",
                 {
-                  version: latestVersion,
+                  version: latestVersionWithChangelog,
                 },
                 "background",
               );

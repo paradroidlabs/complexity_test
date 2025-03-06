@@ -150,6 +150,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     tags: ["new", "experimental", "ui", "ux", "pplxPro"],
     dependentDomObservers: ["coreDomObserver:thread:messageBlocks"],
     dependentCorePlugins: ["spaRouter", "reactVdom"],
+    dependentPlugins: ["queryBox:languageModelSelector"],
   },
   "thread:betterCodeBlocks": {
     id: "thread:betterCodeBlocks",

@@ -15,12 +15,13 @@ csLoaderRegistry.register({
   id: "coreDomObserver:home",
   dependencies: ["messaging:spaRouter"],
   loader: () => {
-    if (
-      !shouldEnableCoreObserver({
-        coreObserverId: "coreDomObserver:home",
-      })
-    )
-      return;
+    // this observer is always needed for update announcer
+    // if (
+    //   !shouldEnableCoreObserver({
+    //     coreObserverId: "coreDomObserver:home",
+    //   })
+    // )
+    //   return;
 
     observeHome(whereAmI());
 
