@@ -43,7 +43,17 @@ A powerful browser extension that enhances your PerplexityAI experience with adv
 
 ## Quick Start
 
-- Build and use the extension locally
+### Build and use the extension locally
+
+Make sure you have `pnpm` and `Node.js >= v14` installed.
+
+1. Install the dependencies
+
+```bash
+pnpm install
+```
+
+2. Build the extension (unpacked)
 
 ```bash
 pnpm build
@@ -51,7 +61,11 @@ pnpm build
 pnpm build:firefox
 ```
 
-- Local development (only works on Chromium-based browsers)
+3. Enable "Developer mode" in your browser
+
+4. Load the extension from the `dist` folder
+
+### Local development (only works on Chromium-based browsers)
 
 ```bash
 pnpm dev
