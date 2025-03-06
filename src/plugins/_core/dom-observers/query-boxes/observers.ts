@@ -18,7 +18,7 @@ const cleanup = () => {
   DomObserver.destroy("queryBoxes:collection");
   DomObserver.destroy("queryBoxes:followUp");
   DomObserver.destroy("queryBoxes:modal");
-  DomObserver.destroy("queryBoxes:$pplxComponentsWrapper");
+  DomObserver.destroy("queryBoxes:pplxComponentsWrapper");
 };
 
 csLoaderRegistry.register({
@@ -120,13 +120,13 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       ),
   });
 
-  DomObserver.create("queryBoxes:$pplxComponentsWrapper", {
+  DomObserver.create("queryBoxes:pplxComponentsWrapper", {
     target: document.body,
     config: { childList: true, subtree: true },
     onMutation: () =>
       CallbackQueue.getInstance().enqueue(
         findPplxComponentsWrapper,
-        "queryBoxes:$pplxComponentsWrapper",
+        "queryBoxes:pplxComponentsWrapper",
       ),
   });
 }

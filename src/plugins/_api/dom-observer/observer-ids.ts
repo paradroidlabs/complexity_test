@@ -9,7 +9,7 @@ const OBSERVER_IDS = [
   "queryBoxes:collection",
   "queryBoxes:followUp",
   "queryBoxes:modal",
-  "queryBoxes:$pplxComponentsWrapper",
+  "queryBoxes:pplxComponentsWrapper",
 
   "home",
   "home:languageSelector",

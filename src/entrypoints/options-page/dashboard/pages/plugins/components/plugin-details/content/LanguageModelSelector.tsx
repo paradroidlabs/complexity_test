@@ -2,7 +2,6 @@ import { LuCheck } from "react-icons/lu";
 
 import { Image } from "@/components/ui/image";
 import { Switch } from "@/components/ui/switch";
-import { P } from "@/components/ui/typography";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
 
 export default function LanguageModelSelectorPluginDetails() {
@@ -12,7 +11,7 @@ export default function LanguageModelSelectorPluginDetails() {
 
   return (
     <div className="x-flex x-flex-col x-gap-4 x-overflow-y-auto">
-      <P className="x-my-0">
+      <div>
         <div className="x-flex x-items-center x-gap-2">
           <LuCheck className="x-text-primary" /> Take complete control of all
           available language models.
@@ -24,7 +23,7 @@ export default function LanguageModelSelectorPluginDetails() {
         <div className="x-flex x-items-center x-gap-2">
           <LuCheck className="x-text-primary" /> Supports keyboard navigation.
         </div>
-      </P>
+      </div>
       <Switch
         textLabel="Enable"
         checked={
