@@ -11,9 +11,7 @@ export default function BetterMessageCopyButton({
     deepEqual,
   );
 
-  if (!$sources) return null;
-
-  const hasSources = $sources.length > 0;
+  const hasSources = $sources != null && $sources.length > 0;
 
   return (
     <CopyButton messageBlockIndex={messageBlockIndex} hasSources={hasSources} />
