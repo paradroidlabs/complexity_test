@@ -28,7 +28,7 @@ export default function ZenModePluginDetails() {
       />
       {settings?.plugins["zenMode"].enabled && (
         <>
-          <div className="x:flex x:flex-col x:gap-2">
+          <div className="x:hidden x:flex-col x:gap-2 x:md:flex">
             <div>Activation hotkey:</div>
             <HotkeyRecorderUI />
           </div>

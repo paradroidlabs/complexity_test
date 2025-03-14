@@ -23,6 +23,7 @@ export function usePanelPosition(): UsePanelPosition | null {
   const threadWrapper = useThreadDomObserverStore(
     (state) => state.$wrapper?.[0],
   );
+  const dispatchResizeAttemptRef = useRef(0);
 
   const calculatePosition = useCallback(() => {
     if (threadWrapper == null) return null;
@@ -50,12 +51,15 @@ export function usePanelPosition(): UsePanelPosition | null {
     });
     if (threadWrapperWidth === 0) return null;
 
-    if (anchorLeft <= 0) {
+    if (anchorLeft < 0 && dispatchResizeAttemptRef.current < 3) {
+      dispatchResizeAttemptRef.current++;
       setTimeout(() => {
         window.dispatchEvent(new Event("resize"));
       }, 0);
       return;
     }
+
+    dispatchResizeAttemptRef.current = 0;
 
     const panelRightEdge = anchorLeft + threadWrapperWidth + PANEL_WIDTH + 32;
 
