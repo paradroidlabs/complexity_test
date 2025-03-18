@@ -51,7 +51,11 @@ const createTocStore = () => {
     listeners.add(listener);
 
     const unsubscribeMessageBlocks =
-      useThreadMessageBlocksDomObserverStore.subscribe(listener);
+      useThreadMessageBlocksDomObserverStore.subscribe(
+        ({ messageBlocks }) => messageBlocks,
+        listener,
+        { equalityFn: deepEqual },
+      );
 
     return () => {
       listeners.delete(listener);

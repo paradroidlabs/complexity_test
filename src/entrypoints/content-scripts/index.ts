@@ -15,6 +15,6 @@ import { insertCss, waitForDocumentReady } from "@/utils/utils";
       css: csUiRootCss,
       id: "cs-ui-root",
     });
-  contentScriptGuard();
+  if (!contentScriptGuard()) return;
   csLoaderRegistry.executeAll();
 })();

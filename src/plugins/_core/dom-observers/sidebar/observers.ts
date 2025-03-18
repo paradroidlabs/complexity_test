@@ -21,9 +21,7 @@ csLoaderRegistry.register({
     )
       return;
 
-    $(() => {
-      observeSidebar();
-    });
+    observeSidebar();
   },
 });
 

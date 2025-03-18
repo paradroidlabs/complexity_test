@@ -35,20 +35,32 @@ type CsUiPluginsGuardProps = GuardConditions & {
   additionalCheck?: AdditionalCheckFn;
   onNotSatisfiedAllConditions?: () => void;
   fallback?: React.ReactNode;
+  customMessage?: string;
 };
 
 function CsUiPluginsGuardError({
   dependentPluginIds,
   location,
   errorMessage,
+  customMessage,
 }: Omit<CsUiPluginsGuardProps, "children"> & { errorMessage?: string }) {
   const [open, setOpen] = useState(true);
 
-  const traces = useErrorTraces({ errorMessage, location, dependentPluginIds });
+  const traces = useErrorTraces({
+    errorMessage,
+    customMessage,
+    location,
+    dependentPluginIds,
+  });
   const pluginsError = usePluginsError(dependentPluginIds);
 
   return (
-    <Dialog defaultOpen open={open} onOpenChange={({ open }) => setOpen(open)}>
+    <Dialog
+      defaultOpen
+      closeOnInteractOutside={false}
+      open={open}
+      onOpenChange={({ open }) => setOpen(open)}
+    >
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Complexity encountered an error</DialogTitle>
@@ -96,6 +108,41 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
 }
 
 export default function CsUiPluginsGuard(props: CsUiPluginsGuardProps) {
+  const [retryCount, setRetryCount] = useState(0);
+  const [error, setError] = useState<Error | null>(null);
+  const [key, setKey] = useState(0); // Used to force re-render
+  const errorRef = useRef<Error | null>(null);
+
+  useEffect(() => {
+    setRetryCount(0);
+    setError(null);
+    setKey(0);
+    errorRef.current = null;
+  }, [props.children]);
+
+  useEffect(() => {
+    if (errorRef.current && retryCount < 3) {
+      const currentError = errorRef.current;
+
+      if (
+        currentError.message.includes(
+          "Failed to fetch dynamically imported module",
+        ) &&
+        chrome.runtime.id == null
+      ) {
+        return;
+      }
+
+      console.error(
+        `[CPLX] Plugin error, retry attempt ${retryCount + 1}/3: ${currentError.message}`,
+      );
+
+      setKey((prevKey) => prevKey + 1);
+
+      errorRef.current = null;
+    }
+  }, [retryCount]);
+
   const {
     deviceValid,
     authValid,
@@ -132,11 +179,44 @@ export default function CsUiPluginsGuard(props: CsUiPluginsGuardProps) {
     return props.fallback;
   }
 
+  if (error && retryCount >= 3) {
+    return <CsUiPluginsGuardError {...props} errorMessage={error.message} />;
+  }
+
   return (
     <ErrorBoundary
-      fallback={({ error }: { error: Error }) => (
-        <CsUiPluginsGuardError {...props} errorMessage={error.message} />
-      )}
+      key={key}
+      fallback={({ error: boundaryError }: { error: Error }) => {
+        if (
+          boundaryError.message.includes(
+            "Failed to fetch dynamically imported module",
+          ) &&
+          chrome.runtime.id == null
+        ) {
+          return null;
+        }
+
+        if (!errorRef.current) {
+          errorRef.current = boundaryError;
+
+          if (retryCount < 3) {
+            setRetryCount((prevCount) => prevCount + 1);
+          } else {
+            setError(boundaryError);
+          }
+        }
+
+        if (retryCount >= 3) {
+          return (
+            <CsUiPluginsGuardError
+              {...props}
+              errorMessage={boundaryError.message}
+            />
+          );
+        }
+
+        return null;
+      }}
     >
       <Suspense fallback={null}>{props.children}</Suspense>
     </ErrorBoundary>
@@ -145,16 +225,19 @@ export default function CsUiPluginsGuard(props: CsUiPluginsGuardProps) {
 
 function useErrorTraces({
   errorMessage,
+  customMessage,
   location,
   dependentPluginIds,
 }: {
   errorMessage?: string;
+  customMessage?: string;
   location?: ReturnType<typeof whereAmI>[];
   dependentPluginIds?: GuardConditions["dependentPluginIds"];
 }) {
   const tracesAsString = JSON.stringify(
     {
       errorMessage,
+      customMessage,
       browser: APP_CONFIG.BROWSER,
       version: APP_CONFIG.VERSION,
       location,
@@ -169,7 +252,7 @@ function useErrorTraces({
 
   return (
     <div className="x:flex x:flex-col">
-      <div>Please provide these details to the maintainer:</div>
+      <div>Debugging information:</div>
       <div className="x:relative x:my-4 x:max-h-[300px] x:overflow-auto x:rounded-md x:bg-secondary x:p-2 x:font-mono">
         <CopyButton
           className="x:sticky x:top-2 x:right-2 x:float-right"
@@ -186,7 +269,9 @@ function usePluginsError(
 ) {
   return dependentPluginIds?.length != null ? (
     <div>
-      Error occurred in dependent plugins:
+      <div className="x:mt-2 x:text-sm x:text-muted-foreground">
+        Disable these plugins if errors persist.
+      </div>
       <Ul>
         {dependentPluginIds.map((pluginId) => (
           <li key={pluginId} className="x:text-foreground">
@@ -194,7 +279,6 @@ function usePluginsError(
           </li>
         ))}
       </Ul>
-      <div>Disable these plugins if errors persist.</div>
     </div>
   ) : null;
 }

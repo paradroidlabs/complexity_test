@@ -6,6 +6,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import csCss from "@/assets/cs.css?inline";
 import indexCss from "@/assets/index.css?inline";
+import ExtensionContextInvalidationWatchdog from "@/components/ExtensionContextInvalidationWatchdog";
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { PostUpdateReleaseNotesDialog } from "@/components/PostUpdateReleaseNotesDialog";
 // import { SponsorHomeLink } from "@/components/SponsorHomeLink";
@@ -55,6 +56,9 @@ const SidebarToggleableRecentThreadsWrapper = lazy(
 export default function CsUiRoot() {
   return (
     <>
+      <CsUiPluginsGuard browser={["chrome"]}>
+        <ExtensionContextInvalidationWatchdog />
+      </CsUiPluginsGuard>
       <CsUiPluginsGuard
         desktopOnly
         additionalCheck={({ settings }) =>
