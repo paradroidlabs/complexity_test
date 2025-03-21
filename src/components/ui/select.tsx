@@ -106,7 +106,7 @@ const SelectContent = ({ className, ...props }: SelectContentProps) => {
       <ArkSelect.Positioner>
         <ArkSelect.Content
           className={cn(
-            "custom-scrollbar x:z-50 x:overflow-auto x:rounded-md x:border x:border-border/50 x:bg-popover x:p-2 x:text-popover-foreground x:shadow-md x:focus-visible:outline-none",
+            "custom-scrollbar x:z-50 x:overflow-auto x:rounded-xl x:border x:border-border/50 x:bg-popover x:p-2 x:text-popover-foreground x:shadow-md x:focus-visible:outline-none",
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",

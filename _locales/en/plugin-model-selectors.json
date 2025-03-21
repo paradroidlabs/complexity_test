@@ -5,19 +5,24 @@
       "tooltip": "More sources, python code interpreter"
     },
     "reasoningModels": {
-      "label": "Reasoning Models",
       "tooltip": {
         "description": "Answers will take longer to generate, but tend to be more detailed and accurate.",
         "proSearchNote": "<emphasis>Pro</emphasis> is always enabled when choosing a reasoning model."
-      },
-      "usesLeft": {
-        "unlimited": "Unlimited",
-        "limited": "{{count}} uses left"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Answers will take significantly longer to generate, but tend to be the most detailed and accurate.",
+        "proSearchNote": "<emphasis>Pro</emphasis> is always enabled when choosing a deep research model."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Adapts to your query"
+    },
+    "usesLeft": {
+      "unlimited": "Unlimited",
+      "limited": "{{count}} uses left"
     }
   },
   "imageGenModelSelector": {

@@ -2,7 +2,9 @@ import { createListCollection } from "@ark-ui/react";
 
 import { Select, SelectContext, SelectTrigger } from "@/components/ui/select";
 import {
+  deepResearchLanguageModels,
   fastLanguageModels,
+  localLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
@@ -13,7 +15,6 @@ import DesktopContent from "@/plugins/language-model-selector/components/desktop
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { useColumnNavigation } from "@/plugins/language-model-selector/hooks/useColumnNavigation";
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 
@@ -36,11 +37,6 @@ export default function BetterLanguageModelSelectorWrapper() {
     selectedLanguageModel,
   );
   const [isOpen, setIsOpen] = useState(false);
-  const hotkeyRef = useColumnNavigation({
-    highlightedItem,
-    setHighlightedItem,
-    enabled: isOpen,
-  });
 
   useBindBetterLanguageModelSelectorHotKeys();
 
@@ -85,7 +81,6 @@ export default function BetterLanguageModelSelectorWrapper() {
         value={{
           component: "select",
           isProSearchEnabled,
-          hotkeyRef,
           setIsProSearchEnabled,
           setHighlightedItem,
         }}
@@ -108,12 +103,15 @@ export default function BetterLanguageModelSelectorWrapper() {
 }
 
 function getSelectItems() {
-  const modelItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
-    (model) => ({
-      id: model.code,
-      label: model.label,
-    }),
-  );
+  const modelItems = [
+    ...fastLanguageModels,
+    ...reasoningLanguageModels,
+    ...deepResearchLanguageModels,
+    localLanguageModels.find((model) => model.code === "turbo")!,
+  ].map((model) => ({
+    id: model.code,
+    label: model.label,
+  }));
 
   return modelItems;
 }

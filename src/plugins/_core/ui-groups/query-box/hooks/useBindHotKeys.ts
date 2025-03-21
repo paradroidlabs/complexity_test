@@ -1,10 +1,12 @@
 import { useHotkeys } from "react-hotkeys-hook";
 
 import {
+  deepResearchLanguageModels,
   fastLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import {
+  isDeepResearchLanguageModelCode,
   isFastLanguageModelCode,
   isReasoningLanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
@@ -31,7 +33,14 @@ export default function useBindBetterLanguageModelSelectorHotKeys() {
 
       switch (nextState) {
         case "deepResearch":
-          sharedQueryBoxStore.getState().setSelectedLanguageModel("pplx_alpha");
+          sharedQueryBoxStore
+            .getState()
+            .setSelectedLanguageModel(
+              searchModels?.deepResearch != null &&
+                isDeepResearchLanguageModelCode(searchModels.deepResearch)
+                ? searchModels.deepResearch
+                : deepResearchLanguageModels[0]!.code,
+            );
           break;
         case "reasoning":
           sharedQueryBoxStore
@@ -76,10 +85,10 @@ function getCurrentState(): LanguageModelState {
     sharedQueryBoxStore.getState().selectedLanguageModel;
   const isProSearchEnabled = sharedQueryBoxStore.getState().isProSearchEnabled;
 
-  if (selectedLanguageModel === "pplx_alpha") return "deepResearch";
-  if (selectedLanguageModel === "turbo") return "auto";
-  if (isProSearchEnabled && isReasoningLanguageModelCode(selectedLanguageModel))
-    return "reasoning";
+  if (isDeepResearchLanguageModelCode(selectedLanguageModel))
+    return "deepResearch";
+  if (isReasoningLanguageModelCode(selectedLanguageModel)) return "reasoning";
+  if (!isProSearchEnabled && selectedLanguageModel === "turbo") return "auto";
   return "pro";
 }
 

@@ -5,19 +5,24 @@
       "tooltip": "Mehr Quellen, Python-Code-Interpreter"
     },
     "reasoningModels": {
-      "label": "Reasoning-Modelle",
       "tooltip": {
         "description": "Antworten brauchen länger zur Generierung, sind aber meist detaillierter und genauer.",
         "proSearchNote": "<emphasis>Pro</emphasis> ist bei der Auswahl eines Reasoning-Modells immer aktiviert."
-      },
-      "usesLeft": {
-        "unlimited": "Unbegrenzt",
-        "limited": "Noch {{count}} Verwendungen"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Antworten brauchen erheblich länger zur Generierung, sind aber in der Regel am detailliertesten und genauesten.",
+        "proSearchNote": "<emphasis>Pro</emphasis> ist bei der Auswahl eines Deep-Research-Modells immer aktiviert."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Passt sich Ihrer Anfrage an"
+    },
+    "usesLeft": {
+      "unlimited": "Unbegrenzt",
+      "limited": "Noch {{count}} Verwendungen"
     }
   },
   "imageGenModelSelector": {

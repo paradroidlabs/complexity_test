@@ -7,8 +7,8 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { fastLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import {
+  isDeepResearchLanguageModelCode,
   isLanguageModelCode,
   isReasoningLanguageModelCode,
   LanguageModelCode,
@@ -18,7 +18,6 @@ import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-obse
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { useColumnNavigation } from "@/plugins/language-model-selector/hooks/useColumnNavigation";
 import { handleRewrite } from "@/plugins/thread-better-rewrite-dropdown/handle-rewrite";
 
 export default function ThreadBetterRewriteDropdown({
@@ -35,11 +34,6 @@ export default function ThreadBetterRewriteDropdown({
     (store) => store.messageBlocks?.[messageBlockIndex]?.states.isReadOnly,
     deepEqual,
   );
-  const hotkeyRef = useColumnNavigation({
-    highlightedItem: highlightedItem ?? fastLanguageModels[0]!.code,
-    setHighlightedItem,
-    enabled: isOpen,
-  });
 
   const { refetch: fetchMessageModelPreferences } = useQuery({
     queryKey: ["messageModelPreferences", messageBlockIndex],
@@ -72,6 +66,9 @@ export default function ThreadBetterRewriteDropdown({
             modelPreferences.data?.mode.toLowerCase() === "copilot" ||
               isReasoningLanguageModelCode(
                 modelPreferences.data?.displayModel ?? "",
+              ) ||
+              isDeepResearchLanguageModelCode(
+                modelPreferences.data?.displayModel ?? "",
               ),
           );
           setHighlightedItem(modelPreferences.data?.displayModel ?? null);
@@ -94,7 +91,7 @@ export default function ThreadBetterRewriteDropdown({
     >
       <Tooltip content={t("misc.rewrite")}>
         <DropdownMenuTrigger asChild>
-          <div className="x:cursor-pointer x:rounded-md x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">
+          <div className="x:cursor-pointer x:rounded-lg x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">
             <PplxRewrite className="x:size-4" />
           </div>
         </DropdownMenuTrigger>
@@ -104,7 +101,6 @@ export default function ThreadBetterRewriteDropdown({
         value={{
           component: "dropdown",
           isProSearchEnabled,
-          hotkeyRef,
           setIsProSearchEnabled,
           setHighlightedItem,
         }}

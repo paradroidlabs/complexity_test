@@ -48,7 +48,7 @@ function syncNativeModelSelector() {
   const cookies = pplxCookiesStore.getState().cookies;
 
   const searchMode = cookies.find(
-    (cookie) => cookie.name === "pplx.search-mode",
+    (cookie) => cookie.name === "pplx.search-mode-raw",
   )?.value;
 
   if (!searchMode) return;

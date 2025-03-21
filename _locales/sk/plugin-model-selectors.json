@@ -5,19 +5,24 @@
       "tooltip": "Viac zdrojov, interpreter kódu Python"
     },
     "reasoningModels": {
-      "label": "Modely uvažovania",
       "tooltip": {
         "description": "Generovanie odpovedí bude trvať dlhšie, ale odpovede bývajú podrobnejšie a presnejšie.",
         "proSearchNote": "Pri výbere modelu uvažovania je <emphasis>Pro</emphasis> vždy aktívne."
-      },
-      "usesLeft": {
-        "unlimited": "Neobmedzene",
-        "limited": "Zostáva {{count}} použití"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Generovanie odpovedí bude trvať výrazne dlhšie, ale odpovede bývajú najpodrobnejšie a najpresnejšie.",
+        "proSearchNote": "Pri výbere modelu hlbokého výskumu je <emphasis>Pro</emphasis> vždy aktívne."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Prispôsobí sa vášmu dopytu"
+    },
+    "usesLeft": {
+      "unlimited": "Neobmedzene",
+      "limited": "Zostáva {{count}} použití"
     }
   },
   "imageGenModelSelector": {

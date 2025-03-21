@@ -2,6 +2,7 @@ import { produce } from "immer";
 import { sendMessage } from "webext-bridge/content-script";
 
 import {
+  isDeepResearchLanguageModelCode,
   isReasoningLanguageModelCode,
   LanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
@@ -57,11 +58,14 @@ export const handleRewrite = ({
           "instant-rewrite-model-change",
         );
 
-        const isReasoningMode = isReasoningLanguageModelCode(selectedModel);
+        const isReasoningModel = isReasoningLanguageModelCode(selectedModel);
+        const isDeepResearchModel =
+          isDeepResearchLanguageModelCode(selectedModel);
 
         const newParams = produce(parsedData.params, (draft: any) => {
           draft.mode =
-            (isReasoningMode || isProSearchEnabled) && selectedModel !== "turbo"
+            (isProSearchEnabled || isReasoningModel || isDeepResearchModel) &&
+            selectedModel !== "turbo"
               ? "copilot"
               : "concise";
           draft.model_preference = selectedModel;

@@ -5,15 +5,24 @@
       "tooltip": "Више извора, Python интерпретер кода"
     },
     "reasoningModels": {
-      "label": "Модели закључивања",
       "tooltip": {
         "description": "Генерисање одговора ће трајати дуже, али одговори су обично детаљнији и прецизнији.",
         "proSearchNote": "<emphasis>Pro</emphasis> је увек активан при избору модела закључивања."
-      },
-      "usesLeft": {
-        "unlimited": "Неограничено",
-        "limited": "Преостало {{count}} коришћења"
       }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Генерисање одговора ће трајати значајно дуже, али одговори су обично најдетаљнији и најпрецизнији.",
+        "proSearchNote": "<emphasis>Pro</emphasis> је увек активан при избору модела дубоког истраживања."
+      }
+    },
+    "autoMode": {
+      "title": "Ауто",
+      "description": "Прилагођава се вашем упиту"
+    },
+    "usesLeft": {
+      "unlimited": "Неограничено",
+      "limited": "Преостало {{count}} коришћења"
     }
   },
   "imageGenModelSelector": {

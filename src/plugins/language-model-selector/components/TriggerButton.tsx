@@ -8,7 +8,10 @@ import ProSearchIcon from "@/components/icons/ProSearchIcon";
 import Tooltip from "@/components/Tooltip";
 import { languageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
-import { isReasoningLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import {
+  isDeepResearchLanguageModelCode,
+  isReasoningLanguageModelCode,
+} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 
@@ -37,11 +40,16 @@ export default function BetterLanguageModelSelectorTriggerButton() {
     if (
       isProSearchEnabled &&
       !isReasoningModel &&
+      !isDeepResearchLanguageModelCode(selectedLanguageModel) &&
       selectedLanguageModel !== "turbo" &&
       !isMobile
     )
       fragments.push("Pro");
-    if (selectedLanguageModel !== "pplx_alpha" && isReasoningModel && !isMobile)
+    if (
+      !isDeepResearchLanguageModelCode(selectedLanguageModel) &&
+      isReasoningModel &&
+      !isMobile
+    )
       fragments.push("Reasoning");
     fragments.push(
       modelInfo?.shortLabel !== "Auto"
@@ -58,7 +66,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
   ]);
 
   const Icon = useMemo(() => {
-    if (selectedLanguageModel === "pplx_alpha") return FaAtom;
+    if (isDeepResearchLanguageModelCode(selectedLanguageModel)) return FaAtom;
     if (selectedLanguageModel === "turbo") return FaShuffle;
 
     return isReasoningModel

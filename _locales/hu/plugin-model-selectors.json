@@ -5,19 +5,24 @@
       "tooltip": "Több forrás, Python kód értelmező"
     },
     "reasoningModels": {
-      "label": "Következtető modellek",
       "tooltip": {
         "description": "A válaszok generálása tovább tart, de általában részletesebbek és pontosabbak.",
         "proSearchNote": "A következtető modell választásakor a <emphasis>Pro</emphasis> mindig aktív."
-      },
-      "usesLeft": {
-        "unlimited": "Korlátlan",
-        "limited": "{{count}} használat maradt"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "A válaszok generálása jelentősen tovább tart, de általában a legrészletesebbek és legpontosabbak.",
+        "proSearchNote": "A mélyreható kutatási modell választásakor a <emphasis>Pro</emphasis> mindig aktív."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Alkalmazkodik a lekérdezéshez"
+    },
+    "usesLeft": {
+      "unlimited": "Korlátlan",
+      "limited": "{{count}} használat maradt"
     }
   },
   "imageGenModelSelector": {

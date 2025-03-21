@@ -104,7 +104,7 @@ const CopyButtonTrigger = memo(function CopyButtonTrigger({
       {...props}
       tabIndex={0}
       className={cn(
-        "x:cursor-pointer x:rounded-md x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95",
+        "x:cursor-pointer x:rounded-lg x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95",
         {
           "x:cursor-not-allowed x:opacity-50": isFetching,
         },

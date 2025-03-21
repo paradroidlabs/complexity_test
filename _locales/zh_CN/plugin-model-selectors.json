@@ -5,19 +5,24 @@
       "tooltip": "更多信息源，Python代码解释器"
     },
     "reasoningModels": {
-      "label": "推理模型",
       "tooltip": {
         "description": "生成答案需要更长时间，但通常更详细准确。",
         "proSearchNote": "选择推理模型时，<emphasis>Pro</emphasis>功能将始终启用。"
-      },
-      "usesLeft": {
-        "unlimited": "无限制",
-        "limited": "剩余{{count}}次使用"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "生成答案需要显著更长的时间，但通常是最详细和最准确的。",
+        "proSearchNote": "选择深度研究模型时，<emphasis>Pro</emphasis>功能将始终启用。"
       }
     },
     "autoMode": {
       "title": "自动",
       "description": "根据查询自适应"
+    },
+    "usesLeft": {
+      "unlimited": "无限制",
+      "limited": "剩余{{count}}次使用"
     }
   },
   "imageGenModelSelector": {

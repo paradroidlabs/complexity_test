@@ -13,6 +13,7 @@ export const localLanguageModels = [
     code: "claude2",
     provider: "Anthropic",
     limitKey: "gpt4_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
@@ -22,6 +23,7 @@ export const localLanguageModels = [
     code: "claude37sonnetthinking",
     provider: "Anthropic",
     limitKey: "pro_reasoning_limit",
+    type: "reasoning",
     isReasoningModel: true,
     hideFromList: false,
   },
@@ -31,6 +33,7 @@ export const localLanguageModels = [
     code: "r1",
     provider: "DeepSeek",
     limitKey: "pro_reasoning_limit",
+    type: "reasoning",
     isReasoningModel: true,
     hideFromList: false,
   },
@@ -40,6 +43,7 @@ export const localLanguageModels = [
     code: "gpt45",
     provider: "OpenAI",
     limitKey: "gpt45_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
@@ -49,6 +53,7 @@ export const localLanguageModels = [
     code: "o3mini",
     provider: "OpenAI",
     limitKey: "o1_limit",
+    type: "reasoning",
     isReasoningModel: true,
     hideFromList: false,
   },
@@ -58,6 +63,7 @@ export const localLanguageModels = [
     code: "gpt4o",
     provider: "OpenAI",
     limitKey: "gpt4_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
@@ -67,6 +73,7 @@ export const localLanguageModels = [
     code: "gemini2flash",
     provider: "Google",
     limitKey: "gpt4_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
@@ -76,15 +83,27 @@ export const localLanguageModels = [
     code: "grok",
     provider: "xAI",
     limitKey: "gpt4_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
   {
-    label: "Deep Research",
+    label: "Standard",
     shortLabel: "Deep Research",
     code: "pplx_alpha",
     provider: "PerplexityDeepResearch",
     limitKey: "pro_reasoning_limit",
+    type: "deepResearch",
+    isReasoningModel: true,
+    hideFromList: false,
+  },
+  {
+    label: "High",
+    shortLabel: "Deep Research (High)",
+    code: "pplx_beta",
+    provider: "PerplexityDeepResearch",
+    limitKey: "pro_reasoning_limit",
+    type: "deepResearch",
     isReasoningModel: true,
     hideFromList: false,
   },
@@ -94,6 +113,7 @@ export const localLanguageModels = [
     code: "experimental",
     provider: "Perplexity",
     limitKey: "gpt4_limit",
+    type: "fast",
     isReasoningModel: false,
     hideFromList: false,
   },
@@ -102,6 +122,7 @@ export const localLanguageModels = [
     shortLabel: "Auto",
     code: "turbo",
     provider: "Perplexity",
+    type: "auto",
     isReasoningModel: false,
     hideFromList: true,
   },
@@ -110,11 +131,15 @@ export const localLanguageModels = [
 export let languageModels: LanguageModel[] = [...localLanguageModels];
 
 export let fastLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => !model.isReasoningModel),
+  ...languageModels.filter((model) => model.type === "fast"),
 ];
 
 export let reasoningLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => model.isReasoningModel),
+  ...languageModels.filter((model) => model.type === "reasoning"),
+];
+
+export let deepResearchLanguageModels: LanguageModel[] = [
+  ...languageModels.filter((model) => model.type === "deepResearch"),
 ];
 
 csLoaderRegistry.register({

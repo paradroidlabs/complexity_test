@@ -48,7 +48,7 @@ export default function MessageMetrics({
       }}
     >
       <HoverCardTrigger asChild>
-        <div className="x:cursor-pointer x:rounded-md x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">
+        <div className="x:cursor-pointer x:rounded-lg x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">
           <LuInfo className="x:size-4" />
         </div>
       </HoverCardTrigger>

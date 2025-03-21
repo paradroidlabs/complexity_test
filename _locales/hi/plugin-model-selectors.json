@@ -5,19 +5,24 @@
       "tooltip": "अधिक स्रोत, पायथन कोड इंटरप्रेटर"
     },
     "reasoningModels": {
-      "label": "तर्क मॉडल",
       "tooltip": {
         "description": "उत्तर जनरेट होने में अधिक समय लगेगा, लेकिन वे अधिक विस्तृत और सटीक होते हैं।",
         "proSearchNote": "तर्क मॉडल चुनते समय <emphasis>Pro</emphasis> हमेशा सक्रिय रहता है।"
-      },
-      "usesLeft": {
-        "unlimited": "असीमित",
-        "limited": "{{count}} उपयोग शेष"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "उत्तर जनरेट होने में काफी अधिक समय लगेगा, लेकिन वे सबसे विस्तृत और सटीक होते हैं।",
+        "proSearchNote": "गहन शोध मॉडल चुनते समय <emphasis>Pro</emphasis> हमेशा सक्रिय रहता है।"
       }
     },
     "autoMode": {
       "title": "स्वचालित",
       "description": "आपकी क्वेरी के अनुसार अनुकूल"
+    },
+    "usesLeft": {
+      "unlimited": "असीमित",
+      "limited": "{{count}} उपयोग शेष"
     }
   },
   "imageGenModelSelector": {

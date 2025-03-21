@@ -5,19 +5,24 @@
       "tooltip": "Więcej źródeł, interpreter kodu Python"
     },
     "reasoningModels": {
-      "label": "Modele rozumowania",
       "tooltip": {
         "description": "Generowanie odpowiedzi zajmie więcej czasu, ale odpowiedzi są zazwyczaj bardziej szczegółowe i dokładne.",
         "proSearchNote": "<emphasis>Pro</emphasis> jest zawsze aktywne przy wyborze modelu rozumowania."
-      },
-      "usesLeft": {
-        "unlimited": "Bez limitu",
-        "limited": "Pozostało {{count}} użyć"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Generowanie odpowiedzi zajmie znacznie więcej czasu, ale odpowiedzi są zazwyczaj najbardziej szczegółowe i dokładne.",
+        "proSearchNote": "<emphasis>Pro</emphasis> jest zawsze aktywne przy wyborze modelu dogłębnych badań."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Dostosowuje się do twojego zapytania"
+    },
+    "usesLeft": {
+      "unlimited": "Bez limitu",
+      "limited": "Pozostało {{count}} użyć"
     }
   },
   "imageGenModelSelector": {

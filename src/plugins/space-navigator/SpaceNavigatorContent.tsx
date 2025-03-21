@@ -47,6 +47,7 @@ export default function SpaceNavigatorContent({
           }, 100);
         }
       }}
+      className="x:rounded-xl"
     >
       <CommandInput
         placeholder={t(
@@ -64,7 +65,7 @@ export default function SpaceNavigatorContent({
           {t("plugin-space-navigator:spaceNavigator.search.noResults")}
         </CommandEmpty>
       )}
-      <div className="x:flex x:items-start x:divide-x x:divide-border/50">
+      <div className="x:flex x:items-start">
         <CommandList className="x:flex-1 x:p-1">
           {isLoading ? (
             <div className="x:my-10 x:w-full x:space-x-2 x:text-center">

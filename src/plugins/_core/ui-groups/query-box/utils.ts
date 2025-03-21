@@ -1,10 +1,12 @@
 import { sendMessage } from "webext-bridge/content-script";
 
 import {
+  deepResearchLanguageModels,
   fastLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import {
+  isDeepResearchLanguageModelCode,
   isLanguageModelCode,
   isReasoningLanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
@@ -109,9 +111,13 @@ export function handleSearchModeChange() {
       const isReasoningModel = isReasoningLanguageModelCode(
         selectedLanguageModel,
       );
+      const isDeepResearchModel = isDeepResearchLanguageModelCode(
+        selectedLanguageModel,
+      );
 
       if (
         !isReasoningModel &&
+        !isDeepResearchModel &&
         previousSelectedLanguageModel !== selectedLanguageModel
       ) {
         PplxApiService.setDefaultLanguageModel(selectedLanguageModel);
@@ -126,27 +132,27 @@ export function handleSearchModeChange() {
         ({
           pro: "turbo",
           reasoning: "",
+          deepResearch: "pplx_alpha",
         } as PplxCookieSearchModels);
 
       let searchMode: PplxCookieSearchModes;
 
       if (isReasoningModel) {
-        searchMode =
-          selectedLanguageModel === "pplx_alpha" ? "deepResearch" : "reasoning";
-        if (selectedLanguageModel !== "pplx_alpha") {
-          searchModelsCookie.reasoning = selectedLanguageModel;
-        }
+        searchMode = "reasoning";
+        searchModelsCookie.reasoning = selectedLanguageModel;
+      } else if (isDeepResearchModel) {
+        searchMode = "deepResearch";
+        searchModelsCookie.deepResearch = selectedLanguageModel;
       } else {
         searchMode =
-          !isProSearchEnabled || selectedLanguageModel === "turbo"
-            ? "auto"
-            : "pro";
-
+          isProSearchEnabled && selectedLanguageModel !== "turbo"
+            ? "pro"
+            : "auto";
         searchModelsCookie.pro = selectedLanguageModel;
       }
 
       setCookie(
-        "pplx.search-mode",
+        "pplx.search-mode-raw",
         searchMode satisfies PplxCookieSearchModes,
         30,
       );
@@ -156,8 +162,10 @@ export function handleSearchModeChange() {
         30,
       );
 
+      const isForcedProSearch = isReasoningModel || isDeepResearchModel;
+
       // Enable pro search if using reasoning model but pro search is disabled
-      if (isReasoningModel && !previousIsProSearchEnabled) {
+      if (isForcedProSearch && !previousIsProSearchEnabled) {
         sharedQueryBoxStore.setState({
           isProSearchEnabled: true,
         });
@@ -165,17 +173,17 @@ export function handleSearchModeChange() {
       }
 
       // Reset to standard model if pro search get disabled while a reasoning model is selected
-      if (isReasoningModel && !isProSearchEnabled) {
+      if (isForcedProSearch && !isProSearchEnabled) {
         const defaultLanguageModel =
           searchModels?.pro ?? fastLanguageModels[0]?.code ?? "turbo";
 
+        searchMode = "auto";
+
         setCookie(
-          "pplx.search-mode",
+          "pplx.search-mode-raw",
           "auto" satisfies PplxCookieSearchModes,
           30,
         );
-
-        searchMode = "auto";
 
         sharedQueryBoxStore.setState((store) => {
           store.selectedLanguageModel = isLanguageModelCode(
@@ -197,7 +205,7 @@ export function handleSearchModeChange() {
 }
 
 export function populateDefaults() {
-  const searchMode = getCookie("pplx.search-mode") as PplxCookieSearchModes;
+  const searchMode = getCookie("pplx.search-mode-raw") as PplxCookieSearchModes;
   const { data: searchModels } = PplxCookieSearchModelsSchema.safeParse(
     jsonUtils.safeParse(getCookie("pplx.search-models-raw") ?? ""),
   );
@@ -228,7 +236,10 @@ export function populateDefaults() {
       break;
     case "deepResearch":
       sharedQueryBoxStore.setState((draft) => {
-        draft.selectedLanguageModel = "pplx_alpha";
+        draft.selectedLanguageModel =
+          searchModels?.deepResearch ??
+          deepResearchLanguageModels[0]?.code ??
+          "pplx_alpha";
         draft.isProSearchEnabled = true;
       });
 

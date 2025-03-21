@@ -11,6 +11,10 @@ export const PplxCookieSearchModelsSchema = z.object({
     .string()
     .transform((val) => val as LanguageModel["code"])
     .optional(),
+  deepResearch: z
+    .string()
+    .transform((val) => val as LanguageModel["code"])
+    .optional(),
 });
 
 export type PplxCookieSearchModels = z.infer<

@@ -1,18 +1,37 @@
 import { LuCpu } from "react-icons/lu";
 
-import Tooltip from "@/components/Tooltip";
 import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { SelectItem, SelectGroup, SelectLabel } from "@/components/ui/select";
-import { fastLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
+import {
+  LanguageModelCode,
+  LanguageModelProvider,
+} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { useModelLimits } from "@/plugins/language-model-selector/hooks/useModelLimits";
+import { t } from "@/utils/i18next";
 
-export default function FastLanguageModels() {
+type LanguageModel = {
+  code: LanguageModelCode;
+  label: string;
+  provider: LanguageModelProvider;
+  description?: string;
+  hideFromList?: boolean;
+};
+
+type MobileLanguageModelGroupProps = {
+  title: string;
+  models: LanguageModel[];
+};
+
+export default function MobileLanguageModelGroup({
+  title,
+  models,
+}: MobileLanguageModelGroupProps) {
   const context = use(LanguageModelSelectorContext);
 
   if (!context) throw new Error("LanguageModelSelectorContext not found");
@@ -27,21 +46,25 @@ export default function FastLanguageModels() {
 
   return (
     <GroupComp className="x:m-0 x:p-0">
-      <LabelComp>Standard</LabelComp>
-      {fastLanguageModels.map((model, index) => {
+      <LabelComp className="x:text-base">{title}</LabelComp>
+      {models.map((model) => {
         if (model.hideFromList) return null;
 
-        const Icon = languageModelProviderIcons[model.provider] ?? LuCpu;
+        const Icon =
+          languageModelProviderIcons[
+            model.provider as keyof typeof languageModelProviderIcons
+          ] ?? LuCpu;
 
-        const modelLimit = modelsLimits[model.code];
+        const modelLimit =
+          modelsLimits[model.code as keyof typeof modelsLimits];
         const limit =
           modelLimit === Infinity
             ? t(
-                "plugin-model-selectors:languageModelSelector.reasoningModels.usesLeft.unlimited",
+                "plugin-model-selectors:languageModelSelector.usesLeft.unlimited",
               )
             : typeof modelLimit === "number"
               ? t(
-                  "plugin-model-selectors:languageModelSelector.reasoningModels.usesLeft.limited",
+                  "plugin-model-selectors:languageModelSelector.usesLeft.limited",
                   { count: modelLimit },
                 )
               : "";
@@ -51,26 +74,20 @@ export default function FastLanguageModels() {
           : limit;
 
         return (
-          <Tooltip
+          <ItemComp
             key={model.code}
-            content={
-              <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
-            }
-            disabled={modelsLimits[model.code] == null}
-            positioning={{ placement: "left", gutter: 10 }}
+            item={model.code}
+            value={model.code}
+            className="x:flex x:items-center x:justify-between x:gap-2 x:p-4 x:text-base x:text-foreground"
           >
-            <ItemComp
-              key={model.code}
-              item={model.code}
-              value={model.code}
-              data-column="fast"
-              data-index={index}
-              className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
-            >
+            <div className="x:flex x:items-center x:gap-2">
               <Icon className="x:size-4" />
               <span className="x:truncate">{model.label}</span>
-            </ItemComp>
-          </Tooltip>
+            </div>
+            <div className="x:text-xs x:text-muted-foreground">
+              {tooltipContent}
+            </div>
+          </ItemComp>
         );
       })}
     </GroupComp>

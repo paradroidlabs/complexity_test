@@ -5,19 +5,24 @@
       "tooltip": "より多くのソース、Pythonコードインタープリター"
     },
     "reasoningModels": {
-      "label": "推論モデル",
       "tooltip": {
         "description": "回答の生成に時間がかかりますが、より詳細で正確な結果が得られます。",
         "proSearchNote": "推論モデルを選択すると、<emphasis>Pro</emphasis>が常に有効になります。"
-      },
-      "usesLeft": {
-        "unlimited": "無制限",
-        "limited": "残り{{count}}回"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "回答の生成にはかなり時間がかかりますが、最も詳細で正確な結果が得られます。",
+        "proSearchNote": "ディープリサーチモデルを選択すると、<emphasis>Pro</emphasis>が常に有効になります。"
       }
     },
     "autoMode": {
       "title": "自動",
       "description": "クエリに応じて適応"
+    },
+    "usesLeft": {
+      "unlimited": "無制限",
+      "limited": "残り{{count}}回"
     }
   },
   "imageGenModelSelector": {

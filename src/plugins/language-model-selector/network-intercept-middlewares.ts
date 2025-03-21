@@ -1,7 +1,10 @@
 import { produce } from "immer";
 
 import { pluginGuardsStore } from "@/components/plugins-guard/store";
-import { isReasoningLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import {
+  isDeepResearchLanguageModelCode,
+  isReasoningLanguageModelCode,
+} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
 import {
   encodePerplexityAskEvent,
@@ -62,13 +65,19 @@ csLoaderRegistry.register({
               const { isProSearchEnabled, selectedLanguageModel } =
                 sharedQueryBoxStore.getState();
 
-              const isReasoningMode = isReasoningLanguageModelCode(
+              const isReasoningModel = isReasoningLanguageModelCode(
+                selectedLanguageModel,
+              );
+
+              const isDeepResearchModel = isDeepResearchLanguageModelCode(
                 selectedLanguageModel,
               );
 
               draft.model_preference = selectedLanguageModel;
               draft.mode =
-                (isProSearchEnabled || isReasoningMode) &&
+                (isProSearchEnabled ||
+                  isReasoningModel ||
+                  isDeepResearchModel) &&
                 selectedLanguageModel !== "turbo"
                   ? "copilot"
                   : "concise";

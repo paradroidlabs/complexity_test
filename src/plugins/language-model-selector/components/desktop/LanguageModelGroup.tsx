@@ -1,4 +1,4 @@
-import { Trans } from "react-i18next";
+import { ReactNode } from "react";
 import { LuCpu } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";
@@ -8,13 +8,36 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { SelectItem, SelectGroup, SelectLabel } from "@/components/ui/select";
-import { reasoningLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
+import {
+  LanguageModelCode,
+  LanguageModelProvider,
+} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { useModelLimits } from "@/plugins/language-model-selector/hooks/useModelLimits";
 import { t } from "@/utils/i18next";
 
-export default function ReasoningLanguageModels() {
+type LanguageModel = {
+  code: LanguageModelCode;
+  label: string;
+  provider: LanguageModelProvider;
+  description?: string;
+  hideFromList?: boolean;
+};
+
+type LanguageModelGroupProps = {
+  title: string;
+  models: LanguageModel[];
+  tooltipPlacement?: "left" | "right";
+  titleTooltip?: ReactNode;
+};
+
+export default function LanguageModelGroup({
+  title,
+  models,
+  tooltipPlacement = "left",
+  titleTooltip,
+}: LanguageModelGroupProps) {
   const context = use(LanguageModelSelectorContext);
 
   if (!context) throw new Error("LanguageModelSelectorContext not found");
@@ -29,40 +52,37 @@ export default function ReasoningLanguageModels() {
 
   return (
     <GroupComp className="x:m-0 x:p-0">
-      <Tooltip
-        content={
-          <div className="x:max-w-[250px]">
-            <div>
-              {t(
-                "plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.description",
-              )}
-            </div>
-            <Trans
-              i18nKey="plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.proSearchNote"
-              components={{
-                emphasis: <span className="x:text-primary" />,
-              }}
-            />
-          </div>
-        }
-        positioning={{
-          placement: "right",
-        }}
-      >
-        <LabelComp>Reasoning</LabelComp>
-      </Tooltip>
-      {reasoningLanguageModels.map((model, index) => {
-        const Icon = languageModelProviderIcons[model.provider] ?? LuCpu;
+      {titleTooltip != null ? (
+        <Tooltip
+          content={titleTooltip}
+          positioning={{
+            placement: "right",
+          }}
+        >
+          <LabelComp>{title}</LabelComp>
+        </Tooltip>
+      ) : (
+        <LabelComp>{title}</LabelComp>
+      )}
 
-        const modelLimit = modelsLimits[model.code];
+      {models.map((model) => {
+        if (model.hideFromList) return null;
+
+        const Icon =
+          languageModelProviderIcons[
+            model.provider as keyof typeof languageModelProviderIcons
+          ] ?? LuCpu;
+
+        const modelLimit =
+          modelsLimits[model.code as keyof typeof modelsLimits];
         const limit =
           modelLimit === Infinity
             ? t(
-                "plugin-model-selectors:languageModelSelector.reasoningModels.usesLeft.unlimited",
+                "plugin-model-selectors:languageModelSelector.usesLeft.unlimited",
               )
             : typeof modelLimit === "number"
               ? t(
-                  "plugin-model-selectors:languageModelSelector.reasoningModels.usesLeft.limited",
+                  "plugin-model-selectors:languageModelSelector.usesLeft.limited",
                   { count: modelLimit },
                 )
               : "";
@@ -77,19 +97,19 @@ export default function ReasoningLanguageModels() {
             content={
               <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
             }
-            disabled={modelsLimits[model.code] == null}
-            positioning={{ placement: "right", gutter: 10 }}
+            disabled={
+              modelsLimits[model.code as keyof typeof modelsLimits] == null
+            }
+            positioning={{ placement: tooltipPlacement, gutter: 10 }}
           >
             <ItemComp
               key={model.code}
               item={model.code}
               value={model.code}
-              data-column="reasoning"
-              data-index={index}
               className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
             >
               <Icon className="x:size-4" />
-              <span>{model.label}</span>
+              <span className="x:truncate">{model.label}</span>
             </ItemComp>
           </Tooltip>
         );

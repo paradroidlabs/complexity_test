@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {
+  deepResearchLanguageModels,
   fastLanguageModels,
   languageModels,
   localLanguageModels,
@@ -12,7 +13,8 @@ export const LanguageModelSchema = z.object({
   shortLabel: z.string(),
   code: z.string().transform((value) => value as LanguageModelCode),
   provider: z.string().transform((value) => value as LanguageModelProvider),
-  isReasoningModel: z.boolean(),
+  type: z.enum(["auto", "fast", "reasoning", "deepResearch"]),
+  isReasoningModel: z.boolean().optional(),
   limitKey: z.string().optional(),
   description: z.string().optional(),
   hideFromList: z.boolean().optional(),
@@ -44,4 +46,10 @@ export function isFastLanguageModelCode(
   value: string,
 ): value is LanguageModel["code"] {
   return fastLanguageModels.some((model) => model.code === value);
+}
+
+export function isDeepResearchLanguageModelCode(
+  value: string,
+): value is LanguageModel["code"] {
+  return deepResearchLanguageModels.some((model) => model.code === value);
 }

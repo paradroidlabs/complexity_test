@@ -5,19 +5,24 @@
       "tooltip": "Повеќе извори, Python интерпретер на код"
     },
     "reasoningModels": {
-      "label": "Модели за резонирање",
       "tooltip": {
         "description": "Генерирањето на одговори ќе трае подолго, но одговорите се обично подетални и попрецизни.",
         "proSearchNote": "<emphasis>Pro</emphasis> е секогаш активен при избор на модел за резонирање."
-      },
-      "usesLeft": {
-        "unlimited": "Неограничено",
-        "limited": "Преостануваат {{count}} користења"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Генерирањето на одговори ќе трае значително подолго, но одговорите се обично најдетални и најпрецизни.",
+        "proSearchNote": "<emphasis>Pro</emphasis> е секогаш активен при избор на модел за длабоко истражување."
       }
     },
     "autoMode": {
       "title": "Авто",
       "description": "Се прилагодува на вашето барање"
+    },
+    "usesLeft": {
+      "unlimited": "Неограничено",
+      "limited": "Преостануваат {{count}} користења"
     }
   },
   "imageGenModelSelector": {

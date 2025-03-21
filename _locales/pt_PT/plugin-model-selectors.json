@@ -5,19 +5,24 @@
       "tooltip": "Mais fontes, interpretador de código Python"
     },
     "reasoningModels": {
-      "label": "Modelos de raciocínio",
       "tooltip": {
         "description": "As respostas demorarão mais tempo a serem geradas, mas tendem a ser mais detalhadas e precisas.",
         "proSearchNote": "<emphasis>Pro</emphasis> está sempre ativo ao escolher um modelo de raciocínio."
-      },
-      "usesLeft": {
-        "unlimited": "Ilimitado",
-        "limited": "{{count}} utilizações restantes"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "As respostas demorarão significativamente mais tempo a serem geradas, mas tendem a ser as mais detalhadas e precisas.",
+        "proSearchNote": "<emphasis>Pro</emphasis> está sempre ativo ao escolher um modelo de investigação profunda."
       }
     },
     "autoMode": {
       "title": "Auto",
       "description": "Adapta-se à sua consulta"
+    },
+    "usesLeft": {
+      "unlimited": "Ilimitado",
+      "limited": "{{count}} utilizações restantes"
     }
   },
   "imageGenModelSelector": {
