@@ -34,7 +34,7 @@ export default function ThreadShowMessageLengthPluginDetails() {
 
       <div className="x:mx-auto x:w-full x:max-w-[700px]">
         <Image
-          src="https://i.imgur.com/1aNm9q0.png"
+          src="https://i.imgur.com/8a6WMCS.png"
           alt="thread-show-message-length"
           className="x:w-full"
         />

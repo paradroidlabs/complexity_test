@@ -14,7 +14,6 @@ export const LanguageModelSchema = z.object({
   code: z.string().transform((value) => value as LanguageModelCode),
   provider: z.string().transform((value) => value as LanguageModelProvider),
   type: z.enum(["auto", "fast", "reasoning", "deepResearch"]),
-  isReasoningModel: z.boolean().optional(),
   limitKey: z.string().optional(),
   description: z.string().optional(),
   hideFromList: z.boolean().optional(),

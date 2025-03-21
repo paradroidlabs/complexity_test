@@ -14,7 +14,6 @@ export const localLanguageModels = [
     provider: "Anthropic",
     limitKey: "gpt4_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -24,7 +23,6 @@ export const localLanguageModels = [
     provider: "Anthropic",
     limitKey: "pro_reasoning_limit",
     type: "reasoning",
-    isReasoningModel: true,
     hideFromList: false,
   },
   {
@@ -34,7 +32,6 @@ export const localLanguageModels = [
     provider: "DeepSeek",
     limitKey: "pro_reasoning_limit",
     type: "reasoning",
-    isReasoningModel: true,
     hideFromList: false,
   },
   {
@@ -44,7 +41,6 @@ export const localLanguageModels = [
     provider: "OpenAI",
     limitKey: "gpt45_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -54,7 +50,6 @@ export const localLanguageModels = [
     provider: "OpenAI",
     limitKey: "o1_limit",
     type: "reasoning",
-    isReasoningModel: true,
     hideFromList: false,
   },
   {
@@ -64,7 +59,6 @@ export const localLanguageModels = [
     provider: "OpenAI",
     limitKey: "gpt4_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -74,7 +68,6 @@ export const localLanguageModels = [
     provider: "Google",
     limitKey: "gpt4_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -84,7 +77,6 @@ export const localLanguageModels = [
     provider: "xAI",
     limitKey: "gpt4_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -94,7 +86,6 @@ export const localLanguageModels = [
     provider: "PerplexityDeepResearch",
     limitKey: "pro_reasoning_limit",
     type: "deepResearch",
-    isReasoningModel: true,
     hideFromList: false,
   },
   {
@@ -104,7 +95,6 @@ export const localLanguageModels = [
     provider: "PerplexityDeepResearch",
     limitKey: "pro_reasoning_limit",
     type: "deepResearch",
-    isReasoningModel: true,
     hideFromList: false,
   },
   {
@@ -114,7 +104,6 @@ export const localLanguageModels = [
     provider: "Perplexity",
     limitKey: "gpt4_limit",
     type: "fast",
-    isReasoningModel: false,
     hideFromList: false,
   },
   {
@@ -123,7 +112,6 @@ export const localLanguageModels = [
     code: "turbo",
     provider: "Perplexity",
     type: "auto",
-    isReasoningModel: false,
     hideFromList: true,
   },
 ] as const;
@@ -164,10 +152,13 @@ csLoaderRegistry.register({
     if (!error && data) {
       languageModels = data;
       fastLanguageModels = languageModels.filter(
-        (model) => !model.isReasoningModel,
+        (model) => model.type === "fast",
       );
       reasoningLanguageModels = languageModels.filter(
-        (model) => model.isReasoningModel,
+        (model) => model.type === "reasoning",
+      );
+      deepResearchLanguageModels = languageModels.filter(
+        (model) => model.type === "deepResearch",
       );
     }
   },
