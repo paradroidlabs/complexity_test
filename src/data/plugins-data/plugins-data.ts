@@ -251,7 +251,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     id: "home:customSlogan",
     routeSegment: "home-custom-slogan",
     title: "Custom Home Slogan",
-    description: "Customize the slogan on the home page",
+    description: "Customize the slogan on the homepage",
     categories: ["misc"],
     tags: ["ui", "forFun"],
     dependentDomObservers: ["coreDomObserver:home"],

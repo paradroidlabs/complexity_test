@@ -6,16 +6,14 @@ import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
 import normalizeCss from "@/plugins/thread-toc/normalize.css?inline";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
-import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
+import {
+  TocItem as TocItemType,
+  useThreadTocItems,
+} from "@/plugins/thread-toc/useThreadTocItems";
+import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { scrollToElement } from "@/utils/utils";
 export const PANEL_WIDTH = 230;
-
-type TocItem = {
-  id: string;
-  title: string;
-  isActive?: boolean;
-};
 
 export default function ThreadTocWrapper() {
   const threadWrapper = useThreadDomObserverStore(
@@ -88,11 +86,15 @@ export default function ThreadTocWrapper() {
               key={idx}
               item={item}
               onClick={() => {
-                const $element = $(`#${item.id}`);
+                const $element = $(
+                  `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                );
                 if ($element.length) scrollToElement($element, 0, 300);
               }}
               onContextMenu={() => {
-                const $element = $(`#${item.id}`);
+                const $element = $(
+                  `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                );
                 if ($element.length && $element.height() != null)
                   scrollToElement(
                     $element,
@@ -113,7 +115,7 @@ const TocItem = memo(function TocItem({
   onClick,
   onContextMenu,
 }: {
-  item: TocItem;
+  item: TocItemType;
   onClick: () => void;
   onContextMenu: () => void;
 }) {

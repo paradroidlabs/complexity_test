@@ -1,26 +1,18 @@
 import { useSyncExternalStore } from "react";
 
-import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 
-type TocItem = {
-  id: string;
+export type TocItem = {
+  id: number;
   title: string;
   element: JQuery<Element>;
   isActive?: boolean;
 };
 
-type MessageBlock = {
-  nodes: {
-    $wrapper: JQuery<Element>;
-  };
-  content: {
-    title: string;
-  };
-};
-
 type TocStore = {
   items: TocItem[];
-  activeId: string | null;
+  activeId: number | null;
   observer: IntersectionObserver | null;
 };
 
@@ -31,13 +23,21 @@ const createTocStore = () => {
     observer: null,
   };
 
+  // Helper function to safely disconnect and clean up the observer
+  const cleanupObserver = () => {
+    if (state.observer) {
+      state.observer.disconnect();
+      state.observer = null;
+    }
+  };
+
   let lastMessageBlocks: MessageBlock[] | null = null;
 
   const listeners = new Set<() => void>();
 
   const getSnapshot = () => {
     const messageBlocks =
-      useThreadMessageBlocksDomObserverStore.getState().messageBlocks;
+      threadMessageBlocksDomObserverStore.getState().messageBlocks;
 
     if (!deepEqual(messageBlocks, lastMessageBlocks)) {
       lastMessageBlocks = messageBlocks;
@@ -51,7 +51,7 @@ const createTocStore = () => {
     listeners.add(listener);
 
     const unsubscribeMessageBlocks =
-      useThreadMessageBlocksDomObserverStore.subscribe(
+      threadMessageBlocksDomObserverStore.subscribe(
         ({ messageBlocks }) => messageBlocks,
         listener,
         { equalityFn: deepEqual },
@@ -60,36 +60,35 @@ const createTocStore = () => {
     return () => {
       listeners.delete(listener);
       unsubscribeMessageBlocks();
-
-      if (listeners.size === 0 && state.observer) {
-        state.observer.disconnect();
-        state.observer = null;
-      }
+      cleanupObserver();
     };
   };
 
-  const notify = () => {
+  const emitChanges = () => {
     listeners.forEach((listener) => listener());
   };
 
   const updateItems = (messageBlocks: MessageBlock[] | null) => {
     if (!messageBlocks) return;
 
-    if (state.observer) {
-      state.observer.disconnect();
-    }
+    cleanupObserver();
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            state.activeId = entry.target.id;
-            state.items = state.items.map((item) => ({
-              ...item,
-              isActive: item.id === entry.target.id,
-            }));
-            notify();
-          }
+          if (!entry.isIntersecting) return;
+
+          const elementId = entry.target.getAttribute("data-index");
+
+          if (!elementId) return;
+
+          state.activeId = parseInt(elementId);
+          state.items = state.items.map((item) => ({
+            ...item,
+            isActive: item.id === state.activeId,
+          }));
+
+          emitChanges();
         });
       },
       {
@@ -102,20 +101,20 @@ const createTocStore = () => {
 
     state.items = messageBlocks.map(
       ({ nodes: { $wrapper }, content: { title } }, idx: number) => {
-        const id = `toc-item-${idx}`;
-        $wrapper.attr("id", id);
-        observer.observe($wrapper[0]);
+        if ($wrapper != null && $wrapper.length > 0) {
+          observer.observe($wrapper[0]);
+        }
 
         return {
-          id,
+          id: idx,
           title: title.length > 0 ? title : (state.items[idx]?.title ?? ""),
           element: $wrapper,
-          isActive: id === state.activeId,
+          isActive: idx === state.activeId,
         };
       },
     );
 
-    notify();
+    emitChanges();
   };
 
   return {

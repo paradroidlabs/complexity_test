@@ -12,14 +12,18 @@ export function findNavbar() {
 
   $navbar.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.NAVBAR);
 
-  const navbarHeight = $navbar[0].offsetHeight;
+  if (document.body.style.getPropertyValue("--navbar-height") == null) {
+    const navbarHeight = $navbar[0].offsetHeight;
 
-  $(document.body).css({
-    "--navbar-height":
-      navbarHeight != null && navbarHeight > 0
-        ? `${navbarHeight - 1}px`
-        : "53px",
-  });
+    if (navbarHeight != null && navbarHeight > 0) {
+      $(document.body).css({
+        "--navbar-height":
+          navbarHeight != null && navbarHeight > 0
+            ? `${navbarHeight - 1}px`
+            : "53px",
+      });
+    }
+  }
 
   threadDomObserverStore.setState({
     $navbar,
@@ -98,14 +102,23 @@ export function findMessageStickyHeaderHeight() {
 
   if (!$messageStickyHeader.length) return;
 
+  if (
+    document.body.style.getPropertyValue(
+      "--message-block-sticky-header-height",
+    ) == null
+  )
+    return;
+
   const stickyHeaderHeight = $messageStickyHeader[0].offsetHeight;
 
-  $(document.body).css({
-    "--message-block-sticky-header-height":
-      stickyHeaderHeight != null && stickyHeaderHeight > 0
-        ? `${stickyHeaderHeight - 1}px`
-        : "91px",
-  });
+  if (stickyHeaderHeight != null && stickyHeaderHeight > 0) {
+    $(document.body).css({
+      "--message-block-sticky-header-height":
+        stickyHeaderHeight != null && stickyHeaderHeight > 0
+          ? `${stickyHeaderHeight - 1}px`
+          : "91px",
+    });
+  }
 
   threadDomObserverStore.setState({
     messageStickyHeaderHeight: stickyHeaderHeight,

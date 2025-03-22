@@ -1,6 +1,5 @@
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
-import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
 export function useObserveStuckToolbar() {
@@ -13,9 +12,9 @@ export function useObserveStuckToolbar() {
 
   const observerRef = useRef<IntersectionObserver | null>(null);
 
-  const navbarHeight = useThreadDomObserverStore(
-    (store) => store.$navbar?.[0]?.offsetHeight,
-  );
+  const navbarHeightStr =
+    document.body.style.getPropertyValue("--navbar-height");
+  const navbarHeight = navbarHeightStr ? +navbarHeightStr : 53;
 
   const toolbars = useThreadMessageBlocksDomObserverStore(
     (store) => store.messageBlocks?.map((block) => block.nodes.$bottomBar[0]),
@@ -34,7 +33,7 @@ export function useObserveStuckToolbar() {
       },
       {
         threshold: 1.0,
-        rootMargin: `-${navbarHeight + 15}px 0px 0px 0px`,
+        rootMargin: `-${navbarHeight + 10}px 0px 0px 0px`,
       },
     );
 

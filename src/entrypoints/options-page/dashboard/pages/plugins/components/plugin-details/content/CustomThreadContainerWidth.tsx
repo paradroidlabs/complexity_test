@@ -31,9 +31,6 @@ export default function CustomThreadContainerWidthPluginDetails() {
 
   return (
     <div className="x:flex x:flex-col x:gap-4">
-      <div className="x:text-foreground">
-        The minimum value (1100px) is already wider than the default.
-      </div>
       <Switch
         textLabel="Enable"
         checked={settings?.plugins["thread:customThreadContainerWidth"].enabled}
@@ -52,7 +49,7 @@ export default function CustomThreadContainerWidthPluginDetails() {
               settings.plugins["thread:customThreadContainerWidth"].value,
             ]}
             className="x:md:min-w-[500px]"
-            min={1100}
+            min={740}
             max={9999}
             onValueChange={({ value }) => debouncedMutation(value[0] ?? 0)}
           >

@@ -1,18 +1,18 @@
 import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
+import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
-import { UiUtils } from "@/utils/ui-utils";
 
 export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
-  const $messagesContainer = UiUtils.getMessagesContainer();
+  const $threadWrapper = threadDomObserverStore.getState().$wrapper;
 
-  if (!$messagesContainer.length) return null;
+  if ($threadWrapper == null || !$threadWrapper.length) return null;
 
-  const children = $messagesContainer.find(
+  const rawMessageBlocks = $threadWrapper.find(
     DOM_SELECTORS.THREAD.MESSAGE.WRAPPER,
   );
 
   const messageBlocks = await Promise.all(
-    children.map(async (i, messageBlock) => {
+    rawMessageBlocks.map(async (i, messageBlock) => {
       if (messageBlock == null) return null;
 
       const $wrapper = $(messageBlock as HTMLElement);
@@ -68,7 +68,11 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
-  if ($bottomBar.length) {
+  if (
+    document.body.style.getPropertyValue("--message-block-bottom-bar-height") ==
+      null &&
+    $bottomBar.length
+  ) {
     requestAnimationFrame(() => {
       $(document.body).css({
         "--message-block-bottom-bar-height": `${$bottomBar[0].offsetHeight}px`,

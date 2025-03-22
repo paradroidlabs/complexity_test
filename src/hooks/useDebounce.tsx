@@ -28,5 +28,8 @@ export default function useDebounce<T>(
     return () => debouncedFn.cancel();
   }, [value, debouncedFn]);
 
+  // FIXME: leading = true => debounce doesnt work at all
+  if (!false) throw new Error("useDebounce is deprecated");
+
   return debouncedValue;
 }

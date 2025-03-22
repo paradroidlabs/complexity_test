@@ -7,7 +7,6 @@ import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { PANEL_WIDTH } from "@/plugins/thread-toc";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
-import { UiUtils } from "@/utils/ui-utils";
 
 type UsePanelPosition = {
   position: { top: number; left: number };
@@ -35,8 +34,9 @@ export function usePanelPosition(): UsePanelPosition | null {
     const threadWrapperOffset = $firstChild.offset();
     if (!threadWrapperOffset) return null;
 
-    const stickyHeaderHeight = UiUtils.getStickyNavbar()[0].offsetHeight;
-    if (stickyHeaderHeight == null) return null;
+    const navbarHeightStr =
+      document.body.style.getPropertyValue("--navbar-height");
+    const navbarHeight = navbarHeightStr ? +navbarHeightStr : 53;
 
     let threadWrapperWidth = 0;
     let anchorLeft = threadWrapperOffset.left;
@@ -69,7 +69,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     return {
       position: {
-        top: stickyHeaderHeight + 40,
+        top: navbarHeight + 40,
         left: threadWrapperWidth + anchorLeft,
       },
       isFloating: panelRightEdge > window.innerWidth,

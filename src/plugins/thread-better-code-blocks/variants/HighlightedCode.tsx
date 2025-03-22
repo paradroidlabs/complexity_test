@@ -1,4 +1,4 @@
-import { useWindowSize } from "@uidotdev/usehooks";
+import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import { ReactNode, RefObject } from "react";
 
 import CodeHighlighter from "@/components/CodeHighlighter";
@@ -87,7 +87,7 @@ function useOverflowing({
     | BetterCodeBlockFineGrainedOptions
     | ExtensionLocalStorage["plugins"]["thread:betterCodeBlocks"];
 }) {
-  const windowSize = useWindowSize();
+  const windowSize = useDebounce(useWindowSize(), 300);
 
   const [initialWidth, setInitialWidth] = useState(0);
 
@@ -122,7 +122,7 @@ function useOverflowing({
     fineGrainedSettings.maxHeight.value,
     setIsHorizontalOverflowing,
     setIsVerticalOverflowing,
-    wrapperRef,
     windowSize,
+    wrapperRef,
   ]);
 }
