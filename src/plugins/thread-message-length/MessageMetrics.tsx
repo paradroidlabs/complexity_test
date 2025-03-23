@@ -29,7 +29,7 @@ export default function MessageMetrics({
 
   return (
     <HoverCard
-      portal
+      portal={false}
       positioning={{ placement: "top-end" }}
       openDelay={0}
       closeDelay={100}
