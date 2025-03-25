@@ -1,3 +1,4 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 import * as path from "path";
 
 import { minimatch } from "minimatch";
