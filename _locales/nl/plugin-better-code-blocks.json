@@ -1,0 +1,12 @@
+{
+  "headerButtons": {
+    "wrap": {
+      "wrap": "Regels omslaan",
+      "unwrap": "Regels niet omslaan"
+    },
+    "expand": {
+      "expand": "Uitklappen",
+      "collapse": "Inklappen"
+    }
+  }
+}

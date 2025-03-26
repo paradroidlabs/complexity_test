@@ -25,6 +25,10 @@ const LANGUAGE_CODES: Record<SupportedLangs, string> = {
   "sk-SK": "sk",
   "mk-MK": "mk",
   "sr-Cyrl-ME": "sr",
+  "nl-NL": "nl",
+  "el-GR": "el",
+  "ro-RO": "ro",
+  "id-ID": "id",
 };
 
 const IMPORT_MAP: Record<SupportedLangs, () => Promise<unknown>> = {
@@ -46,6 +50,10 @@ const IMPORT_MAP: Record<SupportedLangs, () => Promise<unknown>> = {
   "sk-SK": () => import("dayjs/locale/sk"),
   "mk-MK": () => import("dayjs/locale/mk"),
   "sr-Cyrl-ME": () => import("dayjs/locale/sr"),
+  "nl-NL": () => import("dayjs/locale/nl"),
+  "el-GR": () => import("dayjs/locale/el"),
+  "ro-RO": () => import("dayjs/locale/ro"),
+  "id-ID": () => import("dayjs/locale/id"),
 };
 
 dayjs.extend(utc);

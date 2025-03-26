@@ -1,0 +1,21 @@
+{
+  "exportButton": {
+    "action": "Exporteren",
+    "copied": "Gekopieerd",
+    "format": {
+      "label": "Kies formaat",
+      "placeholder": "Selecteer een formaat"
+    },
+    "includeCitations": "Citaten toevoegen",
+    "actions": {
+      "download": "Downloaden",
+      "copy": "Kopiëren"
+    },
+    "errors": {
+      "downloadFailed": {
+        "title": "❌ Downloaden mislukt",
+        "unknownError": "Onbekende fout opgetreden"
+      }
+    }
+  }
+}

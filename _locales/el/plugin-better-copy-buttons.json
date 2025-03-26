@@ -1,0 +1,9 @@
+{
+  "copyButton": {
+    "tooltip": "Αντιγραφή Μηνύματος",
+    "options": {
+      "default": "Προεπιλογή",
+      "withoutCitations": "Χωρίς παραπομπές"
+    }
+  }
+}

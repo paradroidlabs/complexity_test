@@ -1,0 +1,36 @@
+{
+  "spaceNavigator": {
+    "button": {
+      "label": "Zoeken & Navigeren naar Space",
+      "defaultText": "Spaces"
+    },
+    "search": {
+      "placeholder": "Zoeken...",
+      "noResults": "Geen resultaten gevonden."
+    },
+    "loading": "Laden...",
+    "spaceItem": {
+      "currentLocation": "Je bent hier",
+      "details": {
+        "description": "Beschrijving",
+        "instructions": "Instructies",
+        "files": "Bestanden ({{count}})",
+        "focusedWebLinks": "Gefocuste Weblinks ({{count}})"
+      },
+      "noPreviewData": "Geen voorbeeldgegevens beschikbaar",
+      "pinActions": {
+        "pin": "Vastmaken",
+        "unpin": "Losmaken",
+        "pinToSidebar": "Vastmaken aan zijbalk",
+        "unpinFromSidebar": "Losmaken van zijbalk"
+      }
+    },
+    "pinnedSpaces": {
+      "unpin": "Losmaken",
+      "toggleVisibility": {
+        "collapse": "Vastgemaakte Spaces inklappen",
+        "expand": "Vastgemaakte Spaces uitklappen"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "copyButton": {
+    "tooltip": "Salin Pesan",
+    "options": {
+      "default": "Default",
+      "withoutCitations": "Tanpa kutipan"
+    }
+  }
+}

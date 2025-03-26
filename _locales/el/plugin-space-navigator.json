@@ -1,0 +1,36 @@
+{
+  "spaceNavigator": {
+    "button": {
+      "label": "Αναζήτηση & Πλοήγηση Χώρου",
+      "defaultText": "Χώροι"
+    },
+    "search": {
+      "placeholder": "Αναζήτηση...",
+      "noResults": "Δεν βρέθηκαν αποτελέσματα."
+    },
+    "loading": "Φόρτωση...",
+    "spaceItem": {
+      "currentLocation": "Είστε εδώ",
+      "details": {
+        "description": "Περιγραφή",
+        "instructions": "Οδηγίες",
+        "files": "Αρχεία ({{count}})",
+        "focusedWebLinks": "Εστιασμένοι Διαδικτυακοί Σύνδεσμοι ({{count}})"
+      },
+      "noPreviewData": "Δεν υπάρχουν διαθέσιμα δεδομένα προεπισκόπησης",
+      "pinActions": {
+        "pin": "Καρφίτσωμα",
+        "unpin": "Ξεκαρφίτσωμα",
+        "pinToSidebar": "Καρφίτσωμα στην πλευρική στήλη",
+        "unpinFromSidebar": "Ξεκαρφίτσωμα από την πλευρική στήλη"
+      }
+    },
+    "pinnedSpaces": {
+      "unpin": "Ξεκαρφίτσωμα",
+      "toggleVisibility": {
+        "collapse": "Σύμπτυξη καρφιτσωμένων χώρων",
+        "expand": "Επέκταση καρφιτσωμένων χώρων"
+      }
+    }
+  }
+}

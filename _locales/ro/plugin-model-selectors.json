@@ -1,0 +1,31 @@
+{
+  "languageModelSelector": {
+    "tooltip": "Alege modelul de limbaj",
+    "proSearch": {
+      "tooltip": "Mai multe surse, interpreter de cod python"
+    },
+    "reasoningModels": {
+      "tooltip": {
+        "description": "Răspunsurile durează mai mult pentru a fi generate, dar sunt de obicei mai detaliate și mai precise.",
+        "proSearchNote": "<emphasis>Pro</emphasis> este întotdeauna activat atunci când alegeți un model de raționament."
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Răspunsurile durează semnificativ mai mult pentru a fi generate, dar sunt de obicei cele mai detaliate și precise.",
+        "proSearchNote": "<emphasis>Pro</emphasis> este întotdeauna activat atunci când alegeți un model de cercetare profundă."
+      }
+    },
+    "autoMode": {
+      "title": "Auto",
+      "description": "Se adaptează la căutarea ta"
+    },
+    "usesLeft": {
+      "unlimited": "Nelimitat",
+      "limited": "{{count}} utilizări rămase"
+    }
+  },
+  "imageGenModelSelector": {
+    "tooltip": "Alege modelul de imagine"
+  }
+}

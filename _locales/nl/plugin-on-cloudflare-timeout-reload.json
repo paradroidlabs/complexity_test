@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "header": "Sessie timeout",
+    "description": "Je sessie is verlopen (waarschijnlijk door Cloudflare).",
+    "buttons": {
+      "reload": "Herladen",
+      "dismiss": "Sluiten"
+    }
+  }
+}

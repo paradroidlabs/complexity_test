@@ -1,0 +1,9 @@
+{
+  "copyButton": {
+    "tooltip": "Copiază mesajul",
+    "options": {
+      "default": "Implicit",
+      "withoutCitations": "Fără citări"
+    }
+  }
+}

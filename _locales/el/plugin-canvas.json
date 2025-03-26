@@ -1,0 +1,47 @@
+{
+  "canvas": {
+    "placeholder": {
+      "markdown": {
+        "description": "Κάντε κλικ για προβολή περιεχομένου"
+      },
+      "mermaid": {
+        "description": "Κάντε κλικ για προβολή διαγράμματος"
+      },
+      "html": {
+        "description": "Κάντε κλικ για προβολή ιστοσελίδας"
+      },
+      "react": {
+        "description": "Κάντε κλικ για προβολή ιστοσελίδας"
+      },
+      "markmap": {
+        "description": "Κάντε κλικ για προβολή νοητικού χάρτη"
+      }
+    },
+    "version": "Έκδοση {{number}}",
+    "toggle": {
+      "preview": "Προεπισκόπηση",
+      "markdown": {
+        "raw": "Ακατέργαστο κείμενο"
+      },
+      "code": "Κώδικας"
+    },
+    "list": {
+      "title": "Μπλοκ Canvas σε αυτό το νήμα",
+      "generating": "Δημιουργία...",
+      "versions": "{{count}} εκδόσεις"
+    },
+    "tooltip": {
+      "refresh": "Ανανέωση",
+      "openList": "Άνοιγμα Λίστας Canvas",
+      "openInCodeSandbox": "Άνοιγμα στο CodeSandbox",
+      "openInMermaid": "Άνοιγμα στο Mermaid Live Editor",
+      "downloadSvg": "Λήψη SVG",
+      "downloadAsInteractiveHtml": "Λήψη ως διαδραστικό HTML",
+      "viewAsInteractiveHtml": "Προβολή ως διαδραστικό HTML"
+    },
+    "error": {
+      "noSvg": "Δεν βρέθηκε SVG",
+      "previewUrl": "Αποτυχία δημιουργίας URL προεπισκόπησης"
+    }
+  }
+}

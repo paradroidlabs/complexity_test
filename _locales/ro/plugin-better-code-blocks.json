@@ -1,0 +1,12 @@
+{
+  "headerButtons": {
+    "wrap": {
+      "wrap": "Încadrare linii",
+      "unwrap": "Dezîncadrare linii"
+    },
+    "expand": {
+      "expand": "Extinde",
+      "collapse": "Restrânge"
+    }
+  }
+}

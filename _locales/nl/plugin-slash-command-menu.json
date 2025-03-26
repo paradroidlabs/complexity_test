@@ -1,0 +1,37 @@
+{
+  "slashCommandMenu": {
+    "filterItems": {
+      "heading": "Zoeken",
+      "promptHistory": {
+        "label": "Prompt Geschiedenis",
+        "description": "automatisch opgeslagen prompts",
+        "clearButton": {
+          "label": "wissen",
+          "dialog": {
+            "title": "Alle Geschiedenis Wissen",
+            "description": "Weet je zeker dat je alle prompt geschiedenis wilt wissen? Deze actie kan niet ongedaan worden gemaakt.",
+            "actions": {
+              "cancel": "Annuleren",
+              "confirm": "Alles Wissen"
+            }
+          }
+        }
+      }
+    },
+    "actionItems": {
+      "heading": "Actie",
+      "changeFocusMode": {
+        "label": "Focusmodus wijzigen"
+      },
+      "changeModel": {
+        "label": "Taalmodel wijzigen"
+      },
+      "searchSpaces": {
+        "label": "Spaces Zoeken & Navigeren"
+      }
+    },
+    "triggerButton": {
+      "label": "Slash Commando's"
+    }
+  }
+}

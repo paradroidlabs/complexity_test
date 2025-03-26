@@ -1,0 +1,31 @@
+{
+  "languageModelSelector": {
+    "tooltip": "Pilih model bahasa",
+    "proSearch": {
+      "tooltip": "Lebih banyak sumber, interpreter kode python"
+    },
+    "reasoningModels": {
+      "tooltip": {
+        "description": "Jawaban membutuhkan waktu lebih lama untuk dihasilkan, tetapi biasanya lebih detail dan akurat.",
+        "proSearchNote": "<emphasis>Pro</emphasis> selalu diaktifkan saat memilih model penalaran."
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Jawaban membutuhkan waktu jauh lebih lama untuk dihasilkan, tetapi biasanya paling detail dan akurat.",
+        "proSearchNote": "<emphasis>Pro</emphasis> selalu diaktifkan saat memilih model penelitian mendalam."
+      }
+    },
+    "autoMode": {
+      "title": "Otomatis",
+      "description": "Menyesuaikan dengan pencarian Anda"
+    },
+    "usesLeft": {
+      "unlimited": "Tidak terbatas",
+      "limited": "{{count}} penggunaan tersisa"
+    }
+  },
+  "imageGenModelSelector": {
+    "tooltip": "Pilih model gambar"
+  }
+}

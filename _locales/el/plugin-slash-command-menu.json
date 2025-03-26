@@ -1,0 +1,37 @@
+{
+  "slashCommandMenu": {
+    "filterItems": {
+      "heading": "Αναζήτηση",
+      "promptHistory": {
+        "label": "Ιστορικό Ερωτημάτων",
+        "description": "αυτόματα αποθηκευμένα ερωτήματα",
+        "clearButton": {
+          "label": "καθαρισμός",
+          "dialog": {
+            "title": "Καθαρισμός Όλου του Ιστορικού",
+            "description": "Είστε βέβαιοι ότι θέλετε να καθαρίσετε όλο το ιστορικό ερωτημάτων; Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.",
+            "actions": {
+              "cancel": "Ακύρωση",
+              "confirm": "Καθαρισμός Όλων"
+            }
+          }
+        }
+      }
+    },
+    "actionItems": {
+      "heading": "Ενέργεια",
+      "changeFocusMode": {
+        "label": "Αλλαγή λειτουργίας εστίασης"
+      },
+      "changeModel": {
+        "label": "Αλλαγή γλωσσικού μοντέλου"
+      },
+      "searchSpaces": {
+        "label": "Αναζήτηση & Πλοήγηση Χώρων"
+      }
+    },
+    "triggerButton": {
+      "label": "Εντολές Slash"
+    }
+  }
+}

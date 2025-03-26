@@ -24,6 +24,10 @@ export const supportedLangs = [
   "sk-SK",
   "mk-MK",
   "sr-Cyrl-ME",
+  "nl-NL",
+  "el-GR",
+  "ro-RO",
+  "id-ID",
 ] as const;
 
 export const webStoreLangsMap = {
@@ -45,6 +49,10 @@ export const webStoreLangsMap = {
   "sk-SK": "sk",
   "mk-MK": "mk",
   "sr-Cyrl-ME": "sr",
+  "nl-NL": "nl",
+  "el-GR": "el",
+  "ro-RO": "ro",
+  "id-ID": "id",
 };
 
 type PluginResources = {

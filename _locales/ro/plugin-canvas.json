@@ -1,0 +1,47 @@
+{
+  "canvas": {
+    "placeholder": {
+      "markdown": {
+        "description": "Clic pentru a vizualiza conținutul"
+      },
+      "mermaid": {
+        "description": "Clic pentru a vizualiza diagrama"
+      },
+      "html": {
+        "description": "Clic pentru a vizualiza pagina web"
+      },
+      "react": {
+        "description": "Clic pentru a vizualiza pagina web"
+      },
+      "markmap": {
+        "description": "Clic pentru a vizualiza harta mentală"
+      }
+    },
+    "version": "Versiunea {{number}}",
+    "toggle": {
+      "preview": "Previzualizare",
+      "markdown": {
+        "raw": "Text brut"
+      },
+      "code": "Cod"
+    },
+    "list": {
+      "title": "Blocuri Canvas în acest fir",
+      "generating": "Se generează...",
+      "versions": "{{count}} versiuni"
+    },
+    "tooltip": {
+      "refresh": "Reîmprospătează",
+      "openList": "Deschide Lista Canvas",
+      "openInCodeSandbox": "Deschide în CodeSandbox",
+      "openInMermaid": "Deschide în Mermaid Live Editor",
+      "downloadSvg": "Descarcă SVG",
+      "downloadAsInteractiveHtml": "Descarcă ca HTML interactiv",
+      "viewAsInteractiveHtml": "Vizualizează ca HTML interactiv"
+    },
+    "error": {
+      "noSvg": "Nu s-a găsit SVG",
+      "previewUrl": "Nu s-a putut genera URL-ul de previzualizare"
+    }
+  }
+}

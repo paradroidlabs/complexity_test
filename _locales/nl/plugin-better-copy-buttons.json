@@ -1,0 +1,9 @@
+{
+  "copyButton": {
+    "tooltip": "Bericht kopiëren",
+    "options": {
+      "default": "Standaard",
+      "withoutCitations": "Zonder citaten"
+    }
+  }
+}

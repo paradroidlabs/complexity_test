@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "header": "Sesi habis waktu",
+    "description": "Sesi Anda telah kedaluwarsa (kemungkinan oleh Cloudflare).",
+    "buttons": {
+      "reload": "Muat ulang",
+      "dismiss": "Tutup"
+    }
+  }
+}

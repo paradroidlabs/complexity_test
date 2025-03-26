@@ -1,0 +1,31 @@
+{
+  "languageModelSelector": {
+    "tooltip": "Kies taalmodel",
+    "proSearch": {
+      "tooltip": "Meer bronnen, python code-interpreter"
+    },
+    "reasoningModels": {
+      "tooltip": {
+        "description": "Antwoorden duren langer om te genereren, maar zijn meestal gedetailleerder en nauwkeuriger.",
+        "proSearchNote": "<emphasis>Pro</emphasis> is altijd ingeschakeld bij het kiezen van een redeneermodel."
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "Antwoorden duren aanzienlijk langer om te genereren, maar zijn meestal het meest gedetailleerd en nauwkeurig.",
+        "proSearchNote": "<emphasis>Pro</emphasis> is altijd ingeschakeld bij het kiezen van een diep onderzoeksmodel."
+      }
+    },
+    "autoMode": {
+      "title": "Auto",
+      "description": "Past zich aan je zoekopdracht aan"
+    },
+    "usesLeft": {
+      "unlimited": "Onbeperkt",
+      "limited": "{{count}} gebruiken over"
+    }
+  },
+  "imageGenModelSelector": {
+    "tooltip": "Kies beeldmodel"
+  }
+}

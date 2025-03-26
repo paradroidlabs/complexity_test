@@ -1,0 +1,47 @@
+{
+  "canvas": {
+    "placeholder": {
+      "markdown": {
+        "description": "Klik om inhoud te bekijken"
+      },
+      "mermaid": {
+        "description": "Klik om diagram te bekijken"
+      },
+      "html": {
+        "description": "Klik om webpagina te bekijken"
+      },
+      "react": {
+        "description": "Klik om webpagina te bekijken"
+      },
+      "markmap": {
+        "description": "Klik om mindmap te bekijken"
+      }
+    },
+    "version": "Versie {{number}}",
+    "toggle": {
+      "preview": "Voorvertoning",
+      "markdown": {
+        "raw": "Ruwe tekst"
+      },
+      "code": "Code"
+    },
+    "list": {
+      "title": "Canvas blokken in deze thread",
+      "generating": "Genereren...",
+      "versions": "{{count}} versies"
+    },
+    "tooltip": {
+      "refresh": "Vernieuwen",
+      "openList": "Canvas Lijst Openen",
+      "openInCodeSandbox": "Openen in CodeSandbox",
+      "openInMermaid": "Openen in Mermaid Live Editor",
+      "downloadSvg": "SVG Downloaden",
+      "downloadAsInteractiveHtml": "Downloaden als interactieve HTML",
+      "viewAsInteractiveHtml": "Bekijken als interactieve HTML"
+    },
+    "error": {
+      "noSvg": "Geen SVG gevonden",
+      "previewUrl": "Kon preview URL niet genereren"
+    }
+  }
+}

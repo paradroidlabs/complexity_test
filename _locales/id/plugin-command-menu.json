@@ -1,0 +1,96 @@
+{
+  "commandMenu": {
+    "input": {
+      "placeholder": "Ketik perintah atau cari..."
+    },
+    "noResults": "Tidak ada hasil yang ditemukan untuk <emphasis>{{code}}</emphasis>.",
+    "groups": {
+      "search": "Cari",
+      "quickNavigations": "Navigasi cepat",
+      "zenMode": "Mode Zen",
+      "colorScheme": "Ubah skema warna"
+    },
+    "filters": {
+      "threads": {
+        "label": "Utas",
+        "searchPlaceholder": "Cari utas..."
+      },
+      "spaces": {
+        "label": "Ruang",
+        "searchPlaceholder": "Cari ruang..."
+      }
+    },
+    "navigation": {
+      "home": "Beranda",
+      "discover": "Temukan",
+      "library": "Perpustakaan",
+      "userSettings": "Pengaturan pengguna",
+      "labs": "Labs"
+    },
+    "colorSchemes": {
+      "dark": "Gelap",
+      "light": "Terang",
+      "system": "Sistem"
+    },
+    "threadSearch": {
+      "error": "Gagal mendapatkan utas. Silakan coba lagi nanti.",
+      "loading": "Memuat utas",
+      "empty": {
+        "withSearch": "Tidak ada utas yang ditemukan.",
+        "withoutSearch": "Mulai mengetik untuk mencari"
+      },
+      "heading": {
+        "withSearch": "{{count}} utas terbaru dengan istilah pencarian",
+        "withoutSearch": "Utas terbaru"
+      },
+      "spacePreview": {
+        "tooltip": "Klik untuk mencari utas di ruang ini"
+      }
+    },
+    "spaceSearch": {
+      "error": "Gagal mendapatkan ruang. Silakan coba lagi nanti.",
+      "loading": "Memuat ruang",
+      "empty": "Tidak ada ruang yang ditemukan.",
+      "spaceThreads": {
+        "loading": "Memuat utas untuk \"{{title}}\"",
+        "error": "Gagal mendapatkan utas. Silakan coba lagi nanti.",
+        "empty": "Tidak ada utas yang ditemukan di ruang ini.",
+        "heading": "Complexity hanya dapat mencari di 50 utas terbaru."
+      },
+      "spaceItem": {
+        "details": {
+          "description": "Deskripsi:",
+          "instructions": "Instruksi:"
+        },
+        "searchHint": "untuk mencari utas di Ruang ini"
+      }
+    },
+    "zenMode": {
+      "enable": "Aktifkan Mode Zen",
+      "disable": "Nonaktifkan Mode Zen"
+    },
+    "keywords": {
+      "enable": "aktifkan",
+      "zen": "zen",
+      "mode": "mode",
+      "disable": "nonaktifkan",
+      "threads": "utas",
+      "spaces": "ruang",
+      "search": "cari",
+      "home": "beranda",
+      "discover": "temukan",
+      "library": "perpustakaan",
+      "user": "pengguna",
+      "settings": "pengaturan",
+      "labs": "labs",
+      "navigate": "navigasi",
+      "dark": "gelap",
+      "light": "terang",
+      "system": "sistem",
+      "theme": "tema",
+      "change": "ubah",
+      "color": "warna",
+      "scheme": "skema"
+    }
+  }
+}

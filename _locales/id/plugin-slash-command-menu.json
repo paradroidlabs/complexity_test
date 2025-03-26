@@ -1,0 +1,37 @@
+{
+  "slashCommandMenu": {
+    "filterItems": {
+      "heading": "Pencarian",
+      "promptHistory": {
+        "label": "Riwayat Prompt",
+        "description": "prompt yang disimpan otomatis",
+        "clearButton": {
+          "label": "bersihkan",
+          "dialog": {
+            "title": "Bersihkan Semua Riwayat",
+            "description": "Apakah Anda yakin ingin menghapus semua riwayat prompt? Tindakan ini tidak dapat dibatalkan.",
+            "actions": {
+              "cancel": "Batal",
+              "confirm": "Bersihkan Semua"
+            }
+          }
+        }
+      }
+    },
+    "actionItems": {
+      "heading": "Tindakan",
+      "changeFocusMode": {
+        "label": "Ubah mode fokus"
+      },
+      "changeModel": {
+        "label": "Ubah model bahasa"
+      },
+      "searchSpaces": {
+        "label": "Cari & Navigasi Ruang"
+      }
+    },
+    "triggerButton": {
+      "label": "Perintah Slash"
+    }
+  }
+}

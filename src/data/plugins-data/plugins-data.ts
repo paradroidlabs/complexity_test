@@ -104,7 +104,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:betterMessageToolbars": {
     id: "thread:betterMessageToolbars",
     routeSegment: "thread-better-message-toolbars",
-    title: "Better Thread Message Toolbars",
+    title: "Better Message Toolbars",
     description: "Enhance message toolbars (in threads)",
     categories: ["thread"],
     tags: ["ui", "ux"],
@@ -181,7 +181,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:betterMessageCopyButtons": {
     id: "thread:betterMessageCopyButtons",
     routeSegment: "thread-better-message-copy-buttons",
-    title: "Better Thread Message Copy Buttons",
+    title: "Better Message Copy Buttons",
     description:
       "Copy message content without citations. More formatting options coming soon",
     categories: ["thread"],

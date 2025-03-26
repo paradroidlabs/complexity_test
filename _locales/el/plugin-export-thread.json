@@ -1,0 +1,21 @@
+{
+  "exportButton": {
+    "action": "Εξαγωγή",
+    "copied": "Αντιγράφηκε",
+    "format": {
+      "label": "Επιλέξτε μορφή",
+      "placeholder": "Επιλέξτε μια μορφή"
+    },
+    "includeCitations": "Συμπερίληψη παραπομπών",
+    "actions": {
+      "download": "Λήψη",
+      "copy": "Αντιγραφή"
+    },
+    "errors": {
+      "downloadFailed": {
+        "title": "❌ Η λήψη απέτυχε",
+        "unknownError": "Παρουσιάστηκε άγνωστο σφάλμα"
+      }
+    }
+  }
+}

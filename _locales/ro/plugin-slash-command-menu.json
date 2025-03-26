@@ -1,0 +1,37 @@
+{
+  "slashCommandMenu": {
+    "filterItems": {
+      "heading": "Căutare",
+      "promptHistory": {
+        "label": "Istoric Prompturi",
+        "description": "prompturi salvate automat",
+        "clearButton": {
+          "label": "curăță",
+          "dialog": {
+            "title": "Curăță Tot Istoricul",
+            "description": "Ești sigur că vrei să ștergi tot istoricul de prompturi? Această acțiune nu poate fi anulată.",
+            "actions": {
+              "cancel": "Anulează",
+              "confirm": "Curăță Tot"
+            }
+          }
+        }
+      }
+    },
+    "actionItems": {
+      "heading": "Acțiune",
+      "changeFocusMode": {
+        "label": "Schimbă modul de focalizare"
+      },
+      "changeModel": {
+        "label": "Schimbă modelul de limbaj"
+      },
+      "searchSpaces": {
+        "label": "Caută & Navighează Spații"
+      }
+    },
+    "triggerButton": {
+      "label": "Comenzi Slash"
+    }
+  }
+}

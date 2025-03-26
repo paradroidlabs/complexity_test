@@ -1,0 +1,96 @@
+{
+  "commandMenu": {
+    "input": {
+      "placeholder": "Tastați o comandă sau căutați..."
+    },
+    "noResults": "Nu s-au găsit rezultate pentru <emphasis>{{code}}</emphasis>.",
+    "groups": {
+      "search": "Căutare",
+      "quickNavigations": "Navigare rapidă",
+      "zenMode": "Modul Zen",
+      "colorScheme": "Schimbă schema de culori"
+    },
+    "filters": {
+      "threads": {
+        "label": "Fire de discuție",
+        "searchPlaceholder": "Caută fire de discuție..."
+      },
+      "spaces": {
+        "label": "Spații",
+        "searchPlaceholder": "Caută spații..."
+      }
+    },
+    "navigation": {
+      "home": "Acasă",
+      "discover": "Descoperă",
+      "library": "Bibliotecă",
+      "userSettings": "Setări utilizator",
+      "labs": "Laboratoare"
+    },
+    "colorSchemes": {
+      "dark": "Întunecat",
+      "light": "Luminos",
+      "system": "Sistem"
+    },
+    "threadSearch": {
+      "error": "Nu s-au putut obține firele de discuție. Încercați din nou mai târziu.",
+      "loading": "Se încarcă firele de discuție",
+      "empty": {
+        "withSearch": "Nu s-au găsit fire de discuție.",
+        "withoutSearch": "Începeți să tastați pentru a căuta"
+      },
+      "heading": {
+        "withSearch": "{{count}} fire de discuție recente cu termenul de căutare",
+        "withoutSearch": "Fire de discuție recente"
+      },
+      "spacePreview": {
+        "tooltip": "Clic pentru a căuta fire de discuție în acest spațiu"
+      }
+    },
+    "spaceSearch": {
+      "error": "Nu s-au putut obține spațiile. Încercați din nou mai târziu.",
+      "loading": "Se încarcă spațiile",
+      "empty": "Nu s-au găsit spații.",
+      "spaceThreads": {
+        "loading": "Se încarcă firele de discuție pentru \"{{title}}\"",
+        "error": "Nu s-au putut obține firele de discuție. Încercați din nou mai târziu.",
+        "empty": "Nu s-au găsit fire de discuție în acest spațiu.",
+        "heading": "Complexity poate căuta doar în cele mai recente 50 de fire de discuție."
+      },
+      "spaceItem": {
+        "details": {
+          "description": "Descriere:",
+          "instructions": "Instrucțiuni:"
+        },
+        "searchHint": "pentru a căuta fire de discuție în acest Spațiu"
+      }
+    },
+    "zenMode": {
+      "enable": "Activează Modul Zen",
+      "disable": "Dezactivează Modul Zen"
+    },
+    "keywords": {
+      "enable": "activează",
+      "zen": "zen",
+      "mode": "mod",
+      "disable": "dezactivează",
+      "threads": "fire",
+      "spaces": "spații",
+      "search": "caută",
+      "home": "acasă",
+      "discover": "descoperă",
+      "library": "bibliotecă",
+      "user": "utilizator",
+      "settings": "setări",
+      "labs": "laboratoare",
+      "navigate": "navigare",
+      "dark": "întunecat",
+      "light": "luminos",
+      "system": "sistem",
+      "theme": "temă",
+      "change": "schimbă",
+      "color": "culoare",
+      "scheme": "schemă"
+    }
+  }
+}

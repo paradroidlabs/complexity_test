@@ -1,0 +1,96 @@
+{
+  "commandMenu": {
+    "input": {
+      "placeholder": "Typ een commando of zoek..."
+    },
+    "noResults": "Geen resultaten gevonden voor <emphasis>{{code}}</emphasis>.",
+    "groups": {
+      "search": "Zoeken",
+      "quickNavigations": "Snelle navigatie",
+      "zenMode": "Zen Modus",
+      "colorScheme": "Kleurenschema wijzigen"
+    },
+    "filters": {
+      "threads": {
+        "label": "Threads",
+        "searchPlaceholder": "Zoek threads..."
+      },
+      "spaces": {
+        "label": "Spaces",
+        "searchPlaceholder": "Zoek spaces..."
+      }
+    },
+    "navigation": {
+      "home": "Home",
+      "discover": "Ontdekken",
+      "library": "Bibliotheek",
+      "userSettings": "Gebruikersinstellingen",
+      "labs": "Labs"
+    },
+    "colorSchemes": {
+      "dark": "Donker",
+      "light": "Licht",
+      "system": "Systeem"
+    },
+    "threadSearch": {
+      "error": "Kon threads niet ophalen. Probeer het later opnieuw.",
+      "loading": "Threads laden",
+      "empty": {
+        "withSearch": "Geen threads gevonden.",
+        "withoutSearch": "Begin met typen om te zoeken"
+      },
+      "heading": {
+        "withSearch": "{{count}} laatste thread(s) met de zoekterm",
+        "withoutSearch": "Recente threads"
+      },
+      "spacePreview": {
+        "tooltip": "Klik om threads in deze space te zoeken"
+      }
+    },
+    "spaceSearch": {
+      "error": "Kon spaces niet ophalen. Probeer het later opnieuw.",
+      "loading": "Spaces laden",
+      "empty": "Geen spaces gevonden.",
+      "spaceThreads": {
+        "loading": "Threads laden voor \"{{title}}\"",
+        "error": "Kon threads niet ophalen. Probeer het later opnieuw.",
+        "empty": "Geen threads gevonden in deze space.",
+        "heading": "Complexity kan alleen zoeken in de 50 meest recente threads."
+      },
+      "spaceItem": {
+        "details": {
+          "description": "Beschrijving:",
+          "instructions": "Instructies:"
+        },
+        "searchHint": "om threads in deze Space te zoeken"
+      }
+    },
+    "zenMode": {
+      "enable": "Zen Modus inschakelen",
+      "disable": "Zen Modus uitschakelen"
+    },
+    "keywords": {
+      "enable": "inschakelen",
+      "zen": "zen",
+      "mode": "modus",
+      "disable": "uitschakelen",
+      "threads": "threads",
+      "spaces": "spaces",
+      "search": "zoeken",
+      "home": "home",
+      "discover": "ontdekken",
+      "library": "bibliotheek",
+      "user": "gebruiker",
+      "settings": "instellingen",
+      "labs": "labs",
+      "navigate": "navigeren",
+      "dark": "donker",
+      "light": "licht",
+      "system": "systeem",
+      "theme": "thema",
+      "change": "wijzigen",
+      "color": "kleur",
+      "scheme": "schema"
+    }
+  }
+}
