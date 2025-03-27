@@ -1,6 +1,6 @@
 import { onMessage } from "webext-bridge/window";
 
-import { isNextWindowObjectExists } from "@/plugins/_api/spa-router/utils";
+import { isNextWindowObjectExists } from "@/plugins/_core/spa-router/utils";
 
 export type CsUtilEvents = {
   "spa-router:isNextWindowObjectExists": () => boolean;

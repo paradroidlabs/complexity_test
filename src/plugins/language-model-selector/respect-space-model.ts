@@ -1,5 +1,5 @@
 import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";

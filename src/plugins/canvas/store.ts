@@ -4,12 +4,12 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
+import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
+import { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import {
   spaRouteChangeCompleteSubscribe,
   spaRouterStoreSubscribe,
-} from "@/plugins/_api/spa-router/listeners";
-import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
-import { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
+} from "@/plugins/_core/spa-router/listeners";
 import {
   CanvasLanguage,
   CanvasState,

@@ -4,9 +4,9 @@ import debounce from "lodash/debounce";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
-import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
+import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
 import { PANEL_WIDTH } from "@/plugins/thread-toc";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
 

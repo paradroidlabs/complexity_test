@@ -9,7 +9,7 @@ import "@/services/pplx-api/network-intercept-middlewares";
 import "@/data/plugins/query-box/language-model-selector/language-models";
 
 // Cores
-import "@/plugins/_api/spa-router/listeners";
+import "@/plugins/_core/spa-router/listeners";
 import "@/plugins/_core/network-intercept/listeners";
 import "@/plugins/_core/cookies-normalization";
 

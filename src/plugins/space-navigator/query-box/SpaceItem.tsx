@@ -2,7 +2,7 @@ import { isHotkeyPressed } from "react-hotkeys-hook";
 import { sendMessage } from "webext-bridge/content-script";
 
 import { CommandItem } from "@/components/ui/command";
-import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
+import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
 import { Space } from "@/services/pplx-api/pplx-api.types";
 import { emojiCodeToString, parseUrl } from "@/utils/utils";
 

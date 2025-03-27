@@ -6,7 +6,7 @@ import {
   useStoreWithEqualityFn,
 } from "zustand/traditional";
 
-import { RouterEvent } from "@/plugins/_api/spa-router/spa-router.types";
+import { RouterEvent } from "@/plugins/_core/spa-router/spa-router.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { whereAmI } from "@/utils/utils";
 

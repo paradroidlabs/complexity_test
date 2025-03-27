@@ -1,6 +1,5 @@
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import {
   findNavbarOverflowMenuButtonWrapper,
@@ -10,6 +9,7 @@ import {
   findMessageStickyHeaderHeight,
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { whereAmI } from "@/utils/utils";
 

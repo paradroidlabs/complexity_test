@@ -3,12 +3,12 @@ import { sendMessage } from "webext-bridge/window";
 import {
   NextRouter,
   RouterEvent,
-} from "@/plugins/_api/spa-router/spa-router.types";
+} from "@/plugins/_core/spa-router/spa-router.types";
 import {
   applyRouteIdAttrs,
   isNextWindowObjectExists,
   waitForRouteChangeComplete,
-} from "@/plugins/_api/spa-router/utils";
+} from "@/plugins/_core/spa-router/utils";
 import { whereAmI } from "@/utils/utils";
 
 onlyMainWorldGuard();

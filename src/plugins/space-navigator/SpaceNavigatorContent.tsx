@@ -37,6 +37,7 @@ export default function SpaceNavigatorContent({
         if (extendValue.includes(normalizedSearch)) return 1;
         return 0;
       }}
+      className="x:rounded-xl"
       onKeyDown={(event) => {
         if (event.key === Key.Escape) {
           event.preventDefault();
@@ -47,7 +48,6 @@ export default function SpaceNavigatorContent({
           }, 100);
         }
       }}
-      className="x:rounded-xl"
     >
       <CommandInput
         placeholder={t(

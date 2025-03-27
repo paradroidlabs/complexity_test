@@ -2,7 +2,7 @@ import { sendMessage } from "webext-bridge/content-script";
 
 import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import type { NavigationItem as NavigationItemType } from "@/data/plugins/command-menu/types";
-import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
+import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
 import BaseMenuItem, {
   BaseCommandMenuItem,
 } from "@/plugins/command-menu/components/BaseItem";

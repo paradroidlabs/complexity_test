@@ -14,11 +14,11 @@ import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { getThemeCss } from "@/utils/pplx-theme-loader-utils";
 import { injectMainWorldScript, insertCss } from "@/utils/utils";
 
-import spaRouterPlugin from "@/plugins/_api/spa-router/index?script&module";
 import markmapRendererPlugin from "@/plugins/_core/markmap-renderer/index?script&module";
 import mermaidRendererPlugin from "@/plugins/_core/mermaid-renderer/index?script&module";
 import networkInterceptPlugin from "@/plugins/_core/network-intercept/index?script&module";
 import reactVdomPlugin from "@/plugins/_core/react-vdom/index?script&module";
+import spaRouterPlugin from "@/plugins/_core/spa-router/index?script&module";
 import jqueryExtensions from "@/utils/jquery.extensions?script&module";
 import webextBridgeSetNamespace from "@/utils/webext-bridge?script&module";
 

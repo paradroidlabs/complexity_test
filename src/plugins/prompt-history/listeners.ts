@@ -1,4 +1,4 @@
-import { spaRouterStoreSubscribe } from "@/plugins/_api/spa-router/listeners";
+import { spaRouterStoreSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { handlePromptSave } from "@/plugins/prompt-history/utils";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/store";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";

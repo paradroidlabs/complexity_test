@@ -4,7 +4,7 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 import { isMobileStore } from "@/hooks/use-is-mobile-store";
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { queryClient } from "@/utils/ts-query-client";

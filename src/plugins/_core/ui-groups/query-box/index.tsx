@@ -1,7 +1,7 @@
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { usePluginGuardsStore } from "@/components/plugins-guard/store";
 import { useInsertCss } from "@/hooks/useInsertCss";
-import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
+import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
 import followUpQueryBoxCss from "@/plugins/_core/ui-groups/query-box/follow-up-query-box.css?inline";
 import FollowUpQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/FollowUp";
 import MainQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/Main";

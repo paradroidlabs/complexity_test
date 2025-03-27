@@ -1,12 +1,12 @@
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import {
   findBottomBar,
   findSlogan,
   observeLanguageSelector,
 } from "@/plugins/_core/dom-observers/home/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
 import { whereAmI } from "@/utils/utils";

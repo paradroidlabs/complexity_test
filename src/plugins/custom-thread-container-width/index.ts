@@ -1,4 +1,4 @@
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import PplxSpace from "@/components/icons/PplxSpace";
-import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
+import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
 import SpaceNavigatorMobileContentWrapper from "@/plugins/space-navigator/query-box/ContentWrapper";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";

@@ -1,9 +1,9 @@
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import { spacesPageDomObserverStore } from "@/plugins/_core/dom-observers/spaces-page/store";
 import { observeSpaceCard } from "@/plugins/_core/dom-observers/spaces-page/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { whereAmI } from "@/utils/utils";
 

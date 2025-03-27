@@ -1,4 +1,4 @@
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import styles from "@/plugins/hide-homepage-widgets/styles.css?inline";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
