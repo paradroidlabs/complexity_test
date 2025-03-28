@@ -1,4 +1,4 @@
-import { createHashRouter, redirect } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 
 import { canvasPrePromptInstallationDialogRouterRoute } from "@/plugins/canvas/components/PrePromptInstallationDialog";
 
@@ -8,12 +8,11 @@ export const createRouter = () =>
       path: "/",
       element: null,
       children: [canvasPrePromptInstallationDialogRouterRoute],
+      errorElement: null,
     },
     {
       path: "*",
       element: null,
-      loader: () => {
-        return redirect("");
-      },
+      errorElement: null,
     },
   ]);
