@@ -94,11 +94,10 @@ describe("whereAmI", () => {
   });
 
   it('should return "settings" for the settings URL', () => {
-    expect(whereAmI("https://www.perplexity.ai/settings")).toBe("settings");
-    expect(whereAmI("https://www.perplexity.ai/settings/account")).toBe(
+    expect(whereAmI("https://www.perplexity.ai/account/details")).toBe(
       "settings",
     );
-    expect(whereAmI("https://www.perplexity.ai/settings/profile")).toBe(
+    expect(whereAmI("https://www.perplexity.ai/account/preferences")).toBe(
       "settings",
     );
   });

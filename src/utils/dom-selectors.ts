@@ -95,10 +95,9 @@ export const DOM_SELECTORS = {
     SPACE_CARD: `.contents a[data-testid="collection-preview"]`,
   },
   SETTINGS_PAGE: {
-    TOP_NAV_WRAPPER: ".sticky.-top-12.z-20.flex",
-    TOP_NAV_CHILD: {
-      NAV_LINKS_WRAPPER:
-        ".items-center.relative.flex-1.gap-x-md.flex.h-14.flex.px-md.w-auto",
+    SIDEBAR_WRAPPER: ".w-sideBarWidth",
+    SIDEBAR_CHILD: {
+      BACK_BUTTON: ".mb-3.ml-2.flex.items-center.gap-2",
     },
   },
   STICKY_NAVBAR: ".sticky.left-0.right-0.top-0.border-b",
@@ -164,7 +163,8 @@ export const INTERNAL_ATTRIBUTES = {
     SPACE_CARD: "space-card",
   },
   SETTINGS_PAGE: {
-    TOP_NAV_WRAPPER: "settings-page-top-nav-wrapper",
+    SIDEBAR_WRAPPER: "settings-page-sidebar-wrapper",
+    CPLX_DASHBOARD_LINK: "settings-page-cplx-dashboard-link",
   },
 } as const;
 

@@ -213,7 +213,7 @@ export function whereAmI(providedUrl?: string) {
         return "thread";
       case pathname.startsWith("/page"):
         return "page";
-      case pathname.startsWith("/settings"):
+      case pathname.startsWith("/account"):
         return "settings";
       case pathname === "/":
         return "home";

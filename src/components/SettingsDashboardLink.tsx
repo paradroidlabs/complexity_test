@@ -1,39 +1,53 @@
 import { sendMessage } from "webext-bridge/content-script";
 
+import Cplx from "@/components/icons/Cplx";
 import FaArrowUpRight from "@/components/icons/FaArrowUpRight";
 import { Portal } from "@/components/ui/portal";
 import { useSettingsPageDomObserverStore } from "@/plugins/_core/dom-observers/settings-page/store";
-import { DOM_SELECTORS } from "@/utils/dom-selectors";
+import { DOM_SELECTORS, INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export default function SettingsDashboardLink() {
-  const $topNavWrapper = useSettingsPageDomObserverStore(
-    (store) => store.$topNavWrapper,
+  const $sidebarWrapper = useSettingsPageDomObserverStore(
+    (store) => store.$sidebarWrapper,
   );
 
   const portalContainer = useMemo(() => {
-    if ($topNavWrapper == null || !$topNavWrapper.length) return null;
+    if ($sidebarWrapper == null || !$sidebarWrapper.length) return null;
 
-    const $navLinksWrapper = $topNavWrapper.find(
-      DOM_SELECTORS.SETTINGS_PAGE.TOP_NAV_CHILD.NAV_LINKS_WRAPPER,
+    const $existingContainer = $sidebarWrapper.find(
+      `[data-cplx-component="${INTERNAL_ATTRIBUTES.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
     );
 
-    if (!$navLinksWrapper.length) return null;
+    if ($existingContainer[0]) return $existingContainer[0];
 
-    return $navLinksWrapper[0];
-  }, [$topNavWrapper]);
+    const $portalContainer = $("<div>")
+      .internalComponentAttr(
+        INTERNAL_ATTRIBUTES.SETTINGS_PAGE.CPLX_DASHBOARD_LINK,
+      )
+      .insertAfter(
+        $sidebarWrapper.find(
+          DOM_SELECTORS.SETTINGS_PAGE.SIDEBAR_CHILD.BACK_BUTTON,
+        ),
+      );
+
+    return $portalContainer[0];
+  }, [$sidebarWrapper]);
 
   if (portalContainer == null) return null;
 
   return (
     <Portal container={portalContainer}>
       <div
-        className="x:flex x:cursor-pointer x:items-center x:gap-1 x:text-sm x:font-medium x:text-muted-foreground x:transition-all x:hover:text-foreground"
+        className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-1 x:rounded-md x:px-4 x:py-2 x:text-sm x:font-medium x:text-foreground x:transition-all x:hover:bg-primary-foreground"
         onClick={() => {
           sendMessage("bg:openOptionsPage", undefined, "background");
         }}
       >
-        <FaArrowUpRight className="x:size-[14px]" />
-        <div>Complexity</div>
+        <div className="x:flex x:items-center x:gap-1.5">
+          <Cplx className="x:size-4 x:fill-foreground" />
+          <div>Complexity</div>
+        </div>
+        <FaArrowUpRight className="x:ml-auto x:size-3.5" />
       </div>
     </Portal>
   );

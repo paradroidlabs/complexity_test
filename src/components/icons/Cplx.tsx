@@ -1,7 +1,7 @@
 import { SVGProps } from "react";
 
 export default function Cplx({
-  primary = "oklch(var(--primary))",
+  primary = "var(--primary)",
   ...props
 }: SVGProps<SVGSVGElement> & { primary?: string; secondary?: string }) {
   return (
