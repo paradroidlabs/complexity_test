@@ -21,6 +21,7 @@ export const CALLBACK_QUEUE_TASK_IDS = [
   "thread:navbar",
   "thread:navbar:navbarOverflowMenuButton",
   "thread:messageStickyHeaderHeight",
+  "thread:pageWrapper",
   "thread:wrapper",
   "thread:popper",
   "thread:messageBlocks",

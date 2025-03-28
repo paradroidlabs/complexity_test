@@ -1,14 +1,23 @@
 @reference "../../assets/index.css";
 
-body[data-cplx-canvas-active-panel] {
-  [data-cplx-component="thread-wrapper"] {
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    isolation: isolate;
-    height: max-content;
-    & > :first-child {
-      @apply x:md:min-w-[500px];
+body {
+  &[data-cplx-canvas-active-panel] {
+    .bottom-md.right-md.m-sm.fixed.hidden.md\:block {
+      display: none;
+    }
+
+    [data-cplx-component="thread-wrapper"] {
+      display: flex;
+      justify-content: center;
+      isolation: isolate;
+      height: max-content;
+    }
+  }
+
+  &[data-cplx-canvas-active-panel="canvas"]
+    [data-cplx-component="thread-wrapper"] {
+    > :first-child {
+      @apply x:md:min-w-[450px];
       width: 100%;
     }
   }

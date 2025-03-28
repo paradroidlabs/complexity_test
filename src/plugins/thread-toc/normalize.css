@@ -1,4 +1,0 @@
-[data-cplx-component="thread-wrapper"] {
-  max-width: calc(var(--thread-content-width) + 4rem);
-  margin: 0 auto;
-}

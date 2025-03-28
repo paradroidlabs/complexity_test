@@ -67,7 +67,7 @@ const createObservers = (() => {
         },
         {
           threshold: 0,
-          rootMargin: `-${navbarHeight + 16}px 0px -100% 0px`,
+          rootMargin: `-${navbarHeight + 32}px 0px -90% 0px`,
         },
       );
     }

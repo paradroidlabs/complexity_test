@@ -56,7 +56,8 @@ export default function CanvasWrapper() {
       <div
         className={cn(
           "x:fixed x:right-8 x:z-10 x:my-8 x:h-[calc(100dvh-var(--navbar-height)-12rem)] x:overflow-hidden x:rounded-md x:border x:border-border/50 x:bg-secondary x:text-sm x:transition-all x:animate-in x:fade-in x:slide-in-from-right",
-          "x:xl:sticky x:xl:top-6 x:xl:my-0 x:xl:mt-6 x:xl:h-[calc(100dvh-var(--navbar-height)-4rem)]",
+          "x:xl:sticky x:xl:top-0 x:xl:right-0 x:xl:m-0 x:xl:my-0 x:xl:h-[calc(100dvh-var(--navbar-height)-16px)] x:xl:rounded-none x:xl:border-y-0 x:xl:border-r-0",
+          { "x:xl:border": isCanvasListOpen },
           {
             "x:w-[75vw] x:xl:w-[200%]": isCanvasOpen,
             "x:w-[30vw] x:xl:w-[20%] x:xl:min-w-[400px]": isCanvasListOpen,

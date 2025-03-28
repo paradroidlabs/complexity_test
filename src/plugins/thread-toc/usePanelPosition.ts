@@ -1,7 +1,6 @@
-import { useWindowSize } from "@uidotdev/usehooks";
+import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import debounce from "lodash/debounce";
 
-import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
@@ -12,14 +11,12 @@ import { DOM_SELECTORS } from "@/utils/dom-selectors";
 
 type UsePanelPosition = {
   position: { top: number; left: number };
-  isFloating: boolean;
-  forceRecalculate: () => void;
+  isOverflowing: boolean;
 };
 
 export function usePanelPosition(): UsePanelPosition | null {
   const { url } = useSpaRouter();
-  const { isMobile } = useIsMobileStore();
-  const windowSize = useWindowSize();
+  const windowSize = useDebounce(useWindowSize(), 200);
   const [panelPosition, setPanelPosition] = useState<UsePanelPosition | null>(
     null,
   );
@@ -79,8 +76,7 @@ export function usePanelPosition(): UsePanelPosition | null {
         top: navbarHeight + 40,
         left: threadContentWrapperWidth + threadContentWrapperOffset.left + 32,
       },
-      isFloating: panelRightEdge > window.innerWidth,
-      forceRecalculate: () => setPanelPosition(null),
+      isOverflowing: panelRightEdge > window.innerWidth,
     };
   }, [threadContentWrapper, threadWrapper]);
 
@@ -114,7 +110,7 @@ export function usePanelPosition(): UsePanelPosition | null {
       debouncedUpdate.cancel();
       DomObserver.destroy("thread:tocSidebarObserver");
     };
-  }, [calculatePosition, isMobile, windowSize, url]);
+  }, [calculatePosition, windowSize, url]);
 
   return panelPosition;
 }

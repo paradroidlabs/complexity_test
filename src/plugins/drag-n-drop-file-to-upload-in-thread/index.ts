@@ -39,11 +39,14 @@ export function setupDragNDropFileToUploadInThread() {
 
       if (
         !$wrapper.length ||
-        $wrapper.attr(INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE)
+        $wrapper.internalComponentAttr() ===
+          INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE
       )
         return;
 
-      $wrapper.attr(INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE, "true");
+      $wrapper.internalComponentAttr(
+        INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE,
+      );
 
       removeCss = insertCss({
         css: styles,
@@ -116,6 +119,9 @@ export function setupDragNDropFileToUploadInThread() {
         $fileInput.prop("files", dataTransfer.files);
         $fileInput[0].dispatchEvent(new Event("change", { bubbles: true }));
       });
+    },
+    {
+      equalityFn: deepEqual,
     },
   );
 }

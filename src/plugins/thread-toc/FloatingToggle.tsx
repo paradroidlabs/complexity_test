@@ -21,7 +21,7 @@ export default function FloatingToggle({
     <div
       role="button"
       className={cn(
-        "x:fixed x:top-(--panel-top) x:-right-3 x:flex x:h-16 x:w-8 x:items-center x:justify-center x:rounded-md x:border x:border-border/50 x:bg-secondary x:text-muted-foreground x:shadow-lg x:transition-colors x:animate-in x:fade-in x:hover:text-foreground",
+        "x:fixed x:top-(--panel-top) x:-right-3 x:z-20 x:flex x:h-16 x:w-8 x:items-center x:justify-center x:rounded-md x:border x:border-border/50 x:bg-secondary x:text-muted-foreground x:shadow-lg x:transition-colors x:animate-in x:fade-in x:hover:text-foreground",
         {
           "x:hidden": isOpen,
         },

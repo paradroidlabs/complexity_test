@@ -7,6 +7,7 @@ import {
   findPopper,
   findWrapper,
   findMessageStickyHeaderHeight,
+  findPageWrapper,
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
@@ -46,6 +47,10 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
     fireImmediately: true,
     onMutation: () => {
       CallbackQueue.getInstance().enqueueArray([
+        {
+          id: "thread:pageWrapper",
+          callback: findPageWrapper,
+        },
         {
           id: "thread:wrapper",
           callback: findWrapper,

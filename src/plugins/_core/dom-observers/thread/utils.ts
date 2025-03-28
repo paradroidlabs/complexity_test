@@ -74,6 +74,23 @@ export function findWrapper() {
   });
 }
 
+export function findPageWrapper() {
+  const $pageWrapper = $(DOM_SELECTORS.THREAD.PAGE_WRAPPER);
+
+  if (
+    !$pageWrapper.length ||
+    $pageWrapper.internalComponentAttr() ===
+      INTERNAL_ATTRIBUTES.THREAD.PAGE_WRAPPER
+  )
+    return;
+
+  $pageWrapper.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.PAGE_WRAPPER);
+
+  threadDomObserverStore.setState({
+    $pageWrapper,
+  });
+}
+
 export function findPopper() {
   const $popper = $(DOM_SELECTORS.THREAD.POPPER.DESKTOP);
 

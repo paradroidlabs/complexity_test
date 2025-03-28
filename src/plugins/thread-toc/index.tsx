@@ -1,10 +1,7 @@
 import { LuX } from "react-icons/lu";
 
-import { APP_CONFIG } from "@/app.config";
-import { useInsertCss } from "@/hooks/useInsertCss";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
-import normalizeCss from "@/plugins/thread-toc/normalize.css?inline";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import {
@@ -34,7 +31,7 @@ export default function ThreadTocWrapper() {
     setIsOpen,
   });
 
-  const { position, isFloating } = usePanelPosition() ?? {};
+  const { position, isOverflowing } = usePanelPosition() ?? {};
   const { top, left } = position ?? {};
 
   const handleToggleOpen = useCallback(() => setIsOpen(true), []);
@@ -42,20 +39,15 @@ export default function ThreadTocWrapper() {
 
   const shouldShowToc = tocItems.length > 1 && !!position;
 
-  const isFullWidthTab = useMemo(() => {
+  const isFloating = useMemo(() => {
+    if (isOverflowing) return true;
+
     const activeTopMostId = tocItems.findIndex((item) => item.isActiveTopMost);
     const tabState = new URLSearchParams(window.location.search).get(
       activeTopMostId.toString(),
     );
     return tabState != null && !["d", "r"].includes(tabState);
-  }, [tocItems]);
-
-  useInsertCss({
-    css: normalizeCss,
-    id: "thread-toc-normalize",
-    inject:
-      APP_CONFIG.BROWSER === "firefox" && tocItems.length > 1 && !isFloating,
-  });
+  }, [isOverflowing, tocItems]);
 
   if (!shouldShowToc || threadWrapper == null) return null;
 
@@ -93,14 +85,7 @@ export default function ThreadTocWrapper() {
         }
       >
         {isFloating && <CloseButton onClick={handleToggleClose} />}
-        <div
-          className={cn(
-            "x:visible x:flex x:flex-col x:gap-2 x:opacity-100 x:transition-all",
-            {
-              "x:invisible x:opacity-0": isFullWidthTab && !isFloating,
-            },
-          )}
-        >
+        <div className="x:flex x:flex-col x:gap-2">
           {tocItems.map((item, idx) => (
             <TocItem
               key={idx}

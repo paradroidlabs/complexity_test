@@ -1,6 +1,6 @@
 @reference "../../assets/index.css";
 
-[data-cplx-component="message-block"] {
+[data-cplx-component="message-block"][data-inflight="false"] {
   .first\:mt-sm.mt-4 {
     margin-top: 0;
   }

@@ -6,6 +6,7 @@ type ThreadDomObserverStoreType = {
   $navbar: JQuery<HTMLElement> | null;
   $overflowMenuButtonWrapper: JQuery<HTMLElement> | null;
   $wrapper: JQuery<HTMLElement> | null;
+  $pageWrapper: JQuery<HTMLElement> | null;
   $popper: JQuery<HTMLElement> | null;
   messageStickyHeaderHeight: number | null;
   resetStore: () => void;
@@ -19,6 +20,7 @@ export const threadDomObserverStore =
           $navbar: null,
           $overflowMenuButtonWrapper: null,
           $wrapper: null,
+          $pageWrapper: null,
           $popper: null,
           messageStickyHeaderHeight: null,
           resetStore: () => {
@@ -26,6 +28,7 @@ export const threadDomObserverStore =
               $navbar: null,
               $overflowMenuButtonWrapper: null,
               $wrapper: null,
+              $pageWrapper: null,
               $popper: null,
               messageStickyHeaderHeight: null,
             });

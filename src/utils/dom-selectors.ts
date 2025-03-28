@@ -20,6 +20,7 @@ export const DOM_SELECTORS = {
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
     NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
+    PAGE_WRAPPER: ".overflow-auto.\\[scrollbar-gutter\\:stable\\]",
     WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
     /** The container that wraps all messages */
     CONTAINER: {
@@ -136,7 +137,9 @@ export const INTERNAL_ATTRIBUTES = {
       EXPORT_THREAD_BUTTON: "thread-export-button",
       OVERFLOW_MENU_BUTTON_WRAPPER: "thread-overflow-menu-button-wrapper",
     },
+    PAGE_WRAPPER: "thread-page-wrapper",
     WRAPPER: "thread-wrapper",
+    TOC_CONTAINER: "thread-toc-container",
     POPPER: {
       DESKTOP: "thread-popper-desktop",
     },
