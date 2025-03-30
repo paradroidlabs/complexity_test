@@ -6,6 +6,7 @@ import reactHooksPlugin from "eslint-plugin-react-hooks";
 import reactRefreshPlugin from "eslint-plugin-react-refresh";
 import unicornPlugin from "eslint-plugin-unicorn";
 import globals from "globals";
+import tseslint from "typescript-eslint";
 
 import {
   boundariesPluginSettings,
@@ -66,4 +67,4 @@ const baseConfig = {
   },
 };
 
-export default [baseConfig, typescriptConfig];
+export default tseslint.config(baseConfig, typescriptConfig);

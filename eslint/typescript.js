@@ -1,18 +1,17 @@
 import importAliasPlugin from "@limegrass/eslint-plugin-import-alias";
-import tsPlugin from "@typescript-eslint/eslint-plugin";
-import tsParser from "@typescript-eslint/parser";
+import tseslint from "typescript-eslint";
 
 export const typescriptConfig = {
-  files: ["**/*.ts", "**/*.tsx"],
+  files: ["**/*.{ts,tsx}"],
   languageOptions: {
-    parser: tsParser,
+    parser: tseslint.parser,
     parserOptions: {
       alwaysTryTypes: true,
       project: "./tsconfig.json",
     },
   },
   plugins: {
-    "@typescript-eslint": tsPlugin,
+    "@typescript-eslint": tseslint.plugin,
     "@limegrass/import-alias": importAliasPlugin,
   },
   rules: {
