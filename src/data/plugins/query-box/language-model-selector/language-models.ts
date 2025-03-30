@@ -89,7 +89,7 @@ export const localLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "High",
+    label: "Deep Research (High)",
     shortLabel: "Deep Research (High)",
     code: "pplx_beta",
     provider: "PerplexityDeepResearch",
@@ -127,19 +127,27 @@ export const localLanguageModels = [
 export let languageModels: LanguageModel[] = [...localLanguageModels];
 
 export let fastLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => model.type === "fast"),
+  ...languageModels.filter(
+    (model) => !model.hideFromList && model.type === "fast",
+  ),
 ];
 
 export let reasoningLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => model.type === "reasoning"),
+  ...languageModels.filter(
+    (model) => !model.hideFromList && model.type === "reasoning",
+  ),
 ];
 
 export let deepResearchLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => model.type === "deepResearch"),
+  ...languageModels.filter(
+    (model) => !model.hideFromList && model.type === "deepResearch",
+  ),
 ];
 
 export let autoLanguageModels: LanguageModel[] = [
-  ...languageModels.filter((model) => model.type === "auto"),
+  ...languageModels.filter(
+    (model) => !model.hideFromList && model.type === "auto",
+  ),
 ];
 
 csLoaderRegistry.register({

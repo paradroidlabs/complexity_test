@@ -8,6 +8,10 @@ import {
   localLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
+import {
+  ExtractCode,
+  FilterModelByType,
+} from "@/data/plugins/query-box/language-model-selector/utils.types";
 
 export const LanguageModelSchema = z.object({
   label: z.string(),
@@ -26,6 +30,19 @@ export type LanguageModelCode =
   | (typeof localLanguageModels)[number]["code"]
   | (string & Record<string, unknown>);
 
+export type FastLanguageModelCode = ExtractCode<
+  FilterModelByType<typeof localLanguageModels, "fast">
+>;
+export type ReasoningLanguageModelCode = ExtractCode<
+  FilterModelByType<typeof localLanguageModels, "reasoning">
+>;
+export type DeepResearchLanguageModelCode = ExtractCode<
+  FilterModelByType<typeof localLanguageModels, "deepResearch">
+>;
+export type AutoLanguageModelCode = ExtractCode<
+  FilterModelByType<typeof localLanguageModels, "auto">
+>;
+
 export type LanguageModelProvider =
   | (typeof localLanguageModels)[number]["provider"]
   | (string & Record<string, unknown>);
@@ -38,24 +55,24 @@ export function isLanguageModelCode(
 
 export function isReasoningLanguageModelCode(
   value: string,
-): value is LanguageModel["code"] {
+): value is ReasoningLanguageModelCode {
   return reasoningLanguageModels.some((model) => model.code === value);
 }
 
 export function isFastLanguageModelCode(
   value: string,
-): value is LanguageModel["code"] {
+): value is FastLanguageModelCode {
   return fastLanguageModels.some((model) => model.code === value);
 }
 
 export function isDeepResearchLanguageModelCode(
   value: string,
-): value is LanguageModel["code"] {
+): value is DeepResearchLanguageModelCode {
   return deepResearchLanguageModels.some((model) => model.code === value);
 }
 
 export function isAutoLanguageModelCode(
   value: string,
-): value is LanguageModel["code"] {
+): value is AutoLanguageModelCode {
   return autoLanguageModels.some((model) => model.code === value);
 }
