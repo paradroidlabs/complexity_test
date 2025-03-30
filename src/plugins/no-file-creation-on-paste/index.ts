@@ -4,6 +4,7 @@ import {
   queryBoxesDomObserverStore,
   QueryBoxesDomObserverStoreType,
 } from "@/plugins/_core/dom-observers/query-boxes/store";
+import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 
@@ -13,6 +14,10 @@ function noFileCreationOnPaste(
   queryBoxes: QueryBoxesDomObserverStoreType["main"],
 ) {
   const pluginsEnableStates = PluginsStatesService.getEnableStatesCachedSync();
+  const settings =
+    ExtensionLocalStorageService.getCachedSync().plugins[
+      "queryBox:noFileCreationOnPaste"
+    ];
 
   if (!pluginsEnableStates["queryBox:noFileCreationOnPaste"]) return;
 
@@ -28,7 +33,11 @@ function noFileCreationOnPaste(
     $textarea.on("paste", (e) => {
       const clipboardEvent = e.originalEvent as ClipboardEvent;
 
-      if (clipboardEvent.clipboardData && isHotkeyPressed(Key.Shift)) {
+      if (
+        clipboardEvent.clipboardData &&
+        (settings.alwaysActive ||
+          (!settings.alwaysActive && isHotkeyPressed(Key.Shift)))
+      ) {
         if (clipboardEvent.clipboardData.types.includes("text/plain")) {
           e.stopImmediatePropagation();
         }

@@ -23,7 +23,9 @@ export const PluginsSchema = z.object({
       onNavigation: z.boolean(),
     }),
   }),
-  "queryBox:noFileCreationOnPaste": PluginSettingsSchema,
+  "queryBox:noFileCreationOnPaste": PluginSettingsSchema.extend({
+    alwaysActive: z.boolean(),
+  }),
   commandMenu: PluginSettingsSchema.extend({
     hotkey: z.array(z.string()),
   }),

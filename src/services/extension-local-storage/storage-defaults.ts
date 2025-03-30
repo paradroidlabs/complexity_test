@@ -24,6 +24,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       },
     },
     "queryBox:noFileCreationOnPaste": {
+      alwaysActive: false,
       enabled: false,
     },
     "queryBox:submitOnCtrlEnter": {
