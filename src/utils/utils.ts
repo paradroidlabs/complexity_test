@@ -1,4 +1,3 @@
-import debounce from "lodash/debounce";
 import { Key } from "ts-key-enum";
 
 import { APP_CONFIG } from "@/app.config";
@@ -476,7 +475,7 @@ export function untrapWheel(e: React.WheelEvent<HTMLDivElement>) {
 }
 
 export function getOptionsPageUrl() {
-  const prefix = APP_CONFIG.IS_DEV ? "src/entrypoints/" : "";
+  const prefix = APP_CONFIG.IS_DEV ? "src/entrypoints/options-page/" : "";
 
   return chrome.runtime.getURL(`${prefix}options.html`);
 }

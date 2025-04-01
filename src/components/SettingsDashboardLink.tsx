@@ -38,7 +38,7 @@ export default function SettingsDashboardLink() {
   return (
     <Portal container={portalContainer}>
       <div
-        className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-1 x:rounded-md x:px-4 x:py-2 x:text-sm x:font-medium x:text-foreground x:transition-all x:hover:bg-primary-foreground"
+        className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-1 x:rounded-lg x:mx-1 x:px-3 x:py-2 x:text-sm x:font-medium x:text-foreground x:transition-all x:hover:bg-primary-foreground"
         onClick={() => {
           sendMessage("bg:openOptionsPage", undefined, "background");
         }}

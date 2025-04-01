@@ -61,7 +61,7 @@ export default defineConfig(() => ({
     // build
     viteMoveHtmlPlugin([
       {
-        src: "src/entrypoints/options.html",
+        src: "src/entrypoints/options-page/options.html",
         dest: "options.html",
       },
     ]),
@@ -82,7 +82,7 @@ export default defineConfig(() => ({
     warmup: {
       clientFiles: [
         "src/entrypoints/content-scripts/index.ts",
-        "src/entrypoints/options.html",
+        "src/entrypoints/options-page/options.html",
       ],
     },
   },
