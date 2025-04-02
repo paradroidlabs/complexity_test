@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { sendMessage } from "webext-bridge/content-script";
 
 import { toast } from "@/components/ui/use-toast";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
@@ -92,13 +91,10 @@ async function copyMessageWithCitations({
 }: {
   messageBlockIndex: number;
 }) {
-  const content = await sendMessage(
-    "reactVdom:getMessageContent",
-    {
-      index: messageBlockIndex,
-    },
-    "window",
-  );
+  const content =
+    threadMessageBlocksDomObserverStore.getState().messageBlocks?.[
+      messageBlockIndex
+    ]?.content;
 
   if (content == null) {
     const $bottomBar =
@@ -124,7 +120,7 @@ async function copyMessageWithCitations({
     "$1",
   );
 
-  if (content.webResults && content.webResults.length) {
+  if (content.webResults != null && content.webResults.length) {
     navigator.clipboard.writeText(
       `${cleanAnswer}\n\nCitations:\n${ThreadExport.formatWebResults(content.webResults)}`,
     );
@@ -169,14 +165,14 @@ async function copyContent({
     throw new Error("Failed to fetch thread info");
   }
 
-  const messageWithoutCitations = ThreadExport.exportThread({
+  const message = ThreadExport.exportThread({
     threadJSON: threadJson,
     includeCitations: withCitations,
     messageIndex: messageBlockIndex,
   });
 
   const [, error] = await errorWrapper(() =>
-    navigator.clipboard.writeText(messageWithoutCitations),
+    navigator.clipboard.writeText(message),
   )();
 
   if (error) {

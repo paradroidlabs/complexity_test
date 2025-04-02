@@ -162,7 +162,14 @@ export function ThemeForm({
 
         <div className="x:flex x:justify-end x:gap-2">
           {footer}
-          <Button type="submit" disabled={isPending || !form.formState.isDirty}>
+          <Button
+            type="submit"
+            disabled={
+              isPending ||
+              !form.formState.isDirty ||
+              Object.keys(form.formState.errors).length > 0
+            }
+          >
             {isPending ? (
               <LuLoaderCircle className="x:size-4 x:animate-spin" />
             ) : (

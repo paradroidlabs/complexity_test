@@ -88,6 +88,8 @@ export class DomObserver {
         return this.handlePause(id);
       case "resume":
         return this.handleResume(id);
+      case "forceTrigger":
+        return this.handleForceTrigger(id);
       default:
         return this.createError(
           "INVALID_OPERATION",
@@ -201,6 +203,23 @@ export class DomObserver {
     return this.createSuccess();
   }
 
+  private static handleForceTrigger(id: ObserverId): Result<void> {
+    const instance = this.instances.get(id);
+    if (!instance) {
+      return this.createError(
+        "OBSERVER_NOT_FOUND",
+        `Observer with id "${id}" not found`,
+      );
+    }
+
+    if (instance.config.onMutation != null) {
+      instance.config.onMutation();
+      this.log(`Force triggered observer with id "${id}"`);
+    }
+
+    return this.createSuccess();
+  }
+
   private static observe(id: ObserverId): void {
     const instance = this.instances.get(id);
     if (instance?.config.target) {
@@ -286,6 +305,10 @@ export class DomObserver {
   public static resumeAll(): void {
     this.instances.forEach((_, id) => this.resume(id));
     this.isPaused = false;
+  }
+
+  public static forceTrigger(id: ObserverId): Result<void> {
+    return this.handleOperation({ type: "forceTrigger", id });
   }
 
   public static enableLogging(): void {

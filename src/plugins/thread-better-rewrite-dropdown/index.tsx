@@ -1,6 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
-import { sendMessage } from "webext-bridge/content-script";
-
 import PplxRewrite from "@/components/icons/PplxRewrite";
 import Tooltip from "@/components/Tooltip";
 import {
@@ -12,7 +9,11 @@ import {
   LanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import usePplxAuth from "@/hooks/usePplxAuth";
+import {
+  threadMessageBlocksDomObserverStore,
+  useThreadMessageBlocksDomObserverStore,
+} from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
@@ -27,22 +28,15 @@ export default function ThreadBetterRewriteDropdown({
   const [isOpen, setIsOpen] = useState(false);
   const [highlightedItem, setHighlightedItem] =
     useState<LanguageModelCode | null>("claude2");
-  const isReadOnly = useThreadMessageBlocksDomObserverStore(
-    (store) => store.messageBlocks?.[messageBlockIndex]?.states.isReadOnly,
-    deepEqual,
-  );
 
-  const { refetch: fetchMessageModelPreferences } = useQuery({
-    queryKey: ["messageModelPreferences", messageBlockIndex],
-    queryFn: () =>
-      sendMessage(
-        "reactVdom:getMessageModelPreferences",
-        { index: messageBlockIndex },
-        "window",
-      ),
-    refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-  });
+  const userUuid = usePplxAuth();
+
+  const isReadOnly = useThreadMessageBlocksDomObserverStore((store) => {
+    return (
+      userUuid.data == null ||
+      store.messageBlocks?.[0]?.content.authorUuid !== userUuid?.data?.user?.id
+    );
+  }, deepEqual);
 
   if (isReadOnly) return null;
 
@@ -57,8 +51,11 @@ export default function ThreadBetterRewriteDropdown({
       }}
       onOpenChange={async ({ open }) => {
         if (open) {
-          const modelPreferences = await fetchMessageModelPreferences();
-          setHighlightedItem(modelPreferences.data?.displayModel ?? null);
+          const modelPreferences =
+            threadMessageBlocksDomObserverStore.getState().messageBlocks?.[
+              messageBlockIndex
+            ]?.content.displayModel;
+          setHighlightedItem(modelPreferences ?? null);
         }
 
         setIsOpen(open);

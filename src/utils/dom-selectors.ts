@@ -24,13 +24,18 @@ export const DOM_SELECTORS = {
     WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
     /** The container that wraps all messages */
     CONTAINER: {
-      NORMAL:
-        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
-      BRANCHED:
-        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
+      DESKTOP: {
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container div[class=""]:first`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container div[class=""]:first`,
+      },
+      MOBILE: {
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container div[class*="erp-sidecar:"]:not(.mx-auto):first`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container div[class*="erp-sidecar:"]:not(.mx-auto):first`,
+      },
     },
     MESSAGE: {
-      WRAPPER: ".dark\\:divide-borderMainDark\\/50:has(>.isolate.mx-auto)",
+      INNER_WRAPPER:
+        ".dark\\:divide-borderMainDark\\/50:has(>.isolate.mx-auto)",
       QUERY_WRAPPER: ".isolate.mx-auto > .max-w-threadContentWidth:first-child",
       QUERY: ".group\\/query",
       QUERY_HOVER_CONTAINER:

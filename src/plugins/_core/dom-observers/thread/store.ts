@@ -9,6 +9,9 @@ type ThreadDomObserverStoreType = {
   $pageWrapper: JQuery<HTMLElement> | null;
   $popper: JQuery<HTMLElement> | null;
   messageStickyHeaderHeight: number | null;
+  states: {
+    isInFlight: boolean; // >= 1 message is in-flight
+  };
   resetStore: () => void;
 };
 
@@ -23,6 +26,9 @@ export const threadDomObserverStore =
           $pageWrapper: null,
           $popper: null,
           messageStickyHeaderHeight: null,
+          states: {
+            isInFlight: false,
+          },
           resetStore: () => {
             set({
               $navbar: null,
@@ -31,6 +37,9 @@ export const threadDomObserverStore =
               $pageWrapper: null,
               $popper: null,
               messageStickyHeaderHeight: null,
+              states: {
+                isInFlight: false,
+              },
             });
           },
         }),

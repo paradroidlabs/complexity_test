@@ -98,7 +98,8 @@ export default function ThreadTocWrapper() {
                 const $element = $(
                   `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
                 );
-                if ($element.length) scrollToElement($element, 0, 300);
+                if ($element.length)
+                  scrollToElement($element, 0, tocItems.length < 10 ? 300 : 0);
               }}
               onContextMenu={() => {
                 const $element = $(
@@ -108,7 +109,7 @@ export default function ThreadTocWrapper() {
                   scrollToElement(
                     $element,
                     $element.height()! - window.innerHeight / 2,
-                    300,
+                    tocItems.length < 10 ? 300 : 0,
                   );
               }}
             />

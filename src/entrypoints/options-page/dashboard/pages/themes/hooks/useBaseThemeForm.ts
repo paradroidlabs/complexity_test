@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { DeepRequired, useForm } from "react-hook-form";
 
 import {
   ThemeFormSchema,
@@ -14,11 +14,11 @@ import {
 
 type ThemeDataResult = Pick<Theme, "css" | "title">;
 
-export function useBaseThemeForm(defaultValues: ThemeFormValues) {
-  const form = useForm<ThemeFormValues>({
+export function useBaseThemeForm(defaultValues: DeepRequired<ThemeFormValues>) {
+  const form = useForm({
     resolver: zodResolver(ThemeFormSchema),
-    defaultValues,
     mode: "onChange",
+    defaultValues,
   });
 
   const generateThemeData = async (
@@ -31,8 +31,8 @@ export function useBaseThemeForm(defaultValues: ThemeFormValues) {
     }
     if (data.fonts.ui || data.fonts.mono || data.enhanceThreadTypography) {
       css += generateUiFontsOverrides({
-        uiFont: data.fonts.ui,
-        monoFont: data.fonts.mono,
+        uiFont: data.fonts.ui ?? defaultValues.fonts.ui,
+        monoFont: data.fonts.mono ?? defaultValues.fonts.mono,
       });
     }
 

@@ -54,7 +54,7 @@ const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
         {
           "x:sticky x:top-0": isSticky,
           "x:top-(--message-block-sticky-header-height)":
-            isSticky && !isBottomBarSticky,
+            (isSticky && !isBottomBarSticky) || isMessageBlockInFlight,
           "x:top-(--message-block-bottom-bar-height)":
             isSticky && isBottomBarSticky && !isMessageBlockInFlight,
         },

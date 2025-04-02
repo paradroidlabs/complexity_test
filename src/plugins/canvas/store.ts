@@ -128,7 +128,7 @@ const initializeAutonomousMode = () => {
     (codeBlocksChunks, prevCodeBlocksChunks) => {
       if (!codeBlocksChunks || !prevCodeBlocksChunks) return;
 
-      const getTotalBlocks = (chunks: (CodeBlock | null)[][]) =>
+      const getTotalBlocks = (chunks: CodeBlock[][]) =>
         chunks.reduce((acc, blocks) => acc + blocks.length, 0);
 
       if (

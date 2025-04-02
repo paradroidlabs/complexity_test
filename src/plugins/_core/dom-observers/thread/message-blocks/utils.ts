@@ -1,63 +1,81 @@
+import { sendMessage } from "webext-bridge/content-script";
+
 import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
-import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
+import { MessageBlockFiberData } from "@/plugins/_core/react-vdom/actions/get-messages";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
+import { UiUtils } from "@/utils/ui-utils";
 import { setCssProperty } from "@/utils/utils";
 
 export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
-  const $threadWrapper = threadDomObserverStore.getState().$wrapper;
+  const $threadMessagesContainer = UiUtils.getMessagesContainer();
+  if (!$threadMessagesContainer[0]) return null;
 
-  if ($threadWrapper == null || !$threadWrapper.length) return null;
+  const $messageBlockElements = $threadMessagesContainer.eq(0).children();
 
-  const rawMessageBlocks = $threadWrapper.find(
-    DOM_SELECTORS.THREAD.MESSAGE.WRAPPER,
+  const messageBlocksFiberData = await sendMessage(
+    "reactVdom:getMessages",
+    undefined,
+    "window",
   );
 
-  const messageBlocks = await Promise.all(
-    rawMessageBlocks.map(async (i, messageBlock) => {
-      if (messageBlock == null) return null;
-
-      const $wrapper = $(messageBlock as HTMLElement);
-
-      $wrapper
-        .internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK)
-        .attr("data-index", i);
-
-      const parsedBlock = parseMessageBlock($wrapper);
-      const { $query, $queryHoverContainer, $sources, $answer, $bottomBar } =
-        parsedBlock;
-
-      $query.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY);
-      $queryHoverContainer.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+  const messageBlocksPromises = $messageBlockElements
+    .toArray()
+    .map((messageBlockNode, idx) => {
+      return processMessageBlock(
+        messageBlocksFiberData?.[idx],
+        $(messageBlockNode),
+        idx,
       );
-      $answer.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.ANSWER);
-      $bottomBar.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BOTTOM_BAR,
-      );
+    });
 
-      const nodes: MessageBlock["nodes"] = {
-        $wrapper,
-        $query,
-        $sources,
-        $answer,
-        $queryHoverContainer,
-        $bottomBar,
-      };
+  const resolvedMessageBlocks = await Promise.all(messageBlocksPromises);
 
-      const content = getMessageBlockContent({ messageBlockNodes: nodes });
-      const states = getMessageBlockStates({
-        messageBlockNodes: nodes,
-      });
+  return resolvedMessageBlocks.filter(Boolean) as MessageBlock[];
+}
 
-      return {
-        nodes,
-        content,
-        states,
-      };
-    }),
-  );
+async function processMessageBlock(
+  messageBlockFiber: MessageBlockFiberData | undefined,
+  $wrapper: JQuery<HTMLElement>,
+  index: number,
+): Promise<MessageBlock | null> {
+  $wrapper
+    .internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK)
+    .attr("data-index", index);
 
-  return messageBlocks.filter((block): block is MessageBlock => block !== null);
+  const parsedBlock = parseMessageBlock($wrapper);
+  const { $query, $queryHoverContainer, $sources, $answer, $bottomBar } =
+    parsedBlock;
+
+  const nodes: MessageBlock["nodes"] = {
+    $wrapper,
+    $query,
+    $sources,
+    $answer,
+    $queryHoverContainer,
+    $bottomBar,
+  };
+
+  const content: MessageBlock["content"] = {
+    title:
+      messageBlockFiber?.title ??
+      $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY).text(),
+    answer: messageBlockFiber?.answer ?? "",
+    webResults: messageBlockFiber?.webResults ?? [],
+    displayModel: messageBlockFiber?.displayModel ?? "",
+    backendUuid: messageBlockFiber?.backendUuid ?? "",
+    authorUuid: messageBlockFiber?.authorUuid ?? "",
+  };
+
+  const states: MessageBlock["states"] = getMessageBlockStates({
+    messageBlockNodes: nodes,
+    messageBlockFiber,
+  });
+
+  return {
+    nodes,
+    content,
+    states,
+  };
 }
 
 function parseMessageBlock($messageBlock: JQuery<Element>) {
@@ -68,6 +86,15 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   const $sources = $messageBlock.find(selectors.SOURCES);
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
+
+  $query.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY);
+  $queryHoverContainer.internalComponentAttr(
+    INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+  );
+  $answer.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.ANSWER);
+  $bottomBar.internalComponentAttr(
+    INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BOTTOM_BAR,
+  );
 
   if ($bottomBar[0]) {
     const newHeight = `${$bottomBar[0].offsetHeight}px`;
@@ -92,48 +119,27 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
 
 function getMessageBlockStates({
   messageBlockNodes,
+  messageBlockFiber,
 }: {
   messageBlockNodes: MessageBlock["nodes"];
+  messageBlockFiber: MessageBlockFiberData | undefined;
 }): MessageBlock["states"] {
   const { $wrapper, $query, $bottomBar } = messageBlockNodes;
 
-  const isInFlight = !$bottomBar.length;
+  const isVirtualized =
+    $wrapper.find(DOM_SELECTORS.THREAD.MESSAGE.INNER_WRAPPER)[0] == null;
+
+  const isInFlight = isVirtualized
+    ? false
+    : (messageBlockFiber?.isInFlight ?? $bottomBar[0] == null);
 
   $wrapper.attr("data-inflight", isInFlight ? "true" : "false");
 
   const isEditingQuery = $query.find("textarea").length > 0;
-  const isQueryHoverContainerPresent =
-    $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY_HOVER_CONTAINER).length > 0;
-
-  const existingReadOnlyAttr = $wrapper.attr("data-read-only");
-
-  if (existingReadOnlyAttr == null || existingReadOnlyAttr === "true") {
-    $wrapper.attr(
-      "data-read-only",
-      !isQueryHoverContainerPresent ? "true" : "false",
-    );
-  }
-
-  const isReadOnly =
-    existingReadOnlyAttr !== "false" ? !isQueryHoverContainerPresent : false;
 
   return {
     isInFlight,
     isEditingQuery,
-    isReadOnly,
-  };
-}
-
-function getMessageBlockContent({
-  messageBlockNodes,
-}: {
-  messageBlockNodes: MessageBlock["nodes"];
-}): MessageBlock["content"] {
-  const { $query } = messageBlockNodes;
-
-  const title = $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY).text();
-
-  return {
-    title,
+    isVirtualized,
   };
 }

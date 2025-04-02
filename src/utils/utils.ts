@@ -277,14 +277,18 @@ export async function injectMainWorldScript({
   url,
   head = true,
   inject = true,
+  waitForDocument = true,
 }: {
   url: string;
   head?: boolean;
   inject?: boolean;
+  waitForDocument?: boolean;
 }) {
   if (!inject) return;
 
-  await waitForDocumentReady();
+  if (waitForDocument) {
+    await waitForDocumentReady();
+  }
 
   return new Promise((resolve, reject) => {
     $("<script>")

@@ -1,7 +1,6 @@
 import { FaStopCircle } from "react-icons/fa";
 import { HiOutlineSpeakerWave } from "react-icons/hi2";
 import { LuLoaderCircle } from "react-icons/lu";
-import { sendMessage } from "webext-bridge/content-script";
 
 import Tooltip from "@/components/Tooltip";
 import {
@@ -11,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { TTS_VOICES, TtsVoice } from "@/data/plugins/thread-message-tts/types";
+import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import usePplxTtsRequest from "@/plugins/thread-message-tts/hooks/usePplxTtsRequest";
 import { PplxTtsPlayerCoordinator } from "@/plugins/thread-message-tts/utils/coordinator";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
@@ -71,11 +71,10 @@ export default function ThreadMessageTtsButton({
       player.startSession();
       setPlaying(true);
 
-      const backendUuid = await sendMessage(
-        "reactVdom:getMessageBackendUuid",
-        { index: messageBlockIndex },
-        "window",
-      );
+      const backendUuid =
+        threadMessageBlocksDomObserverStore.getState().messageBlocks?.[
+          messageBlockIndex
+        ]?.content.backendUuid;
 
       if (!backendUuid) {
         console.error("No backendUuid found");
