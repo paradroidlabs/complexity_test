@@ -31,7 +31,7 @@ export type Result<T> = {
 };
 
 export type ObserverOperation = {
-  readonly type: "create" | "update" | "destroy" | "pause" | "resume";
+  readonly type: "create" | "update" | "destroy" | "pause" | "resume" | "forceTrigger";
   readonly id: ObserverId;
   readonly config?: Partial<DomObserverConfig>;
 };

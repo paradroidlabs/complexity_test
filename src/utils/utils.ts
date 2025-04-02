@@ -1,4 +1,3 @@
-import debounce from "lodash/debounce";
 import { Key } from "ts-key-enum";
 
 import { APP_CONFIG } from "@/app.config";
@@ -278,14 +277,18 @@ export async function injectMainWorldScript({
   url,
   head = true,
   inject = true,
+  waitForDocument = true,
 }: {
   url: string;
   head?: boolean;
   inject?: boolean;
+  waitForDocument?: boolean;
 }) {
   if (!inject) return;
 
-  await waitForDocumentReady();
+  if (waitForDocument) {
+    await waitForDocumentReady();
+  }
 
   return new Promise((resolve, reject) => {
     $("<script>")
@@ -476,7 +479,7 @@ export function untrapWheel(e: React.WheelEvent<HTMLDivElement>) {
 }
 
 export function getOptionsPageUrl() {
-  const prefix = APP_CONFIG.IS_DEV ? "src/entrypoints/" : "";
+  const prefix = APP_CONFIG.IS_DEV ? "src/entrypoints/options-page/" : "";
 
   return chrome.runtime.getURL(`${prefix}options.html`);
 }

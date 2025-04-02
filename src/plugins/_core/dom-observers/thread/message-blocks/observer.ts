@@ -38,17 +38,38 @@ function observeThreadMessageBlocks() {
         target: $threadWrapper[0],
         config: { childList: true, subtree: true },
         fireImmediately: true,
-        onMutation: () => {
-          CallbackQueue.getInstance().enqueue(async () => {
-            threadMessageBlocksDomObserverStore.setState({
-              messageBlocks: await findMessageBlocks(),
-            });
-          }, "thread:messageBlocks");
-        },
+        onMutation,
       });
     },
     {
       equalityFn: deepEqual,
     },
   );
+}
+
+async function onMutation() {
+  const messageBlocks = await findMessageBlocks();
+
+  if (messageBlocks == null) return;
+
+  const isAnyMessageBlockInFlight = messageBlocks.some(
+    (block) => block.states.isInFlight,
+  );
+
+  // in case the in-flight message is virtualized, no further DOM mutations will occur so we need to force trigger the observer
+  if (isAnyMessageBlockInFlight) {
+    setTimeout(() => {
+      DomObserver.forceTrigger("thread:messageBlocks");
+    }, 100);
+  }
+
+  threadDomObserverStore.setState((store) => {
+    store.states.isInFlight = isAnyMessageBlockInFlight;
+  });
+
+  CallbackQueue.getInstance().enqueue(async () => {
+    threadMessageBlocksDomObserverStore.setState({
+      messageBlocks,
+    });
+  }, "thread:messageBlocks");
 }

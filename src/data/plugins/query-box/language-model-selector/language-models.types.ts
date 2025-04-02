@@ -28,7 +28,8 @@ export type LanguageModel = z.infer<typeof LanguageModelSchema>;
 
 export type LanguageModelCode =
   | (typeof localLanguageModels)[number]["code"]
-  | (string & Record<string, unknown>);
+  // eslint-disable-next-line @typescript-eslint/no-restricted-types
+  | (string & {});
 
 export type FastLanguageModelCode = ExtractCode<
   FilterModelByType<typeof localLanguageModels, "fast">
@@ -45,7 +46,8 @@ export type AutoLanguageModelCode = ExtractCode<
 
 export type LanguageModelProvider =
   | (typeof localLanguageModels)[number]["provider"]
-  | (string & Record<string, unknown>);
+  // eslint-disable-next-line @typescript-eslint/no-restricted-types
+  | (string & {});
 
 export function isLanguageModelCode(
   value: string,

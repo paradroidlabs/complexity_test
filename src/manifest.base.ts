@@ -32,7 +32,7 @@ export const baseManifest: ExtendedManifestV3Export = {
   },
   options_ui: {
     open_in_tab: true,
-    page: "src/entrypoints/options.html",
+    page: "src/entrypoints/options-page/options.html",
   },
 
   permissions: ["storage", "unlimitedStorage", "contextMenus"],

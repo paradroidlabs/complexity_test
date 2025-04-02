@@ -1,11 +1,11 @@
 import { LuInfo } from "react-icons/lu";
-import { sendMessage } from "webext-bridge/content-script";
 
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
 export default function MessageMetrics({
@@ -13,19 +13,22 @@ export default function MessageMetrics({
 }: {
   messageBlockIndex: number;
 }) {
-  const [content, setContent] = useState<string | null>(null);
+  const answer = useThreadMessageBlocksDomObserverStore(
+    (store) => store.messageBlocks?.[messageBlockIndex]?.content.answer,
+    deepEqual,
+  );
 
   const settings = ExtensionLocalStorageService.getCachedSync();
 
   const metrics = useMemo(() => {
-    if (!content) return null;
-    const wordCount = content.split(" ").length;
-    const characterCount = content.length;
+    if (!answer) return null;
+    const wordCount = answer.split(" ").length;
+    const characterCount = answer.length;
     const tokenCount = settings.plugins["thread:showMessageLength"].showTokens
       ? Math.ceil(characterCount / 4)
       : null;
     return { wordCount, characterCount, tokenCount };
-  }, [settings, content]);
+  }, [settings, answer]);
 
   return (
     <HoverCard
@@ -33,19 +36,6 @@ export default function MessageMetrics({
       positioning={{ placement: "top-end" }}
       openDelay={0}
       closeDelay={100}
-      onOpenChange={async ({ open }) => {
-        if (!open) return;
-
-        const content = await sendMessage(
-          "reactVdom:getMessageContent",
-          { index: messageBlockIndex },
-          "window",
-        );
-
-        if (!content) return;
-
-        setContent(content.answer);
-      }}
     >
       <HoverCardTrigger asChild>
         <div className="x:cursor-pointer x:rounded-lg x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">

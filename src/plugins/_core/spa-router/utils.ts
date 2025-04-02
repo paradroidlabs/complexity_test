@@ -40,7 +40,7 @@ export async function waitForRouteChangeComplete(
 
   async function checkThreadLoaded() {
     await UiUtils.waitForSpaIdle();
-    return $(DOM_SELECTORS.THREAD.MESSAGE.WRAPPER).length > 0;
+    return $(DOM_SELECTORS.THREAD.MESSAGE.INNER_WRAPPER).length > 0;
   }
 
   function checkHomeLoaded() {

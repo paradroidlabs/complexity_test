@@ -1,6 +1,6 @@
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
-import { parseCodeBlocks } from "@/plugins/_core/dom-observers/thread/code-blocks/utils";
+import { findCodeBlocks } from "@/plugins/_core/dom-observers/thread/code-blocks/utils";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
@@ -34,11 +34,14 @@ function observeThreadCodeBlocks() {
           id: "thread:codeBlocks",
           callback: async () => {
             threadCodeBlocksDomObserverStore.setState({
-              codeBlocksChunks: await parseCodeBlocks(messageBlocks),
+              codeBlocksChunks: await findCodeBlocks(messageBlocks),
             });
           },
         },
       ]);
+    },
+    {
+      equalityFn: deepEqual,
     },
   );
 }

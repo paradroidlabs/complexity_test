@@ -7,7 +7,9 @@ import { queryClient } from "@/utils/ts-query-client";
 export function createMirroredPortalContainer(
   codeBlock: CodeBlock,
   codeBlockIndex: number,
-): HTMLElement {
+): HTMLElement | null {
+  if (!codeBlock.nodes.$wrapper) return null;
+
   const $existingPortalContainer = codeBlock.nodes.$wrapper.prev();
 
   if (

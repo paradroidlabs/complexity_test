@@ -39,7 +39,7 @@ function Select<T>({
 Select.displayName = "Select";
 
 const selectTriggerVariants = cva(
-  "x:flex x:w-full x:items-center x:justify-between x:rounded-md x:px-2 x:text-sm x:font-medium x:transition-all x:duration-150 x:outline-none x:placeholder:text-muted-foreground x:focus-visible:bg-primary-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50 x:[&>span]:!truncate",
+  "x:flex x:w-full x:items-center x:justify-between x:rounded-lg x:px-2 x:text-sm x:font-medium x:transition-all x:duration-150 x:outline-none x:placeholder:text-muted-foreground x:focus-visible:bg-primary-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50 x:[&>span]:!truncate",
   {
     variants: {
       variant: {

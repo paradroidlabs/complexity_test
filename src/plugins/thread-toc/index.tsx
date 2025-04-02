@@ -60,17 +60,12 @@ export default function ThreadTocWrapper() {
         ref={containerRef}
         id="thread-toc-container"
         className={cn(
-          PPLX_SCROLLBAR_CLASSES,
           "x:fixed x:top-(--panel-top)",
-          "x:w-(--panel-width) x:overflow-y-auto",
-          {
-            "x:max-h-[60vh]": isFloating,
-            "x:max-h-[80vh]": !isFloating,
-          },
+          "x:w-(--panel-width)",
           "x:transition-all x:animate-in x:fade-in",
           {
             "x:left-(--panel-left)": !isFloating,
-            "x:right-3 x:rounded-md x:border x:border-border/50 x:bg-secondary x:p-4 x:shadow-lg x:md:right-8":
+            "x:right-3 x:rounded-md x:border x:border-border/50 x:bg-secondary x:shadow-lg x:md:right-8":
               isFloating,
             "x:hidden": isFloating && !isOpen,
           },
@@ -85,7 +80,16 @@ export default function ThreadTocWrapper() {
         }
       >
         {isFloating && <CloseButton onClick={handleToggleClose} />}
-        <div className="x:flex x:flex-col x:gap-2">
+        <div
+          className={cn(
+            PPLX_SCROLLBAR_CLASSES,
+            "x:flex x:h-full x:flex-col x:gap-2 x:overflow-y-auto",
+            {
+              "x:max-h-[60vh] x:p-4": isFloating,
+              "x:max-h-[80vh]": !isFloating,
+            },
+          )}
+        >
           {tocItems.map((item, idx) => (
             <TocItem
               key={idx}
@@ -94,7 +98,8 @@ export default function ThreadTocWrapper() {
                 const $element = $(
                   `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
                 );
-                if ($element.length) scrollToElement($element, 0, 300);
+                if ($element.length)
+                  scrollToElement($element, 0, tocItems.length < 10 ? 300 : 0);
               }}
               onContextMenu={() => {
                 const $element = $(
@@ -104,7 +109,7 @@ export default function ThreadTocWrapper() {
                   scrollToElement(
                     $element,
                     $element.height()! - window.innerHeight / 2,
-                    300,
+                    tocItems.length < 10 ? 300 : 0,
                   );
               }}
             />

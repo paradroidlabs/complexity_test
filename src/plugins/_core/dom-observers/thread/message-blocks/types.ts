@@ -1,3 +1,6 @@
+import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { PplxWebResult } from "@/utils/thread-export";
+
 export type MessageBlock = {
   nodes: {
     $wrapper: JQuery<HTMLElement>;
@@ -8,11 +11,16 @@ export type MessageBlock = {
     $bottomBar: JQuery<HTMLElement>;
   };
   content: {
+    backendUuid: string;
     title: string;
+    answer: string;
+    webResults: PplxWebResult[];
+    displayModel: LanguageModelCode;
+    authorUuid: string | null;
   };
   states: {
     isInFlight: boolean;
     isEditingQuery: boolean;
-    isReadOnly: boolean;
+    isVirtualized: boolean;
   };
 };

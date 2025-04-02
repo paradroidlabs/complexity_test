@@ -1,4 +1,5 @@
 import { QueryBoxType } from "@/data/plugins/query-box/types";
+import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
 
 export class UiUtils {
@@ -7,10 +8,20 @@ export class UiUtils {
   }
 
   static getMessagesContainer() {
-    let $messagesContainer = $(DOM_SELECTORS.THREAD.CONTAINER.NORMAL);
+    const isMobile = isMobileStore.getState().isMobile;
+
+    let $messagesContainer = $(
+      isMobile
+        ? DOM_SELECTORS.THREAD.CONTAINER.MOBILE.NORMAL
+        : DOM_SELECTORS.THREAD.CONTAINER.DESKTOP.NORMAL,
+    );
 
     if (!$messagesContainer.length) {
-      $messagesContainer = $(DOM_SELECTORS.THREAD.CONTAINER.BRANCHED);
+      $messagesContainer = $(
+        isMobile
+          ? DOM_SELECTORS.THREAD.CONTAINER.MOBILE.BRANCHED
+          : DOM_SELECTORS.THREAD.CONTAINER.DESKTOP.BRANCHED,
+      );
     }
 
     return $messagesContainer;

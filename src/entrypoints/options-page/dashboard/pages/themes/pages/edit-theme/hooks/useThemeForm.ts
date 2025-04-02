@@ -1,4 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
+import { DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
@@ -8,9 +9,12 @@ import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/the
 import { getLocalThemesService } from "@/services/indexed-db/themes";
 
 export function useThemeForm(theme: Theme) {
-  const initialValues: ThemeFormValues = {
+  const initialValues: DeepRequired<ThemeFormValues> = {
     title: theme.title,
-    fonts: theme.config?.fonts ?? { ui: "", mono: "" },
+    fonts: {
+      ui: theme.config?.fonts?.ui ?? "",
+      mono: theme.config?.fonts?.mono ?? "",
+    },
     accentColor: theme.config?.accentColor ?? "",
     enhanceThreadTypography: theme.config?.enhanceThreadTypography ?? false,
     customCss: theme.config?.customCss ?? "",

@@ -13,20 +13,17 @@ import { toast } from "@/components/ui/use-toast";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useCopyPplxThread } from "@/hooks/useCopyPplxThread";
 import useToggleButtonText from "@/hooks/useToggleButtonText";
-import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { ExportOption } from "@/plugins/export-thread/export-options";
 import { ExportActions } from "@/plugins/export-thread/ExportActions";
 import { ExportFormatSelect } from "@/plugins/export-thread/ExportFormatSelect";
 import { parseUrl } from "@/utils/utils";
 
 const ExportButton = memo(function ExportButton() {
-  const messageBlocks = useThreadMessageBlocksDomObserverStore(
-    (state) => state.messageBlocks,
+  const isThreadInFlight = useThreadDomObserverStore(
+    (state) => state.states.isInFlight,
     deepEqual,
   );
-  const isAnyMessageBlockInFlight = useMemo(() => {
-    return messageBlocks?.some((block) => block.states.isInFlight);
-  }, [messageBlocks]);
 
   const { isMobile } = useIsMobileStore();
   const { copyThread, isFetching, getContent } = useCopyPplxThread();
@@ -92,7 +89,7 @@ const ExportButton = memo(function ExportButton() {
       <Tooltip content={t("plugin-export-thread:exportButton.action")}>
         <PopoverTrigger asChild>
           <Button
-            disabled={isAnyMessageBlockInFlight}
+            disabled={isThreadInFlight}
             variant="ghost"
             size="sm"
             className="x:box-content x:h-8 x:px-2.5"

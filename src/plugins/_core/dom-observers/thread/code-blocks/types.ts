@@ -1,7 +1,7 @@
 export type CodeBlock = {
   nodes: {
-    $wrapper: JQuery<Element>;
-    $nativeCopyButton: JQuery<Element>;
+    $wrapper: JQuery<Element> | null;
+    $nativeCopyButton: JQuery<Element> | null;
   };
   content: {
     language: string;
