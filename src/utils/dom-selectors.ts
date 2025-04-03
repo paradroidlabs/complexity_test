@@ -25,12 +25,12 @@ export const DOM_SELECTORS = {
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container div[class=""]:first`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container div[class=""]:first`,
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class=""]:first`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class=""]:first`,
       },
       MOBILE: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container div[class*="erp-sidecar:"]:not(.mx-auto):first`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container div[class*="erp-sidecar:"]:not(.mx-auto):first`,
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class*="erp-sidecar:"]:not(.mx-auto):first`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class*="erp-sidecar:"]:not(.mx-auto):first`,
       },
     },
     MESSAGE: {

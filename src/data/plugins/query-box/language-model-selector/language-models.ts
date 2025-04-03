@@ -80,7 +80,7 @@ export const localLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Deep Research",
+    label: "Standard",
     shortLabel: "Deep Research",
     code: "pplx_alpha",
     provider: "PerplexityDeepResearch",
@@ -89,13 +89,13 @@ export const localLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Deep Research (High)",
+    label: "High",
     shortLabel: "Deep Research (High)",
     code: "pplx_beta",
     provider: "PerplexityDeepResearch",
     limitKey: "pro_reasoning_limit",
     type: "deepResearch",
-    hideFromList: true,
+    hideFromList: false,
   },
   {
     label: "Sonar",
