@@ -9,7 +9,6 @@ import {
   LanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import usePplxAuth from "@/hooks/usePplxAuth";
 import {
   threadMessageBlocksDomObserverStore,
   useThreadMessageBlocksDomObserverStore,
@@ -29,13 +28,8 @@ export default function ThreadBetterRewriteDropdown({
   const [highlightedItem, setHighlightedItem] =
     useState<LanguageModelCode | null>("claude2");
 
-  const userUuid = usePplxAuth();
-
   const isReadOnly = useThreadMessageBlocksDomObserverStore((store) => {
-    return (
-      userUuid.data == null ||
-      store.messageBlocks?.[0]?.content.authorUuid !== userUuid?.data?.user?.id
-    );
+    return store.messageBlocks?.[messageBlockIndex]?.states.isReadOnly;
   }, deepEqual);
 
   if (isReadOnly) return null;

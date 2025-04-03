@@ -137,7 +137,26 @@ function getMessageBlockStates({
 
   const isEditingQuery = $query.find("textarea").length > 0;
 
+  const isReadOnly = (() => {
+    const existingReadOnlyAttr = $wrapper.attr("data-read-only");
+
+    if (existingReadOnlyAttr != null && existingReadOnlyAttr === "false")
+      return false;
+
+    const isQueryHoverContainerPresent =
+      $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY_HOVER_CONTAINER).length >
+      0;
+
+    $wrapper.attr(
+      "data-read-only",
+      isQueryHoverContainerPresent ? "false" : "true",
+    );
+
+    return !isQueryHoverContainerPresent;
+  })();
+
   return {
+    isReadOnly,
     isInFlight,
     isEditingQuery,
     isVirtualized,

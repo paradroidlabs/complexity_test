@@ -20,6 +20,7 @@ export type MessageBlock = {
   };
   states: {
     isInFlight: boolean;
+    isReadOnly: boolean;
     isEditingQuery: boolean;
     isVirtualized: boolean;
   };
