@@ -2,14 +2,16 @@ import { onMessage } from "webext-bridge/window";
 
 import { MermaidRenderer } from "@/plugins/_core/mermaid-renderer/index";
 
-export type MermaidRendererEvents = {
-  "mermaidRenderer:isInitialized": () => boolean;
-  "mermaidRenderer:render": (params: { selector: string }) => {
-    success: boolean;
-    error?: string;
-  };
-  "mermaidRenderer:getPlaygroundUrl": (params: { code: string }) => string;
-};
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "mermaidRenderer:isInitialized": () => boolean;
+    "mermaidRenderer:render": (params: { selector: string }) => {
+      success: boolean;
+      error?: string;
+    };
+    "mermaidRenderer:getPlaygroundUrl": (params: { code: string }) => string;
+  }
+}
 
 export function setupMermaidRendererListeners() {
   onMessage(

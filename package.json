@@ -25,7 +25,7 @@
     "test:ui": "pnpm dx vitest --ui",
     "e2e": "pnpm dx playwright test",
     "e2e:ui": "pnpm dx playwright test --ui",
-    "zip": "pnpm eslq &&tsc && pnpm test && pnpm build && pnpm dx gulp createPackage",
+    "zip": "pnpm eslq && tsc && pnpm test && pnpm build && pnpm dx gulp createPackage",
     "zip:firefox": "pnpm eslq && tsc && pnpm test && pnpm build:firefox && pnpm dx:firefox gulp createPackage",
     "zip:both": "pnpm eslq && tsc && pnpm test && pnpm build:firefox && pnpm dx:firefox gulp createPackage && pnpm build && pnpm dx gulp createPackage"
   },

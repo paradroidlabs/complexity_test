@@ -2,12 +2,14 @@ import { onMessage } from "webext-bridge/window";
 
 import { isNextWindowObjectExists } from "@/plugins/_core/spa-router/utils";
 
-export type CsUtilEvents = {
-  "spa-router:isNextWindowObjectExists": () => boolean;
-  "spa-router:push": ({ url }: { url: string }) => void;
-  "spa-router:replace": ({ url }: { url: string }) => void;
-  "spa-router:refresh": () => void;
-};
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "spa-router:isNextWindowObjectExists": () => boolean;
+    "spa-router:push": ({ url }: { url: string }) => void;
+    "spa-router:replace": ({ url }: { url: string }) => void;
+    "spa-router:refresh": () => void;
+  }
+}
 
 export function setupSpaRouterListeners() {
   onMessage("spa-router:isNextWindowObjectExists", () => {

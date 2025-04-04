@@ -3,6 +3,7 @@
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
+    "erasableSyntaxOnly": true,
     "esModuleInterop": false,
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
@@ -24,9 +25,9 @@
   },
   "exclude": ["node_modules"],
   "include": [
+    "e2e/**/*",
     "src/**/*",
     "tests/**/*",
-    "e2e/**/*",
     "vite-plugins/**/*",
     "vite.config.ts"
   ]

@@ -9,7 +9,6 @@ import {
   LuX,
 } from "react-icons/lu";
 
-import { cn } from "@/utils/cn";
 import { untrapWheel } from "@/utils/utils";
 
 type ComboboxContext = {

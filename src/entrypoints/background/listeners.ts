@@ -9,12 +9,14 @@ import { ExtensionVersion } from "@/utils/ext-version";
 import { getThemeCss } from "@/utils/pplx-theme-loader-utils";
 import { getOptionsPageUrl } from "@/utils/utils";
 
-export type BackgroundEvents = {
-  "bg:getTabId": () => number;
-  "bg:removePreloadedTheme": () => void;
-  "bg:openDirectReleaseNotes": ({ version }: { version: string }) => void;
-  "bg:openOptionsPage": () => void;
-};
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "bg:getTabId": () => number;
+    "bg:removePreloadedTheme": () => void;
+    "bg:openDirectReleaseNotes": ({ version }: { version: string }) => void;
+    "bg:openOptionsPage": () => void;
+  }
+}
 
 export function setupBackgroundListeners() {
   extensionIconActionListener();

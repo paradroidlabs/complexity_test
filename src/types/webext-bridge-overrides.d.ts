@@ -1,23 +1,24 @@
 import type { BridgeMessage } from "webext-bridge";
 
-import type { AllEventHandlers } from "@/entrypoints/webext-bridge-imports";
 import type { MaybePromise } from "@/types/utils.types";
 
+interface EventHandlers {}
+
 type MessageFunctions = {
-  onMessage<K extends keyof AllEventHandlers>(
+  onMessage<K extends keyof EventHandlers>(
     event: K,
     callback: (
-      data: Parameters<AllEventHandlers[K]>[0] extends undefined
-        ? Omit<BridgeMessage<AllEventHandlers[K]>, "data">
-        : BridgeMessage<AllEventHandlers[K]> & {
-            data: Parameters<AllEventHandlers[K]>[0];
+      data: Parameters<EventHandlers[K]>[0] extends undefined
+        ? Omit<BridgeMessage<EventHandlers[K]>, "data">
+        : BridgeMessage<EventHandlers[K]> & {
+            data: Parameters<EventHandlers[K]>[0];
           },
-    ) => MaybePromise<ReturnType<AllEventHandlers[K]>>,
+    ) => MaybePromise<ReturnType<EventHandlers[K]>>,
   ): void;
 
-  sendMessage<K extends keyof AllEventHandlers>(
+  sendMessage<K extends keyof EventHandlers>(
     event: K,
-    payload: Parameters<AllEventHandlers[K]>[0],
+    payload: Parameters<EventHandlers[K]>[0],
     target:
       | "content-script"
       | "background"
@@ -26,7 +27,7 @@ type MessageFunctions = {
       | "window"
       | `content-script@${number}`
       | `devtools@${number}`,
-  ): Promise<ReturnType<AllEventHandlers[K]>>;
+  ): Promise<ReturnType<EventHandlers[K]>>;
 };
 
 declare module "webext-bridge/content-script" {

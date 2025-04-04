@@ -2,20 +2,25 @@ import { onMessage } from "webext-bridge/window";
 
 import { MarkmapRenderer } from "@/plugins/_core/markmap-renderer/index";
 
-export type MarkmapRendererEvents = {
-  "markmapRenderer:isInitialized": () => boolean;
-  "markmapRenderer:render": (params: { content: string; selector: string }) => {
-    success: boolean;
-    error?: string;
-  };
-  "markmapRenderer:openAsInteractiveHtml": (params: {
-    content: string;
-  }) => void;
-  "markmapRenderer:downloadAsInteractiveHtml": (params: {
-    content: string;
-    title: string;
-  }) => void;
-};
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "markmapRenderer:isInitialized": () => boolean;
+    "markmapRenderer:render": (params: {
+      content: string;
+      selector: string;
+    }) => {
+      success: boolean;
+      error?: string;
+    };
+    "markmapRenderer:openAsInteractiveHtml": (params: {
+      content: string;
+    }) => void;
+    "markmapRenderer:downloadAsInteractiveHtml": (params: {
+      content: string;
+      title: string;
+    }) => void;
+  }
+}
 
 export function setupMarkmapRendererListeners() {
   onMessage(

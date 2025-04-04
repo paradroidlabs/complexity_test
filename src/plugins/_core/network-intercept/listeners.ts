@@ -9,8 +9,6 @@ import {
 } from "@/plugins/_core/network-intercept/listeners.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 
-onlyExtensionGuard();
-
 export type InterceptorsEvents = {
   "network-intercept:webSocketEvent": (
     event: WebSocketEventData,
@@ -25,6 +23,12 @@ export type InterceptorsEvents = {
     event: BeaconEventData,
   ) => BeaconEventData["payload"];
 };
+
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers extends InterceptorsEvents {}
+}
+
+onlyExtensionGuard();
 
 function setupInterceptorsListeners() {
   onMessage(

@@ -8,21 +8,22 @@ import {
 
 import { RouterEvent } from "@/plugins/_core/spa-router/spa-router.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
-import { whereAmI } from "@/utils/utils";
+
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "spa-router:route-change": ({
+      state,
+      trigger,
+      newUrl,
+    }: {
+      state: "pending" | "complete";
+      trigger: RouterEvent;
+      newUrl: string;
+    }) => void;
+  }
+}
 
 onlyExtensionGuard();
-
-export type DispatchEvents = {
-  "spa-router:route-change": ({
-    state,
-    trigger,
-    newUrl,
-  }: {
-    state: "pending" | "complete";
-    trigger: RouterEvent;
-    newUrl: string;
-  }) => void;
-};
 
 function setupSpaRouterDispatchListeners() {
   onMessage(
