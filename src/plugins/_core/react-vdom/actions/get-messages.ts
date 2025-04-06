@@ -30,34 +30,37 @@ export function getMessages(): MessageBlockFiberData[] | null {
     return findReactFiberNodeValue({
       fiberNode,
       condition: (node) => {
-        return node.return.memoizedState.memoizedState.results != null;
+        return (
+          node.return.memoizedState.next.next.memoizedState.current.results !=
+          null
+        );
       },
       select: (node): MessageBlockFiberData[] => {
-        return (node.return.memoizedState.memoizedState.results as any[]).map(
-          (entry) => ({
-            title: entry.query_str,
-            backendUuid: entry.backend_uuid,
+        return (
+          node.return.memoizedState.next.next.memoizedState.current
+            .results as any[]
+        ).map((entry) => ({
+          title: entry.query_str,
+          backendUuid: entry.backend_uuid,
+          answer: (entry.blocks as any[])
+            .filter((block) => block.intended_usage === "ask_text")
+            .map((chunk: any) => chunk.markdown_block.chunks.join(""))
+            .join(""),
+          webResults: (entry.blocks as any[])
+            .filter((block) => block.intended_usage === "web_results")
+            .map((chunk: any) =>
+              chunk.web_result_block.web_results.map((result: any) => ({
+                name: result.name,
+                url: result.url,
+                snippet: result.snippet,
+              })),
+            )
+            .flat(),
 
-            answer: (entry.blocks as any[])
-              .filter((block) => block.intended_usage === "ask_text")
-              .map((chunk: any) => chunk.markdown_block.chunks.join(""))
-              .join(""),
-            webResults: (entry.blocks as any[])
-              .filter((block) => block.intended_usage === "web_results")
-              .map((chunk: any) =>
-                chunk.web_result_block.web_results.map((result: any) => ({
-                  name: result.name,
-                  url: result.url,
-                  snippet: result.snippet,
-                })),
-              )
-              .flat(),
-
-            displayModel: entry.display_model,
-            isInFlight: entry.status !== "COMPLETED",
-            authorUuid: entry.author_id ?? null,
-          }),
-        );
+          displayModel: entry.display_model,
+          isInFlight: entry.status !== "COMPLETED",
+          authorUuid: entry.author_id ?? null,
+        }));
       },
     });
   })();
