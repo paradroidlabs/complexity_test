@@ -1,0 +1,25 @@
+{
+  "extends": "@complexity/typescript-config/base.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": ".",
+    "jsx": "react-jsx",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
+    },
+    "target": "ESNext"
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "e2e/**/*",
+    "src/**/*",
+    "tests/**/*",
+    "vite-plugins/**/*",
+    "vite.config.ts"
+  ]
+}

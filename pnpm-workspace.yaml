@@ -1,0 +1,4 @@
+packages:
+  - "packages/*"
+  - "perplexity/*"
+  - "perplexity/extension/release/cli"

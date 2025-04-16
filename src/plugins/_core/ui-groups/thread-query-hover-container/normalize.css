@@ -1,7 +1,0 @@
-@reference "../../../../assets/index.css";
-
-[data-cplx-component="message-block-query-hover-container"] {
-  width: max-content;
-  transform: translateY(100%);
-  @apply x:md:absolute;
-}

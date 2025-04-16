@@ -1,34 +1,35 @@
-Custom License for Complexity
+# Custom License for Complexity
 
-Copyright (c) 2024 Complexity Project
+Copyright (c) 2024-2025 The Original Author of Complexity
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to use and modify the Software for personal, non-commercial purposes only, subject to the following conditions:
+## Terms and Conditions
 
-1. Personal Use and Modification
-   - You may use and modify the Software for personal purposes.
-   - You may not use the Software or any derivative works for commercial purposes.
-   - You may not attempt to bypass, remove, or circumvent any paid features or payment mechanisms within the Software, even for personal use.
+1. **Redistribution**
 
-2. Distribution and Attribution
-   - You may not distribute modified versions of the Software without explicit attribution to the original project and clear indication of the changes made.
-   - Any distribution must include a copy of this license and maintain all copyright notices.
-   - You must state clearly that your version is a modification of the original Complexity project.
+   Redistribution of the source code, documentation, or any other components of this software in any form is permitted only for individuals for personal use, and not for organizations, companies, or any collective entities. Redistribution is allowed, provided that:
 
-3. Commercial Use
-   - Commercial use of the Software is strictly prohibited without explicit written permission from the copyright holders.
-   - "Commercial use" includes but is not limited to:
-     * Using the Software in a commercial product
-     * Using the Software to provide commercial services
-     * Incorporating the Software into a commercial offering
+   a. The original copyright notice, this license, and the disclaimer below appear in all copies.
 
-4. Paid Features
-   - The Software may include paid features to support its development.
-   - You may not modify the Software to bypass, remove, or circumvent these paid features.
-   - This restriction applies even for personal use.
+   b. Proper attribution to the original project is clearly provided.
 
-5. Disclaimer
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   c. The redistribution is conducted by an individual person for personal or educational purposes, and not on behalf of or for the benefit of any organization, company, corporation, government entity, or any other collective entity.
 
-6. Termination
-   - Your rights under this license will terminate automatically if you fail to comply with any of its terms.
-   - Upon termination, you must cease all use, modification, and distribution of the Software. 
+2. **Restrictions**
+
+   a. **Commercial Use Prohibition**: This software, including any part of its source code or derivatives, may not be used for any commercial purposes. Commercial purposes include, but are not limited to, using the software in a commercial product, offering services based on the software for a fee, or any activity intended to generate profit.
+
+   b. **Monetization Prohibition**: No monetization of this software or its derivatives is permitted in any form, including but not limited to selling the software itself, selling services based on the software, or generating advertising revenue through the software.
+
+   c. **Organizational Use Prohibition**: This software may not be redistributed, used, or modified by organizations, companies, corporations, government entities, or any collective entities. It is intended solely for use by individual persons.
+
+3. **Derivatives**
+
+   Modified versions and derivative works of this software are allowed under the same terms as the original software, particularly the prohibitions on commercial use, monetization, and organizational use.
+
+4. **Attribution**
+
+   Any redistribution or derivative work must provide clear and visible attribution to the original project, including a link to the original project repository if distributed electronically.
+
+## Disclaimer
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.

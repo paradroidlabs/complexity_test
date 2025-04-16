@@ -1,0 +1,37 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "lintq": {},
+    "fmt": {
+      "dependsOn": ["^lint"]
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/chrome/**"],
+      "outputLogs": "new-only"
+    },
+    "build:firefox": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": ["dist/firefox/**"],
+      "outputLogs": "new-only"
+    },
+    "zip": {
+      "dependsOn": ["lintq", "check-types", "test", "build"],
+      "cache": false,
+      "outputLogs": "new-only"
+    },
+    "zip:firefox": {
+      "dependsOn": ["lintq", "check-types", "test", "build:firefox"],
+      "cache": false,
+      "outputLogs": "new-only"
+    },
+    "zip:all": {
+      "dependsOn": ["zip:firefox", "zip"],
+      "cache": false,
+      "outputLogs": "new-only"
+    }
+  }
+}

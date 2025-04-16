@@ -1,0 +1,36 @@
+---
+description: 
+globs: src/**/*
+alwaysApply: false
+---
+## Auto-Import Reference
+
+This document provides a comprehensive list of automatically imported dependencies, configured in `src/types/unimport.config.ts`.
+
+GUIDANCE: When referencing or utilizing the following modules and functions, do **NOT** include explicit import statements. These are globally available due to the auto-import configuration.
+
+### List of Auto-Imports
+
+| Module/Function      | Source                    |
+| -------------------- | ------------------------- |
+| `useState`           | `react`                   |
+| `useEffect`          | `react`                   |
+| `useRef`             | `react`                   |
+| `useCallback`        | `react`                   |
+| `useMemo`            | `react`                   |
+| `lazy`               | `react`                   |
+| `use`                | `react`                   |
+| `createContext`      | `react`                   |
+| `useDeferredValue`   | `react`                   |
+| `memo`               | `react`                   |
+| `onlyMainWorldGuard` | `src/utils/js-context.ts` |
+| `onlyExtensionGuard` | `src/utils/js-context.ts` |
+| `sleep`              | `src/utils/utils.ts`      |
+| `isMainWorldContext` | `src/utils/utils.ts`      |
+| `isExtensionContext` | `src/utils/utils.ts`      |
+| `cn`                 | `src/utils/cn.ts`         |
+| `i18n`               | `src/utils/i18next.ts`    |
+| `t`                  | `src/utils/i18next.ts`    |
+| `deepEqual`          | `src/utils/deep-equal.ts` |
+| `$` (default)        | `jquery`                  |
+| `Key`                | `ts-key-enum`             |

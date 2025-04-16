@@ -1,0 +1,19 @@
+{
+  "name": "pplx-ext-release-cli",
+  "type": "module",
+  "scripts": {
+    "upload:chrome": "dotenvx run -f .env.chrome --quiet -- node chrome-upload.js",
+    "publish:firefox": "dotenvx run -f .env.firefox --quiet -- node firefox-publish.js",
+    "create-release-note": "node create-release-note.js"
+  },
+  "devDependencies": {
+    "@complexity/cli-logger": "workspace:*",
+    "chrome-webstore-upload": "^3.1.4",
+    "commander": "^13.1.0",
+    "inquirer": "^12.5.2",
+    "web-ext": "^8.5.0"
+  },
+  "dependencies": {
+    "@dotenvx/dotenvx": "^1.39.1"
+  }
+}

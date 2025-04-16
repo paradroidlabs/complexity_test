@@ -1,0 +1,26 @@
+{
+  "source": [
+    "packages/!(webext-bridge)/package.json",
+    "perplexity/*/package.json"
+  ],
+  "versionGroups": [
+    {
+      "label": "Use workspace protocol for local packages",
+      "packages": ["**"],
+      "dependencies": ["@complexity/**", "webext-bridge"],
+      "isIgnored": true
+    },
+    {
+      "label": "Use exact TypeScript version across all packages",
+      "dependencies": ["typescript"],
+      "dependencyTypes": ["dev", "peer", "prod"],
+      "pinVersion": "5.8.2"
+    },
+    {
+      "label": "Ignore ts-key-enum and @types/node",
+      "packages": ["**"],
+      "dependencies": ["ts-key-enum", "@types/node"],
+      "isIgnored": true
+    }
+  ]
+}

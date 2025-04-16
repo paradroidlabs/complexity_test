@@ -1,44 +1,14 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-.idea
-
-# dependencies
-/node_modules
-
-# testing
-/coverage
-
-# production
-/dist
-/package
-
-# misc
 .DS_Store
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.history
+node_modules
+.turbo
 *.log
-*.crx
-*.pem
-/public/img_no_track
-/temp
-vite.config.ts.timestamp-*
-dummy-non-existing-folder
-tsconfig.tsbuildinfo
-.cursorignore
-.cursorrules
-.ai-prompts
-cdn-template
+dist
+dist-ssr
+*.local
+.env
+.cache
+server/dist
+public/dist
 TODO.md
-
-# secrets
-secrets.*.js
-unimport.d.ts
-
-# playwright
-/e2e/playwright-report/
-/e2e/chrome-instances/
-/e2e/results/
+**/*.tsbuildinfo
+**/tsconfig.temp.json

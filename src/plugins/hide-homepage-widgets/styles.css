@@ -1,5 +1,0 @@
-body[location="home"]
-  /* .relative.w-full:has(.grid.grid-cols-6.grid-rows-2.mt-lg.gap-sm) { */
-  .relative.w-full:has(>.absolute.w-full > .mt-lg >.gap-sm.grid.grid-cols-6) {
-  display: none;
-}

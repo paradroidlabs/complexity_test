@@ -1,0 +1,67 @@
+import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
+import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
+import { findCodeBlocks } from "@/plugins/_core/dom-observers/thread/code-blocks/utils";
+import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
+
+declare module "@/plugins/_core/dom-observers/types" {
+  interface CoreDomObserverRegistry {
+    "thread:codeBlocks": void;
+  }
+}
+
+declare module "@/data/async-dep-registry" {
+  interface AsyncLoadersRegistry {
+    "coreDomObserver:thread:codeBlocks": void;
+  }
+}
+
+export default function loader() {
+  asyncLoaderRegistry.register({
+    id: "coreDomObserver:thread:codeBlocks",
+    dependencies: [
+      "coreDomObserver:thread:messageBlocks",
+      "cache:pluginsStates",
+    ],
+    loader: () => {
+      if (
+        !shouldEnableCoreObserver({
+          coreObserverId: "thread:codeBlocks",
+        })
+      )
+        return;
+
+      observeThreadCodeBlocks();
+    },
+  });
+}
+
+function observeThreadCodeBlocks() {
+  threadMessageBlocksDomObserverStore.subscribe(
+    (store) => store.messageBlocks,
+    async (messageBlocks) => {
+      if (messageBlocks == null) {
+        threadCodeBlocksDomObserverStore.getState().resetStore();
+        return;
+      }
+
+      CallbackQueue.getInstance().enqueueArray([
+        {
+          id: createTaskId("thread", "codeBlocks"),
+          callback: async () => {
+            threadCodeBlocksDomObserverStore.setState({
+              codeBlocksChunks: await findCodeBlocks(messageBlocks),
+            });
+          },
+        },
+      ]);
+    },
+    {
+      equalityFn: deepEqual,
+    },
+  );
+}

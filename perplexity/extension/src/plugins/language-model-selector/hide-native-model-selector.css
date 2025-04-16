@@ -1,0 +1,34 @@
+@reference "../../assets/index.css";
+
+[cplx-main-query-box] {
+  [data-cplx-component="query-box-components-wrapper"]
+    [data-cplx-component="query-box-pplx-left-toolbar-components-wrapper"] {
+    display: none;
+  }
+}
+
+[cplx-space-query-box]
+  [data-cplx-component="query-box-components-wrapper"]
+  [data-cplx-component="query-box-pplx-left-toolbar-components-wrapper"] {
+  > :first-child {
+    display: none;
+  }
+
+  .mr-xs.flex.shrink-0.items-center {
+    @apply x:ml-2;
+  }
+}
+
+[cplx-follow-up-query-box]
+  [data-cplx-component="query-box-pplx-left-toolbar-components-wrapper"] {
+  display: none;
+}
+
+[cplx-main-query-box],
+[cplx-follow-up-query-box],
+[cplx-space-query-box] {
+  [data-cplx-component="query-box-cplx-right-toolbar-components-left-wrapper"]
+    + div {
+    display: none;
+  }
+}

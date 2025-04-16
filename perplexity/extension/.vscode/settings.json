@@ -1,0 +1,80 @@
+{
+  "eslint.useFlatConfig": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.hg": true,
+    "**/.svn": true,
+    "**/.turbo": true,
+    "**/CVS": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/*.tsbuildinfo": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.hg/store/**": true,
+    "**/.turbo": true,
+    "**/build/**/*": true,
+    "**/dist/**/*": true,
+    "**/node_modules/*/**": true,
+    "**/*.tsbuildinfo": true
+  },
+  "i18n-ally.defaultNamespace": "common",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.enabledFrameworks": ["i18next", "react-i18next"],
+  "i18n-ally.extract.autoDetect": false,
+  "i18n-ally.keystyle": "nested",
+  "i18n-ally.localesPaths": ["_locales"],
+  "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
+  "i18n-ally.sourceLanguage": "en",
+  "npm.exclude": ["**/build", "**/dist"],
+  "npm.scriptExplorerExclude": ["preinstall"],
+  "search.exclude": {
+    "**/*.code-search": true,
+    "**/.turbo": true,
+    "**/bower_components": true,
+    "**/build/**/*": true,
+    "**/dist/**/*": true,
+    "**/node_modules": true,
+    "**/public/locales/**/*": true,
+    "**/*.tsbuildinfo": true
+  },
+  "tailwindCSS.experimental.classRegex": [
+    [
+      "addClass\\(\\s*([\"\\'`].*?[\"\\'`])\\s*\\)",
+      "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"
+    ],
+    [
+      "toggleClass\\(\\s*([\"\\'`].*?[\"\\'`])\\s*\\)",
+      "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"
+    ],
+    ["cva\\(([^)]*)\\)", "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"],
+    ["cn\\(([^)]*)\\)", "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"]
+  ],
+  "tailwindCSS.experimental.configFile": "src/assets/index.css",
+  "typescript.format.enable": false,
+  "typescript.tsdk": "node_modules\\typescript\\lib",
+  "typescript.tsserver.maxTsServerMemory": 8192,
+  "typescript.tsserver.watchOptions": {
+    "fallbackPolling": "dynamicPriorityPolling",
+    "watchDirectory": "useFsEvents",
+    "watchFile": "useFsEventsOnParentDirectory"
+  },
+  "window.title": "${dirty}🧩 Perplexity AI Enhancer${separator}${activeRepositoryBranchName}${separator}${activeEditorShort}",
+  "workbench.editor.customLabels.patterns": {
+    "**/src/manifest.base.ts": "Extension Manifest (Base)",
+    "**/src/manifest.chrome.ts": "Extension Manifest (Chrome)",
+    "**/src/manifest.firefox.ts": "Extension Manifest (Firefox)",
+    "**/src/data/plugin-registry/index.ts": "Plugin Registry",
+    "**/src/entrypoints/content-scripts/loaders.ts": "Loaders Registry",
+    "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
+    "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
+    "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"
+  }
+}

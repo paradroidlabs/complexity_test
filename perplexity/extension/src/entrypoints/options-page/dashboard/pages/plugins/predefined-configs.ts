@@ -1,0 +1,54 @@
+import { produce } from "immer";
+
+import { PluginRegistry } from "@/data/plugin-registry/index";
+import type { PluginId } from "@/data/plugin-registry/types";
+import type { ExtensionSettings } from "@/services/extension-settings/types";
+
+export const ESSENTIALS_ONLY: ExtensionSettings["plugins"] = produce(
+  PluginRegistry.fallbackValues,
+  (draft) => {
+    draft["queryBox:languageModelSelector"].enabled = true;
+    draft["spaceNavigator"].enabled = true;
+    draft["thread:toc"].enabled = true;
+    draft["thread:exportThread"].enabled = true;
+    draft["thread:betterMessageCopyButtons"].enabled = true;
+    draft["imageGenModelSelector"].enabled = true;
+  },
+);
+
+export const POWER_USER: ExtensionSettings["plugins"] = produce(
+  PluginRegistry.fallbackValues,
+  (draft) => {
+    draft["queryBox:languageModelSelector"].enabled = true;
+    draft["spaceNavigator"].enabled = true;
+    draft["queryBox:slashCommandMenu"].enabled = true;
+    draft["queryBox:slashCommandMenu:promptHistory"].enabled = true;
+    draft["queryBox:rawTextPaste"].enabled = true;
+    draft["commandMenu"].enabled = true;
+    draft["thread:toc"].enabled = true;
+    draft["thread:exportThread"].enabled = true;
+    draft["thread:betterMessageCopyButtons"].enabled = true;
+    draft["thread:dragAndDropFileToUploadInThread"].enabled = true;
+    draft["imageGenModelSelector"].enabled = true;
+    draft["zenMode"].enabled = true;
+  },
+);
+
+export const ALL_PLUGINS: ExtensionSettings["plugins"] = produce(
+  PluginRegistry.fallbackValues,
+  (draft) => {
+    Object.keys(draft).forEach((key) => {
+      const pluginIdKey = key as keyof typeof draft;
+
+      const excludedPlugins: PluginId[] = [
+        "queryBox:submitOnCtrlEnter",
+        "thread:customThreadContainerWidth",
+        "queryBox:spacesThreadsForceWritingMode",
+      ];
+
+      if (excludedPlugins.includes(pluginIdKey)) return;
+
+      draft[pluginIdKey].enabled = true;
+    });
+  },
+);
