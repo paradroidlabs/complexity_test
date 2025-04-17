@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/icons/logo.svg" alt="Complexity Logo" width="120" height="120" />
+  <img src="../../branding/logo.svg" alt="Complexity Logo" width="120" height="120" />
 </div>
 
 <div align="center">
@@ -16,8 +16,8 @@ A powerful browser extension that enhances your Perplexity AI experience with ad
 </div>
 
 <div>
-  <a href="https://chromewebstore.google.com/detail/complexity/ffppmilmeaekegkpckebkeahjgmhggpj" target="_blank"><img src="https://i.imgur.com/9QWBxZO.png" width="200px" style="border-radius: .5rem"></a>
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/complexity/" target="_blank"><img src="https://i.imgur.com/RpP2H81.png" width="200px"></a>
+  <a href="https://chromewebstore.google.com/detail/complexity/ffppmilmeaekegkpckebkeahjgmhggpj" target="_blank"><img src="../../branding/cws.svg" width="200px" style="border-radius: .5rem"></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/complexity/" target="_blank"><img src="../../branding/amo.svg" width="200px"></a>
   <p style="font-style: italic; font-size: .8rem;">Complexity is a third-party extension, it does NOT affiliate with Perplexity AI</p>
   💖 support the development
 </div>
@@ -33,7 +33,7 @@ A powerful browser extension that enhances your Perplexity AI experience with ad
 ## Capabilities
 
 - Provides a comprehensive set of added features and UI/UX improvements with excellent modularity and customization
-- Supports all available languages (22 languages)
+- Supports all available languages (22)
 - Runs flawlessly on Firefox Android
 
 ## Documentation

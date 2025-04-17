@@ -33,12 +33,12 @@
   </div>
 
 - Provides a comprehensive set of added features and UI/UX improvements with excellent modularity and customization
-- Supports all available languages (22 languages)
+- Supports all available languages (22)
 - Runs flawlessly on Firefox Android
 - Available on:
 
-  <a href="https://chromewebstore.google.com/detail/complexity/ffppmilmeaekegkpckebkeahjgmhggpj" target="_blank"><img src="https://i.imgur.com/9QWBxZO.png" width="200px" style="border-radius: .5rem"></a>
-  <a href="https://addons.mozilla.org/en-US/firefox/addon/complexity/" target="_blank"><img src="https://i.imgur.com/RpP2H81.png" width="200px"></a>
+  <a href="https://chromewebstore.google.com/detail/complexity/ffppmilmeaekegkpckebkeahjgmhggpj" target="_blank"><img src="./branding/cws.svg" width="200px"></a>
+  <a href="https://addons.mozilla.org/en-US/firefox/addon/complexity/" target="_blank"><img src="./branding/amo.svg" width="200px"></a>
 
 - Navigate to [`./perplexity/extension/`](./perplexity/extension/) for more information
 
