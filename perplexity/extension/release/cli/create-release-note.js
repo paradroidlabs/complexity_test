@@ -41,11 +41,11 @@ async function main() {
       `Changelog file ${chalk.yellowBright(changelogFile)} already exists`,
     );
   } else {
-    const releaseNote = generateFooter(extVersion);
+    // const releaseNote = generateFooter(extVersion);
 
-    fs.writeFileSync(changelogFile, releaseNote);
+    fs.writeFileSync(changelogFile, "");
     logger.success(
-      `Created changelog file ${chalk.yellowBright(changelogFile)}`,
+      `Created empty changelog file ${chalk.yellowBright(changelogFile)}`,
     );
   }
 
@@ -61,7 +61,14 @@ async function main() {
   if (createRelease) {
     const tagName = `${packageJson.name}@${extVersion}`;
 
-    const command = `gh release create "${tagName}" -t "${tagName}" --notes-file ${changelogFile} ../${extVersion}-chrome.crx ../${extVersion}-firefox.xpi`;
+    const temptChangelogFile = `${changelogFile}.tmp`;
+    const releaseNote = fs.readFileSync(changelogFile, "utf8");
+    fs.writeFileSync(
+      temptChangelogFile,
+      releaseNote + "\n\n" + generateFooter(extVersion),
+    );
+
+    const command = `gh release create "${tagName}" -t "${tagName}" --notes-file ${temptChangelogFile} ../${extVersion}-chrome.crx ../${extVersion}-firefox.xpi`;
 
     const execAsync = promisify(exec);
 
@@ -76,6 +83,8 @@ async function main() {
     } catch (error) {
       logger.error(`Failed to create GitHub release: ${error.message}`);
       process.exit(1);
+    } finally {
+      fs.unlinkSync(temptChangelogFile);
     }
   }
 }

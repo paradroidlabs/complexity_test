@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLoaderData } from "react-router-dom";
 
-import ChangelogRenderer from "@/components/ChangelogRenderer";
+import ChangelogRenderer from "@/components/changelog/ChangelogRenderer";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import { H1, H2 } from "@/components/ui/typography";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";

@@ -1,5 +1,7 @@
 import type { HTMLAttributes } from "react";
 
+import { ChangelogSectionComponent } from "@/components/changelog/components/ChangelogSectionComponent";
+
 const HEADER_TEXT = {
   new: "What's New",
   "bug-fix": "Bug Fixes",
@@ -20,11 +22,11 @@ export default function LegacyChangelogItemsBlock({
     : null;
 
   return (
-    <div className={cn(className)} {...props}>
+    <ChangelogSectionComponent className={cn(className)} {...props}>
       <h2 className="x:mt-2 x:text-2xl x:font-semibold x:text-primary x:capitalize">
         {headerText}
       </h2>
       {children}
-    </div>
+    </ChangelogSectionComponent>
   );
 }

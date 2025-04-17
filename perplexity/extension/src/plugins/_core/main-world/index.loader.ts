@@ -1,3 +1,5 @@
+import { allowWindowMessaging } from "webext-bridge/content-script";
+
 import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { PluginRegistry } from "@/data/plugin-registry";
 import type { PluginId } from "@/data/plugin-registry/types";
@@ -23,6 +25,8 @@ declare module "@/data/async-dep-registry" {
 }
 
 export default function loader() {
+  allowWindowMessaging("com.complexity.perplexity");
+
   asyncLoaderRegistry.register({
     id: "plugins:mainWorldCorePlugins",
     dependencies: ["cache:pluginsStates"],

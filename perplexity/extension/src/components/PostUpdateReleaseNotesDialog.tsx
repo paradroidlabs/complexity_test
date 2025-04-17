@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { APP_CONFIG } from "@/app.config";
-import ChangelogRenderer from "@/components/ChangelogRenderer";
+import ChangelogRenderer from "@/components/changelog/ChangelogRenderer";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,

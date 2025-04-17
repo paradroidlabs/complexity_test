@@ -1,7 +1,7 @@
 import { LuLoaderCircle } from "react-icons/lu";
 import semver from "semver";
 
-import ChangelogRenderer from "@/components/ChangelogRenderer";
+import ChangelogRenderer from "@/components/changelog/ChangelogRenderer";
 import { useVersionPagination } from "@/entrypoints/options-page/dashboard/pages/release-notes/hooks/useVersionPagination";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 

@@ -80,6 +80,7 @@
     "@types/culori": "^2.1.1",
     "@types/jquery": "^3.5.32",
     "@types/lodash": "^4.17.16",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^20.17.30",
     "@types/pako": "^2.0.3",
     "@types/react": "^19.1.2",
