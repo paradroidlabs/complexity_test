@@ -1,6 +1,6 @@
 {
   "name": "pplx-ext",
-  "version": "1.12.1",
+  "version": "1.12.2",
   "author": "pnd280",
   "dependencies": {
     "@ark-ui/react": "^5.6.0",
@@ -73,6 +73,7 @@
     "@complexity/typescript-config": "workspace:*",
     "@crxjs/vite-plugin": "2.0.0-beta.32",
     "@playwright/test": "^1.51.1",
+    "@tailwindcss/cli": "^4.1.4",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.4",
     "@tanstack/react-query-devtools": "^5.74.3",
@@ -130,14 +131,17 @@
     "lint": "eslint ./src",
     "lintf": "eslint ./src --fix",
     "lintq": "eslint ./src --quiet",
+    "lint-staged": "lint-staged",
     "test": "pnpm dx:chrome vitest run",
     "test:ui": "pnpm dx:chrome vitest --ui",
     "zip": "pnpm dx:chrome gulp createPackage",
     "zip:firefox": "pnpm dx:firefox gulp createPackage",
-    "upload:chrome": "cd release/cli && pnpm upload:chrome",
-    "publish:firefox": "cd release/cli && pnpm publish:firefox",
-    "create-release-note": "cd release/cli && pnpm create-release-note",
-    "lint-staged": "lint-staged"
+    "upload:chrome": "cd ./cli && pnpm upload:chrome",
+    "publish:firefox": "cd ./cli && pnpm publish:firefox",
+    "create-release-note": "cd ./cli && pnpm create-release-note",
+    "r2:pull": "cd ./cli && pnpm r2:pull",
+    "r2:push": "cd ./cli && pnpm r2:push",
+    "r2:changelog-push": "cd ./cli && pnpm r2:changelog-push"
   },
   "type": "module"
 }

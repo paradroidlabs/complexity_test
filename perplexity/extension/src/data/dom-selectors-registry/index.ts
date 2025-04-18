@@ -6,8 +6,8 @@ import {
 import type { DomSelectors } from "@/data/dom-selectors-registry/types";
 
 export class DomSelectorsRegistry {
-  static local = DOM_SELECTORS;
-  static remote = null as DomSelectors | null;
+  static local: DomSelectors = DOM_SELECTORS;
+  static remote: DomSelectors | null = null;
   static internalAttributes = INTERNAL_ATTRIBUTES;
   static testIds = TEST_ID;
 

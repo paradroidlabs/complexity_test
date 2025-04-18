@@ -1,5 +1,6 @@
-import { onMessage } from "webext-bridge/window";
+import { onMessage, sendMessage } from "webext-bridge/window";
 
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { getCodeBlockContent } from "@/plugins/_core/main-world/react-vdom/actions/get-code-block-content";
 import type { MessageBlockFiberData } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
 import { getMessages } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
@@ -24,7 +25,13 @@ declare module "@/types/webext-bridge-overrides" {
   }
 }
 
-export function setupReactVdomListeners() {
+export async function setupReactVdomListeners() {
+  DomSelectorsRegistry.remote = await sendMessage(
+    "cache:domSelectors",
+    undefined,
+    "content-script",
+  );
+
   onMessage("reactVdom:getMessages", ({ data }) => getMessages(data));
 
   onMessage("reactVdom:getCodeBlockContent", ({ data }) =>

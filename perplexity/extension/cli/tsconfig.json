@@ -1,0 +1,17 @@
+{
+  "extends": "@complexity/typescript-config/base.json",
+  "compilerOptions": {
+    "allowJs": false,
+    "baseUrl": ".",
+    "incremental": false,
+    "lib": ["ES2022"],
+    "noEmit": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "~/*": ["./*"],
+      "#/*": ["../*"]
+    }
+  },
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts"]
+}

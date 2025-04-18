@@ -21,21 +21,24 @@ import { queryClient } from "@/utils/ts-query-client";
 import { fetchTextResource } from "@/utils/utils";
 
 export class CplxApiService {
+  private getUrl(path: string): URL {
+    const url = new URL(APP_CONFIG.CPLX_CDN_URL!);
+    url.pathname = path;
+    url.searchParams.set("t", getTParam().toString());
+    return url;
+  }
+
   async fetchVersions(): Promise<CplxVersionsApiResponse> {
     return CplxVersionsApiResponseSchema.parse(
       JSON.parse(
-        await fetchTextResource(
-          `${APP_CONFIG.CPLX_CDN_URL}/versions.json?t=${getTParam()}`,
-        ),
+        await fetchTextResource(this.getUrl("/versions.json").toString()),
       ),
     );
   }
 
   async fetchFeatureCompat(): Promise<FeatureCompatibility> {
     return JSON.parse(
-      await fetchTextResource(
-        `${APP_CONFIG.CPLX_CDN_URL}/feature-compat.json?t=${getTParam()}`,
-      ),
+      await fetchTextResource(this.getUrl("/feature-compat.json").toString()),
     );
   }
 
@@ -45,7 +48,7 @@ export class CplxApiService {
       .parse(
         JSON.parse(
           await fetchTextResource(
-            `${APP_CONFIG.CPLX_CDN_URL}/language-models.json?t=${getTParam()}`,
+            this.getUrl("/language-models.json").toString(),
           ),
         ),
       );
@@ -65,9 +68,7 @@ export class CplxApiService {
         ? targetVersion
         : versions?.latest);
 
-    const resp = await fetch(
-      `https://raw.githubusercontent.com/pnd280/complexity/refs/heads/nxt/perplexity/extension/release/changelog/${versionUrl}.md`,
-    );
+    const resp = await fetch(this.getUrl(`/changelogs/${versionUrl}.md`));
 
     if (resp.status === 404) {
       throw new Error(`Failed to fetch changelog for version ${versionUrl}.`);
@@ -80,9 +81,7 @@ export class CplxApiService {
     return safeMerge(
       DomSelectorsSchema,
       JSON.parse(
-        await fetchTextResource(
-          `${APP_CONFIG.CPLX_CDN_URL}/dom-selectors.json?t=${getTParam()}`,
-        ),
+        await fetchTextResource(this.getUrl("/dom-selectors.json").toString()),
       ),
       DomSelectorsRegistry.local,
     );
@@ -90,7 +89,7 @@ export class CplxApiService {
 
   async fetchMessageBlocksReactFiberNodePath() {
     return await fetchTextResource(
-      `${APP_CONFIG.CPLX_CDN_URL}/message-blocks-react-fiber-node-path?t=${getTParam()}`,
+      this.getUrl("/message-blocks-react-fiber-node-path").toString(),
     );
   }
 }

@@ -1,21 +1,29 @@
-#!/usr/bin/env node
-
 import { exec } from "child_process";
 import fs from "fs";
+import path from "path";
 import process from "process";
 import { promisify } from "util";
-import chalk from "chalk";
 
+import packageJson from "#/package.json" assert { type: "json" };
 import { Logger } from "@complexity/cli-logger";
+import chalk from "chalk";
 import { Command } from "commander";
 import inquirer from "inquirer";
 
-import packageJson from "../../package.json" assert { type: "json" };
-import { getExtensionVersion, md5sum } from "./utils.js";
+import { getRootPath } from "@/utils";
+import {
+  getExtensionVersion,
+  md5sum,
+  getArtifactPath,
+} from "@/web-stores/utils";
 
 const LOGGER_NAME = packageJson.name;
-const CHANGELOG_DIR = "../changelog";
-const FOOTER_TEMPLATE_PATH = "./release-note-footer-template.md";
+const CHANGELOG_DIR = path.resolve(getRootPath(), "changelogs");
+
+const FOOTER_TEMPLATE_PATH = path.resolve(
+  __dirname,
+  "./release-note-footer-template.md",
+);
 
 const logger = new Logger({
   name: LOGGER_NAME,
@@ -32,9 +40,9 @@ program
 
 program.parse(process.argv);
 
-async function main() {
+async function main(): Promise<void> {
   const extVersion = getExtensionVersion({ defaultVersion: packageJson });
-  const changelogFile = `${CHANGELOG_DIR}/${extVersion}.md`;
+  const changelogFile = path.join(CHANGELOG_DIR, `${extVersion}.md`);
 
   if (fs.existsSync(changelogFile)) {
     logger.info(
@@ -51,15 +59,16 @@ async function main() {
     {
       type: "confirm",
       name: "createRelease",
-      message: `Commit and push your changes (including the newly created changelog file) before proceeding!\nCreate a new GitHub release for version ${extVersion}?`,
+      message: `Create a new GitHub release for version ${extVersion}?`,
       default: false,
     },
   ]);
 
-  if (createRelease) {
+  if (createRelease === true) {
     const tagName = `${packageJson.name}@${extVersion}`;
-    const crxPath = `../${extVersion}-chrome.crx`;
-    const xpiPath = `../${extVersion}-firefox.xpi`;
+
+    const crxPath = getArtifactPath("chrome", extVersion);
+    const xpiPath = getArtifactPath("firefox", extVersion);
 
     const crxExists = fs.existsSync(crxPath);
     const xpiExists = fs.existsSync(xpiPath);
@@ -67,9 +76,9 @@ async function main() {
     let proceedWithRelease = true;
 
     if (!crxExists || !xpiExists) {
-      const missingFiles = [];
-      if (!crxExists) missingFiles.push("Chrome extension (CRX)");
-      if (!xpiExists) missingFiles.push("Firefox extension (XPI)");
+      const missingFiles: string[] = [];
+      if (!crxExists) missingFiles.push(crxPath);
+      if (!xpiExists) missingFiles.push(xpiPath);
 
       const { proceed } = await inquirer.prompt([
         {
@@ -87,11 +96,11 @@ async function main() {
       const temptChangelogFile = `${changelogFile}.tmp`;
       const releaseNote = fs.readFileSync(changelogFile, "utf8");
 
-      let footerContent;
+      let footerContent: string;
       try {
         footerContent = generateFooter(extVersion, crxExists, xpiExists);
       } catch (error) {
-        logger.error(`Failed to generate footer: ${error.message}`);
+        logger.error(`Failed to generate footer: ${(error as Error).message}`);
         return;
       }
 
@@ -121,7 +130,9 @@ async function main() {
           `https://github.com/pnd280/complexity/releases/tag/${tagName}`,
         );
       } catch (error) {
-        logger.error(`Failed to create GitHub release: ${error.message}`);
+        logger.error(
+          `Failed to create GitHub release: ${(error as Error).message}`,
+        );
         process.exit(1);
       } finally {
         fs.unlinkSync(temptChangelogFile);
@@ -132,22 +143,28 @@ async function main() {
   }
 }
 
-function generateFooter(version, crxExists = true, xpiExists = true) {
+function generateFooter(
+  version: string,
+  crxExists = true,
+  xpiExists = true,
+): string {
   try {
     const footerTemplate = fs.readFileSync(FOOTER_TEMPLATE_PATH, "utf8");
 
     const crxHash = crxExists
-      ? md5sum(`../${version}-chrome.crx`)
+      ? md5sum(getArtifactPath("chrome", version))
       : "File not available";
     const xpiHash = xpiExists
-      ? md5sum(`../${version}-firefox.xpi`)
+      ? md5sum(getArtifactPath("firefox", version))
       : "File not available";
 
     return footerTemplate
       .replace("$CRX_HASH", crxHash)
       .replace("$XPI_HASH", xpiHash);
   } catch (error) {
-    logger.error(`Failed to generate release note: ${error.message}`);
+    logger.error(
+      `Failed to generate release note: ${(error as Error).message}`,
+    );
     throw error;
   }
 }

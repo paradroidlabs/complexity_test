@@ -29,7 +29,7 @@ export const isPluginOutdated = (
   currentVersion: string,
   requiredVersion: string | undefined,
 ): boolean => {
-  if (!requiredVersion) return false;
+  if (!requiredVersion) return true;
   return semver.lt(
     semver.coerce(currentVersion)!,
     semver.coerce(requiredVersion)!,

@@ -13,7 +13,7 @@ dummy-non-existing-folder
 .cursorignore
 .cursorrules
 .ai-prompts
-cdn-template
+*-no-track
 TODO.md
 
 secrets.*.js
@@ -26,9 +26,6 @@ unimport.d.ts
 /node_modules
 /coverage
 /dist
-/release/*.zip
-/release/*.xpi
-/release/*.crx
-/release/*-firefox
+/release
 
-dom-selectors.json
+cdn

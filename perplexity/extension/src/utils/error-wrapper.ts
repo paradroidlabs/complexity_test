@@ -1,6 +1,6 @@
 import type { MaybePromise } from "@/types/utils.types";
 
-type ErrorWrapperResult<T> = [T | null, Error | null];
+type ErrorWrapperResult<T> = [T, null] | [null, Error];
 
 /**
  * Wraps a function to provide consistent error handling

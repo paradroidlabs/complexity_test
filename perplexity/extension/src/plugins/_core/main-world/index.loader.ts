@@ -29,7 +29,7 @@ export default function loader() {
 
   asyncLoaderRegistry.register({
     id: "plugins:mainWorldCorePlugins",
-    dependencies: ["cache:pluginsStates"],
+    dependencies: ["cache:pluginsStates", "cache:domSelectors"],
     loader: async ({ "cache:pluginsStates": pluginsStates }) => {
       await injectMainWorldScript({
         url: chrome.runtime.getURL(webextBridgeSetNamespace),

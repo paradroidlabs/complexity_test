@@ -4,6 +4,7 @@
     "*.css": "tailwindcss"
   },
   "files.exclude": {
+    "**/*.tsbuildinfo": true,
     "**/.DS_Store": true,
     "**/.git": true,
     "**/.hg": true,
@@ -11,18 +12,17 @@
     "**/.turbo": true,
     "**/CVS": true,
     "**/Thumbs.db": true,
-    "**/node_modules": true,
-    "**/*.tsbuildinfo": true
+    "**/node_modules": true
   },
   "files.watcherExclude": {
+    "**/*.tsbuildinfo": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true,
     "**/.turbo": true,
     "**/build/**/*": true,
     "**/dist/**/*": true,
-    "**/node_modules/*/**": true,
-    "**/*.tsbuildinfo": true
+    "**/node_modules/*/**": true
   },
   "i18n-ally.defaultNamespace": "common",
   "i18n-ally.displayLanguage": "en",
@@ -33,17 +33,17 @@
   "i18n-ally.namespace": true,
   "i18n-ally.pathMatcher": "{locale}/{namespaces}.json",
   "i18n-ally.sourceLanguage": "en",
-  "npm.exclude": ["**/build", "**/dist"],
+  "npm.exclude": ["**/build", "**/dist/**"],
   "npm.scriptExplorerExclude": ["preinstall"],
   "search.exclude": {
     "**/*.code-search": true,
+    "**/*.tsbuildinfo": true,
     "**/.turbo": true,
     "**/bower_components": true,
     "**/build/**/*": true,
     "**/dist/**/*": true,
     "**/node_modules": true,
-    "**/public/locales/**/*": true,
-    "**/*.tsbuildinfo": true
+    "**/public/locales/**/*": true
   },
   "tailwindCSS.experimental.classRegex": [
     [
@@ -68,14 +68,14 @@
   },
   "window.title": "${dirty}🧩 Perplexity AI Enhancer${separator}${activeRepositoryBranchName}${separator}${activeEditorShort}",
   "workbench.editor.customLabels.patterns": {
+    "**/src/data/plugin-registry/index.ts": "Plugin Registry",
+    "**/src/entrypoints/background/index.ts": "Entrypoint - Background",
+    "**/src/entrypoints/content-scripts/index.ts": "Entrypoint - Content Scripts",
+    "**/src/entrypoints/content-scripts/loaders.ts": "Loaders Registry",
+    "**/src/entrypoints/options-page/index.tsx": "Entrypoint - Options Page",
     "**/src/manifest.base.ts": "Extension Manifest (Base)",
     "**/src/manifest.chrome.ts": "Extension Manifest (Chrome)",
     "**/src/manifest.firefox.ts": "Extension Manifest (Firefox)",
-    "**/src/entrypoints/content-scripts/index.ts": "Entrypoint - Content Scripts",
-    "**/src/entrypoints/options-page/index.tsx": "Entrypoint - Options Page",
-    "**/src/entrypoints/background/index.ts": "Entrypoint - Background",
-    "**/src/data/plugin-registry/index.ts": "Plugin Registry",
-    "**/src/entrypoints/content-scripts/loaders.ts": "Loaders Registry",
     "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
     "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
     "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"

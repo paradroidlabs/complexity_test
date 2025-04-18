@@ -1,14 +1,18 @@
-#!/usr/bin/env node
-
 import { exec } from "child_process";
 import fs from "fs";
+import path from "path";
 import process from "process";
 import { promisify } from "util";
 
+import packageJson from "#/package.json" assert { type: "json" };
 import { Logger } from "@complexity/cli-logger";
 
-import packageJson from "../../package.json" assert { type: "json" };
-import { getExtensionVersion, validateZipFile } from "./utils.js";
+import {
+  getExtensionVersion,
+  validateZipFile,
+  getArtifactPath,
+  ARTIFACTS_DIR,
+} from "@/web-stores/utils";
 
 const logger = new Logger({
   name: packageJson.name,
@@ -17,11 +21,13 @@ const logger = new Logger({
 
 const extVersion = getExtensionVersion({ defaultVersion: packageJson });
 const zipPath = validateZipFile(extVersion, "firefox");
-const extractDir = `../${extVersion}-firefox`;
+const extractDir = path.join(ARTIFACTS_DIR, `${extVersion}-firefox`);
 
 const execAsync = promisify(exec);
 
-async function main() {
+async function main(): Promise<void> {
+  verifyEnvVariables();
+
   if (fs.existsSync(extractDir)) {
     logger.verbose(`Removing existing ${extractDir}...`);
     fs.rmSync(extractDir, { recursive: true, force: true });
@@ -34,18 +40,18 @@ async function main() {
 
     logger.info("Signing extension...");
     const { stdout } = await execAsync(
-      `web-ext sign --channel listed --source-dir "${extractDir}" --artifacts-dir ..`,
+      `web-ext sign --channel listed --source-dir "${extractDir}" --artifacts-dir ${ARTIFACTS_DIR}`,
     );
     console.log(stdout);
 
     logger.verbose("Renaming XPI file...");
-    const xpiFile = `../complexity-${extVersion}.xpi`;
+    const xpiFile = path.join(ARTIFACTS_DIR, `complexity-${extVersion}.xpi`);
 
     if (!fs.existsSync(xpiFile)) {
       logger.error(`XPI file not found: ${xpiFile}`);
     } else {
-      const newName = `${extVersion}-firefox.xpi`;
-      fs.renameSync(xpiFile, `../${newName}`);
+      const newName = getArtifactPath("firefox", extVersion);
+      fs.renameSync(xpiFile, newName);
       logger.verbose(`Renamed complexity-${extVersion}.xpi to ${newName}`);
     }
 
@@ -58,18 +64,25 @@ async function main() {
       `Please visit https://addons.mozilla.org/en-US/developers/addon/complexity/versions/${extVersion} to add Android as a supported platform`,
     );
   } catch (err) {
-    logger.error(`Error: ${err.message}`);
+    logger.error(`Error: ${(err as Error).message}`);
     cleanup();
     process.exit(1);
   }
 }
 
-function cleanup() {
+function cleanup(): void {
   logger.verbose("Cleaning up...");
   fs.rmSync(extractDir, { recursive: true, force: true });
 }
 
-main().catch((err) => {
+main().catch((err: Error) => {
   logger.error(`Unhandled error: ${err.message}`);
   process.exit(1);
 });
+
+function verifyEnvVariables(): void {
+  if (!process.env.WEB_EXT_API_KEY || !process.env.WEB_EXT_API_SECRET) {
+    logger.error("Missing environment variables");
+    process.exit(1);
+  }
+}

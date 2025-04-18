@@ -20,7 +20,7 @@ Publication of the extension on web stores is done manually via scripts because 
 ## GitHub Releases
 
 - After obtaining both the signed CRX and XPI files, create a new release via the command `pnpm create-release-note`
-- A release note will be generated in the [`../changelog`](../changelog) directory, with the version number automatically extracted from the [`package.json`](../../package.json) file
+- A release note will be generated in the [`../../changelogs`](../../changelogs) directory, with the version number automatically extracted from the [`package.json`](../../package.json) file
 - The script will prompt you to confirm the creation of a GitHub release
 - Open the generated file and add a description of the changes
 - Commit and push your changes (including the newly created changelog file) before proceeding
@@ -31,7 +31,6 @@ Publication of the extension on web stores is done manually via scripts because 
 - CLI version of the chrome web store upload script: https://github.com/fregante/chrome-webstore-upload-cli
 - CI template: https://github.com/fregante/ghatemplates/blob/main/webext/release.yml
 - Example of creating a folder symlink on Windows:
-
-```powershell
-New-Item -ItemType SymbolicLink -Path "$(pwd)\cdn-template\changelog" -Target "$(pwd)\release\changelog"
-```
+  ```powershell
+  New-Item -ItemType SymbolicLink -Path -Target "$(pwd)\release\changelog" "$(pwd)\cdn-template\changelog"
+  ```

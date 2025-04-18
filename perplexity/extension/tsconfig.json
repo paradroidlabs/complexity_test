@@ -14,7 +14,7 @@
     },
     "target": "ESNext"
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "release/cli/**/*"],
   "include": [
     "e2e/**/*",
     "src/**/*",
