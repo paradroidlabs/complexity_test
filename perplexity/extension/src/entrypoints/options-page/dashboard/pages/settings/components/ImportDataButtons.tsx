@@ -16,9 +16,9 @@ export default function ImportDataButtons() {
     const [, error] = await errorWrapper(async () => {
       const parsedData = JSON.parse(data) as ExtensionData;
 
-      if ("plugins" in parsedData.localStorage) {
-        parsedData.localStorage = {
-          settings: transfromFlatSchema(parsedData.localStorage),
+      if ("plugins" in parsedData.settings) {
+        parsedData.settings = {
+          settings: transfromFlatSchema(parsedData.settings),
           settings$: {
             v: 2,
           },
@@ -27,10 +27,10 @@ export default function ImportDataButtons() {
 
       await storage.setItem<ExtensionSettings>(
         "local:settings",
-        parsedData.localStorage.settings,
+        parsedData.settings.settings,
       );
       await storage.setMeta("local:settings", {
-        v: parsedData.localStorage["settings$"].v,
+        v: parsedData.settings["settings$"].v,
       });
       db.import(parsedData.db);
     })();

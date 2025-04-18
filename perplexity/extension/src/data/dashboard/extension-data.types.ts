@@ -7,7 +7,7 @@ import { ThemeSchema } from "@/data/plugins/themes/theme-registry.types";
 import { ExtensionSettingsSchema } from "@/services/extension-settings/types";
 
 export const ExtensionDataSchema = z.object({
-  localStorage: z.object({
+  settings: z.object({
     settings: ExtensionSettingsSchema,
     settings$: z.object({
       v: z.number(),

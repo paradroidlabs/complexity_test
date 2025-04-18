@@ -1,10 +1,10 @@
-import { storage } from "@wxt-dev/storage";
 import { LuCheck, LuLoaderCircle } from "react-icons/lu";
 
 import AsyncButton from "@/components/AsyncButton";
 import { Button } from "@/components/ui/button";
 import type { ExtensionData } from "@/data/dashboard/extension-data.types";
 import useToggleButtonText from "@/hooks/useToggleButtonText";
+import { ExtensionSettingsService } from "@/services/extension-settings";
 import { db as indexedDb } from "@/services/indexed-db";
 
 export default function ExportDataButtons() {
@@ -16,9 +16,10 @@ export default function ExportDataButtons() {
     await sleep(300);
     return JSON.stringify(
       {
-        localStorage: (await storage.snapshot(
-          "local",
-        )) as ExtensionData["localStorage"],
+        settings: {
+          settings: await ExtensionSettingsService.instance.getValue(),
+          settings$: await ExtensionSettingsService.instance.getMeta(),
+        } as ExtensionData["settings"],
         db: await indexedDb.exportAll(),
       } satisfies ExtensionData,
       null,
