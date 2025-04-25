@@ -3,22 +3,21 @@ import semver from "semver";
 
 import { APP_CONFIG } from "@/app.config";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
-import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 
 export function useVersionPagination() {
-  const { data: versions } = useQuery({
-    ...CplxVersionsService.query,
-  });
+  const { data: changelogListing } = useQuery(
+    cplxApiQueries.changelog.listing.detail(),
+  );
 
   const availableVersions = useMemo(() => {
-    if (!versions?.changelogEntries) return [];
-    return versions.changelogEntries.filter((version) =>
+    if (!changelogListing) return [];
+    return Object.keys(changelogListing).filter((version) =>
       semver.lte(version, APP_CONFIG.VERSION),
     );
-  }, [versions?.changelogEntries]);
+  }, [changelogListing]);
 
   const { data, fetchNextPage, hasNextPage } = useInfiniteQuery({
-    queryKey: ["versionPagination", versions?.changelogEntries],
+    queryKey: ["versionPagination", changelogListing],
     queryFn: ({ pageParam = 0 }) => {
       const startIndex = pageParam as number;
       const count = 1;

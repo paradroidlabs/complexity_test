@@ -1,15 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { LuLoaderCircle } from "react-icons/lu";
 
 import ChangelogRenderer from "@/components/changelog/ChangelogRenderer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useVersionPagination } from "@/entrypoints/options-page/dashboard/pages/release-notes/hooks/useVersionPagination";
+import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { cn } from "@/utils/cn";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export function ReleaseNotesPage() {
   const { loadedVersions, hasMore, loadNextVersions, changelogQueries } =
     useVersionPagination();
+
+  const { data: changelogListing } = useQuery(
+    cplxApiQueries.changelog.listing.detail(),
+  );
 
   const observerRef = useRef<IntersectionObserver | null>(null);
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -33,7 +39,7 @@ export function ReleaseNotesPage() {
   }, [hasMore, loadNextVersions]);
 
   return (
-    <div className="x:flex x:flex-col x:gap-4">
+    <div className="x:flex x:flex-col x:gap-8">
       <div className="x:flex x:flex-col x:gap-2">
         <h1 className="x:text-2xl x:font-bold">Release Notes</h1>
         <p className="x:text-sm x:text-muted-foreground">
@@ -51,14 +57,18 @@ export function ReleaseNotesPage() {
           const changelogQuery = changelogQueries[index];
           const isLoading = changelogQuery?.isLoading;
           const changelog = changelogQuery?.data;
+          const releaseDate = changelogListing?.[version];
 
           return (
             <div
               key={version}
-              className="x:mb-8 x:grid x:grid-cols-1 x:gap-4 x:last:mb-0 x:md:grid-cols-[6rem_1fr] x:md:gap-x-6"
+              className="x:relative x:mb-8 x:grid x:grid-cols-1 x:gap-4 x:last:mb-0 x:md:grid-cols-[8rem_1fr] x:md:gap-x-6"
             >
-              <div className="x:relative x:flex x:items-start x:md:justify-end">
-                <div className="x:sticky x:mb-2 x:w-max x:rounded-lg x:border x:border-border/50 x:bg-secondary x:px-2 x:py-1 x:text-left x:font-mono x:text-lg x:md:top-4">
+              <div className="x:sticky x:top-4 x:flex x:h-fit x:flex-col-reverse x:items-start x:gap-2 x:self-start x:md:flex-col x:md:items-end">
+                <div className="x:ml-2 x:text-right x:text-sm x:text-muted-foreground">
+                  {releaseDate}
+                </div>
+                <div className="x:mb-2 x:w-max x:rounded-lg x:border x:border-border/50 x:bg-secondary x:px-2 x:py-1 x:text-left x:font-mono x:text-lg">
                   {version}
                 </div>
               </div>

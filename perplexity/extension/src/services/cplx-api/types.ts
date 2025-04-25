@@ -46,3 +46,7 @@ export const FeatureCompatibilitySchema = z.record(
 );
 
 export type FeatureCompatibility = z.infer<typeof FeatureCompatibilitySchema>;
+
+export const ChangelogListingSchema = z.record(SemverSchema, z.string());
+
+export type ChangelogListing = z.infer<typeof ChangelogListingSchema>;

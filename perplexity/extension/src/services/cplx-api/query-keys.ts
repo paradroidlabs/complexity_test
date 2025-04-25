@@ -13,6 +13,14 @@ export const cplxApiQueries = {
         queryKey: [...cplxApiQueries.changelog.all(), params] as const,
         queryFn: () => CplxApiService.fetchChangelog(params),
       }),
+    listing: {
+      all: () => [...cplxApiQueries.changelog.all(), "listing"] as const,
+      detail: () =>
+        queryOptions({
+          queryKey: [...cplxApiQueries.changelog.listing.all()] as const,
+          queryFn: () => CplxApiService.fetchChangelogListing(),
+        }),
+    },
   },
 
   remoteResource: {

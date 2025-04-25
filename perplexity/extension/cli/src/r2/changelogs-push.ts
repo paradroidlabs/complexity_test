@@ -15,6 +15,42 @@ if (require.main === module) {
     process.exit(1);
   }
 
+  const listingFile = path.resolve(getRootPath(), "changelogs/listing.json");
+
+  if (!fs.existsSync(listingFile)) {
+    logger.warn(`File ${listingFile} does not exist, skipping listing update`);
+    process.exit(0);
+  }
+
+  const versions = JSON.parse(fs.readFileSync(listingFile, "utf8"));
+
+  const changelogFiles = fs.readdirSync(dir);
+  const changelogEntries = changelogFiles
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => file.replace(".md", ""))
+    .sort((a, b) => semver.compare(semver.coerce(b)!, semver.coerce(a)!));
+
+  changelogEntries.forEach((entry) => {
+    versions[entry] =
+      versions[entry] != null
+        ? versions[entry]
+        : new Date().toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+  });
+
+  const sortedVersions = Object.fromEntries(
+    Object.entries(versions).sort(([a], [b]) =>
+      semver.compare(semver.coerce(b)!, semver.coerce(a)!),
+    ),
+  );
+
+  fs.writeFileSync(listingFile, JSON.stringify(sortedVersions, null, 2));
+
+  logger.success(`Listing updated and sorted by semver`);
+
   await syncWithBucket({
     client: r2Client,
     bucketName: BUCKET_NAME,
@@ -25,28 +61,4 @@ if (require.main === module) {
     logger.error(`Unhandled error: ${error.message}`);
     process.exit(1);
   });
-
-  const versionsFile = path.resolve(
-    getRootPath(),
-    "cdn/resources/versions.json",
-  );
-
-  if (!fs.existsSync(versionsFile)) {
-    logger.warn(`File ${versionsFile} does not exist, skipping listing update`);
-    process.exit(0);
-  }
-
-  const versions = JSON.parse(fs.readFileSync(versionsFile, "utf8"));
-
-  const changelogFiles = fs.readdirSync(dir);
-  const changelogEntries = changelogFiles
-    .filter((file) => file.endsWith(".md"))
-    .map((file) => file.replace(".md", ""))
-    .sort((a, b) => semver.compare(semver.coerce(b)!, semver.coerce(a)!));
-
-  versions.changelogEntries = changelogEntries;
-
-  fs.writeFileSync(versionsFile, JSON.stringify(versions, null, 2));
-
-  logger.success(`Listing updated`);
 }

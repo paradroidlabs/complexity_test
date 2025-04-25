@@ -1,9 +1,12 @@
 import type { ZodSchema } from "zod";
 
 import { APP_CONFIG } from "@/app.config";
+import {
+  ChangelogListingSchema,
+  type ChangelogListing,
+} from "@/services/cplx-api/types";
 import { fetchResourceWithSchema, getUrl } from "@/services/cplx-api/utils";
 import { fetchTextResource } from "@/utils/utils";
-
 export class CplxApiService {
   static async fetchChangelog({ version }: { version?: string } = {}) {
     const targetVersion = version ?? APP_CONFIG.VERSION;
@@ -22,6 +25,18 @@ export class CplxApiService {
     }
 
     return resp.text();
+  }
+
+  static async fetchChangelogListing(): Promise<ChangelogListing> {
+    return ChangelogListingSchema.parse(
+      JSON.parse(
+        await fetchTextResource(
+          getUrl({
+            path: "/changelogs/listing.json",
+          }).toString(),
+        ),
+      ),
+    );
   }
 
   static async fetchRemoteResource<T>({
