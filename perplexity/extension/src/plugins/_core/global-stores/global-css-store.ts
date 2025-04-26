@@ -111,7 +111,7 @@ export function useIsEntryActive(entryId: keyof GlobalCssStoreRegistry) {
   }, deepEqual);
 }
 
-export function useRegisterGlobalCssEntry({
+export function useRegisteredGlobalCssEntry({
   entryIds,
   subscriberId,
   subscribe,

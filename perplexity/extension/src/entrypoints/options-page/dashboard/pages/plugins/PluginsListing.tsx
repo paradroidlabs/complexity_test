@@ -1,14 +1,13 @@
-import { useRoutes } from "react-router-dom";
+import { useCallback } from "react";
 
 import { Input } from "@/components/ui/input";
-import PluginSettingsWrapper from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsWrapper";
 import { PluginSections } from "@/entrypoints/options-page/dashboard/pages/plugins/components/PluginSections";
 import { TagsFilter } from "@/entrypoints/options-page/dashboard/pages/plugins/components/TagsFilter";
 import { useFilteredPlugins } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/useFilteredPlugins";
 import { usePluginCategories } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginCategories";
 import { usePluginFiltersStore } from "@/entrypoints/options-page/dashboard/pages/plugins/store";
 
-function PluginsListing() {
+export default function PluginsListing() {
   const filters = usePluginFiltersStore((state) => state.filters);
   const setFilters = usePluginFiltersStore((state) => state.setFilters);
 
@@ -56,17 +55,4 @@ function PluginsListing() {
       </div>
     </div>
   );
-}
-
-export default function PluginsPage() {
-  return useRoutes([
-    {
-      path: ":pluginId/*",
-      element: <PluginSettingsWrapper />,
-    },
-    {
-      path: "*",
-      element: <PluginsListing />,
-    },
-  ]);
 }

@@ -5,12 +5,12 @@ import { sendMessage } from "webext-bridge/content-script";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
+import { useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
   getCanvasTitle,
   isAutonomousCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
-import { useCanvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 import { UiUtils } from "@/utils/ui-utils";
 
 export default function MarkmapRenderer() {

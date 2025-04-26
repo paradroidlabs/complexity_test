@@ -1,5 +1,5 @@
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import { isAutonomousCanvasLanguageString } from "@/plugins/canvas/canvas.types";
+import { isAutonomousCanvasLanguageString } from "@/plugins/canvas/utils";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import BaseCodeBlockWrapper from "@/plugins/thread-better-code-blocks/variants/base/Wrapper";
 import CanvasPlaceholderWrapper from "@/plugins/thread-better-code-blocks/variants/canvas-placeholders/Wrapper";

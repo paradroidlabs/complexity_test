@@ -27,5 +27,6 @@ unimport.d.ts
 /coverage
 /dist
 /release
+/changelogs/listing.json
 
 cdn

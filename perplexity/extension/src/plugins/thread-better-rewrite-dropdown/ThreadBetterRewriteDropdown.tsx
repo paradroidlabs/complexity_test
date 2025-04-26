@@ -9,7 +9,7 @@ import {
   threadMessageBlocksDomObserverStore,
   useThreadMessageBlocksDomObserverStore,
 } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
-import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
+import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useThreadMessageContext } from "@/plugins/_core/ui/groups/thread-message-context";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
@@ -26,7 +26,7 @@ export function ThreadBetterRewriteDropdown() {
   const [highlightedItem, setHighlightedItem] =
     useState<LanguageModelCode | null>("claude2");
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["thread-message-toolbar-hide-native-rewrite-dropdowns"],
     subscriberId: "thread-better-rewrite-dropdown#" + messageBlockIndex,
   });

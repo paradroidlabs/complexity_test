@@ -10,9 +10,10 @@ import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.ty
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { PANEL_WIDTH } from "@/plugins/thread-toc/ThreadToc";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { whereAmI } from "@/utils/utils";
+
+export const PANEL_WIDTH = 230;
 
 type UsePanelPosition = {
   position: { top: number; left: number };

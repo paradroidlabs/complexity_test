@@ -4,11 +4,8 @@ import { sendMessage } from "webext-bridge/content-script";
 import Tooltip from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import {
-  formatCanvasTitle,
-  getCanvasTitle,
-} from "@/plugins/canvas/canvas.types";
 import { useCanvasStore } from "@/plugins/canvas/store";
+import { formatCanvasTitle, getCanvasTitle } from "@/plugins/canvas/utils";
 
 export default function DownloadAsInteractiveHtml() {
   const { selectedCodeBlockLocation } = useCanvasStore();

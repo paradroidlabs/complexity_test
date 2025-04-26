@@ -1,12 +1,32 @@
 import throttle from "lodash/throttle";
 import type { Markmap } from "markmap-view";
+import { onMessage } from "webext-bridge/window";
 
-import { setupMarkmapRendererListeners } from "@/plugins/_core/main-world/markmap-renderer/listeners";
 import { injectMainWorldScriptBlock } from "@/utils/utils";
 
 declare module "@/plugins/_core/main-world/types" {
   interface MainWorldCorePluginRegistry {
     markmapRenderer: void;
+  }
+}
+
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "markmapRenderer:isInitialized": () => boolean;
+    "markmapRenderer:render": (params: {
+      content: string;
+      selector: string;
+    }) => {
+      success: boolean;
+      error?: string;
+    };
+    "markmapRenderer:openAsInteractiveHtml": (params: {
+      content: string;
+    }) => void;
+    "markmapRenderer:downloadAsInteractiveHtml": (params: {
+      content: string;
+      title: string;
+    }) => void;
   }
 }
 
@@ -26,8 +46,41 @@ export class MarkmapRenderer {
     return MarkmapRenderer.instance;
   }
 
+  private static setupMarkmapRendererListeners() {
+    onMessage(
+      "markmapRenderer:isInitialized",
+      () => MarkmapRenderer.getInstance()?.isInitialized() ?? false,
+    );
+
+    onMessage("markmapRenderer:render", ({ data: { content, selector } }) => {
+      return MarkmapRenderer.getInstance().handleRenderRequest({
+        content,
+        selector,
+      });
+    });
+
+    onMessage(
+      "markmapRenderer:openAsInteractiveHtml",
+      ({ data: { content } }) => {
+        return MarkmapRenderer.openAsInteractiveHtml({
+          content,
+        });
+      },
+    );
+
+    onMessage(
+      "markmapRenderer:downloadAsInteractiveHtml",
+      ({ data: { content, title } }) => {
+        return MarkmapRenderer.downloadAsInteractiveHtml({
+          content,
+          title,
+        });
+      },
+    );
+  }
+
   initialize() {
-    setupMarkmapRendererListeners();
+    MarkmapRenderer.setupMarkmapRendererListeners();
     $(() => this.importMarkmap());
   }
 

@@ -1,9 +1,9 @@
 import { useThreadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
+import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import {
   isAutonomousCanvasLanguageString,
   isCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
-import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 
 export function useHandleCanvasState() {
   const selectedCodeBlockLocation = useCanvasStore(

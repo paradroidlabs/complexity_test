@@ -3,8 +3,10 @@ import { storage } from "@wxt-dev/storage";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import type { ExtensionData } from "@/data/dashboard/extension-data.types";
+import { queryClient } from "@/data/query-client";
 import ImportDataPasteDialogWrapper from "@/entrypoints/options-page/dashboard/pages/settings/components/ImportDataPasteDialogWrapper";
 import { transfromFlatSchema } from "@/services/extension-settings/migrations";
+import { extensionSettingsQueries } from "@/services/extension-settings/query-keys";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
 import { db } from "@/services/indexed-db";
 import { errorWrapper } from "@/utils/error-wrapper";
@@ -16,7 +18,7 @@ export default function ImportDataButtons() {
     const [, error] = await errorWrapper(async () => {
       const parsedData = JSON.parse(data) as ExtensionData;
 
-      if ("plugins" in parsedData.settings) {
+      if (parsedData.settings != null && "plugins" in parsedData.settings) {
         parsedData.settings = {
           settings: transfromFlatSchema(parsedData.settings),
           settings$: {
@@ -25,14 +27,26 @@ export default function ImportDataButtons() {
         };
       }
 
+      const settings =
+        "localStorage" in parsedData
+          ? (parsedData.localStorage as {
+              settings: ExtensionSettings;
+              settings$: { v: number };
+            })
+          : parsedData.settings;
+
       await storage.setItem<ExtensionSettings>(
         "local:settings",
-        parsedData.settings.settings,
+        settings.settings,
       );
       await storage.setMeta("local:settings", {
-        v: parsedData.settings["settings$"].v,
+        v: settings["settings$"].v,
       });
       db.import(parsedData.db);
+
+      queryClient.invalidateQueries({
+        queryKey: extensionSettingsQueries.all(),
+      });
     })();
 
     if (!error) {

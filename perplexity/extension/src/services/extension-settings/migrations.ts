@@ -17,8 +17,12 @@ export const migrations = {
     })();
 
     if (error) {
+      console.error("Error migrating v2 schema", error);
+
       return DEFAULT_EXTENSION_SETTINGS;
     }
+
+    console.log("v2 schema migrated");
 
     return result;
   },

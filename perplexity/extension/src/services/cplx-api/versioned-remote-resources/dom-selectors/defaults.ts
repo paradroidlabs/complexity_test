@@ -55,7 +55,7 @@ export const DOM_SELECTORS: DomSelectors = {
         ".gap-y-md.flex.flex-col > .flex.items-center.justify-between",
       BOTTOM_BAR_CHILD: {
         REWRITE_BUTTON: "button:has(svg.tabler-icon-repeat)",
-        COPY_BUTTON: 'button[aria-label="Copy"]',
+        COPY_BUTTON: "button[aria-label]:has(svg.tabler-icon-copy)",
         THUMBS_DOWN_BUTTON: "button:has(svg.tabler-icon-thumb-down)",
         MISC_BUTTON: "button:has(svg.tabler-icon-dots)",
       },
@@ -90,7 +90,7 @@ export const DOM_SELECTORS: DomSelectors = {
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:
-      'button[aria-label="Submit"], button:has(svg.tabler-icon-square)',
+      'button[aria-label="Submit"], button[aria-label="Dictation"], button:has(svg.tabler-icon-square)',
     FORK_BUTTON: 'button svg[data-icon="code-fork"]',
     /** The floating container that wraps the query box */
     WRAPPER: ".grow.block",

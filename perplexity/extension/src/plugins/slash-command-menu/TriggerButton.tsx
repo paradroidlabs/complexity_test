@@ -1,7 +1,7 @@
 import { LuSquareSlash } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";
-import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
+import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { UiUtils } from "@/utils/ui-utils";
 
@@ -10,7 +10,7 @@ export function TriggerButton() {
 
   const subscriberId = "slash-command-menu";
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["normalize-main-query-box"],
     subscriberId,
     subscribe: store.type === "main",

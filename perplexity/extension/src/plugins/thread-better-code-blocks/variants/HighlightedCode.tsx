@@ -3,7 +3,7 @@ import type { ReactNode, RefObject } from "react";
 
 import CodeHighlighter from "@/components/CodeHighlighter";
 import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
-import { getInterpretedCanvasLanguage } from "@/plugins/canvas/canvas.types";
+import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";

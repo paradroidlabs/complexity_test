@@ -1,3 +1,4 @@
-[data-cplx-component="message-block-bottom-bar"] button[aria-label="Copy"] {
+[data-cplx-component="message-block-bottom-bar"]
+  button[aria-label]:has(svg.tabler-icon-copy) {
   display: none;
 }

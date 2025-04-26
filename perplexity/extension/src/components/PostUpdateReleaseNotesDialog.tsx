@@ -44,7 +44,10 @@ export function PostUpdateReleaseNotesDialog() {
             {t("common:releaseNotes.title", { version: APP_CONFIG.VERSION })}
           </DialogTitle>
         </DialogHeader>
-        <ChangelogRenderer changelog={changelog} />
+        <ChangelogRenderer
+          changelog={changelog}
+          className="x:md:max-w-[900px]"
+        />
         <DialogFooter>
           <DontShowAgainForFutureUpdatesConfirmDialog
             onConfirm={() => {

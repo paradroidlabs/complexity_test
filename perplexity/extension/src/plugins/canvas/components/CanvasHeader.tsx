@@ -4,15 +4,15 @@ import Tooltip from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
+import PreviewToggle from "@/plugins/canvas/components/PreviewToggle";
+import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
   getCanvasTitle,
   getInterpretedCanvasLanguage,
   isAutonomousCanvasLanguageString,
   isCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
-import PreviewToggle from "@/plugins/canvas/components/PreviewToggle";
-import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { scrollToElement } from "@/utils/utils";
 

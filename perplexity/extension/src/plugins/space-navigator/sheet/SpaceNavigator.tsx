@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import type { IconType } from "react-icons";
 
 import PplxSpace from "@/components/icons/PplxSpace";
-import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
+import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import SpaceNavigatorMobileContentWrapper from "@/plugins/space-navigator/sheet/ContentWrapper";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
@@ -18,7 +18,7 @@ export function SpaceNavigator({ Icon = PplxSpace }: { Icon?: IconType }) {
     (space) => space.slug === spaceSlug || space.uuid === spaceSlug,
   )?.title;
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["normalize-main-query-box"],
     subscriberId: "space-navigator",
   });

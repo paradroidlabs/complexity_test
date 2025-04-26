@@ -31,7 +31,7 @@ async function processAllRemoteResourceFiles(): Promise<void> {
     listing = readResourceListing();
   } catch (error: any) {
     logger.error(`Failed to read resource listing: ${error.message}`);
-    process.exit(1); // Exit if we can't even read the listing
+    process.exit(1);
   }
 
   let updatedListing = { ...listing };
@@ -128,11 +128,11 @@ async function registerVersionedResource(params: {
     // If content hasn't changed, skip registration
     if (!contentChanged) {
       logger.info(
-        `Skipping resource ${chalk.yellow(
+        `Content unchanged for ${chalk.yellow(
           `["${resource.name}/${resourceFileName}"]`,
-        )} (content unchanged)`,
+        )}`,
       );
-      return listing; // Return the original listing unchanged
+      return listing;
     }
 
     // 2. Update listing object

@@ -2,8 +2,8 @@ import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import { getCanvasTitle } from "@/plugins/canvas/canvas.types";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+import { getCanvasTitle } from "@/plugins/canvas/utils";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { scrollToElement } from "@/utils/utils";
 

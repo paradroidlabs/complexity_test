@@ -2,8 +2,8 @@ import { fromUint8Array } from "js-base64";
 import type { MermaidConfig } from "mermaid";
 import pako from "pako";
 import svgPanZoom from "svg-pan-zoom";
+import { onMessage } from "webext-bridge/window";
 
-import { setupMermaidRendererListeners } from "@/plugins/_core/main-world/mermaid-renderer/listeners";
 import { UiUtils } from "@/utils/ui-utils";
 import { injectMainWorldScriptBlock } from "@/utils/utils";
 import packageJson from "~/package.json";
@@ -11,6 +11,17 @@ import packageJson from "~/package.json";
 declare module "@/plugins/_core/main-world/types" {
   interface MainWorldCorePluginRegistry {
     mermaidRenderer: void;
+  }
+}
+
+declare module "@/types/webext-bridge-overrides" {
+  interface EventHandlers {
+    "mermaidRenderer:isInitialized": () => boolean;
+    "mermaidRenderer:render": (params: { selector: string }) => {
+      success: boolean;
+      error?: string;
+    };
+    "mermaidRenderer:getPlaygroundUrl": (params: { code: string }) => string;
   }
 }
 
@@ -27,8 +38,23 @@ export class MermaidRenderer {
     return MermaidRenderer.instance;
   }
 
+  private static setupMermaidRendererListeners() {
+    onMessage(
+      "mermaidRenderer:isInitialized",
+      () => MermaidRenderer.getInstance()?.isInitialized() ?? false,
+    );
+
+    onMessage("mermaidRenderer:render", ({ data: { selector } }) => {
+      return MermaidRenderer.getInstance().handleRenderRequest(selector);
+    });
+
+    onMessage("mermaidRenderer:getPlaygroundUrl", ({ data: { code } }) => {
+      return MermaidRenderer.getInstance().handleGetPlaygroundUrlRequest(code);
+    });
+  }
+
   initialize() {
-    setupMermaidRendererListeners();
+    MermaidRenderer.setupMermaidRendererListeners();
     $(() => this.importMermaid());
   }
 

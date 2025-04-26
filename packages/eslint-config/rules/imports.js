@@ -9,6 +9,7 @@ export default tseslint.config({
     import: importPlugin,
     "@limegrass/import-alias": importAliasPlugin,
   },
+  ignores: ["**/node_modules/**"],
   settings: {
     "import/resolver": {
       typescript: {
@@ -16,10 +17,14 @@ export default tseslint.config({
         project: "./tsconfig.json",
       },
     },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"],
+    },
+    "import/ignore": ["node_modules", "\.json$"],
   },
   rules: {
     "import/no-unresolved": "error",
-    // "import/no-cycle": ["error", { maxDepth: 10, ignoreExternal: true }],
+    "import/no-cycle": ["error", { ignoreExternal: true }],
     "import/no-self-import": "error",
     "import/order": [
       "warn",

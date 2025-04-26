@@ -71,7 +71,7 @@ export function TagsFilter() {
         <PopoverTrigger asChild>
           <Button variant="ghost" className="x:py-2">
             <div className="x:flex x:items-center x:gap-2">
-              <span>Tags</span>
+              <span>Filter</span>
               {getActiveFiltersCount() > 0 && (
                 <div className="x:flex x:h-4 x:w-4 x:items-center x:justify-center x:rounded-full x:bg-primary/10 x:text-[10px] x:font-medium x:text-primary">
                   {getActiveFiltersCount()}

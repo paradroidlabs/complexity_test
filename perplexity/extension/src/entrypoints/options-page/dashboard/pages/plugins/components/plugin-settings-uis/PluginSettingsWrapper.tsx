@@ -7,7 +7,7 @@ import Page from "@/entrypoints/options-page/components/Page";
 import PluginSettingsModal from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsModal";
 import PluginSettingsPage from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsPage";
 import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
-import PluginsPage from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsPage";
+import PluginsListing from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsListing";
 import useClearLocationState from "@/hooks/useClearLocationState";
 
 export default function PluginSettingsWrapper() {
@@ -44,7 +44,7 @@ export default function PluginSettingsWrapper() {
     <>
       {isFromPluginList ? (
         <>
-          <PluginsPage />
+          <PluginsListing />
           <PluginSettingsModal pluginId={plugin.id} />
         </>
       ) : (

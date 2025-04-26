@@ -9,13 +9,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
+import styles from "@/plugins/canvas/components/renderer/sandpack.css?inline";
+import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
   getCanvasTitle,
   isAutonomousCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
-import styles from "@/plugins/canvas/components/renderer/sandpack.css?inline";
-import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 import { UiUtils } from "@/utils/ui-utils";
 
 export default memo(function ReactRenderer() {

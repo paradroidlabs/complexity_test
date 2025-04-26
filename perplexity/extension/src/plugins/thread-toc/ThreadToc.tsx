@@ -5,13 +5,14 @@ import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
 import TocItem from "@/plugins/thread-toc/TocItem";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
-import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
+import {
+  PANEL_WIDTH,
+  usePanelPosition,
+} from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { scrollToElement } from "@/utils/utils";
-
-export const PANEL_WIDTH = 230;
 
 export function ThreadToc() {
   const tocItems = useThreadTocItems();

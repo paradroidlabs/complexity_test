@@ -2,11 +2,11 @@ import { LuPlay } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";
 import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
+import { canvasStore } from "@/plugins/canvas/store";
 import {
   isAutonomousCanvasLanguageString,
   isCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
-import { canvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 
 export default function CanvasSimpleModeRenderButton() {

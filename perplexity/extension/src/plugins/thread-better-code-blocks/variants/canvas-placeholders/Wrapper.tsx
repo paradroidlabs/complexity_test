@@ -1,13 +1,13 @@
 import { LuLoaderCircle } from "react-icons/lu";
 
 import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
+import { CANVAS_PLACEHOLDERS } from "@/plugins/canvas/canvases";
+import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
   getCanvasTitle,
   getInterpretedCanvasLanguage,
-} from "@/plugins/canvas/canvas.types";
-import { CANVAS_PLACEHOLDERS } from "@/plugins/canvas/canvases";
-import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+} from "@/plugins/canvas/utils";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 
 const CanvasPlaceholderWrapper = memo(function CanvasPlaceholderWrapper() {

@@ -3,7 +3,7 @@ import { createListCollection } from "@ark-ui/react";
 import { Select, SelectContext, SelectTrigger } from "@/components/ui/select";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useInsertCss } from "@/hooks/useInsertCss";
-import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
+import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
@@ -109,13 +109,13 @@ function useRegisterGlobalCss() {
 
   const subscriberId = "language-model-selector";
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["normalize-main-query-box"],
     subscriberId,
     subscribe: store.type === "main",
   });
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["normalize-follow-up-query-box"],
     subscriberId,
     subscribe: store.type === "follow-up",

@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useCopyPplxThread } from "@/hooks/useCopyPplxThread";
 import useToggleButtonText from "@/hooks/useToggleButtonText";
-import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
+import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 
 type CopyButtonProps = {
   messageBlockIndex: number;
@@ -42,7 +42,7 @@ const CopyButton = memo(function CopyButton({
     [copyMessage, isFetching, messageBlockIndex, setTriggerIcon],
   );
 
-  useRegisterGlobalCssEntry({
+  useRegisteredGlobalCssEntry({
     entryIds: ["thread-message-toolbar-hide-native-copy-buttons"],
     subscriberId: "thread-better-message-copy-button#" + messageBlockIndex,
   });

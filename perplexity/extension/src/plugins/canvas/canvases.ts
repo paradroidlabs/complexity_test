@@ -20,43 +20,11 @@ import MermaidRenderer from "@/plugins/canvas/components/renderer/Mermaid";
 import PlantUmlRenderer from "@/plugins/canvas/components/renderer/PlantUml";
 import ReactRenderer from "@/plugins/canvas/components/renderer/React";
 
-export const CANVAS_LANGUAGES = {
-  markdown: "markdown",
-  mermaid: "mermaid",
-  markmap: "markmap",
-  html: "html",
-  react: "react",
-  plantuml: "plantuml",
-} as const satisfies Partial<Record<string, string>>;
+export let CANVAS_LANGUAGE_PREVIEW_TOGGLE_TEXT: Record<CanvasLanguage, string> =
+  {} as Record<CanvasLanguage, string>;
 
-export const CANVAS_INTERPRETED_LANGUAGES: Record<string, CanvasLanguage> = {
-  svg: "html",
-  md: "markdown",
-  mmd: "mermaid",
-  plantuml: "plantuml",
-  markmap: "markmap",
-};
-
-export const CANVAS_LANGUAGE_PREVIEW_TOGGLE_TEXT: Record<
-  CanvasLanguage,
-  string
-> = {
-  markdown: t("plugin-canvas:canvas.toggle.preview"),
-  mermaid: t("plugin-canvas:canvas.toggle.preview"),
-  html: t("plugin-canvas:canvas.toggle.preview"),
-  react: t("plugin-canvas:canvas.toggle.preview"),
-  plantuml: t("plugin-canvas:canvas.toggle.preview"),
-  markmap: t("plugin-canvas:canvas.toggle.preview"),
-};
-
-export const CANVAS_LANGUAGE_RAW_TOGGLE_TEXT: Record<CanvasLanguage, string> = {
-  markdown: t("plugin-canvas:canvas.toggle.markdown.raw"),
-  mermaid: t("plugin-canvas:canvas.toggle.code"),
-  html: t("plugin-canvas:canvas.toggle.code"),
-  react: t("plugin-canvas:canvas.toggle.code"),
-  plantuml: t("plugin-canvas:canvas.toggle.code"),
-  markmap: t("plugin-canvas:canvas.toggle.code"),
-};
+export let CANVAS_LANGUAGE_RAW_TOGGLE_TEXT: Record<CanvasLanguage, string> =
+  {} as Record<CanvasLanguage, string>;
 
 export const CANVAS_INITIAL_STATE: Record<CanvasLanguage, CanvasState> = {
   markdown: "preview",
@@ -88,6 +56,24 @@ asyncLoaderRegistry.register({
   id: "plugin:thread:canvas:codeBlockPlaceholdersData",
   dependencies: ["lib:i18next"],
   loader: () => {
+    CANVAS_LANGUAGE_PREVIEW_TOGGLE_TEXT = {
+      markdown: t("plugin-canvas:canvas.toggle.preview"),
+      mermaid: t("plugin-canvas:canvas.toggle.preview"),
+      html: t("plugin-canvas:canvas.toggle.preview"),
+      react: t("plugin-canvas:canvas.toggle.preview"),
+      plantuml: t("plugin-canvas:canvas.toggle.preview"),
+      markmap: t("plugin-canvas:canvas.toggle.preview"),
+    };
+
+    CANVAS_LANGUAGE_RAW_TOGGLE_TEXT = {
+      markdown: t("plugin-canvas:canvas.toggle.markdown.raw"),
+      mermaid: t("plugin-canvas:canvas.toggle.code"),
+      html: t("plugin-canvas:canvas.toggle.code"),
+      react: t("plugin-canvas:canvas.toggle.code"),
+      plantuml: t("plugin-canvas:canvas.toggle.code"),
+      markmap: t("plugin-canvas:canvas.toggle.code"),
+    };
+
     CANVAS_PLACEHOLDERS = {
       markdown: {
         icon: PiArticleDuotone,

@@ -96,7 +96,12 @@ export class ExtensionSettingsService {
   public static async set(
     updater: (draft: ExtensionSettings) => void,
   ): Promise<ExtensionSettings> {
-    const newSettings = produce(await ExtensionSettingsService.get(), updater);
+    const newSettings = produce(
+      await (isInContentScript()
+        ? ExtensionSettingsService.getWithoutCacheInvalidation()
+        : ExtensionSettingsService.get()),
+      updater,
+    );
 
     await ExtensionSettingsService.instance.setValue(newSettings);
 

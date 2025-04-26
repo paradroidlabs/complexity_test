@@ -7,7 +7,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import Page from "@/entrypoints/options-page/components/Page";
 import ErrorPage from "@/entrypoints/options-page/dashboard/pages/ErrorPage";
 import NotFoundPage from "@/entrypoints/options-page/dashboard/pages/NotFoundPage";
-import PluginsPage from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsPage";
+import { PluginRoutes } from "@/entrypoints/options-page/dashboard/pages/plugins/routes";
 import { ThemesPageRoutes } from "@/entrypoints/options-page/dashboard/pages/themes/routes";
 
 const { Playground } = lazily(
@@ -54,7 +54,7 @@ export const router: ReturnType<typeof createHashRouter> = createHashRouter([
         children: [
           {
             path: "plugins/*",
-            element: <Page title="Plugins" page={PluginsPage} />,
+            element: <Page title="Plugins" page={PluginRoutes} />,
           },
           {
             path: "themes/*",

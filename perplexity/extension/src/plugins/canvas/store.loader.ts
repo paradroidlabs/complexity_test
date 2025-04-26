@@ -6,18 +6,18 @@ import {
   spaRouterStoreSubscribe,
 } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
-import {
-  formatCanvasTitle,
-  getCanvasTitle,
-  getInterpretedCanvasLanguage,
-  isAutonomousCanvasLanguageString,
-} from "@/plugins/canvas/canvas.types";
 import { CANVAS_PLACEHOLDERS } from "@/plugins/canvas/canvases";
 import {
   canvasStore,
   type CanvasBlock,
   type CodeBlockLocation,
 } from "@/plugins/canvas/store";
+import {
+  formatCanvasTitle,
+  getCanvasTitle,
+  getInterpretedCanvasLanguage,
+  isAutonomousCanvasLanguageString,
+} from "@/plugins/canvas/utils";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { parseUrl, scrollToElement, whereAmI } from "@/utils/utils";
 
