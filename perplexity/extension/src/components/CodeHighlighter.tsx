@@ -12,6 +12,7 @@ const INTERPRETED_LANGUAGES: Record<string, string> = {
   "c++": "cpp",
   js: "javascript",
   ts: "typescript",
+  toml: "ini",
 };
 
 const CodeHighlighter = memo(function CodeHighlighter({
