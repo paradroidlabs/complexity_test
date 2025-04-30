@@ -1,5 +1,5 @@
 import { createListCollection } from "@ark-ui/react";
-import { LuCpu as Cpu, LuImage as Image } from "react-icons/lu";
+import { LuCpu as Cpu, LuImage as Image, LuCpu } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";
 import { Portal } from "@/components/ui/portal";
@@ -67,9 +67,6 @@ export function ImageGenModelSelector() {
                   )?.shortLabel
                 }
               </SelectValue>
-              <span className="x:self-start x:text-[.5rem] x:text-primary">
-                {limit}
-              </span>
             </div>
           </SelectTrigger>
         </Tooltip>
@@ -80,9 +77,7 @@ export function ImageGenModelSelector() {
           )}
         >
           {PplxImageModelsService.allModels.map((model) => {
-            const Icon = PplxImageModelsService.icons[model.code];
-
-            if (Icon == null) return null;
+            const Icon = PplxImageModelsService.icons[model.code] ?? LuCpu;
 
             return (
               <Tooltip

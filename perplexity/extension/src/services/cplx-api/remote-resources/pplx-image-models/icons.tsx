@@ -1,12 +1,13 @@
-import { AiOutlineOpenAI } from "react-icons/ai";
+import { FaShuffle } from "react-icons/fa6";
 import { SiGooglegemini, SiOpenai } from "react-icons/si";
 
 import BlackForestLabs from "@/components/icons/BlackForestLabsIcon";
 import type { ImageModel } from "@/services/cplx-api/remote-resources/pplx-image-models/types";
 
 export const imageModelIcons: Record<ImageModel["code"], React.ElementType> = {
-  default: SiOpenai,
+  default: FaShuffle,
+  "gpt-4o-image": SiOpenai,
   flux: BlackForestLabs,
-  "dall-e-3": AiOutlineOpenAI,
+  "dall-e-3": SiOpenai,
   "gemini-flash": SiGooglegemini,
 };

@@ -1,36 +1,47 @@
 ---
 description: 
-globs: src/**/*
+globs: *.ts,*.tsx
 alwaysApply: false
 ---
-## Auto-Import Reference
+# AUTO-IMPORTS
 
-This document provides a comprehensive list of automatically imported dependencies, configured in `src/types/unimport.config.ts`.
+## CRITICAL: NEVER ADD EXPLICIT IMPORTS FOR THESE DEPENDENCIES
 
-GUIDANCE: When referencing or utilizing the following modules and functions, do **NOT** include explicit import statements. These are globally available due to the auto-import configuration.
+This project uses automatic imports via unimport. The following dependencies are AUTOMATICALLY AVAILABLE in all files without explicit imports.
 
-### List of Auto-Imports
+### React Core
+- `useState`, `useEffect`, `useRef`, `useMemo`, `useCallback`, `useLayoutEffect`
+- `useContext`, `useReducer`, `useImperativeHandle`, `useDebugValue`, `useId`
+- `lazy`, `use`, `createContext`, `useDeferredValue`, `memo`
 
-| Module/Function      | Source                    |
-| -------------------- | ------------------------- |
-| `useState`           | `react`                   |
-| `useEffect`          | `react`                   |
-| `useRef`             | `react`                   |
-| `useCallback`        | `react`                   |
-| `useMemo`            | `react`                   |
-| `lazy`               | `react`                   |
-| `use`                | `react`                   |
-| `createContext`      | `react`                   |
-| `useDeferredValue`   | `react`                   |
-| `memo`               | `react`                   |
-| `onlyMainWorldGuard` | `src/utils/js-context.ts` |
-| `onlyExtensionGuard` | `src/utils/js-context.ts` |
-| `sleep`              | `src/utils/utils.ts`      |
-| `isMainWorldContext` | `src/utils/utils.ts`      |
-| `isExtensionContext` | `src/utils/utils.ts`      |
-| `cn`                 | `src/utils/cn.ts`         |
-| `i18n`               | `src/utils/i18next.ts`    |
-| `t`                  | `src/utils/i18next.ts`    |
-| `deepEqual`          | `src/utils/deep-equal.ts` |
-| `$` (default)        | `jquery`                  |
-| `Key`                | `ts-key-enum`             |
+### Utility Functions
+- From `src/utils/js-context-guards.ts`: 
+  - `onlyMainWorldGuard`
+  - `onlyExtensionGuard`
+  
+- From `src/utils/utils.ts`: 
+  - `sleep`
+  - `isMainWorldContext`
+  - `isExtensionContext`
+  
+- From `src/data/i18next.ts`: 
+  - `t`
+  - `i18n`
+  
+- From `src/utils/deep-equal.ts`: 
+  - `deepEqual`
+  
+- From `src/utils/cn.ts`: 
+  - `cn`
+
+### External Libraries
+- From jquery: `$` (default import)
+- From ts-key-enum: `Key`
+
+## IMPORTANT REMINDER
+- DO NOT add import statements for any of the above items
+- Treat these imports as already present in the global scope
+
+
+
+

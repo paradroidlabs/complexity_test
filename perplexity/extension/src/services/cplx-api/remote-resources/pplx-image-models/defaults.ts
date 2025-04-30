@@ -1,8 +1,13 @@
 export const pplxLocalImageModels = [
   {
+    label: "Auto",
+    shortLabel: "Auto",
+    code: "default",
+  },
+  {
     label: "GPT-4o",
     shortLabel: "GPT-4o",
-    code: "default",
+    code: "gpt-4o-image",
   },
   {
     label: "FLUX.1",

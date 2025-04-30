@@ -8,7 +8,7 @@ import { errorWrapper } from "@/utils/error-wrapper";
 export async function getRemoteResource<T>(
   resourceConfig: RemoteResource<T>,
 ): Promise<T> {
-  if (APP_CONFIG.IS_DEV) return resourceConfig.fallback;
+  // if (APP_CONFIG.IS_DEV) return resourceConfig.fallback;
 
   if (APP_CONFIG.CPLX_CDN_URL == null) return resourceConfig.fallback;
 

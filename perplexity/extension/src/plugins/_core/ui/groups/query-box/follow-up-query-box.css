@@ -1,51 +1,23 @@
 @reference "../../../../../assets/index.css";
 
 [cplx-follow-up-query-box] {
-  /* Enlarge the query box (tall mode) */
-  @apply x:rounded-2xl;
-
-  > div {
-    @apply x:rounded-2xl;
-
-    > div {
-      @apply x:rounded-2xl x:p-2.5 x:py-3;
-
-      > div {
-        display: grid !important;
-        grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-        grid-template-rows: 1fr auto !important;
-
-        > div:nth-child(1) {
-          order: 0;
-          grid-column: span 3 / span 3;
-          grid-column-start: 1;
-
-          @apply x:p-2 x:pt-0;
-        }
-
-        > div:nth-child(2) {
-          grid-column: span 2 / span 2;
-          grid-column-start: 1;
-          align-items: center;
-          order: 1;
-
-          &.-ml-1 {
-            margin-left: unset;
-          }
-        }
-
-        > div:nth-child(3) {
-          grid-column: span 1 / span 1;
-
-          &.-mr-1 {
-            margin-right: unset;
-          }
-        }
-      }
-    }
+  & > div > div {
+    @apply x:py-3;
   }
 
-  [data-cplx-component="query-box-components-wrapper"] > div:nth-child(3) {
-    max-height: max-content;
+  [data-cplx-component="query-box-components-wrapper"] {
+    @apply x:grid x:grid-cols-3 x:grid-rows-[1fr_auto] x:px-4;
+
+    > div:nth-child(1) {
+      @apply x:col-start-1 x:col-end-4 x:p-0 x:pb-2;
+    }
+
+    > div:nth-child(2) {
+      @apply x:col-start-1 x:row-start-2 x:-ml-1;
+    }
+
+    > div:nth-child(3) {
+      @apply x:col-start-3 x:row-start-2 x:-mr-1;
+    }
   }
 }
