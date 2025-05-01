@@ -2,12 +2,11 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
+import type { PplxSidebarV2Tab } from "@/plugins/_core/dom-observers/sidebar/types";
+
 type SidebarDomObserverStoreType = {
   $wrapper: JQuery<HTMLElement> | null;
-  $spaceButtonWrapper: JQuery<HTMLElement> | null;
-  $spaceButtonTriggerButtonsWrapper: JQuery<HTMLElement> | null;
-  $libraryButtonWrapper: JQuery<HTMLElement> | null;
-  $libraryButtonTriggerButtonsWrapper: JQuery<HTMLElement> | null;
+  activePplxSidebarV2Tab: PplxSidebarV2Tab | null;
   resetStore: () => void;
 };
 
@@ -17,15 +16,11 @@ export const sidebarDomObserverStore =
       immer(
         (set): SidebarDomObserverStoreType => ({
           $wrapper: null,
-          $spaceButtonWrapper: null,
-          $spaceButtonTriggerButtonsWrapper: null,
-          $libraryButtonWrapper: null,
-          $libraryButtonTriggerButtonsWrapper: null,
+          activePplxSidebarV2Tab: null,
           resetStore: () => {
             set({
               $wrapper: null,
-              $spaceButtonWrapper: null,
-              $libraryButtonWrapper: null,
+              activePplxSidebarV2Tab: null,
             });
           },
         }),

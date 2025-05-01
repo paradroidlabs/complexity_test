@@ -6,24 +6,22 @@ import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resource
 
 export const DOM_SELECTORS: DomSelectors = {
   SIDEBAR: {
-    WRAPPER: ".group\\/bar",
-    SPACE_BUTTON: "a[role='button'][aria-label][href='/spaces']",
-    SPACE_BUTTON_WRAPPER: `.relative.justify-center.w-full:has(>div>a[role='button'][aria-label][href='/spaces'])`,
-    SPACE_BUTTON_WRAPPER_CHILD: {
-      TRIGGER_BUTTONS_PORTAL_CONTAINER:
-        ".flex.items-center.min-w-0.justify-left.w-full",
-    },
-    LIBRARY_BUTTON: "a[role='button'][aria-label][href='/library']",
-    LIBRARY_BUTTON_WRAPPER: `.relative.justify-center.w-full:has(>div>a[role='button'][aria-label][href='/library'])`,
-    LIBRARY_BUTTON_WRAPPER_CHILD: {
-      TRIGGER_BUTTONS_PORTAL_CONTAINER:
-        ".flex.items-center.min-w-0.justify-left.w-full .-mr-sm.flex.w-full.flex-1.justify-end",
+    WRAPPER: ".h-\\[100dvh\\] > .z-10:first-child",
+    TAB: {
+      CONTENT: {
+        WRAPPER: ">:first-child",
+        WRAPPER_COLLAPSED: ".-translate-x-1\\/3.opacity-0",
+      },
+      ANCHOR: {
+        HOME: ".group\\/header > a[href='/library']",
+        SPACES: ".group\\/history + a[href='/spaces']",
+      },
     },
   },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
     NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
-    PAGE_WRAPPER: ".overflow-auto.\\[scrollbar-gutter\\:stable\\]",
+    PAGE_WRAPPER: ".h-\\[100dvh\\] > .max-h-screen",
     WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
     /** The container that wraps all messages */
     CONTAINER: {

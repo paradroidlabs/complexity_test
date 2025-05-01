@@ -5,7 +5,6 @@ import { createToolbarPortalContainers } from "@/plugins/_core/ui/groups/query-b
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
 import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
-import SpaceNavigatorWrapper from "@/plugins/space-navigator/sheet/Wrapper";
 
 export default function MainQueryBoxWrapper() {
   const mainQueryBox = queryBoxesDomObserverStore(
@@ -27,7 +26,6 @@ export default function MainQueryBoxWrapper() {
       <Portal container={leftToolbar.rightContainer}>
         <div className="x:flex x:size-full x:flex-wrap x:items-center">
           <SlashCommandMenuTriggerButtonWrapper />
-          <SpaceNavigatorWrapper />
         </div>
         <SlashCommandMenuWrapper anchor={mainQueryBox} />
       </Portal>

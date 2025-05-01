@@ -20,7 +20,7 @@ export default definePlugin({
     title: "Custom Home Slogan",
     description: "Customize the slogan on the homepage",
     categories: ["misc"],
-    tags: ["ui", "forFun"],
+    tags: ["ui"],
     dependentDomObservers: ["home"],
     dependentMainWorldCorePlugins: ["spaRouter"],
   },

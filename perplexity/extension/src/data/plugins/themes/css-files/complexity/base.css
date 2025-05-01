@@ -28,10 +28,6 @@ body#__next {
 
   font-variant-ligatures: none;
 
-  a[aria-label="Perplexity"] svg path {
-    stroke: var(--primary);
-  }
-
   [data-cplx-component]::selection {
     color: var(--primary);
     background-color: oklch(var(--teal-200) / 0.1);

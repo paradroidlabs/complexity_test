@@ -33,7 +33,13 @@ async function setupCustomSlogan({
 
   $slogan.attr(DomSelectorsService.internalAttributes.HOME.SLOGAN, "true");
 
-  $slogan.find("span:first").text(sloganText);
+  const $sloganContent = $("<span>").html(sloganText);
+
+  $sloganContent.addClass("x:text-balance x:text-4xl x:animate-in x:fade-in-0");
+
+  $slogan.html("");
+
+  $slogan.append($sloganContent);
 }
 
 declare module "@/plugins/_core/async-dep-registry" {

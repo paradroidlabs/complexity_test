@@ -3,15 +3,15 @@ import { z } from "zod";
 export const DomSelectorsSchema = z.object({
   SIDEBAR: z.object({
     WRAPPER: z.string(),
-    SPACE_BUTTON: z.string(),
-    SPACE_BUTTON_WRAPPER: z.string(),
-    SPACE_BUTTON_WRAPPER_CHILD: z.object({
-      TRIGGER_BUTTONS_PORTAL_CONTAINER: z.string(),
-    }),
-    LIBRARY_BUTTON: z.string(),
-    LIBRARY_BUTTON_WRAPPER: z.string(),
-    LIBRARY_BUTTON_WRAPPER_CHILD: z.object({
-      TRIGGER_BUTTONS_PORTAL_CONTAINER: z.string(),
+    TAB: z.object({
+      CONTENT: z.object({
+        WRAPPER: z.string(),
+        WRAPPER_COLLAPSED: z.string(),
+      }),
+      ANCHOR: z.object({
+        HOME: z.string(),
+        SPACES: z.string(),
+      }),
     }),
   }),
   THREAD: z.object({

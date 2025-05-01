@@ -1,19 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { escapeHtmlTags, isValidVersionString, whereAmI } from "@/utils/utils";
-
-describe("isValidVersionString", () => {
-  it("should return true for valid version strings", () => {
-    expect(isValidVersionString("1.0.0")).toBe(true);
-    expect(isValidVersionString("0.0.0.1")).toBe(true);
-  });
-
-  it("should return false for invalid version strings", () => {
-    expect(isValidVersionString("1")).toBe(false);
-    expect(isValidVersionString("0.1.")).toBe(false);
-    expect(isValidVersionString("1.0.0a")).toBe(false);
-  });
-});
+import { escapeHtmlTags, whereAmI } from "@/utils/utils";
 
 describe("whereAmI", () => {
   it('should return "collection" for collection URLs', () => {

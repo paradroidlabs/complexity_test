@@ -6,11 +6,8 @@ import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import {
-  findLibraryButtonTriggerButtonsWrapper,
-  findLibraryButtonWrapper,
+  findActiveSidebarContentTab,
   findSidebarWrapper,
-  findSpaceButtonTriggerButtonsWrapper,
-  findSpaceButtonWrapper,
 } from "@/plugins/_core/dom-observers/sidebar/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 
@@ -54,20 +51,8 @@ async function observeSidebar() {
           id: createTaskId("sidebar", "wrapper"),
         },
         {
-          callback: findSpaceButtonWrapper,
-          id: createTaskId("sidebar", "spaceButtonWrapper"),
-        },
-        {
-          callback: findSpaceButtonTriggerButtonsWrapper,
-          id: createTaskId("sidebar", "spaceButtonTriggerButtonsWrapper"),
-        },
-        {
-          callback: findLibraryButtonWrapper,
-          id: createTaskId("sidebar", "libraryButtonWrapper"),
-        },
-        {
-          callback: findLibraryButtonTriggerButtonsWrapper,
-          id: createTaskId("sidebar", "libraryButtonTriggerButtonsWrapper"),
+          callback: findActiveSidebarContentTab,
+          id: createTaskId("sidebar", "activeTab"),
         },
       ]),
   });

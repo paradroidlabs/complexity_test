@@ -10,7 +10,6 @@ import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.ty
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { whereAmI } from "@/utils/utils";
 
 export const PANEL_WIDTH = 230;
@@ -74,17 +73,21 @@ export function usePanelPosition(): UsePanelPosition | null {
       threadContentWrapperOffset.left +
       threadContentWrapperWidth +
       PANEL_WIDTH +
-      32 +
       32;
 
     return {
       position: {
         top: navbarHeight + 40,
-        left: threadContentWrapperWidth + threadContentWrapperOffset.left + 32,
+        left: threadContentWrapperWidth + threadContentWrapperOffset.left,
       },
       isOverflowing: panelRightEdge > window.innerWidth,
     };
   }, [threadContentWrapper, threadWrapper]);
+
+  const pageWrapper = useThreadDomObserverStore(
+    (store) => store.$pageWrapper?.[0],
+    deepEqual,
+  );
 
   useEffect(() => {
     if (whereAmI(url) !== "thread") {
@@ -100,15 +103,13 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     debouncedUpdate();
 
-    const $sidebarWrapper = $(DomSelectorsService.cachedSync.SIDEBAR.WRAPPER);
-
-    if (!$sidebarWrapper[0]) return;
+    if (pageWrapper == null) return;
 
     DomObserver.create(createDomObserverId("thread", "tocSidebarObserver"), {
-      target: $sidebarWrapper[0],
+      target: pageWrapper,
       config: {
         attributes: true,
-        attributeFilter: ["class"],
+        attributeFilter: ["style"],
       },
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
@@ -121,7 +122,7 @@ export function usePanelPosition(): UsePanelPosition | null {
       debouncedUpdate.cancel();
       DomObserver.destroy(createDomObserverId("thread", "tocSidebarObserver"));
     };
-  }, [calculatePosition, windowSize, url]);
+  }, [calculatePosition, windowSize, url, pageWrapper]);
 
   return panelPosition;
 }

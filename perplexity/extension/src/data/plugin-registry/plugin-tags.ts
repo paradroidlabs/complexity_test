@@ -53,10 +53,6 @@ export const PLUGIN_TAGS = {
     label: "Beta",
     description: "Official plugins but still in testing/development",
   },
-  forFun: {
-    label: "For Fun",
-    description: "Just for fun!",
-  },
   new: {
     label: "New",
     description: "Recently added plugins",

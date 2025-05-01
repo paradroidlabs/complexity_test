@@ -8,7 +8,6 @@ export const ESSENTIALS_ONLY: ExtensionSettings["plugins"] = produce(
   PluginRegistry.fallbackValues,
   (draft) => {
     draft["queryBox:languageModelSelector"].enabled = true;
-    draft["spaceNavigator"].enabled = true;
     draft["thread:toc"].enabled = true;
     draft["thread:exportThread"].enabled = true;
     draft["thread:betterMessageCopyButtons"].enabled = true;
@@ -20,7 +19,6 @@ export const POWER_USER: ExtensionSettings["plugins"] = produce(
   PluginRegistry.fallbackValues,
   (draft) => {
     draft["queryBox:languageModelSelector"].enabled = true;
-    draft["spaceNavigator"].enabled = true;
     draft["queryBox:slashCommandMenu"].enabled = true;
     draft["queryBox:slashCommandMenu:promptHistory"].enabled = true;
     draft["queryBox:rawTextPaste"].enabled = true;

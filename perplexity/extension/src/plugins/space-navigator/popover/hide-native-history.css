@@ -1,6 +1,0 @@
-[data-cplx-component="sidebar-space-button-wrapper"]:has(
-    > [data-cplx-component="pinned-spaces"]:not(:empty)
-  )
-  .group\/history {
-  display: none;
-}

@@ -1,14 +1,3 @@
-@reference "../../assets/index.css";
-
-.mb-lg.md\:absolute.text-center {
-  text-align: center;
-  text-wrap: balance;
-
-  &:not([home-slogan]) span {
-    display: none;
-  }
-
-  span {
-    @apply x:animate-in x:fade-in-0;
-  }
+.mb-lg.md\:absolute.text-center:not([home-slogan]) {
+  display: none;
 }

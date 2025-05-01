@@ -2,22 +2,16 @@
 
 body[data-cplx-zen-mode="true"] {
   /* Sidebar */
-  .h-\[100dvh\] > div[data-testid="sidebar"] {
+  .h-\[100dvh\] > .z-10:first-child {
     display: none;
     & + div {
-      @apply x:pl-2;
+      @apply x:pl-2!;
     }
   }
 
   &[location="home"] {
     .hidden.pb-md.md\:block {
       display: none !important;
-    }
-
-    .relative.w-full:has(
-        > .absolute.w-full > .mt-lg > .gap-sm.grid.grid-cols-6
-      ) {
-      display: none;
     }
   }
 

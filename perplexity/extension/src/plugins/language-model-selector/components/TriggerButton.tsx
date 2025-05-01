@@ -3,7 +3,6 @@ import { LuCpu } from "react-icons/lu";
 
 import FaAtom from "@/components/icons/FaAtom";
 import Tooltip from "@/components/Tooltip";
-import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import { isDeepResearchLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
@@ -12,10 +11,6 @@ export default function BetterLanguageModelSelectorTriggerButton() {
   const selectedLanguageModel = useSharedQueryBoxStore(
     (state) => state.selectedLanguageModel,
   );
-
-  const {
-    store: { type },
-  } = useScopedQueryBoxContext();
 
   const isDeepResearchModel = useMemo(
     () => isDeepResearchLanguageModelCode(selectedLanguageModel),
@@ -55,13 +50,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
         )}
       >
         <Icon className="x:size-4 x:shrink-0" />
-        <span
-          className={cn("x:truncate", {
-            "x:hidden x:md:block": type === "space",
-          })}
-        >
-          {modelInfo?.shortLabel}
-        </span>
+        <span className="x:truncate">{modelInfo?.shortLabel}</span>
       </div>
     </Tooltip>
   );

@@ -1,3 +1,5 @@
+import { MatchPattern } from "@webext-core/match-patterns";
+
 export const jsonUtils = {
   safeParse(json: string) {
     try {
@@ -12,10 +14,6 @@ export const jsonUtils = {
       .replace(/\\\\/g, "\\"); // Backslash
   },
 };
-
-export function isValidVersionString(version: string) {
-  return /^\d+(\.\d+){1,}$/.test(version);
-}
 
 export async function waitForHydration() {
   await Promise.all([
@@ -186,44 +184,60 @@ export function parseUrl(url: string = window.location.href): ParsedUrl {
   return parsedUrl;
 }
 
-export function whereAmI(providedUrl?: string) {
-  if (!providedUrl && typeof window === "undefined") {
-    return "unknown";
-  }
+export const whereAmI = (() => {
+  const hostname =
+    typeof window === "undefined"
+      ? "www.perplexity.ai"
+      : window.location.hostname;
 
-  const url = parseUrl(providedUrl || window.location.href);
+  const pplxHostname = "www.perplexity.ai";
 
-  const hostname = url.hostname;
-  const pathname = url.pathname;
+  const patternMap = {
+    home: [new MatchPattern(`https://${pplxHostname}/`)],
+    discover: [new MatchPattern(`https://${pplxHostname}/discover*`)],
+    collections_page: [
+      new MatchPattern(`https://${pplxHostname}/spaces`),
+      new MatchPattern(`https://${pplxHostname}/spaces/`),
+      new MatchPattern(`https://${pplxHostname}/collections`),
+      new MatchPattern(`https://${pplxHostname}/collections/`),
+    ],
+    collection: [
+      new MatchPattern(`https://${pplxHostname}/spaces/*`),
+      new MatchPattern(`https://${pplxHostname}/collections/*`),
+    ],
+    library: [new MatchPattern(`https://${pplxHostname}/library*`)],
+    thread: [new MatchPattern(`https://${pplxHostname}/search/*`)],
+    page: [new MatchPattern(`https://${pplxHostname}/page/*`)],
+    settings: [new MatchPattern(`https://${pplxHostname}/account*`)],
+    same_origin: [new MatchPattern(`https://${pplxHostname}/*`)],
+  };
 
-  if (hostname === "www.perplexity.ai") {
-    switch (true) {
-      case pathname.startsWith("/discover"):
-        return "discover";
-      case pathname === "/spaces":
-        return "collections_page";
-      case pathname.startsWith("/spaces/"):
-      case pathname.startsWith("/collections/"):
-        return "collection";
-      case pathname.startsWith("/library"):
-        return "library";
-      case pathname.startsWith("/search"):
-        return "thread";
-      case pathname.startsWith("/page"):
-        return "page";
-      case pathname.startsWith("/account"):
-        return "settings";
-      case pathname === "/":
-        return "home";
-      case hostname.includes("perplexity.ai"):
-        return "same_origin";
-      default:
-        return "unknown";
+  return function (providedUrl?: string): string {
+    if (!providedUrl && typeof window === "undefined") {
+      return "unknown";
     }
-  }
 
-  return "unknown";
-}
+    if (hostname !== pplxHostname) {
+      return "unknown";
+    }
+
+    const baseUrl = `https://${pplxHostname}`;
+
+    for (const [key, patterns] of Object.entries(patternMap)) {
+      if (
+        patterns.some((pattern) =>
+          pattern.includes(
+            new URL(providedUrl || window.location.href, baseUrl).toString(),
+          ),
+        )
+      ) {
+        return key;
+      }
+    }
+
+    return "unknown";
+  };
+})();
 
 export function waitForElement({
   selector,

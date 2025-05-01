@@ -6,7 +6,6 @@ import ForceWritingModeToggle from "@/plugins/force-writing-mode/Wrapper";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
 import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
-import SpaceNavigatorWrapper from "@/plugins/space-navigator/sheet/Wrapper";
 
 export default function SpaceQueryBoxWrapper() {
   const spaceQueryBox = queryBoxesDomObserverStore(
@@ -28,7 +27,6 @@ export default function SpaceQueryBoxWrapper() {
       <Portal container={leftToolbar.rightContainer}>
         <div className="x:flex x:size-full x:flex-wrap x:items-center x:gap-2">
           <SlashCommandMenuTriggerButtonWrapper />
-          <SpaceNavigatorWrapper />
         </div>
         <SlashCommandMenuWrapper anchor={spaceQueryBox} />
       </Portal>

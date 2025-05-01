@@ -1,7 +1,0 @@
-@reference "../../assets/index.css";
-
-[data-cplx-component="sidebar-library-button-wrapper"]
-  [data-cplx-component="sidebar-library-button-trigger-buttons-portal-container"]
-  > :last-child {
-  @apply x:mr-1;
-}
