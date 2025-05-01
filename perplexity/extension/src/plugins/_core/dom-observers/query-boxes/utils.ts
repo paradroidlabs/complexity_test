@@ -3,7 +3,7 @@ import {
   createTaskId,
 } from "@/plugins/_api/dom-observer/callback-queue";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
-import { UiUtils } from "@/utils/ui-utils";
+import { getActiveQueryBox } from "@/plugins/_core/ui/groups/query-box/utils";
 
 const OBSERVER_ID = {
   MAIN_QUERY_BOX: "cplx-main-query-box",
@@ -14,7 +14,7 @@ const OBSERVER_ID = {
 export function findMainQueryBox() {
   const id = OBSERVER_ID.MAIN_QUERY_BOX;
 
-  const $mainQueryBox = UiUtils.getActiveQueryBox({ type: "main" });
+  const $mainQueryBox = getActiveQueryBox({ type: "main" });
 
   if (!$mainQueryBox.length || $mainQueryBox.attr(id)) return;
 
@@ -28,7 +28,7 @@ export function findMainQueryBox() {
 export function findSpaceQueryBox() {
   if ($(`[${OBSERVER_ID.SPACE_QUERY_BOX}]`).length) return;
 
-  const $spaceQueryBox = UiUtils.getActiveQueryBox({
+  const $spaceQueryBox = getActiveQueryBox({
     type: "space",
   });
 
@@ -44,7 +44,7 @@ export function findSpaceQueryBox() {
 export async function findFollowUpQueryBox() {
   if ($(`[${OBSERVER_ID.FOLLOW_UP_QUERY_BOX}]`).length) return;
 
-  const $followUpQueryBox = UiUtils.getActiveQueryBox({
+  const $followUpQueryBox = getActiveQueryBox({
     type: "follow-up",
   });
 

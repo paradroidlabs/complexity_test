@@ -2,7 +2,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import type { QueryBoxType } from "@/data/plugins/query-box/types";
+import type { QueryBoxType } from "@/plugins/_core/ui/groups/query-box/types";
 
 export type ScopedQueryBoxStoreType = {
   type: QueryBoxType;

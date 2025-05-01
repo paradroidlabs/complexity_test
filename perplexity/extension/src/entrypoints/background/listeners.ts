@@ -41,7 +41,7 @@ function createDashboardShortcut() {
 }
 
 function onboardingFlowTrigger() {
-  chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
+  chrome.runtime.onInstalled.addListener(({ reason }) => {
     if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
       chrome.tabs.create({
         url: `${getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV })}#/onboarding`,

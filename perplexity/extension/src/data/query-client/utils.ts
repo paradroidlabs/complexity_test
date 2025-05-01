@@ -7,8 +7,8 @@ import type { PersistedClient } from "@tanstack/react-query-persist-client";
 import debounce from "lodash/debounce";
 
 import { APP_CONFIG } from "@/app.config";
+import { getQueryCacheService } from "@/data/query-client/indexed-db";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
-import { getQueryCacheService } from "@/services/indexed-db/query-cache";
 
 export type QueryCacheEntry = {
   key: string;

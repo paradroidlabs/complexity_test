@@ -1,4 +1,4 @@
-import { useCanvasStore } from "@/plugins/canvas/store";
+import { useCanvasStore } from "@/plugins/canvas/index.public";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import BetterCodeBlockHeader from "@/plugins/thread-better-code-blocks/variants/base/Header";
 import HighlightedCodeWrapper from "@/plugins/thread-better-code-blocks/variants/HighlightedCode";

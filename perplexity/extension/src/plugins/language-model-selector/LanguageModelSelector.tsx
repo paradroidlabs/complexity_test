@@ -6,6 +6,7 @@ import { useInsertCss } from "@/hooks/useInsertCss";
 import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
@@ -15,7 +16,6 @@ import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/
 import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
-import { UiUtils } from "@/utils/ui-utils";
 
 const hideNativeModelSelector = await getVersionedRemoteResource(
   hideNativeModelSelectorCssResourceConfig,
@@ -62,7 +62,7 @@ export function LanguageModelSelector() {
       onValueChange={({ value }) => {
         setSelectedLanguageModel(value[0] as LanguageModelCode);
         setTimeout(() => {
-          UiUtils.getActiveQueryBoxTextarea().trigger("focus");
+          getActiveQueryBoxTextarea().trigger("focus");
         }, 100);
       }}
       onHighlightChange={({ highlightedValue }) =>
@@ -73,7 +73,7 @@ export function LanguageModelSelector() {
           event.preventDefault();
           event.stopPropagation();
           setTimeout(() => {
-            UiUtils.getActiveQueryBoxTextarea().trigger("focus");
+            getActiveQueryBoxTextarea().trigger("focus");
           }, 100);
         }
       }}

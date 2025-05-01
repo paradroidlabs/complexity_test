@@ -2,9 +2,9 @@ import { LuLoaderCircle } from "react-icons/lu";
 
 import CopyButton from "@/components/CopyButton";
 import { Separator } from "@/components/ui/separator";
-import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
+import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
 import CanvasSimpleModeRenderButton from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/CanvasSimpleModeRenderButton";
 import { ExpandCollapseButton } from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/ExpandCollapseButton";

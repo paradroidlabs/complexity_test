@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons";
 
-import type { SearchFilter } from "@/data/plugins/command-menu/items";
 import type { ColorScheme } from "@/plugins/_core/global-stores/color-scheme-store";
+import type { SearchFilter } from "@/plugins/command-menu/public/items";
 import type { whereAmI } from "@/utils/utils";
 
 export type BaseItem = {

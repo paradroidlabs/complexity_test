@@ -3,7 +3,7 @@ import { LuSquareSlash } from "react-icons/lu";
 import Tooltip from "@/components/Tooltip";
 import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
-import { UiUtils } from "@/utils/ui-utils";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 
 export function TriggerButton() {
   const { store } = useScopedQueryBoxContext();
@@ -17,7 +17,7 @@ export function TriggerButton() {
   });
 
   const handleTrigger = async () => {
-    const $activeQueryBoxTextarea = UiUtils.getActiveQueryBoxTextarea();
+    const $activeQueryBoxTextarea = getActiveQueryBoxTextarea();
 
     if (!$activeQueryBoxTextarea.length) return;
 

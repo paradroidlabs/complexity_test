@@ -190,26 +190,27 @@ export const whereAmI = (() => {
       ? "www.perplexity.ai"
       : window.location.hostname;
 
-  const pplxHostname = "www.perplexity.ai";
+  const pplxHostnamePattern = /(www\.)?perplexity\.ai/;
+  const hostnameGlob = `https://*.perplexity.ai`;
 
   const patternMap = {
-    home: [new MatchPattern(`https://${pplxHostname}/`)],
-    discover: [new MatchPattern(`https://${pplxHostname}/discover*`)],
+    home: [new MatchPattern(`${hostnameGlob}/`)],
+    discover: [new MatchPattern(`${hostnameGlob}/discover*`)],
     collections_page: [
-      new MatchPattern(`https://${pplxHostname}/spaces`),
-      new MatchPattern(`https://${pplxHostname}/spaces/`),
-      new MatchPattern(`https://${pplxHostname}/collections`),
-      new MatchPattern(`https://${pplxHostname}/collections/`),
+      new MatchPattern(`${hostnameGlob}/spaces`),
+      new MatchPattern(`${hostnameGlob}/spaces/`),
+      new MatchPattern(`${hostnameGlob}/collections`),
+      new MatchPattern(`${hostnameGlob}/collections/`),
     ],
     collection: [
-      new MatchPattern(`https://${pplxHostname}/spaces/*`),
-      new MatchPattern(`https://${pplxHostname}/collections/*`),
+      new MatchPattern(`${hostnameGlob}/spaces/*`),
+      new MatchPattern(`${hostnameGlob}/collections/*`),
     ],
-    library: [new MatchPattern(`https://${pplxHostname}/library*`)],
-    thread: [new MatchPattern(`https://${pplxHostname}/search/*`)],
-    page: [new MatchPattern(`https://${pplxHostname}/page/*`)],
-    settings: [new MatchPattern(`https://${pplxHostname}/account*`)],
-    same_origin: [new MatchPattern(`https://${pplxHostname}/*`)],
+    library: [new MatchPattern(`${hostnameGlob}/library*`)],
+    thread: [new MatchPattern(`${hostnameGlob}/search/*`)],
+    page: [new MatchPattern(`${hostnameGlob}/page/*`)],
+    settings: [new MatchPattern(`${hostnameGlob}/account*`)],
+    same_origin: [new MatchPattern(`${hostnameGlob}/*`)],
   };
 
   return function (providedUrl?: string): string {
@@ -217,11 +218,11 @@ export const whereAmI = (() => {
       return "unknown";
     }
 
-    if (hostname !== pplxHostname) {
+    if (!pplxHostnamePattern.test(hostname)) {
       return "unknown";
     }
 
-    const baseUrl = `https://${pplxHostname}`;
+    const baseUrl = `https://${hostname}`;
 
     for (const [key, patterns] of Object.entries(patternMap)) {
       if (

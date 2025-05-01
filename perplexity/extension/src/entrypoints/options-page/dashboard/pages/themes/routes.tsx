@@ -2,9 +2,9 @@ import { lazily } from "react-lazily";
 import type { RouteObject } from "react-router-dom";
 import { redirect } from "react-router-dom";
 
-import { BUILTIN_THEME_REGISTRY } from "@/data/plugins/themes/theme-registry";
 import Page from "@/entrypoints/options-page/components/Page";
-import { getLocalThemesService } from "@/services/indexed-db/themes";
+import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
+import { BUILTIN_THEME_REGISTRY } from "@/plugins/_core/custom-theme/themes/theme-registry";
 
 const { CreateThemePage } = lazily(
   () =>

@@ -1,6 +1,6 @@
 import Tooltip from "@/components/Tooltip";
 import { Switch } from "@/components/ui/switch";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
 type ThemeActionButtonProps = {

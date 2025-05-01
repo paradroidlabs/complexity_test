@@ -1,8 +1,8 @@
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useThreadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import { CANVAS_INITIAL_STATE } from "@/plugins/canvas/canvases";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 import {
   getInterpretedCanvasLanguage,
   isAutonomousCanvasLanguageString,

@@ -1,5 +1,5 @@
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import { CANVAS_RENDERER } from "@/plugins/canvas/canvases";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 
 export default function CanvasPreview({
   language,

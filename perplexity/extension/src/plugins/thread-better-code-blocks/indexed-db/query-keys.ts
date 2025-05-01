@@ -1,6 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 
-import { getBetterCodeBlocksFineGrainedOptionsService } from "@/services/indexed-db/better-code-blocks";
+import { getBetterCodeBlocksFineGrainedOptionsService } from "@/plugins/thread-better-code-blocks/indexed-db";
 
 export const betterCodeBlocksFineGrainedOptionsQueries = {
   all: () => ["betterCodeBlocksFineGrainedOptions"] as const,

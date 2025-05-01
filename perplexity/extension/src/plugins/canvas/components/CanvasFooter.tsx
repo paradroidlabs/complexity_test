@@ -1,10 +1,10 @@
 import CopyButton from "@/components/CopyButton";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import { CANVAS_LANGUAGE_ACTION_BUTTONS } from "@/plugins/canvas/canvases";
 import AutonomousCanvasVersionsNavigator from "@/plugins/canvas/components/VersionsNavigator";
 import { useCanvasStore } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
 
 export default function CanvasFooter() {

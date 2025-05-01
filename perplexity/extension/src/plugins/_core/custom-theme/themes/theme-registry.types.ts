@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { ThemeFormSchema } from "@/data/dashboard/themes/theme-form.types";
+import { ThemeFormSchema } from "@/plugins/_core/custom-theme/theme-form.types";
 
 export const ThemeSchema = z.object({
   id: z.string().refine((id) => /^[a-zA-Z0-9-]+$/.test(id), {

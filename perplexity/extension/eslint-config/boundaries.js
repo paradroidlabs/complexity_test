@@ -34,6 +34,12 @@ export default tseslint.config({
         pattern: ["src/plugins/_api/**/*", "src/plugins/_core/**/*"],
       },
       {
+        type: "plugin-public-exports",
+        mode: "full",
+        capture: ["pluginName"],
+        pattern: ["src/plugins/*/**/*.public.ts"],
+      },
+      {
         type: "plugin",
         mode: "full",
         capture: ["pluginName"],
@@ -51,24 +57,36 @@ export default tseslint.config({
         rules: [
           {
             from: "shared",
-            allow: ["shared", "plugin-core"],
+            allow: ["shared", "plugin-core", "plugin-public-exports"],
           },
           {
             from: "entrypoint",
-            allow: ["entrypoint", "shared", "plugin-core", "plugin"],
+            allow: [
+              "entrypoint",
+              "shared",
+              "plugin-core",
+              "plugin-public-exports",
+            ],
           },
           {
             from: "plugin-core",
-            allow: ["shared", "plugin-core", "plugin"],
+            allow: ["shared", "plugin-core", "plugin", "plugin-public-exports"],
           },
           {
             from: "plugin",
             allow: [
               "shared",
               "plugin-core",
-              "plugin",
+              "plugin-public-exports",
               ["plugin", { pluginName: "${from.pluginName}" }],
             ],
+            disallow: [
+              ["plugin-public-exports", { pluginName: "${from.pluginName}" }],
+            ],
+          },
+          {
+            from: "plugin-public-exports",
+            allow: [["plugin", { pluginName: "${from.pluginName}" }]],
           },
         ],
       },

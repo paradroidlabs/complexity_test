@@ -1,6 +1,6 @@
-import { BUILTIN_THEME_REGISTRY } from "@/data/plugins/themes/theme-registry";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
-import { getLocalThemesService } from "@/services/indexed-db/themes";
+import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
+import { BUILTIN_THEME_REGISTRY } from "@/plugins/_core/custom-theme/themes/theme-registry";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 export async function getThemeCss(themeId: Theme["id"]) {
   return getBuiltInThemeCss(themeId) || (await getLocalThemeCss(themeId)) || "";

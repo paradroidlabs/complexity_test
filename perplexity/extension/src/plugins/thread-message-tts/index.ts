@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { definePlugin } from "@/data/plugin-registry/utils";
-import { TtsVoiceSchema } from "@/data/plugins/thread-message-tts/types";
+import { TtsVoiceSchema } from "@/plugins/thread-message-tts/types";
 
 const schema = z.object({
   enabled: z.boolean(),

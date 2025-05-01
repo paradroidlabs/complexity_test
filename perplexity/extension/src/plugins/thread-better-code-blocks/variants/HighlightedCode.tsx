@@ -2,9 +2,9 @@ import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import type { ReactNode, RefObject } from "react";
 
 import CodeHighlighter from "@/components/CodeHighlighter";
-import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
-import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
+import { getInterpretedCanvasLanguage } from "@/plugins/canvas/index.public";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
+import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import type { ExtensionSettings } from "@/services/extension-settings/types";

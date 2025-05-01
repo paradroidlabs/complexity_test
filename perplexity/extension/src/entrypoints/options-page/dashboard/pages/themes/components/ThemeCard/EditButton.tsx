@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import Tooltip from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 type ThemeCardEditButtonProps = {
   theme: Theme;

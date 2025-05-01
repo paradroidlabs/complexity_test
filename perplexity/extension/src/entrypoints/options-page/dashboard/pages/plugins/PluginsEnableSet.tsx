@@ -49,7 +49,7 @@ export default function PluginsEnableSet() {
     >
       <DialogTrigger asChild>
         <Button variant="link" className="x:p-0">
-          Don&apos;t know where to start? Try presets!
+          Not sure where to start? Try presets!
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -57,14 +57,14 @@ export default function PluginsEnableSet() {
           <DialogTitle>Plugin Presets</DialogTitle>
         </DialogHeader>
         <DialogDescription>
-          Predefined sets of plugins to help you get started.
+          Predefined plugin sets to help you get started quickly.
         </DialogDescription>
 
         {!isDefaultSettings && (
           <div className="x:flex x:flex-col x:gap-2">
             <div className="x:text-sm x:text-yellow-300">
-              Presets will override your current settings. Please make sure to
-              save your current settings before applying.
+              Presets will override your current settings. Be sure to save your
+              current configuration before applying a preset.
             </div>
           </div>
         )}
@@ -73,7 +73,7 @@ export default function PluginsEnableSet() {
           <PresetButton
             label="Essentials Only"
             LabelIcon={LuCheck}
-            description="You are new to Perplexity and using the extension for the first time."
+            description="You're new to Perplexity and using the extension for the first time."
             config={ESSENTIALS_ONLY}
             className="x:border-primary/50"
             onComplete={() => setOpen(false)}
@@ -81,7 +81,7 @@ export default function PluginsEnableSet() {
           <PresetButton
             label="Power User"
             LabelIcon={LuZap}
-            description="You have used Perplexity for a while and want to make the most out of it."
+            description="You're an experienced Perplexity user looking to maximize your productivity."
             config={POWER_USER}
             className="x:border-primary/50"
             onComplete={() => setOpen(false)}
@@ -89,20 +89,20 @@ export default function PluginsEnableSet() {
           <PresetButton
             label="YOLO"
             LabelIcon={LuRocket}
-            description="Enable all plugins without knowing what they do is NOT recommended. Please start exploring them first."
+            description="Enabling all plugins without understanding their functionality is not recommended. It's suggested to explore them individually first."
             config={ALL_PLUGINS}
             onComplete={() => setOpen(false)}
           />
         </div>
 
         <div className="x:text-sm x:text-muted-foreground">
-          There are many plugins that depend on personal preferences. Feel free
-          to test and enable them as you see fit.
+          Many plugins depend on personal preferences. Feel free to test and
+          enable them as you prefer.
         </div>
 
         <DialogFooter>
           <DialogClose asChild>
-            <Button onClick={() => navigate("/")}>
+            <Button variant="outline" onClick={() => navigate("/")}>
               I&apos;ll look around by myself
             </Button>
           </DialogClose>

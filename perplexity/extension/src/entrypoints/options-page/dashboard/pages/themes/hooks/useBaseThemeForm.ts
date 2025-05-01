@@ -2,14 +2,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import type { DeepRequired } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
-import type { ThemeFormValues } from "@/data/dashboard/themes/theme-form.types";
-import { ThemeFormSchema } from "@/data/dashboard/themes/theme-form.types";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
 import {
   generateDarkModeColorOverrides,
   generatePalette,
   generateUiFontsOverrides,
 } from "@/entrypoints/options-page/dashboard/pages/themes/pages/utils";
+import {
+  ThemeFormSchema,
+  type ThemeFormValues,
+} from "@/plugins/_core/custom-theme/theme-form.types";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 type ThemeDataResult = Pick<Theme, "css" | "title">;
 
@@ -38,7 +40,7 @@ export function useBaseThemeForm(defaultValues: DeepRequired<ThemeFormValues>) {
     if (data.enhanceThreadTypography) {
       css += (
         await import(
-          "@/data/plugins/themes/css-files/complexity/base.css?inline"
+          "@/plugins/_core/custom-theme/themes/css-files/complexity/base.css?inline"
         )
       ).default;
     }

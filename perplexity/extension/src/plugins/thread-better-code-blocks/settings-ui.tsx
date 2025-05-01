@@ -4,11 +4,11 @@ import { useLocation, useSearchParams } from "react-router-dom";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import type { PluginId } from "@/data/plugin-registry/types";
+import { betterCodeBlocksFineGrainedOptionsQueries } from "@/plugins/thread-better-code-blocks/indexed-db/query-keys";
 import CreateNewLanguageOptionButton from "@/plugins/thread-better-code-blocks/settings-ui/CreateNewLanguageOptionButton";
 import BetterCodeBlockFineGrainedOptions from "@/plugins/thread-better-code-blocks/settings-ui/FineGrainedOptions";
 import BetterCodeBlockGlobalOptions from "@/plugins/thread-better-code-blocks/settings-ui/GlobalOptions";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
-import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
 
 export const pluginId: PluginId = "thread:betterCodeBlocks";
 

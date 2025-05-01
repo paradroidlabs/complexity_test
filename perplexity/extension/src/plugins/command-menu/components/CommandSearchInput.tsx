@@ -1,7 +1,7 @@
 import { CommandInput } from "@/components/ui/command";
-import { SEARCH_FILTERS } from "@/data/plugins/command-menu/items";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import SearchFilterBadge from "@/plugins/command-menu/components/SearchFilterBadge";
+import { SEARCH_FILTERS } from "@/plugins/command-menu/public/items";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 
 export const CommandSearchInput = memo(function CommandSearchInput() {
   const { searchValue, setSearchValue, filter, setFilter, setInputRef, open } =

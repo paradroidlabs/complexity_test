@@ -1,10 +1,10 @@
 import { sendMessage } from "webext-bridge/content-script";
 
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
-import type { NavigationItem as NavigationItemType } from "@/data/plugins/command-menu/types";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import type { BaseCommandMenuItem } from "@/plugins/command-menu/components/BaseItem";
 import BaseMenuItem from "@/plugins/command-menu/components/BaseItem";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
+import type { NavigationItem as NavigationItemType } from "@/plugins/command-menu/public/types";
 import { whereAmI } from "@/utils/utils";
 
 type NavigationItemProps = BaseCommandMenuItem & NavigationItemType;

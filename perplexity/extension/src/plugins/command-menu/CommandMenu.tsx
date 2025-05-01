@@ -1,9 +1,9 @@
 import { CommandDialog } from "@/components/ui/command";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import { CommandContent } from "@/plugins/command-menu/components/CommandContent";
 import { CommandSearchInput } from "@/plugins/command-menu/components/CommandSearchInput";
 import useBindCommandMenuHotkeys from "@/plugins/command-menu/hooks/useBindCommandMenuHotkeys";
 import { useSearchFilter } from "@/plugins/command-menu/hooks/useSearchFilter";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 
 export function CommandMenu() {
   const { open, setOpen, selectedValue, setSelectedValue } =

@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { LuLoaderCircle } from "react-icons/lu";
 
 import { CommandEmpty, CommandGroup } from "@/components/ui/command";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import SpaceThreadItem from "@/plugins/command-menu/components/space-search-items/SpaceThreadItem";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 
 export default function SpaceThreadsSearchItems() {

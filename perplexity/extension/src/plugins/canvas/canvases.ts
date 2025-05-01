@@ -6,10 +6,6 @@ import { PiArticleDuotone } from "react-icons/pi";
 import { RiMindMap } from "react-icons/ri";
 
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
-import type {
-  CanvasLanguage,
-  CanvasState,
-} from "@/plugins/canvas/canvas.types";
 import MarkmapCanvasActionButtonsWrapper from "@/plugins/canvas/components/action-buttons/Markmap/Wrapper";
 import MermaidCanvasActionButtonsWrapper from "@/plugins/canvas/components/action-buttons/Mermaid/Wrapper";
 import PlantUmlCanvasActionButtonsWrapper from "@/plugins/canvas/components/action-buttons/PlantUml/Wrapper";
@@ -19,6 +15,7 @@ import MarkmapRenderer from "@/plugins/canvas/components/renderer/Markmap";
 import MermaidRenderer from "@/plugins/canvas/components/renderer/Mermaid";
 import PlantUmlRenderer from "@/plugins/canvas/components/renderer/PlantUml";
 import ReactRenderer from "@/plugins/canvas/components/renderer/React";
+import type { CanvasLanguage, CanvasState } from "@/plugins/canvas/types";
 
 export let CANVAS_LANGUAGE_PREVIEW_TOGGLE_TEXT: Record<CanvasLanguage, string> =
   {} as Record<CanvasLanguage, string>;

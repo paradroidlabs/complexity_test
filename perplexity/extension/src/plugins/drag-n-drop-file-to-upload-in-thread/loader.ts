@@ -1,8 +1,8 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
+import { getActiveQueryBox } from "@/plugins/_core/ui/groups/query-box/utils";
 import styles from "@/plugins/drag-n-drop-file-to-upload-in-thread/styles.css?inline";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import { UiUtils } from "@/utils/ui-utils";
 import { insertCss } from "@/utils/utils";
 
 const DRAGOVER_EVENT = "dragover.cplx-file-upload";
@@ -117,7 +117,7 @@ export default function loader() {
             $overlay?.removeClass("active");
             dragCounter = 0;
 
-            const $queryBox = UiUtils.getActiveQueryBox({ type: "follow-up" });
+            const $queryBox = getActiveQueryBox({ type: "follow-up" });
             const $fileInput = $queryBox.find('input[type="file"]');
             if (!$fileInput[0]) return;
 

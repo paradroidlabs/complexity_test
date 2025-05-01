@@ -3,9 +3,9 @@ import type { DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
-import type { ThemeFormValues } from "@/data/dashboard/themes/theme-form.types";
 import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/hooks/useBaseThemeForm";
-import { getLocalThemesService } from "@/services/indexed-db/themes";
+import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
+import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
 
 const initialValues: DeepRequired<ThemeFormValues> = {
   title: "Untitled Theme",

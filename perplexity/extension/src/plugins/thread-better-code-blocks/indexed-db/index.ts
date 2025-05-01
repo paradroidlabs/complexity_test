@@ -3,7 +3,7 @@ import { produce } from "immer";
 import merge from "lodash/merge";
 import type { DeepPartial } from "react-hook-form";
 
-import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
+import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { db } from "@/services/indexed-db";
 
 class BetterCodeBlocksFineGrainedService {
@@ -55,10 +55,8 @@ class BetterCodeBlocksFineGrainedService {
   }
 }
 
-export const [
-  registerBetterCodeBlocksFineGrainedOptionsService,
-  getBetterCodeBlocksFineGrainedOptionsService,
-] = defineProxyService(
-  "BetterCodeBlocksFineGrainedOptionsService",
-  () => new BetterCodeBlocksFineGrainedService(),
-);
+export const [registerService, getBetterCodeBlocksFineGrainedOptionsService] =
+  defineProxyService(
+    "BetterCodeBlocksFineGrainedOptionsService",
+    () => new BetterCodeBlocksFineGrainedService(),
+  );

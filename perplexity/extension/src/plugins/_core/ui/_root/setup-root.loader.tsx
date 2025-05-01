@@ -29,7 +29,6 @@ export default function loader() {
       "lib:dayjs",
       "cache:pluginsStates",
       "cache:languageModels",
-      "cache:betterCodeBlocksFineGrainedOptions",
       "cache:domSelectors",
     ],
     loader: () => {

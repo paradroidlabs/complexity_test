@@ -1,5 +1,5 @@
-import { getPromptHistoryService } from "@/services/indexed-db/prompt-history";
-import { UiUtils } from "@/utils/ui-utils";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
 
 let lastUrl = window.location.pathname;
 
@@ -17,7 +17,7 @@ export const handlePromptSave = async (params?: {
   let prompt = params?.promptString;
 
   if (!params?.promptString) {
-    const $activeQueryBox = UiUtils.getActiveQueryBoxTextarea();
+    const $activeQueryBox = getActiveQueryBoxTextarea();
 
     if (!$activeQueryBox[0]) return;
 

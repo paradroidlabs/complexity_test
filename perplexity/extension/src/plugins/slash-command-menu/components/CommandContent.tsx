@@ -5,8 +5,8 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { PopoverContent } from "@/components/ui/popover";
-import type { QueryBoxType } from "@/data/plugins/query-box/types";
-import PromptHistorySlashMenuItemsWrapper from "@/plugins/prompt-history/Wrapper";
+import type { QueryBoxType } from "@/plugins/_core/ui/groups/query-box/types";
+import { PromptHistorySlashMenuItemsWrapper } from "@/plugins/prompt-history/Wrapper.public";
 import ActionItems from "@/plugins/slash-command-menu/ActionItems";
 import { CommandInputHandler } from "@/plugins/slash-command-menu/components/CommandInputHandler";
 import FilterItems from "@/plugins/slash-command-menu/FilterItems";

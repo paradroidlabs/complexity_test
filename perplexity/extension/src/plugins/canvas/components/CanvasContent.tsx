@@ -1,10 +1,10 @@
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import { CANVAS_INITIAL_STATE } from "@/plugins/canvas/canvases";
 import CanvasCodeView from "@/plugins/canvas/components/CodeView";
 import CanvasPreview from "@/plugins/canvas/components/Preview";
 import { useCanvasStore } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 

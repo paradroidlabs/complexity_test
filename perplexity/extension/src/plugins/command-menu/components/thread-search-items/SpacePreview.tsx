@@ -1,7 +1,7 @@
 import { useCommandState } from "cmdk";
 
 import Tooltip from "@/components/Tooltip";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 import type { ThreadSearchApi } from "@/services/pplx-api/pplx-api.types";
 
 export function SpacePreview({ thread }: { thread: ThreadSearchApi }) {

@@ -5,13 +5,13 @@ import {
   spaRouteChangeCompleteSubscribe,
   spaRouterStoreSubscribe,
 } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import { CANVAS_PLACEHOLDERS } from "@/plugins/canvas/canvases";
 import {
   canvasStore,
   type CanvasBlock,
   type CodeBlockLocation,
 } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 import {
   formatCanvasTitle,
   getCanvasTitle,

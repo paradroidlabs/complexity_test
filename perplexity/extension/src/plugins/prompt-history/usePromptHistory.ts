@@ -3,9 +3,9 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { usePrevious } from "@uidotdev/usehooks";
 import { useMemo } from "react";
 
-import type { PromptHistory } from "@/data/plugins/prompt-history/prompt-history.type";
 import { queryClient } from "@/data/query-client";
-import { promptHistoryQueries } from "@/services/indexed-db/prompt-history/query-keys";
+import { promptHistoryQueries } from "@/plugins/prompt-history/indexed-db/query-keys";
+import type { PromptHistory } from "@/plugins/prompt-history/types";
 
 export function usePromptHistory({
   searchValue,

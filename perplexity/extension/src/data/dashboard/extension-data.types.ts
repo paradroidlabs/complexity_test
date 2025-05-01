@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { BetterCodeBlockFineGrainedOptionsSchema } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
-import { PromptHistorySchema } from "@/data/plugins/prompt-history/prompt-history.type";
-import { ThemeSchema } from "@/data/plugins/themes/theme-registry.types";
+import { ThemeSchema } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
+import { PromptHistorySchema } from "@/plugins/prompt-history/index.public";
+import { BetterCodeBlockFineGrainedOptionsSchema } from "@/plugins/thread-better-code-blocks/index.public";
 import { ExtensionSettingsSchema } from "@/services/extension-settings/types";
 
 export const ExtensionDataSchema = z.object({

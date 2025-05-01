@@ -1,39 +1,24 @@
-import { Dexie } from "dexie";
+import { Dexie, type Table } from "dexie";
 
-import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
 import type { ExtensionData } from "@/data/dashboard/extension-data.types";
-import type { PromptHistory } from "@/data/plugins/prompt-history/prompt-history.type";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
 import type { QueryCacheEntry } from "@/data/query-client/utils";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
+import type { PromptHistory } from "@/plugins/prompt-history/index.public";
+import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/index.public";
 
 export class IndexedDbService extends Dexie {
-  queryCache!: Dexie.Table<QueryCacheEntry, string>;
-  themes!: Dexie.Table<Theme, string>;
-  betterCodeBlocks!: Dexie.Table<BetterCodeBlockFineGrainedOptions, string>;
-  promptHistory!: Dexie.Table<PromptHistory, string>;
+  queryCache!: Table<QueryCacheEntry>;
+  themes!: Table<Theme>;
+  betterCodeBlocks!: Table<BetterCodeBlockFineGrainedOptions>;
+  promptHistory!: Table<PromptHistory>;
 
   constructor() {
     super("ComplexityDatabase");
-    this.version(1).stores({
-      themes: "&id, title, author",
-      betterCodeBlocks: "&language",
-    });
-
-    this.version(2).stores({
-      promptHistory: "&id, prompt, createdAt",
-    });
-
-    this.version(5).upgrade(async (tx) => {
-      const betterCodeBlocks = await tx.table("betterCodeBlocks").toArray();
-      for (const betterCodeBlock of betterCodeBlocks) {
-        await tx.table("betterCodeBlocks").update(betterCodeBlock.language, {
-          showLineNumbers: false,
-        });
-      }
-    });
-
     this.version(6).stores({
       queryCache: "&key, timestamp",
+      themes: "&id, title, author",
+      betterCodeBlocks: "&language",
+      promptHistory: "&id, prompt, createdAt",
     });
   }
 

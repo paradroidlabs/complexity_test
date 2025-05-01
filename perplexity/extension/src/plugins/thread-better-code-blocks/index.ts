@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { BetterCodeBlockGlobalOptionsSchema } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
 import { definePlugin } from "@/data/plugin-registry/utils";
+import { BetterCodeBlockGlobalOptionsSchema } from "@/plugins/thread-better-code-blocks/types";
 
 const schema = z
   .object({

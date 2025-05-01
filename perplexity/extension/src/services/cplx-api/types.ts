@@ -10,10 +10,18 @@ export type RemoteResourceType = (typeof remoteResourceTypes)[number];
 
 export const SemverSchema = z
   .string()
-  .refine((v) => !!semver.valid(semver.coerce(v)), {
-    message: "Invalid semver",
-  })
-  .transform((v) => semver.coerce(v)!.toString());
+  .refine(
+    (v) =>
+      !!semver.valid(
+        semver.coerce(v, {
+          includePrerelease: true,
+        }),
+      ),
+    {
+      message: "Invalid semver",
+    },
+  )
+  .transform((v) => semver.coerce(v, { includePrerelease: true })!.toString());
 
 export const CplxVersionsApiResponseSchema = z.object({
   latest: SemverSchema,

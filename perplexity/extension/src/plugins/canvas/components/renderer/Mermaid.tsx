@@ -5,13 +5,13 @@ import { sendMessage } from "webext-bridge/content-script";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 import { useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
   getCanvasTitle,
   isAutonomousCanvasLanguageString,
 } from "@/plugins/canvas/utils";
-import { UiUtils } from "@/utils/ui-utils";
 
 export default function MermaidRenderer() {
   const { colorScheme } = useColorSchemeStore();
@@ -92,7 +92,7 @@ export default function MermaidRenderer() {
               className="x:w-max"
               variant="destructive"
               onClick={() => {
-                const $textarea = UiUtils.getActiveQueryBoxTextarea();
+                const $textarea = getActiveQueryBoxTextarea();
                 if (!$textarea.length) return;
 
                 const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${result.error}`;

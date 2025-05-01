@@ -3,8 +3,8 @@ import type { ComponentProps } from "react";
 
 import KeyCombo from "@/components/KeyCombo";
 import { CommandItem, CommandShortcut } from "@/components/ui/command";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
-import type { BaseItem } from "@/data/plugins/command-menu/types";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
+import type { BaseItem } from "@/plugins/command-menu/public/types";
 
 export type BaseCommandMenuItem = BaseItem & {
   onSelect?: () => void;

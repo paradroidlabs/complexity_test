@@ -3,7 +3,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import type { SearchFilter } from "@/data/plugins/command-menu/items";
+import type { SearchFilter } from "@/plugins/command-menu/public/items";
 
 type CommandMenuStoreType = {
   inputRef: RefObject<HTMLInputElement | null> | null;

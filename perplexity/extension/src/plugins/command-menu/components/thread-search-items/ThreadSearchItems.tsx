@@ -2,10 +2,10 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "@uidotdev/usehooks";
 
 import { CommandEmpty, CommandGroup } from "@/components/ui/command";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import { EmptyState } from "@/plugins/command-menu/components/thread-search-items/EmptyState";
 import { LoadingState } from "@/plugins/command-menu/components/thread-search-items/LoadingState";
 import { ThreadItem } from "@/plugins/command-menu/components/thread-search-items/ThreadItem";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 
 export default function ThreadSearchItems() {

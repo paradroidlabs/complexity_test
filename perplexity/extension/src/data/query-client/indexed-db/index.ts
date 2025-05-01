@@ -26,5 +26,7 @@ class QueryCacheService {
   }
 }
 
-export const [registerQueryCacheService, getQueryCacheService] =
-  defineProxyService("QueryCacheService", () => new QueryCacheService());
+export const [registerService, getQueryCacheService] = defineProxyService(
+  "QueryCacheService",
+  () => new QueryCacheService(),
+);

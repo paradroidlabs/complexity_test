@@ -1,5 +1,5 @@
-import { DISABLE_LOCAL_FILTER_SEARCH_FILTERS } from "@/data/plugins/command-menu/items";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
+import { DISABLE_LOCAL_FILTER_SEARCH_FILTERS } from "@/plugins/command-menu/public/items";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 
 export function useSearchFilter() {
   const { searchValue, setSearchValue, filter, setFilter } =

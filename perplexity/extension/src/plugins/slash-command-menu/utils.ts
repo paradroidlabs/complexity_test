@@ -1,4 +1,4 @@
-import type { QueryBoxType } from "@/data/plugins/query-box/types";
+import type { QueryBoxType } from "@/plugins/_core/ui/groups/query-box/types";
 
 type PopoverPositionConfig = {
   placement: "top-start" | "bottom-start";

@@ -1,13 +1,7 @@
-import { UiUtils } from "@/utils/ui-utils";
-
 type TextareaSelection = {
   start: number;
   end: number;
   value: string;
-};
-
-export const getActiveTextarea = (): HTMLTextAreaElement | null => {
-  return UiUtils.getActiveQueryBoxTextarea()[0] ?? null;
 };
 
 export const setTextareaSelection = (

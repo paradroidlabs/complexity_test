@@ -2,8 +2,8 @@ import type { CSSProperties, ReactNode } from "react";
 
 import CodeHighlighter from "@/components/CodeHighlighter";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
 import { useCanvasStore } from "@/plugins/canvas/store";
+import { getInterpretedCanvasLanguage } from "@/plugins/canvas/utils";
 
 export default function CodeView() {
   const selectedCodeBlockLocation = useCanvasStore(

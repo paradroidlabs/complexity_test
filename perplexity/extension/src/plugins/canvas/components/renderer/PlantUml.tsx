@@ -5,6 +5,7 @@ import svgPanZoom from "svg-pan-zoom";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 import { useCanvasStore } from "@/plugins/canvas/store";
 import {
   formatCanvasTitle,
@@ -15,7 +16,6 @@ import {
   generatePlantUMLUrl,
   generateTextPlantUMLUrl,
 } from "@/utils/plant-uml";
-import { UiUtils } from "@/utils/ui-utils";
 
 const SVGContent = memo(function SVGContent({ svg }: { svg: string }) {
   useEffect(() => {
@@ -127,7 +127,7 @@ export default function PlantUmlRenderer() {
             onClick={() => {
               if (!error.message) return;
 
-              const $textarea = UiUtils.getActiveQueryBoxTextarea();
+              const $textarea = getActiveQueryBoxTextarea();
 
               if (!$textarea.length) return;
 

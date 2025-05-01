@@ -1,7 +1,7 @@
 import { defineProxyService } from "@webext-core/proxy-service";
 import { nanoid } from "nanoid";
 
-import type { PromptHistory } from "@/data/plugins/prompt-history/prompt-history.type";
+import type { PromptHistory } from "@/plugins/prompt-history/types";
 import { db } from "@/services/indexed-db";
 
 class PromptHistoryService {
@@ -71,5 +71,7 @@ class PromptHistoryService {
   }
 }
 
-export const [registerPromptHistoryService, getPromptHistoryService] =
-  defineProxyService("PromptHistoryService", () => new PromptHistoryService());
+export const [registerService, getPromptHistoryService] = defineProxyService(
+  "PromptHistoryService",
+  () => new PromptHistoryService(),
+);

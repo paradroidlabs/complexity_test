@@ -1,10 +1,10 @@
+import { hexToOklchString } from "@/entrypoints/options-page/dashboard/pages/themes/pages/utils";
 import {
   SVG_FEATURED_BANNERS,
   ThemeBanner,
-} from "@/data/plugins/themes/svg-featured-banners";
-import type { BuiltInThemeId } from "@/data/plugins/themes/theme-registry";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
-import { hexToOklchString } from "@/entrypoints/options-page/dashboard/pages/themes/pages/utils";
+} from "@/plugins/_core/custom-theme/themes/svg-featured-banners";
+import type { BuiltInThemeId } from "@/plugins/_core/custom-theme/themes/theme-registry";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 type ThemeCardBannerProps = {
   theme: Theme;

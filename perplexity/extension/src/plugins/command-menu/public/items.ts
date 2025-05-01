@@ -18,8 +18,8 @@ import type {
   ColorSchemeItem,
   NavigationItem,
   SearchItem,
-} from "@/data/plugins/command-menu/types";
-import { toggleZenMode } from "@/data/plugins/zen-mode/utils";
+} from "@/plugins/command-menu/public/types";
+import { toggleZenMode } from "@/plugins/zen-mode/index.public";
 
 export const ZENMODE_ITEMS: ZenModeItem[] = [
   {

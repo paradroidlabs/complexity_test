@@ -1,7 +1,4 @@
-import {
-  CANVAS_LANGUAGES,
-  type CanvasLanguage,
-} from "@/plugins/canvas/canvas.types";
+import { CANVAS_LANGUAGES, type CanvasLanguage } from "@/plugins/canvas/types";
 
 export const CANVAS_INTERPRETED_LANGUAGES: Record<string, CanvasLanguage> = {
   svg: "html",

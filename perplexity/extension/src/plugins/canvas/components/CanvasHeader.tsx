@@ -3,9 +3,9 @@ import { LuList, LuRefreshCcw, LuX } from "react-icons/lu";
 import Tooltip from "@/components/Tooltip";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import PreviewToggle from "@/plugins/canvas/components/PreviewToggle";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 import {
   formatCanvasTitle,
   getCanvasTitle,

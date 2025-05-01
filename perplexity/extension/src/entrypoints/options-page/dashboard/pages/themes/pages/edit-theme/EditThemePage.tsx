@@ -1,10 +1,10 @@
 import { LuChevronLeft } from "react-icons/lu";
 import { Link, useLoaderData } from "react-router-dom";
 
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
 import { ThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeForm";
 import { DeleteButton } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/components/DeleteButton";
 import { useThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/hooks/useThemeForm";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 export function EditThemePage() {
   const theme = useLoaderData() as Theme;

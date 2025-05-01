@@ -9,11 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { TtsVoice } from "@/data/plugins/thread-message-tts/types";
-import { TTS_VOICES } from "@/data/plugins/thread-message-tts/types";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadMessageContext } from "@/plugins/_core/ui/groups/thread-message-context";
 import usePplxTtsRequest from "@/plugins/thread-message-tts/hooks/usePplxTtsRequest";
+import type { TtsVoice } from "@/plugins/thread-message-tts/types";
+import { TTS_VOICES } from "@/plugins/thread-message-tts/types";
 import { PplxTtsPlayerCoordinator } from "@/plugins/thread-message-tts/utils/coordinator";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 

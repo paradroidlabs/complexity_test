@@ -14,8 +14,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import type { ThemeFormValues } from "@/data/dashboard/themes/theme-form.types";
 import { ColorInput } from "@/entrypoints/options-page/dashboard/pages/themes/components/ColorInput";
+import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
 
 type ThemeFormProps = {
   form: UseFormReturn<ThemeFormValues>;

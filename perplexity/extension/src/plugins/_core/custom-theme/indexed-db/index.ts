@@ -1,6 +1,6 @@
 import { defineProxyService } from "@webext-core/proxy-service";
 
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import { db } from "@/services/indexed-db";
 
 class LocalThemesService {
@@ -26,5 +26,7 @@ class LocalThemesService {
   }
 }
 
-export const [registerLocalThemesService, getLocalThemesService] =
-  defineProxyService("LocalThemesService", () => new LocalThemesService());
+export const [registerService, getLocalThemesService] = defineProxyService(
+  "LocalThemesService",
+  () => new LocalThemesService(),
+);

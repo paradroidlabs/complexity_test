@@ -1,7 +1,7 @@
 import { formatKeys } from "@/components/hotkey-recorder/utils";
-import type { ZenModeItem as ZenModeItemType } from "@/data/plugins/command-menu/types";
 import type { BaseCommandMenuItem } from "@/plugins/command-menu/components/BaseItem";
 import BaseMenuItem from "@/plugins/command-menu/components/BaseItem";
+import type { ZenModeItem as ZenModeItemType } from "@/plugins/command-menu/public/types";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 
 type ZenModeItemProps = BaseCommandMenuItem & ZenModeItemType;

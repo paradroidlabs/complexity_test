@@ -1,11 +1,11 @@
 import { useHotkeys } from "react-hotkeys-hook";
 
-import type { SearchFilter } from "@/data/plugins/command-menu/items";
+import type { SearchFilter } from "@/plugins/command-menu/public/items";
 import {
   commandMenuStore,
   useCommandMenuStore,
-} from "@/data/plugins/command-menu/store";
-import { toggleZenMode } from "@/data/plugins/zen-mode/utils";
+} from "@/plugins/command-menu/public/store";
+import { toggleZenMode } from "@/plugins/zen-mode/index.public";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { keysToString } from "@/utils/utils";

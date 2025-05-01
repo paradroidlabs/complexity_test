@@ -4,11 +4,11 @@ import { LuHistory } from "react-icons/lu";
 import { CommandGroup } from "@/components/ui/command";
 import { queryClient } from "@/data/query-client";
 import ClearAllButton from "@/plugins/prompt-history/ClearAllButton";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
+import { promptHistoryQueries } from "@/plugins/prompt-history/indexed-db/query-keys";
 import PromptHistoryItem from "@/plugins/prompt-history/PromptHistoryItem";
 import { usePromptHistory } from "@/plugins/prompt-history/usePromptHistory";
-import { useSlashCommandMenuStore } from "@/plugins/slash-command-menu/store";
-import { getPromptHistoryService } from "@/services/indexed-db/prompt-history";
-import { promptHistoryQueries } from "@/services/indexed-db/prompt-history/query-keys";
+import { useSlashCommandMenuStore } from "@/plugins/slash-command-menu/index.public";
 
 export default function PromptHistorySlashMenuItemsWrapper() {
   const loadMoreRef = useRef<HTMLDivElement>(null);

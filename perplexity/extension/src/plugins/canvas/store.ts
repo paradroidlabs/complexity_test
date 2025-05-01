@@ -4,7 +4,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import type { CanvasState } from "@/plugins/canvas/canvas.types";
+import type { CanvasState } from "@/plugins/canvas/types";
 
 export type CodeBlockLocation = {
   messageBlockIndex: number;

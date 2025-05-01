@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
+import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 import styles from "@/plugins/canvas/components/renderer/sandpack.css?inline";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import {
@@ -16,7 +17,6 @@ import {
   getCanvasTitle,
   isAutonomousCanvasLanguageString,
 } from "@/plugins/canvas/utils";
-import { UiUtils } from "@/utils/ui-utils";
 
 export default memo(function ReactRenderer() {
   const selectedCodeBlockLocation = useCanvasStore(
@@ -123,7 +123,7 @@ function FixErrorButtons() {
         variant="destructive"
         onClick={() => {
           if (!sandpack.error) return;
-          const $textarea = UiUtils.getActiveQueryBoxTextarea();
+          const $textarea = getActiveQueryBoxTextarea();
           if (!$textarea.length) return;
           const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
           $textarea.trigger("focus");

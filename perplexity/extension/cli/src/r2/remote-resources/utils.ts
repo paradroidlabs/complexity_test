@@ -93,8 +93,12 @@ export function updateListingData(params: {
 
   // Sort the entries for the specific resource name by semantic version in descending order
   const entries = Object.entries(newListing[name]).sort(([fileA], [fileB]) => {
-    const versionA = semver.coerce(fileA.slice(0, -(type.length + 1)));
-    const versionB = semver.coerce(fileB.slice(0, -(type.length + 1)));
+    const versionA = semver.coerce(fileA.slice(0, -(type.length + 1)), {
+      includePrerelease: true,
+    });
+    const versionB = semver.coerce(fileB.slice(0, -(type.length + 1)), {
+      includePrerelease: true,
+    });
 
     if (versionA && versionB) {
       return semver.compare(versionB, versionA);

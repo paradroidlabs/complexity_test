@@ -1,8 +1,8 @@
-import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
 import { queryClient } from "@/data/query-client";
 import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
+import { betterCodeBlocksFineGrainedOptionsQueries } from "@/plugins/thread-better-code-blocks/indexed-db/query-keys";
+import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
 
 export function createMirroredPortalContainer(
   codeBlock: CodeBlock,

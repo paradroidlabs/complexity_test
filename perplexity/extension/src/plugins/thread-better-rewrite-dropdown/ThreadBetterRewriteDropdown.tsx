@@ -11,9 +11,9 @@ import {
 } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useThreadMessageContext } from "@/plugins/_core/ui/groups/thread-message-context";
-import DesktopContent from "@/plugins/language-model-selector/components/desktop";
-import MobileContent from "@/plugins/language-model-selector/components/mobile";
-import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
+import { DesktopContent } from "@/plugins/language-model-selector/index.public";
+import { MobileContent } from "@/plugins/language-model-selector/index.public";
+import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/index.public";
 import { handleRewrite } from "@/plugins/thread-better-rewrite-dropdown/handle-rewrite";
 import { isLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
 import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";

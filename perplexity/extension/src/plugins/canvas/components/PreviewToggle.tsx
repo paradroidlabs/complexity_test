@@ -1,9 +1,9 @@
-import type { CanvasLanguage } from "@/plugins/canvas/canvas.types";
 import {
   CANVAS_LANGUAGE_PREVIEW_TOGGLE_TEXT,
   CANVAS_LANGUAGE_RAW_TOGGLE_TEXT,
 } from "@/plugins/canvas/canvases";
 import { useCanvasStore } from "@/plugins/canvas/store";
+import type { CanvasLanguage } from "@/plugins/canvas/types";
 
 export default function PreviewToggle({
   language,

@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { SEARCH_FILTERS } from "@/data/plugins/command-menu/items";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
+import { SEARCH_FILTERS } from "@/plugins/command-menu/public/items";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 
 export default function SearchFilterBadge() {
   const { filter, spacethreadTitle } = useCommandMenuStore();

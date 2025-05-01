@@ -2,8 +2,8 @@ import { useMutation } from "@tanstack/react-query";
 import type { Socket } from "socket.io-client";
 
 import { APP_CONFIG } from "@/app.config";
-import type { TtsVoice } from "@/data/plugins/thread-message-tts/types";
 import { InternalWebSocketManager } from "@/plugins/_api/web-socket/internal-web-socket-manager";
+import type { TtsVoice } from "@/plugins/thread-message-tts/types";
 
 export default function usePplxTtsRequest() {
   const socketRef = useRef<Socket | null>(null);

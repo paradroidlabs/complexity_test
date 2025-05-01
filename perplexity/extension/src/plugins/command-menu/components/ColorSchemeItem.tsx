@@ -1,8 +1,8 @@
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
-import type { ColorSchemeItem as ColorSchemeItemType } from "@/data/plugins/command-menu/types";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
 import type { BaseCommandMenuItem } from "@/plugins/command-menu/components/BaseItem";
 import BaseMenuItem from "@/plugins/command-menu/components/BaseItem";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
+import type { ColorSchemeItem as ColorSchemeItemType } from "@/plugins/command-menu/public/types";
 
 type ColorSchemeItemProps = BaseCommandMenuItem & ColorSchemeItemType;
 

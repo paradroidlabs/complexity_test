@@ -1,4 +1,5 @@
 import { sharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
+import type { QueryBoxType } from "@/plugins/_core/ui/groups/query-box/types";
 import { isLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
@@ -127,4 +128,35 @@ export function populateDefaults() {
   sharedQueryBoxStore
     .getState()
     .setSelectedLanguageModel(selectedLanguageModel);
+}
+
+export function getActiveQueryBoxTextarea({
+  type,
+}: {
+  type?: QueryBoxType;
+} = {}): JQuery<HTMLTextAreaElement> {
+  if (!type)
+    return $(
+      `${DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.ARBITRARY}:last`,
+    );
+
+  const selectorMap: Record<QueryBoxType, string> = {
+    main: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
+    space: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.SPACE,
+    "follow-up": DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.FOLLOW_UP,
+  };
+
+  return $(selectorMap[type]);
+}
+
+export function getActiveQueryBox({ type }: { type?: QueryBoxType } = {}) {
+  return getActiveQueryBoxTextarea({
+    type,
+  })
+    .parents(DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER)
+    .first();
+}
+
+export function getActiveTextarea(): HTMLTextAreaElement | null {
+  return getActiveQueryBoxTextarea()[0] ?? null;
 }

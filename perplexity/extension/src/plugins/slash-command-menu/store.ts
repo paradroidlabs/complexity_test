@@ -2,10 +2,10 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
+import { getActiveTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
 import type { FilterMode } from "@/plugins/slash-command-menu/FilterItems";
 import {
   deleteSelectedText,
-  getActiveTextarea,
   insertText,
   setTextareaSelection,
 } from "@/utils/textarea-utils";

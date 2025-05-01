@@ -6,7 +6,6 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import type { Theme } from "@/data/plugins/themes/theme-registry.types";
 import ThemeActionButton from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/ActionButton";
 import {
   ColorSchemeBadge,
@@ -14,6 +13,7 @@ import {
 } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/Badges";
 import ThemeCardBanner from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/Banner";
 import ThemeCardEditButton from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/EditButton";
+import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
 type ThemeCardProps = {

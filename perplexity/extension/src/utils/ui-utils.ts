@@ -1,4 +1,3 @@
-import type { QueryBoxType } from "@/data/plugins/query-box/types";
 import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
@@ -25,33 +24,6 @@ export class UiUtils {
     }
 
     return $messagesContainer;
-  }
-
-  static getActiveQueryBoxTextarea({
-    type,
-  }: {
-    type?: QueryBoxType;
-  } = {}): JQuery<HTMLTextAreaElement> {
-    if (!type)
-      return $(
-        `${DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.ARBITRARY}:last`,
-      );
-
-    const selectorMap: Record<QueryBoxType, string> = {
-      main: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
-      space: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.SPACE,
-      "follow-up": DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.FOLLOW_UP,
-    };
-
-    return $(selectorMap[type]);
-  }
-
-  static getActiveQueryBox({ type }: { type?: QueryBoxType } = {}) {
-    return UiUtils.getActiveQueryBoxTextarea({
-      type,
-    })
-      .parents(DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER)
-      .first();
   }
 
   static getStickyNavbar() {

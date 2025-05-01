@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { getLocalThemesService } from "@/services/indexed-db/themes";
+import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
 
 export function useLocalThemes() {
   return useQuery({

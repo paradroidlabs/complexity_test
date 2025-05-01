@@ -28,7 +28,12 @@ if (require.main === module) {
   const changelogEntries = changelogFiles
     .filter((file) => file.endsWith(".md"))
     .map((file) => file.replace(".md", ""))
-    .sort((a, b) => semver.compare(semver.coerce(b)!, semver.coerce(a)!));
+    .sort((a, b) =>
+      semver.compare(
+        semver.coerce(b, { includePrerelease: true })!,
+        semver.coerce(a, { includePrerelease: true })!,
+      ),
+    );
 
   changelogEntries.forEach((entry) => {
     versions[entry] =
@@ -43,7 +48,10 @@ if (require.main === module) {
 
   const sortedVersions = Object.fromEntries(
     Object.entries(versions).sort(([a], [b]) =>
-      semver.compare(semver.coerce(b)!, semver.coerce(a)!),
+      semver.compare(
+        semver.coerce(b, { includePrerelease: true })!,
+        semver.coerce(a, { includePrerelease: true })!,
+      ),
     ),
   );
 

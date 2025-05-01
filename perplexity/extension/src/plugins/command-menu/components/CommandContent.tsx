@@ -7,13 +7,6 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { InlineCode } from "@/components/ui/typography";
-import {
-  ZENMODE_ITEMS,
-  COLOR_SCHEME_ITEMS,
-  NAVIGATION_ITEMS,
-  SEARCH_ITEMS,
-} from "@/data/plugins/command-menu/items";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
 import ColorSchemeItem from "@/plugins/command-menu/components/ColorSchemeItem";
 import NavigationItem from "@/plugins/command-menu/components/NavigationItem";
@@ -22,6 +15,13 @@ import SpaceSearchItems from "@/plugins/command-menu/components/space-search-ite
 import SpaceThreadsSearchItems from "@/plugins/command-menu/components/space-search-items/SpaceThreadsSearchItems";
 import ThreadSearchItems from "@/plugins/command-menu/components/thread-search-items/ThreadSearchItems";
 import ZenModeItem from "@/plugins/command-menu/components/ZenModeItem";
+import {
+  ZENMODE_ITEMS,
+  COLOR_SCHEME_ITEMS,
+  NAVIGATION_ITEMS,
+  SEARCH_ITEMS,
+} from "@/plugins/command-menu/public/items";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 
 const FilteredContent = memo(function FilteredContent() {
   return (

@@ -3,7 +3,7 @@ import { sendMessage } from "webext-bridge/content-script";
 
 import { CommandItem } from "@/components/ui/command";
 import { formatHowLongAgo } from "@/data/dayjs";
-import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
+import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
 import type { ThreadSearchApi } from "@/services/pplx-api/pplx-api.types";
 
 type SpaceThreadItemProps = {

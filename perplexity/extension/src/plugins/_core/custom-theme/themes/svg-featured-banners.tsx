@@ -1,5 +1,5 @@
 import Cplx from "@/components/icons/Cplx";
-import type { BuiltInThemeId } from "@/data/plugins/themes/theme-registry";
+import type { BuiltInThemeId } from "@/plugins/_core/custom-theme/themes/theme-registry";
 
 const THEME_COLORS: Record<BuiltInThemeId, string> = {
   complexity: "oklch(74.37% 0.1304 255.6)",

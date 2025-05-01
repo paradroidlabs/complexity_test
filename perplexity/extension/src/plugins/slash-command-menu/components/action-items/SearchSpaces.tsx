@@ -1,6 +1,6 @@
 import PplxSpace from "@/components/icons/PplxSpace";
 import { CommandItem } from "@/components/ui/command";
-import { commandMenuStore } from "@/data/plugins/command-menu/store";
+import { commandMenuStore } from "@/plugins/command-menu/public/index.public";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/store";
 
 export default function SearchSpacesActionItem() {

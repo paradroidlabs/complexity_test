@@ -1,11 +1,17 @@
-import { registerBetterCodeBlocksFineGrainedOptionsService } from "@/services/indexed-db/better-code-blocks";
-import { registerPromptHistoryService } from "@/services/indexed-db/prompt-history";
-import { registerQueryCacheService } from "@/services/indexed-db/query-cache";
-import { registerLocalThemesService } from "@/services/indexed-db/themes";
-
 export function registerProxyServices() {
-  registerQueryCacheService();
-  registerLocalThemesService();
-  registerBetterCodeBlocksFineGrainedOptionsService();
-  registerPromptHistoryService();
+  const entries = import.meta.glob("@/**/indexed-db/index.ts", {
+    eager: true,
+  }) as Record<string, Record<string, unknown>>;
+
+  for (const [path, module] of Object.entries(entries)) {
+    if (!("registerService" in module)) continue;
+
+    const registerService = module.registerService;
+
+    if (typeof registerService !== "function") {
+      throw new Error(`registerService is not a function in ${path}`);
+    }
+
+    registerService();
+  }
 }
