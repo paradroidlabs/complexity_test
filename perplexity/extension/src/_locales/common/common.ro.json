@@ -1,0 +1,38 @@
+{
+  "extensionDescription": "Complexity - Perplexity AI Îmbunătățit",
+  "sidebar": {
+    "supporterMessage": "Vă rugăm să considerați să deveniți un <emphasis>Susținător</emphasis> pentru a menține proiectul în viață!"
+  },
+  "sponsorDialog": {
+    "title": "Complexity Are Nevoie de Ajutorul Tău!",
+    "description": "Această extensie rafinată și bogată în funcționalități este rezultatul nenumăratelor ore de dezvoltare și îmbunătățire dedicată. Dacă apreciezi atenția la detalii și îmbunătățirile continue, te rugăm să consideri susținerea dezvoltării",
+    "descriptionLine2": "Dacă Complexity adaugă valoare fluxului tău de lucru, te rugăm să consideri contribuția la viitorul său!",
+    "donation": {
+      "title": "💖 Fă o donație"
+    },
+    "sponsorship": {
+      "title": "🌟 Ai o ofertă pentru sponsorizare pe termen lung?",
+      "contactEmail": "Contactează prin email"
+    }
+  },
+  "misc": {
+    "words": "cuvinte",
+    "characters": "caractere",
+    "expand": "Extinde",
+    "collapse": "Restrânge",
+    "rewrite": "Rescrie",
+    "speakAloud": "Citește cu voce tare",
+    "stop": "Oprește"
+  },
+  "releaseNotes": {
+    "title": "Actualizat la v{{version}}",
+    "dontShowAgain": "Respinge și nu mai afișa pentru actualizările viitoare",
+    "confirmDialog": {
+      "title": "Confirmare",
+      "message": "Ești sigur că vrei să respingi și să nu mai afișezi pentru actualizările viitoare? Poți întotdeauna să reactivezi acest pop-up în pagina de setări.",
+      "cancel": "Anulează",
+      "confirm": "Înțeleg"
+    },
+    "dismiss": "Respinge"
+  }
+}

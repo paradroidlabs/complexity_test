@@ -1,0 +1,38 @@
+{
+  "extensionDescription": "Complexity | Perplexity AI Supercharged",
+  "sidebar": {
+    "supporterMessage": "Kérjük, fontolja meg, hogy <emphasis>Támogató</emphasis> lesz a projekt életben tartásához!"
+  },
+  "sponsorDialog": {
+    "title": "A Complexity-nek szüksége van a segítségére!",
+    "description": "Ez a kifinomult és funkciógazdag bővítmény számtalan órányi fejlesztés és finomítás eredménye. Ha értékeli a részletekre fordított figyelmet és a folyamatos fejlesztéseket, kérjük, fontolja meg a fejlesztés támogatását",
+    "descriptionLine2": "Ha a Complexity értéket ad a munkafolyamatához, kérjük, fontolja meg, hogy hozzájárul a jövőjéhez!",
+    "donation": {
+      "title": "💖 Adományozás"
+    },
+    "sponsorship": {
+      "title": "🌟 Van ajánlata hosszú távú szponzorációra?",
+      "contactEmail": "Kapcsolat e-mailben"
+    }
+  },
+  "misc": {
+    "words": "szó",
+    "characters": "karakter",
+    "expand": "Kibontás",
+    "collapse": "Összecsukás",
+    "rewrite": "Átírás",
+    "speakAloud": "Felolvasás",
+    "stop": "Leállítás"
+  },
+  "releaseNotes": {
+    "title": "Frissítve v{{version}} verzióra",
+    "dontShowAgain": "Bezárás és ne jelenjen meg a jövőbeni frissítéseknél",
+    "confirmDialog": {
+      "title": "Megerősítés",
+      "message": "Biztosan be szeretné zárni és nem szeretné látni a jövőbeni frissítéseknél? Ezt a felugró ablakot bármikor újra engedélyezheti a beállítások oldalon.",
+      "cancel": "Mégse",
+      "confirm": "Értem"
+    },
+    "dismiss": "Bezárás"
+  }
+}

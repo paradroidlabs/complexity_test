@@ -1,0 +1,38 @@
+{
+  "extensionDescription": "Complexity | Perplexity AI Supercharged",
+  "sidebar": {
+    "supporterMessage": "プロジェクトを継続するために<emphasis>サポーター</emphasis>になることをご検討ください！"
+  },
+  "sponsorDialog": {
+    "title": "Complexityはあなたの助けを必要としています！",
+    "description": "この洗練された機能豊富な拡張機能は、数え切れない時間の開発と改良の結果です。細部へのこだわりと継続的な改善を評価していただけるなら、開発のサポートをご検討ください",
+    "descriptionLine2": "もしComplexityがあなたのワークフローに価値をもたらしているなら、その未来に貢献することをご検討ください！",
+    "donation": {
+      "title": "💖 寄付をする"
+    },
+    "sponsorship": {
+      "title": "🌟 長期スポンサーシップのご提案をお持ちですか？",
+      "contactEmail": "メールでお問い合わせ"
+    }
+  },
+  "misc": {
+    "words": "単語",
+    "characters": "文字",
+    "expand": "展開",
+    "collapse": "折りたたむ",
+    "rewrite": "書き直す",
+    "speakAloud": "音声で読み上げ",
+    "stop": "停止"
+  },
+  "releaseNotes": {
+    "title": "v{{version}}に更新されました",
+    "dontShowAgain": "今後の更新で表示しない",
+    "confirmDialog": {
+      "title": "確認",
+      "message": "今後の更新でこのポップアップを表示しないようにしますか？設定ページでいつでも再有効化できます。",
+      "cancel": "キャンセル",
+      "confirm": "了解しました"
+    },
+    "dismiss": "閉じる"
+  }
+}

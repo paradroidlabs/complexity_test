@@ -14,11 +14,11 @@ export type ExtendedManifestV3Export = PlainManifest & {
 
 export const baseManifest: ExtendedManifestV3Export = {
   manifest_version: 3,
-  name: "__MSG_appName__",
-  description: "__MSG_appDesc__",
+  name: "Complexity | Perplexity AI Supercharged",
+  description:
+    "Enhance Perplexity AI with fast model switching, custom themes, and advanced features for seamless AI conversations",
   version: packageData.version,
   homepage_url: "https://cplx.app",
-  default_locale: "en",
 
   icons: {
     16: "public/img/logo-16.png",

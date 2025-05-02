@@ -1,0 +1,38 @@
+{
+  "extensionDescription": "Complexity | Perplexity AI Supercharged",
+  "sidebar": {
+    "supporterMessage": "请考虑成为<emphasis>支持者</emphasis>以维持项目的发展！"
+  },
+  "sponsorDialog": {
+    "title": "Complexity 需要您的帮助！",
+    "description": "这个精心打磨且功能丰富的扩展程序是无数小时开发和改进的成果。如果您欣赏我们对细节的关注和持续的改进，请考虑支持开发",
+    "descriptionLine2": "如果 Complexity 为您的工作流程增添了价值，请考虑为其未来发展做出贡献！",
+    "donation": {
+      "title": "💖 捐赠"
+    },
+    "sponsorship": {
+      "title": "🌟 有长期赞助的提议吗？",
+      "contactEmail": "通过邮件联系"
+    }
+  },
+  "misc": {
+    "words": "字数",
+    "characters": "字符",
+    "expand": "展开",
+    "collapse": "收起",
+    "rewrite": "重写",
+    "speakAloud": "朗读",
+    "stop": "停止"
+  },
+  "releaseNotes": {
+    "title": "已更新至 v{{version}}",
+    "dontShowAgain": "关闭并不再显示未来更新",
+    "confirmDialog": {
+      "title": "确认",
+      "message": "您确定要关闭并不再显示未来更新吗？您可以随时在设置页面重新启用此弹窗。",
+      "cancel": "取消",
+      "confirm": "我明白了"
+    },
+    "dismiss": "关闭"
+  }
+}

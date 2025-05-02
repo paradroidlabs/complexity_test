@@ -5,35 +5,8 @@ alwaysApply: false
 ---
 ## Task
 
-1. UPDATE or CREATE the json locale files for the specified language
+1. UPDATE or CREATE the json locale files for the specified language (use English as reference)
 2. Process all languages if not being asked specifically for one
-
-## Locale Folders
-
-The following are the folders containing the json locale files for supported languages:
-
-/src/_locales/en (English)
-/src/_locales/fr (French)
-/src/_locales/de (German)
-/src/_locales/ja (Japanese)
-/src/_locales/ko (Korean)
-/src/_locales/zh_CN (Simplified Chinese)
-/src/_locales/zh_TW (Traditional Chinese)
-/src/_locales/es (Spanish)
-/src/_locales/hi (Hindi)
-/src/_locales/it (Italian)
-/src/_locales/pt_BR (Brazilian Portuguese)
-/src/_locales/cs (Czech)
-/src/_locales/hr (Croatian)
-/src/_locales/hu (Hungarian)
-/src/_locales/pl (Polish)
-/src/_locales/pt_PT (European Portuguese)
-/src/_locales/sk (Slovak)
-/src/_locales/sr (Serbian, Cyrillic)
-/src/_locales/nl (Dutch)
-/src/_locales/el (Greek)
-/src/_locales/ro (Romanian)
-/src/_locales/id (Indonesian)
 
 ## Output Instructions
 
@@ -55,9 +28,6 @@ The following are the folders containing the json locale files for supported lan
 
 ## Translation Context
 
-- This is a browser extension that enhances the user experience on Perplexity AI (www.perplexity.ai), an AI-powered search engine.
-- The extension adds various features and improvements to make the website more user-friendly.
-- The extension's interface needs to be accessible to users in multiple languages.
 - Key content requiring translation includes:
   - User-facing messages and notifications
   - Navigation menus and buttons
@@ -66,5 +36,5 @@ The following are the folders containing the json locale files for supported lan
   - Error messages
   - Plugin descriptions and instructions
 - Translations should maintain a friendly, clear, and professional tone
-- Some technical terms and brand names (like "Complexity", "Perplexity") should NOT be translated
+- DO NOT translate jargons and brand names
 - Emojis and other universal symbols can be kept as-is

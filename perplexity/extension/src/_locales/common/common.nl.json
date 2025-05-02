@@ -1,0 +1,38 @@
+{
+  "extensionDescription": "Complexity - Perplexity AI Verbeterd",
+  "sidebar": {
+    "supporterMessage": "Overweeg alstublieft om een <emphasis>Supporter</emphasis> te worden om het project levend te houden!"
+  },
+  "sponsorDialog": {
+    "title": "Complexity Heeft Jouw Hulp Nodig!",
+    "description": "Deze gepolijste en functierijke extensie is het resultaat van talloze uren toegewijde ontwikkeling en verfijning. Als je de aandacht voor detail en voortdurende verbeteringen waardeert, overweeg dan de ontwikkeling te ondersteunen",
+    "descriptionLine2": "Als Complexity waarde toevoegt aan je workflow, overweeg dan alsjeblieft bij te dragen aan de toekomst ervan!",
+    "donation": {
+      "title": "💖 Doe een donatie"
+    },
+    "sponsorship": {
+      "title": "🌟 Heb je een aanbod voor langdurige sponsoring?",
+      "contactEmail": "Contact via e-mail"
+    }
+  },
+  "misc": {
+    "words": "woorden",
+    "characters": "tekens",
+    "expand": "Uitklappen",
+    "collapse": "Inklappen",
+    "rewrite": "Herschrijven",
+    "speakAloud": "Hardop voorlezen",
+    "stop": "Stop"
+  },
+  "releaseNotes": {
+    "title": "Bijgewerkt naar v{{version}}",
+    "dontShowAgain": "Verberg en toon niet meer voor toekomstige updates",
+    "confirmDialog": {
+      "title": "Bevestigen",
+      "message": "Weet je zeker dat je dit wilt verbergen en niet meer wilt tonen voor toekomstige updates? Je kunt deze pop-up altijd opnieuw inschakelen in de instellingenpagina.",
+      "cancel": "Annuleren",
+      "confirm": "Ik begrijp het"
+    },
+    "dismiss": "Verbergen"
+  }
+}

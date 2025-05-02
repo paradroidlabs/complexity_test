@@ -1,7 +1,5 @@
 import i18n from "i18next";
 
-import { whereAmI } from "@/utils/utils";
-
 export type SupportedLangs = (typeof supportedLangs)[number];
 
 export const supportedLangs = [
@@ -54,34 +52,33 @@ export const webStoreLangsMap: Record<SupportedLangs, string> = {
   "id-ID": "id",
 };
 
-const enModules = import.meta.glob("~/_locales/en/*.json");
-
 type VersionedRemoteResources = Record<string, any>;
 
 type Resources = {
   [key: string]: VersionedRemoteResources;
 };
 
+const mainLocales = import.meta.glob("@/_locales/*/*.*.json");
+const pluginLocales = import.meta.glob("@/plugins/*/_locales/*.*.json");
+
 async function loadLanguageResources(
   language: string,
 ): Promise<VersionedRemoteResources> {
-  const langFolderName =
-    webStoreLangsMap[language as keyof typeof webStoreLangsMap];
-
-  const moduleImports = import.meta.glob("~/_locales/*/*.json");
-
+  const langCode = webStoreLangsMap[language as keyof typeof webStoreLangsMap];
   const resources: VersionedRemoteResources = {};
 
   const importPromises: Promise<any>[] = [];
   const importKeys: string[] = [];
 
-  Object.keys(moduleImports).forEach((path) => {
-    if (path.includes(`/${langFolderName}/`)) {
-      const fileName = path.split("/").pop()?.replace(".json", "");
-      if (fileName) {
-        const importFn = moduleImports[path];
+  const allLocales = { ...mainLocales, ...pluginLocales };
+  Object.keys(allLocales).forEach((path) => {
+    if (path.endsWith(`.${langCode}.json`)) {
+      const namespace = path.split("/").pop()?.split(".")[0];
+
+      if (namespace) {
+        const importFn = allLocales[path];
         if (importFn) {
-          importKeys.push(fileName);
+          importKeys.push(namespace);
           importPromises.push(importFn());
         }
       }
@@ -97,28 +94,15 @@ async function loadLanguageResources(
   return resources;
 }
 
-async function getCookieLocale(
-  isExtension: boolean,
-): Promise<string | undefined> {
-  if (isExtension) {
-    if (await chrome.permissions.contains({ permissions: ["cookies"] })) {
-      const cookie = await chrome.cookies.get({
-        name: "pplx.chosen-locale",
-        url: "https://www.perplexity.ai",
-      });
-      return cookie?.value;
-    }
-  } else {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("pplx.chosen-locale="))
-      ?.split("=")[1];
-  }
+async function getCookieLocale(): Promise<string | undefined> {
+  return document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("pplx.chosen-locale="))
+    ?.split("=")[1];
 }
 
 export async function getLanguage() {
-  const isExtension = whereAmI() === "unknown";
-  const cookieLocale = await getCookieLocale(isExtension);
+  const cookieLocale = await getCookieLocale();
   const pplxLang = cookieLocale || navigator.language || "en-US";
 
   return supportedLangs.includes(pplxLang as SupportedLangs)
@@ -131,9 +115,18 @@ export const t = i18n.t;
 export { i18n };
 
 export async function initializeI18next() {
-  const namespaces = Object.keys(enModules)
-    .map((path) => path.split("/").pop()?.replace(".json", ""))
-    .filter(Boolean) as string[];
+  const namespaces = new Set<string>();
+
+  [...Object.keys(mainLocales), ...Object.keys(pluginLocales)].forEach(
+    (path) => {
+      if (path.endsWith(".en.json")) {
+        const namespace = path.split("/").pop()?.split(".")[0];
+        if (namespace) {
+          namespaces.add(namespace);
+        }
+      }
+    },
+  );
 
   const language = await getLanguage();
 
@@ -158,7 +151,7 @@ export async function initializeI18next() {
     lng: language,
     fallbackLng: "en-US",
     defaultNS: "common",
-    ns: namespaces,
+    ns: Array.from(namespaces),
     resources,
   });
 }
