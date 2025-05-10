@@ -42,6 +42,7 @@ export const ALL_PLUGINS: ExtensionSettings["plugins"] = produce(
         "queryBox:submitOnCtrlEnter",
         "thread:customThreadContainerWidth",
         "queryBox:spacesThreadsForceWritingMode",
+        "incognitoByDefault",
       ];
 
       if (excludedPlugins.includes(pluginIdKey)) return;
