@@ -1,3 +1,9 @@
-.mb-lg.md\:absolute.text-center:not([home-slogan]) {
-  display: none;
+.mb-lg.md\:absolute.text-center {
+  &:not([home-slogan]) {
+    display: none;
+  }
+
+  > *:not([home-slogan-content]) {
+    display: none;
+  }
 }

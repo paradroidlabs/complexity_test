@@ -35,9 +35,14 @@ async function setupCustomSlogan({
 
   const $sloganContent = $("<span>").html(sloganText);
 
-  $sloganContent.addClass("x:text-balance x:text-4xl x:animate-in x:fade-in-0");
-
-  $slogan.html("");
+  $sloganContent
+    .addClass(
+      "x:text-balance x:text-3xl x:md:text-4xl x:animate-in x:fade-in-0",
+    )
+    .attr(
+      `${DomSelectorsService.internalAttributes.HOME.SLOGAN}-content`,
+      "true",
+    );
 
   $slogan.append($sloganContent);
 }
