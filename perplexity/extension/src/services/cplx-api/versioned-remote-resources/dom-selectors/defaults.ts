@@ -46,7 +46,7 @@ export const DOM_SELECTORS: DomSelectors = {
         EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
       },
       STICKY_HEADER: "div.md\\:sticky > .max-w-threadContentWidth",
-      SOURCES: '[class*="md:grid-cols-"].grid.grid-flow-col',
+      SOURCES: ".gap-sm.grid.grid-cols-4.md\\:px-0",
       ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
       BOTTOM_BAR:
