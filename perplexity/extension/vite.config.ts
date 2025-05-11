@@ -95,8 +95,4 @@ export default defineConfig(() => ({
     exclude: ["node_modules", "e2e/**"],
     setupFiles: ["./tests/vitest.setup.ts"],
   },
-
-  legacy: {
-    skipWebSocketTokenCheck: true,
-  },
 }));
