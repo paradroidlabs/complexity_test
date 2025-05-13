@@ -302,15 +302,51 @@ describe("AsyncDependencyRegistry", () => {
   });
 
   it("should handle missing dependency registrations", async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+
+    asyncDependencyRegistry.setVerbose(true);
+
+    vi.clearAllMocks();
+
     asyncDependencyRegistry.register({
       id: "testWithDeps",
       dependencies: ["testSimple"],
       loader: async (deps) => deps.testSimple.length,
     });
 
-    await expect(asyncDependencyRegistry.load("testWithDeps")).rejects.toThrow(
-      /Dependency "testWithDeps" cannot be loaded because it has unregistered dependencies/,
+    const loadPromise = asyncDependencyRegistry.load("testWithDeps");
+
+    let resolved = false;
+    void loadPromise.then(() => {
+      resolved = true;
+    });
+
+    expect(console.warn).not.toHaveBeenCalled();
+
+    await vi.advanceTimersByTimeAsync(5100);
+
+    expect(console.warn).toHaveBeenCalledWith(
+      expect.stringContaining(
+        '5 seconds have passed, but load operation for "testWithDeps" is still hanging because dependencies are not registered: testSimple',
+      ),
     );
+
+    expect(resolved).toBe(false);
+
+    asyncDependencyRegistry.register({
+      id: "testSimple",
+      dependencies: [],
+      loader: async () => "test value",
+    });
+
+    await vi.advanceTimersByTimeAsync(100);
+
+    const result = await loadPromise;
+
+    expect(result).toBe(10);
+    expect(resolved).toBe(true);
+
+    vi.useRealTimers();
   });
 
   it("should load dependencies with no prerequisites in parallel", async () => {
@@ -392,7 +428,7 @@ describe("AsyncDependencyRegistry", () => {
     asyncDependencyRegistry.register({
       id: "parallelDepL1A",
       dependencies: ["parallelDep1"],
-      loader: async (deps) => {
+      loader: async (_deps) => {
         const startTime = Date.now();
         await new Promise((resolve) => setTimeout(resolve, level1Delays[0]));
         const timing = Date.now() - startTime;
@@ -404,7 +440,7 @@ describe("AsyncDependencyRegistry", () => {
     asyncDependencyRegistry.register({
       id: "parallelDepL1B",
       dependencies: ["parallelDep1"],
-      loader: async (deps) => {
+      loader: async (_deps) => {
         const startTime = Date.now();
         await new Promise((resolve) => setTimeout(resolve, level1Delays[1]));
         const timing = Date.now() - startTime;
@@ -558,7 +594,9 @@ describe("AsyncDependencyRegistry", () => {
 
   it("should toggle verbose setting", async () => {
     // Create with verbose=false initially
-    const manager = AsyncDependencyRegistry.create<TestRegistry>({ verbose: false });
+    const manager = AsyncDependencyRegistry.create<TestRegistry>({
+      verbose: false,
+    });
 
     vi.clearAllMocks();
 

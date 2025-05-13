@@ -41,6 +41,9 @@ export class AsyncDependencyRegistry<
     keyof TRegistry,
     Record<DependencyState, number>
   > = new Map();
+  private _pendingWarnings: Map<keyof TRegistry, NodeJS.Timeout> = new Map();
+  private _pendingResolvers: Map<keyof TRegistry, Set<() => Promise<void>>> =
+    new Map();
 
   constructor(options: AsyncDependencyRegistryOptions = {}) {
     this.verbose = options.verbose ?? false;
@@ -149,9 +152,18 @@ export class AsyncDependencyRegistry<
   ): void {
     const now = Date.now();
     const stateTimestamps = this.stateTransitionTimestamps.get(id);
+    const previousState = this.dependencyStates.get(id);
 
     if (stateTimestamps) {
       stateTimestamps[state] = now;
+    }
+
+    if (previousState === "inactive" && state !== "inactive") {
+      const warningTimeoutId = this._pendingWarnings.get(id);
+      if (warningTimeoutId) {
+        clearTimeout(warningTimeoutId);
+        this._pendingWarnings.delete(id);
+      }
     }
 
     this.dependencyStates.set(id, state);
@@ -209,6 +221,25 @@ export class AsyncDependencyRegistry<
         if (missingDeps.size === 0) {
           this.updateDependencyState(id, "pending");
           this.pendingDependencies.delete(id);
+
+          // Resolve any pending promises for this dependency now that it's ready
+          const resolvers = this._pendingResolvers.get(id);
+          if (resolvers && resolvers.size > 0) {
+            if (this.verbose) {
+              console.info(
+                `Resolving ${resolvers.size} pending promises for "${String(id)}" now that dependencies are registered.`,
+              );
+            }
+
+            // Call all resolvers
+            for (const resolver of resolvers) {
+              void resolver(); // void to ignore the promise
+            }
+
+            // Clear the resolvers
+            resolvers.clear();
+          }
+
           if (this.verbose) {
             console.info(
               `Dependency "${String(
@@ -248,9 +279,31 @@ export class AsyncDependencyRegistry<
       const missingDepsList = missingDeps
         ? Array.from(missingDeps).map(String).join(", ")
         : "unknown dependencies";
-      throw new Error(
-        `Dependency "${String(id)}" cannot be loaded because it has unregistered dependencies: ${missingDepsList}.`,
-      );
+
+      const warningTimeoutId = setTimeout(() => {
+        if (this.dependencyStates.get(id) === "inactive") {
+          console.warn(
+            `5 seconds have passed, but load operation for "${String(id)}" is still hanging because dependencies are not registered: ${missingDepsList}. The promise will hang indefinitely until these dependencies are registered.`,
+          );
+        }
+      }, 5000);
+
+      this._pendingWarnings.set(id, warningTimeoutId);
+
+      return new Promise<TRegistry[K]>((resolve) => {
+        if (this._pendingResolvers == null) {
+          this._pendingResolvers = new Map();
+        }
+
+        if (!this._pendingResolvers.has(id)) {
+          this._pendingResolvers.set(id, new Set());
+        }
+
+        this._pendingResolvers.get(id)?.add(async () => {
+          const value = await this.load(id);
+          resolve(value);
+        });
+      });
     }
 
     if (loadingPath.has(id)) {
@@ -323,6 +376,10 @@ export class AsyncDependencyRegistry<
   }
 
   reset(): void {
+    for (const timeoutId of this._pendingWarnings.values()) {
+      clearTimeout(timeoutId);
+    }
+
     this.dependencies.clear();
     this.dependencyStates.clear();
     this.dependencyValues.clear();
@@ -330,6 +387,8 @@ export class AsyncDependencyRegistry<
     this.loadingPromises.clear();
     this.registrationTimestamps.clear();
     this.stateTransitionTimestamps.clear();
+    this._pendingWarnings.clear();
+    this._pendingResolvers.clear();
   }
 
   /**
