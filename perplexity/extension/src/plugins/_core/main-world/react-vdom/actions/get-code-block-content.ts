@@ -3,54 +3,83 @@ import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resour
 import { errorWrapper } from "@/utils/error-wrapper";
 import { getReactFiberKey } from "@/utils/utils";
 
-export function getCodeBlockContent(params: {
+export type CodeBlockContentParams = {
   messageBlockIndex: number;
   codeBlockIndex: number;
-}): {
+};
+
+export type CodeBlockContent = {
   code: string;
   language: string;
-} | null {
+} | null;
+
+export type CodeBlocksContentParams = {
+  codeBlocks: CodeBlockContentParams[];
+};
+
+export function getCodeBlocksContent(
+  params: CodeBlocksContentParams,
+): CodeBlockContent[] {
+  return params.codeBlocks.map(({ messageBlockIndex, codeBlockIndex }) =>
+    getCodeBlockContent({ messageBlockIndex, codeBlockIndex }),
+  );
+}
+
+export function getCodeBlockContent(
+  params: CodeBlockContentParams,
+): CodeBlockContent {
   const { messageBlockIndex, codeBlockIndex } = params;
 
-  const selector = `${DomSelectorsService.cplxAttribute(
-    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
-  )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
-    DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
-  )}[data-index="${codeBlockIndex}"] pre`;
-
+  const selector = buildCodeBlockSelector(messageBlockIndex, codeBlockIndex);
   const $el = $(selector);
 
   if (!$el[0]) return null;
 
   const fiberNode = ($el[0] as any)[getReactFiberKey($el[0])];
 
-  const [code, error] = errorWrapper(() =>
+  const [code, codeError] = extractCodeContent(fiberNode);
+  if (codeError || code == null) return null;
+
+  const [language, languageError] = extractLanguageInfo(fiberNode);
+
+  return {
+    code,
+    language: languageError || language == null ? "text" : language,
+  };
+}
+
+function buildCodeBlockSelector(
+  messageBlockIndex: number,
+  codeBlockIndex: number,
+): string {
+  return `${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+  )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
+  )}[data-index="${codeBlockIndex}"] pre`;
+}
+
+function extractCodeContent(fiberNode: any): [string | null, Error | null] {
+  return errorWrapper(() =>
     findReactFiberNodeValue({
       fiberNode,
       condition: (node) => node.memoizedProps.children.props.children != null,
       select: (node) => node.memoizedProps.children.props.children as string,
     }),
   )();
+}
 
-  const [language, error2] = errorWrapper(() =>
+function extractLanguageInfo(fiberNode: any): [string | null, Error | null] {
+  return errorWrapper(() =>
     findReactFiberNodeValue({
       fiberNode,
       condition: (node) => node.memoizedProps.children.props.className != null,
       select: (node) => {
-        const language = node.memoizedProps.children.props.className.replace(
+        return node.memoizedProps.children.props.className.replace(
           /^language-/,
           "",
         );
-
-        return language;
       },
     }),
   )();
-
-  if (error || code == null) return null;
-
-  return {
-    code,
-    language: error2 || language == null ? "text" : language,
-  };
 }

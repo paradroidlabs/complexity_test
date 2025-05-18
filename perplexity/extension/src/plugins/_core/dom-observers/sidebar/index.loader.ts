@@ -5,10 +5,7 @@ import {
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
-import {
-  findActiveSidebarContentTab,
-  findSidebarWrapper,
-} from "@/plugins/_core/dom-observers/sidebar/utils";
+import { findSidebarWrapper } from "@/plugins/_core/dom-observers/sidebar/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 
 declare module "@/plugins/_core/dom-observers/types" {
@@ -49,10 +46,6 @@ async function observeSidebar() {
         {
           callback: findSidebarWrapper,
           id: createTaskId("sidebar", "wrapper"),
-        },
-        {
-          callback: findActiveSidebarContentTab,
-          id: createTaskId("sidebar", "activeTab"),
         },
       ]),
   });

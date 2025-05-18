@@ -5,6 +5,9 @@
 import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/types";
 
 export const DOM_SELECTORS: DomSelectors = {
+  SIDEBAR: {
+    WRAPPER: ".group\\/sidebar",
+  },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
     NAVBAR: ".h-headerHeight",

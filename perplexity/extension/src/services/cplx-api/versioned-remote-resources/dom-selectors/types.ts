@@ -1,6 +1,9 @@
 import { z } from "zod";
 
 export const DomSelectorsSchema = z.object({
+  SIDEBAR: z.object({
+    WRAPPER: z.string(),
+  }),
   THREAD: z.object({
     NAVBAR: z.string(),
     PAGE_WRAPPER: z.string(),

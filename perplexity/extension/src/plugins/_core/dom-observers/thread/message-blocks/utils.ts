@@ -95,11 +95,21 @@ async function processMessageBlock(
 function parseMessageBlock($messageBlock: JQuery<Element>) {
   const selectors = DomSelectorsService.cachedSync.THREAD.MESSAGE;
 
-  const $query = $messageBlock.find(selectors.QUERY_WRAPPER);
+  const $elements = $messageBlock.find(
+    [
+      selectors.QUERY_WRAPPER,
+      selectors.SOURCES,
+      selectors.ANSWER,
+      selectors.BOTTOM_BAR,
+    ].join(", "),
+  );
+
+  const $query = $elements.filter(selectors.QUERY_WRAPPER);
+  const $sources = $elements.filter(selectors.SOURCES);
+  const $answer = $elements.filter(selectors.ANSWER);
+  const $bottomBar = $elements.filter(selectors.BOTTOM_BAR);
+
   const $queryHoverContainer = $query.find(selectors.QUERY_HOVER_CONTAINER);
-  const $sources = $messageBlock.find(selectors.SOURCES);
-  const $answer = $messageBlock.find(selectors.ANSWER);
-  const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
   $query.internalComponentAttr(
     DomSelectorsService.internalAttributes.THREAD.MESSAGE.QUERY,
@@ -133,10 +143,10 @@ function getMessageBlockStates({
 }): MessageBlock["states"] {
   const { $wrapper, $query, $bottomBar } = messageBlockNodes;
 
-  const isVirtualized =
-    $wrapper.find(
-      DomSelectorsService.cachedSync.THREAD.MESSAGE.INNER_WRAPPER,
-    )[0] == null;
+  const hasInnerWrapper =
+    $wrapper.find(DomSelectorsService.cachedSync.THREAD.MESSAGE.INNER_WRAPPER)
+      .length > 0;
+  const isVirtualized = !hasInnerWrapper;
 
   const isInFlight = isVirtualized
     ? false

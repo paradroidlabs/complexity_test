@@ -7,6 +7,9 @@ import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks
 import type { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
+const astCache = new Map<string, any>();
+const mdAstProcessor = unified().use(remarkParse).use(remarkGfm);
+
 export async function findCodeBlocks(
   messageBlocks: MessageBlock[],
 ): Promise<CodeBlock[][]> {
@@ -32,8 +35,10 @@ async function processCodeBlocksForMessageBlock(
     .find(DomSelectorsService.cachedSync.THREAD.MESSAGE.CODE_BLOCK.WRAPPER)
     .toArray();
 
-  const codeBlocksPromises = $codeBlockElements.map(
-    async (codeBlockElement, codeBlockIndex) => {
+  if ($codeBlockElements.length === 0) return [];
+
+  const codeBlocks = $codeBlockElements.map(
+    (codeBlockElement, codeBlockIndex) => {
       const $codeBlock = $(codeBlockElement);
 
       $codeBlock
@@ -47,38 +52,51 @@ async function processCodeBlocksForMessageBlock(
           .NATIVE_COPY_BUTTON,
       );
 
-      const content = await getCodeBlockContent({
-        messageBlockIndex,
-        codeBlockIndex,
-        $wrapper: $codeBlock,
-      });
-
-      const states = {
-        isInFlight: isCodeBlockInFlight({
-          messageBlocks,
-          messageBlockIndex,
-          codeBlockIndex,
-        }),
-      };
-
       return {
+        index: codeBlockIndex,
         nodes: {
           $wrapper: $codeBlock,
           $nativeCopyButton,
         },
-        content,
-        states,
-      } satisfies CodeBlock;
+        states: {
+          isInFlight: isCodeBlockInFlight({
+            messageBlocks,
+            messageBlockIndex,
+            codeBlockIndex,
+          }),
+        },
+      };
     },
   );
 
-  return Promise.all(codeBlocksPromises);
+  const codeBlockContents = await getCodeBlocksContent(
+    messageBlockIndex,
+    codeBlocks.map((block) => block.index),
+  );
+
+  return codeBlocks.map(
+    (block, idx) =>
+      ({
+        nodes: block.nodes,
+        content: codeBlockContents[idx] || {
+          language:
+            block.nodes.$wrapper.find(".text-text-200.font-thin:last").text() ||
+            "text",
+          code: block.nodes.$wrapper.find("code:last").text() || "",
+        },
+        states: block.states,
+      }) satisfies CodeBlock,
+  );
 }
 
-const mdAstProcessor = unified().use(remarkParse).use(remarkGfm);
-
 function parseCodeBlocksFromString(messageBlock: MessageBlock): CodeBlock[] {
-  const ast = mdAstProcessor.parse(messageBlock.content.answer);
+  const content = messageBlock.content.answer;
+
+  let ast = astCache.get(content);
+  if (ast == null) {
+    ast = mdAstProcessor.parse(content);
+    astCache.set(content, ast);
+  }
 
   const codeBlocks: CodeBlock[] = [];
 
@@ -105,32 +123,24 @@ function parseCodeBlocksFromString(messageBlock: MessageBlock): CodeBlock[] {
   return codeBlocks;
 }
 
-async function getCodeBlockContent({
-  messageBlockIndex,
-  codeBlockIndex,
-  $wrapper,
-}: {
-  messageBlockIndex: number;
-  codeBlockIndex: number;
-  $wrapper: JQuery<HTMLElement>;
-}): Promise<CodeBlock["content"]> {
-  const data = await sendMessage(
-    "reactVdom:getCodeBlockContent",
-    {
-      messageBlockIndex,
+async function getCodeBlocksContent(
+  messageBlockIndex: number,
+  codeBlockIndices: number[],
+): Promise<Array<{ language: string; code: string } | null>> {
+  if (codeBlockIndices.length === 0) return [];
 
-      codeBlockIndex,
+  const codeBlocks = codeBlockIndices.map((codeBlockIndex) => ({
+    messageBlockIndex,
+    codeBlockIndex,
+  }));
+
+  return sendMessage(
+    "reactVdom:getCodeBlocksContent",
+    {
+      codeBlocks,
     },
     "window",
   );
-
-  return {
-    language:
-      data?.language ??
-      $wrapper.find(".text-text-200.font-thin:last").text() ??
-      "text",
-    code: data?.code ?? $wrapper.find("code:last").text() ?? "",
-  };
 }
 
 function isCodeBlockInFlight({

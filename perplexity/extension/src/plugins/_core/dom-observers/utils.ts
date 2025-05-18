@@ -35,3 +35,19 @@ export function shouldEnableCoreObserver({
     );
   });
 }
+
+export function isInternalNodeExists({
+  node,
+  selector,
+}: {
+  node?: HTMLElement;
+  selector?: string;
+}) {
+  if (node == null) return false;
+
+  if (!document.body.contains(node)) return false;
+
+  if (selector != null && !$(node).is(selector)) return false;
+
+  return true;
+}

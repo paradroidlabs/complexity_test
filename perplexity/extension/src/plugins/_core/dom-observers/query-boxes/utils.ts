@@ -3,6 +3,7 @@ import {
   createTaskId,
 } from "@/plugins/_api/dom-observer/callback-queue";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
+import { isInternalNodeExists } from "@/plugins/_core/dom-observers/utils";
 import { getActiveQueryBox } from "@/plugins/_core/ui/groups/query-box/utils";
 
 const OBSERVER_ID = {
@@ -12,13 +13,22 @@ const OBSERVER_ID = {
 };
 
 export function findMainQueryBox() {
-  const id = OBSERVER_ID.MAIN_QUERY_BOX;
+  const existingMainQueryBox =
+    queryBoxesDomObserverStore.getState().main.$mainQueryBox?.[0];
+
+  if (
+    isInternalNodeExists({
+      node: existingMainQueryBox,
+      selector: `[${OBSERVER_ID.MAIN_QUERY_BOX}]`,
+    })
+  )
+    return;
 
   const $mainQueryBox = getActiveQueryBox({ type: "main" });
 
-  if (!$mainQueryBox.length || $mainQueryBox.attr(id)) return;
+  if (!$mainQueryBox.length) return;
 
-  $mainQueryBox.attr(id, "true");
+  $mainQueryBox.attr(OBSERVER_ID.MAIN_QUERY_BOX, "true");
 
   queryBoxesDomObserverStore.getState().setMainNodes({
     $mainQueryBox,
@@ -26,7 +36,16 @@ export function findMainQueryBox() {
 }
 
 export function findSpaceQueryBox() {
-  if ($(`[${OBSERVER_ID.SPACE_QUERY_BOX}]`).length) return;
+  const existingSpaceQueryBox =
+    queryBoxesDomObserverStore.getState().main.$spaceQueryBox?.[0];
+
+  if (
+    isInternalNodeExists({
+      node: existingSpaceQueryBox,
+      selector: `[${OBSERVER_ID.SPACE_QUERY_BOX}]`,
+    })
+  )
+    return;
 
   const $spaceQueryBox = getActiveQueryBox({
     type: "space",
@@ -42,7 +61,16 @@ export function findSpaceQueryBox() {
 }
 
 export async function findFollowUpQueryBox() {
-  if ($(`[${OBSERVER_ID.FOLLOW_UP_QUERY_BOX}]`).length) return;
+  const existingFollowUpQueryBox =
+    queryBoxesDomObserverStore.getState().followUp.$followUpQueryBox?.[0];
+
+  if (
+    isInternalNodeExists({
+      node: existingFollowUpQueryBox,
+      selector: `[${OBSERVER_ID.FOLLOW_UP_QUERY_BOX}]`,
+    })
+  )
+    return;
 
   const $followUpQueryBox = getActiveQueryBox({
     type: "follow-up",

@@ -1,6 +1,12 @@
 import { onMessage } from "webext-bridge/window";
 
-import { getCodeBlockContent } from "@/plugins/_core/main-world/react-vdom/actions/get-code-block-content";
+import {
+  getCodeBlockContent,
+  getCodeBlocksContent,
+  type CodeBlockContent,
+  type CodeBlockContentParams,
+  type CodeBlocksContentParams,
+} from "@/plugins/_core/main-world/react-vdom/actions/get-code-block-content";
 import type { MessageBlockFiberData } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
 import { getMessages } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
 import { triggerRewriteOption } from "@/plugins/_core/main-world/react-vdom/actions/trigger-rewrite-option";
@@ -11,13 +17,12 @@ declare module "@/types/webext-bridge-overrides" {
     "reactVdom:getMessages": (params: {
       remoteFiberNodePath?: string[];
     }) => MessageBlockFiberData[] | null;
-    "reactVdom:getCodeBlockContent": (params: {
-      messageBlockIndex: number;
-      codeBlockIndex: number;
-    }) => {
-      code: string;
-      language: string;
-    } | null;
+    "reactVdom:getCodeBlocksContent": (
+      params: CodeBlocksContentParams,
+    ) => CodeBlockContent[];
+    "reactVdom:getCodeBlockContent": (
+      params: CodeBlockContentParams,
+    ) => CodeBlockContent | null;
     "reactVdom:triggerRewriteOption": (params: {
       messageBlockIndex: number;
       optionIndex?: number;
@@ -27,6 +32,10 @@ declare module "@/types/webext-bridge-overrides" {
 
 export async function setupReactVdomListeners() {
   onMessage("reactVdom:getMessages", ({ data }) => getMessages(data));
+
+  onMessage("reactVdom:getCodeBlocksContent", ({ data }) =>
+    getCodeBlocksContent(data),
+  );
 
   onMessage("reactVdom:getCodeBlockContent", ({ data }) =>
     getCodeBlockContent(data),
