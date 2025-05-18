@@ -9,13 +9,23 @@ import "@/assets/cs.css";
 import { APP_CONFIG } from "@/app.config";
 import csCss from "@/assets/cs.css?inline";
 import indexCss from "@/assets/index.css?inline";
+import { ExtensionSettingsService } from "@/services/extension-settings";
+import { getThemeCss } from "@/utils/pplx-theme-loader-utils";
 import { insertCss } from "@/utils/utils";
 
-export default async function loader() {
-  if (!APP_CONFIG.IS_DEV) {
-    insertCss({
-      id: "cs-ui-root",
-      css: indexCss + "\n" + csCss,
-    });
-  }
+if (!APP_CONFIG.IS_DEV) {
+  insertCss({
+    id: "cs-ui-root",
+    css: indexCss + "\n" + csCss,
+  });
 }
+
+const chosenThemeId = (
+  await ExtensionSettingsService.getWithoutCacheInvalidation()
+).theme;
+const css = await getThemeCss(chosenThemeId);
+
+insertCss({
+  css,
+  id: "cplx-custom-theme",
+});

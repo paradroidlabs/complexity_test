@@ -55,6 +55,12 @@ export const baseManifest: ExtendedManifestV3Export = {
       js: ["src/entrypoints/content-scripts/index.ts"],
       run_at: "document_end",
     },
+    {
+      matches: APP_CONFIG["perplexity-ai"].globalMatches,
+      exclude_matches: APP_CONFIG["perplexity-ai"].globalExcludeMatches,
+      js: ["src/entrypoints/content-scripts/starting-styles.ts"],
+      run_at: "document_start",
+    },
   ],
 
   web_accessible_resources: [
