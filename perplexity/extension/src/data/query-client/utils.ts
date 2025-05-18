@@ -95,16 +95,16 @@ function shouldDehydrateQuery(query: Query) {
   );
 }
 
-export async function invalidateRemoteResources({
+export async function removeCachedRemoteResources({
   queryClient,
 }: {
   queryClient: QueryClient;
 }) {
-  queryClient.invalidateQueries({
+  queryClient.removeQueries({
     queryKey: cplxApiQueries.remoteResource.all(),
   });
 
-  queryClient.invalidateQueries({
+  queryClient.removeQueries({
     queryKey: cplxApiQueries.versionedRemoteResource.all(),
   });
 

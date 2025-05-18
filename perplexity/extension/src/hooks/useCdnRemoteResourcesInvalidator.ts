@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { storage } from "@wxt-dev/storage";
 
 import { softCacheBusterKey } from "@/data/query-client";
-import { invalidateRemoteResources } from "@/data/query-client/utils";
+import { removeCachedRemoteResources } from "@/data/query-client/utils";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 
 export default function useCdnRemoteResourcesInvalidator({
@@ -28,7 +28,7 @@ export default function useCdnRemoteResourcesInvalidator({
         softCacheBuster !== remoteResourcesCacheBuster
       ) {
         storage.setItem(softCacheBusterKey, remoteResourcesCacheBuster);
-        invalidateRemoteResources({ queryClient });
+        removeCachedRemoteResources({ queryClient });
         console.log("[CPLX] Cache invalidated");
 
         callback?.();

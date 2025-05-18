@@ -1,7 +1,7 @@
 import { useQueryClient } from "@tanstack/react-query";
 
 import { Button } from "@/components/ui/button";
-import { invalidateRemoteResources } from "@/data/query-client/utils";
+import { removeCachedRemoteResources } from "@/data/query-client/utils";
 import useToggleButtonText from "@/hooks/useToggleButtonText";
 
 export default function ClearRemoteResourcesCache() {
@@ -15,7 +15,7 @@ export default function ClearRemoteResourcesCache() {
     <Button
       variant="outline"
       onClick={() => {
-        invalidateRemoteResources({ queryClient });
+        removeCachedRemoteResources({ queryClient });
         setButtonText("Cache cleared");
       }}
     >

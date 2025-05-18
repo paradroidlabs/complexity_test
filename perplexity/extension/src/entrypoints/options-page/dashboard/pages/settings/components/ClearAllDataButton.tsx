@@ -12,7 +12,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Ul } from "@/components/ui/typography";
-import { invalidateRemoteResources } from "@/data/query-client/utils";
+import { removeCachedRemoteResources } from "@/data/query-client/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { db } from "@/services/indexed-db";
 
@@ -24,7 +24,7 @@ export default function ClearAllDataButton() {
   const handleClearData = async () => {
     await ExtensionSettingsService.reset();
     await db.clearAll();
-    invalidateRemoteResources({ queryClient });
+    removeCachedRemoteResources({ queryClient });
     navigate("/plugins");
   };
 
