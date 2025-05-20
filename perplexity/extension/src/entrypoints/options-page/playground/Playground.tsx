@@ -1,59 +1,153 @@
-import { LuGripVertical } from "react-icons/lu";
+import { useState } from "react";
 
 import {
-  FloatingPanel,
-  FloatingPanelBody,
-  FloatingPanelContent,
-  FloatingPanelDragTrigger,
-  FloatingPanelResizeTrigger,
-  FloatingPanelTrigger,
-} from "@/components/ui/floating-panel";
+  RadioGroup,
+  RadioRoot,
+  RadioItem,
+  RadioItemControl,
+  RadioIndicator,
+  RadioItemText,
+  RadioLabel,
+  RadioItemHiddenInput,
+} from "@/components/ui/radio";
 
 export function Playground() {
-  const [size, setSize] = useState({ width: 1000, height: 500 });
+  const [simpleValue, setSimpleValue] = useState("react");
+  const [compoundValue, setCompoundValue] = useState("horizontal");
+  const [sizeValue, setSizeValue] = useState("base");
 
   return (
-    <div className="x:flex x:min-h-screen x:items-center x:justify-center">
-      <FloatingPanel size={size} onSizeChange={({ size }) => setSize(size)}>
-        <FloatingPanelTrigger>open</FloatingPanelTrigger>
-        <FloatingPanelContent className="x:group x:overflow-hidden x:bg-secondary">
-          <div className="x:flex x:h-0 x:items-center x:justify-between x:overflow-hidden x:bg-background x:transition-all x:group-hover:h-auto x:group-hover:p-2">
-            <FloatingPanelDragTrigger className="x:ml-auto">
-              <LuGripVertical className="x:size-5 x:text-muted-foreground" />
-            </FloatingPanelDragTrigger>
-          </div>
-          <FloatingPanelBody className="x:max-h-(--height)">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam
-            possimus facilis, veniam voluptate incidunt aut dolorum at
-            aspernatur voluptatibus eaque, nesciunt optio eos ducimus error,
-            perspiciatis deserunt vel? Perferendis, consequuntur! Incidunt quas
-            dolorum, quasi temporibus quod accusamus, maxime in laudantium
-            distinctio libero, aliquam officia quibusdam iusto nostrum eligendi
-            sapiente quae reprehenderit culpa voluptates minima! Inventore
-            numquam dignissimos quo repellat natus! Aliquid quas quis impedit
-            fuga eaque voluptas illo soluta, nemo voluptates assumenda
-            praesentium perferendis libero nesciunt distinctio laudantium
-            tempora laborum dolore sed nulla? Dicta nostrum suscipit minima ex
-            dolorum corrupti! Enim placeat quos aliquid et minima similique cum
-            fugiat, nobis rerum praesentium repellat ea totam vero. Facilis
-            deserunt provident soluta. Sapiente voluptas commodi repudiandae
-            pariatur quos tenetur corporis! Ipsum, atque. Sapiente labore dolor
-            ipsam voluptas natus reiciendis ea amet voluptatum? Perspiciatis
-            nisi excepturi laborum, ullam recusandae sit tempora aspernatur
-            corrupti dolores architecto explicabo quaerat eum molestias eos
-            doloremque quas dicta.
-          </FloatingPanelBody>
+    <div className="x:flex x:flex-col x:gap-10 x:p-6">
+      <section>
+        <h2 className="x:mb-4 x:text-xl x:font-semibold">
+          Simple RadioGroup Example
+        </h2>
+        <RadioGroup
+          label="Select a framework"
+          value={simpleValue}
+          options={[
+            { value: "react", label: "React" },
+            { value: "vue", label: "Vue" },
+            { value: "svelte", label: "Svelte" },
+            { value: "solid", label: "Solid" },
+          ]}
+          onValueChange={(details) => {
+            if (details.value) setSimpleValue(details.value);
+          }}
+        />
+        <div className="x:mt-2 x:text-sm x:text-muted-foreground">
+          Selected: {simpleValue}
+        </div>
+      </section>
 
-          <FloatingPanelResizeTrigger axis="n" />
-          <FloatingPanelResizeTrigger axis="e" />
-          <FloatingPanelResizeTrigger axis="w" />
-          <FloatingPanelResizeTrigger axis="s" />
-          <FloatingPanelResizeTrigger axis="ne" />
-          <FloatingPanelResizeTrigger axis="se" />
-          <FloatingPanelResizeTrigger axis="sw" />
-          <FloatingPanelResizeTrigger axis="nw" />
-        </FloatingPanelContent>
-      </FloatingPanel>
+      <section>
+        <h2 className="x:mb-4 x:text-xl x:font-semibold">
+          Horizontal RadioGroup
+        </h2>
+        <RadioGroup
+          label="Select a framework"
+          orientation="horizontal"
+          value={simpleValue}
+          options={[
+            { value: "react", label: "React" },
+            { value: "vue", label: "Vue" },
+            { value: "svelte", label: "Svelte" },
+            { value: "solid", label: "Solid" },
+          ]}
+          onValueChange={(details) => {
+            if (details.value) setSimpleValue(details.value);
+          }}
+        />
+      </section>
+
+      <section>
+        <h2 className="x:mb-4 x:text-xl x:font-semibold">
+          Compound Component API
+        </h2>
+        <RadioRoot
+          value={compoundValue}
+          onValueChange={(details) => {
+            if (details.value) setCompoundValue(details.value);
+          }}
+        >
+          <RadioLabel>Layout Orientation</RadioLabel>
+
+          <div className="x:mt-2 x:flex x:flex-col x:gap-2">
+            <RadioItem value="horizontal">
+              <RadioItemControl>
+                <RadioIndicator />
+              </RadioItemControl>
+              <RadioItemText>Horizontal</RadioItemText>
+              <RadioItemHiddenInput />
+            </RadioItem>
+
+            <RadioItem value="vertical">
+              <RadioItemControl>
+                <RadioIndicator />
+              </RadioItemControl>
+              <RadioItemText>Vertical</RadioItemText>
+              <RadioItemHiddenInput />
+            </RadioItem>
+          </div>
+        </RadioRoot>
+        <div className="x:mt-2 x:text-sm x:text-muted-foreground">
+          Selected: {compoundValue}
+        </div>
+      </section>
+
+      <section>
+        <h2 className="x:mb-4 x:text-xl x:font-semibold">Size Variants</h2>
+        <div className="x:flex x:flex-col x:gap-6">
+          <RadioRoot
+            value={sizeValue}
+            onValueChange={(details) => {
+              if (details.value) setSizeValue(details.value);
+            }}
+          >
+            <RadioLabel>Select a size</RadioLabel>
+
+            <div className="x:mt-2 x:flex x:flex-col x:gap-4">
+              <RadioItem value="sm" size="sm">
+                <RadioItemControl size="sm">
+                  <RadioIndicator size="sm" />
+                </RadioItemControl>
+                <RadioItemText size="sm">Small</RadioItemText>
+                <RadioItemHiddenInput />
+              </RadioItem>
+
+              <RadioItem value="base" size="base">
+                <RadioItemControl size="base">
+                  <RadioIndicator size="base" />
+                </RadioItemControl>
+                <RadioItemText size="base">Base (Default)</RadioItemText>
+                <RadioItemHiddenInput />
+              </RadioItem>
+
+              <RadioItem value="lg" size="lg">
+                <RadioItemControl size="lg">
+                  <RadioIndicator size="lg" />
+                </RadioItemControl>
+                <RadioItemText size="lg">Large</RadioItemText>
+                <RadioItemHiddenInput />
+              </RadioItem>
+            </div>
+          </RadioRoot>
+        </div>
+      </section>
+
+      <section>
+        <h2 className="x:mb-4 x:text-xl x:font-semibold">Disabled State</h2>
+        <RadioGroup
+          disabled
+          label="Disabled RadioGroup"
+          options={[
+            { value: "option1", label: "Option 1" },
+            { value: "option2", label: "Option 2" },
+            { value: "option3", label: "Option 3" },
+          ]}
+          defaultValue="option1"
+        />
+      </section>
     </div>
   );
 }

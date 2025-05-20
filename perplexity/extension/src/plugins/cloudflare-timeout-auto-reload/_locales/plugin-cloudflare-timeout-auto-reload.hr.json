@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sesija je istekla",
+      "sessionTimeoutDescription": "Vaša sesija je istekla (najvjerojatnije zbog Cloudflare-a)",
+      "reload": "Ponovno učitaj",
+      "dismiss": "Zatvori"
+    }
+  }
+} 

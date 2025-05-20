@@ -1,0 +1,60 @@
+import { sendMessage } from "webext-bridge/content-script";
+
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import {
+  betterSidebarNormalizeCollapsedCssResourceConfig,
+  betterSidebarNormalizeExpandedCssResourceConfig,
+} from "@/plugins/better-sidebar/index.remote-resources";
+import { shouldPreventLayoutShift } from "@/plugins/better-sidebar/utils";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
+import {
+  registerInstantCss,
+  removeInstantCss,
+} from "@/services/instant-css/entry.utils";
+import { getCookie } from "@/utils/utils";
+
+declare module "@/plugins/_core/async-dep-registry" {
+  interface AsyncLoadersRegistry {
+    "plugin:betterSidebar:instantCss": void;
+  }
+}
+
+export default function loader() {
+  asyncLoaderRegistry.register({
+    id: "plugin:betterSidebar:instantCss",
+    dependencies: ["cache:pluginsStates", "store:pluginGuards"],
+    loader: async ({ "cache:pluginsStates": pluginsStates }) => {
+      await applyLayoutShiftPreventionInstantCss({
+        enabled:
+          pluginsStates["betterSidebar"] && (await shouldPreventLayoutShift()),
+      });
+    },
+  });
+}
+
+export async function applyLayoutShiftPreventionInstantCss({
+  enabled,
+}: {
+  enabled: boolean;
+}) {
+  const [normalizeCollapsedCss, normalizeExpandedCss] = await Promise.all([
+    getVersionedRemoteResource(
+      betterSidebarNormalizeCollapsedCssResourceConfig,
+    ),
+    getVersionedRemoteResource(betterSidebarNormalizeExpandedCssResourceConfig),
+  ]);
+
+  const tabId = await sendMessage("bg:getTabId", undefined, "background");
+
+  if (!tabId) return;
+
+  const state = getCookie("isSidebarPinned");
+
+  const action = enabled ? registerInstantCss : removeInstantCss;
+
+  action({
+    id: "plugin:betterSidebar:normalizeLayout",
+    css: state === "true" ? normalizeExpandedCss : normalizeCollapsedCss,
+    tabId,
+  });
+}

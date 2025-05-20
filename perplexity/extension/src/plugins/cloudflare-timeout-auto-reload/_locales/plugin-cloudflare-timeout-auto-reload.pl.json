@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sesja wygasła",
+      "sessionTimeoutDescription": "Twoja sesja wygasła (najprawdopodobniej z powodu Cloudflare)",
+      "reload": "Odśwież",
+      "dismiss": "Zamknij"
+    }
+  }
+} 

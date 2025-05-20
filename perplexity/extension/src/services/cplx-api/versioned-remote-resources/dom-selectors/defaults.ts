@@ -5,8 +5,11 @@
 import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/types";
 
 export const DOM_SELECTORS: DomSelectors = {
+  PAGE_WRAPPER: ".h-\\[100dvh\\]",
+  PAGE_CHILD_WRAPPER: ".h-\\[100dvh\\] > [class^=erp][style^=padding]",
   SIDEBAR: {
     WRAPPER: ".group\\/sidebar",
+    MOBILE_TRIGGER: ".h-headerHeight button:has(svg.tabler-icon-menu-2)",
   },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
@@ -113,13 +116,7 @@ export const DOM_SELECTORS: DomSelectors = {
 export const INTERNAL_ATTRIBUTES = {
   SIDEBAR: {
     WRAPPER: "sidebar-wrapper",
-    SPACE_BUTTON_WRAPPER: "sidebar-space-button-wrapper",
-    SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER:
-      "sidebar-space-button-trigger-buttons-portal-container",
-    LIBRARY_BUTTON_WRAPPER: "sidebar-library-button-wrapper",
-    LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER:
-      "sidebar-library-button-trigger-buttons-portal-container",
-    PINNED_SPACES_PORTAL_CONTAINER: "pinned-spaces",
+    MOBILE_TRIGGER: "sidebar-mobile-trigger",
   },
   HOME: {
     SLOGAN: "home-slogan",

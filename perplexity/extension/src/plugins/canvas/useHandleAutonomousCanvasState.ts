@@ -16,7 +16,7 @@ export default function useHandleAutonoumousCanvasState() {
     messageBlockIndex: selectedCodeBlockLocation?.messageBlockIndex,
     codeBlockIndex: selectedCodeBlockLocation?.codeBlockIndex,
   });
-  const isCanvasOpen = selectedCodeBlockLocation !== null;
+  const isCanvasOpen = selectedCodeBlockLocation != null;
   const hasAutoPreviewTriggered = useCanvasStore(
     (state) => state.hasAutoPreviewTriggered,
   );

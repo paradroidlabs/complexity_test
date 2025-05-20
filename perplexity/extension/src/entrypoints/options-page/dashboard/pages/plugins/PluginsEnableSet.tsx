@@ -1,6 +1,6 @@
 import isEqual from "lodash/isEqual";
-import type { ComponentProps, ComponentType, SVGProps } from "react";
-import { LuArrowRight, LuCheck, LuRocket, LuZap } from "react-icons/lu";
+import type { ComponentType, SVGProps } from "react";
+import { LuCheck, LuRocket, LuZap } from "react-icons/lu";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { RadioGroup } from "@/components/ui/radio";
 import { toast } from "@/components/ui/use-toast";
 import { PluginRegistry } from "@/data/plugin-registry/index";
 import {
@@ -21,24 +22,90 @@ import {
   ESSENTIALS_ONLY,
   POWER_USER,
 } from "@/entrypoints/options-page/dashboard/pages/plugins/predefined-configs";
-import type { ExtensionSettings } from "@/services/extension-settings/types";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
+const presets = [
+  {
+    value: "essentials",
+    label: (
+      <PresetLabel
+        label="Essentials Only"
+        LabelIcon={LuCheck}
+        description="You're new to Perplexity and using the extension for the first time."
+      />
+    ),
+    config: ESSENTIALS_ONLY,
+  },
+  {
+    value: "power",
+    label: (
+      <PresetLabel
+        label="Power User"
+        LabelIcon={LuZap}
+        description="You're an experienced Perplexity user looking to maximize your productivity."
+      />
+    ),
+    config: POWER_USER,
+  },
+  {
+    value: "all",
+    label: (
+      <PresetLabel
+        label="YOLO"
+        LabelIcon={LuRocket}
+        description="Enabling all plugins without understanding their functionality is not recommended. It's suggested to explore them individually first."
+      />
+    ),
+    config: ALL_PLUGINS,
+  },
+];
+
+function PresetLabel({
+  label,
+  LabelIcon,
+  description,
+}: {
+  label: string;
+  LabelIcon: ComponentType<SVGProps<SVGSVGElement>>;
+  description: string;
+}) {
+  return (
+    <div className="x:flex x:flex-col x:gap-1">
+      <div className="x:flex x:items-center x:gap-2">
+        <div className="x:text-lg">{label}</div>
+        <LabelIcon className="x:text-primary" />
+      </div>
+      <div className="x:text-sm x:text-muted-foreground">{description}</div>
+    </div>
+  );
+}
+
 export default function PluginsEnableSet() {
-  const { settings } = useExtensionSettings();
-
+  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-
+  const { settings, mutation } = useExtensionSettings();
   const isDefaultSettings = useMemo(
     () => isEqual(settings?.plugins, PluginRegistry.fallbackValues),
     [settings],
   );
-
   const [open, setOpen] = useState(
     searchParams.get("from") === "onboarding" && isDefaultSettings,
   );
+  const [selectedPreset, setSelectedPreset] = useState<string>("essentials");
+  const applyPreset = useCallback(() => {
+    const preset = presets.find((p) => p.value === selectedPreset);
+    if (!preset) return;
 
-  const navigate = useNavigate();
+    mutation.mutate((draft) => {
+      draft.plugins = preset.config;
+    });
+
+    toast({
+      description: `✅ Preset "${preset.value === "essentials" ? "Essentials Only" : preset.value === "power" ? "Power User" : "YOLO"}" applied successfully!`,
+    });
+
+    setOpen(false);
+  }, [mutation, selectedPreset]);
 
   return (
     <Dialog
@@ -69,31 +136,18 @@ export default function PluginsEnableSet() {
           </div>
         )}
 
-        <div className="x:flex x:flex-col x:gap-2">
-          <PresetButton
-            label="Essentials Only"
-            LabelIcon={LuCheck}
-            description="You're new to Perplexity and using the extension for the first time."
-            config={ESSENTIALS_ONLY}
-            className="x:border-primary/50"
-            onComplete={() => setOpen(false)}
-          />
-          <PresetButton
-            label="Power User"
-            LabelIcon={LuZap}
-            description="You're an experienced Perplexity user looking to maximize your productivity."
-            config={POWER_USER}
-            className="x:border-primary/50"
-            onComplete={() => setOpen(false)}
-          />
-          <PresetButton
-            label="YOLO"
-            LabelIcon={LuRocket}
-            description="Enabling all plugins without understanding their functionality is not recommended. It's suggested to explore them individually first."
-            config={ALL_PLUGINS}
-            onComplete={() => setOpen(false)}
-          />
-        </div>
+        <RadioGroup
+          value={selectedPreset}
+          options={presets}
+          orientation="vertical"
+          size="lg"
+          className="x:space-y-4"
+          onValueChange={(details) => {
+            if (details.value) {
+              setSelectedPreset(details.value);
+            }
+          }}
+        />
 
         <div className="x:text-sm x:text-muted-foreground">
           Many plugins depend on personal preferences. Feel free to test and
@@ -106,74 +160,7 @@ export default function PluginsEnableSet() {
               I&apos;ll look around by myself
             </Button>
           </DialogClose>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-function PresetButton({
-  label,
-  LabelIcon,
-  description,
-  config,
-  onComplete,
-  className,
-  ...props
-}: {
-  label: string;
-  LabelIcon: ComponentType<SVGProps<SVGSVGElement>>;
-  description: string;
-  config: ExtensionSettings["plugins"];
-  onComplete: () => void;
-} & ComponentProps<"button">) {
-  const { mutation } = useExtensionSettings();
-
-  return (
-    <Dialog lazyMount unmountOnExit>
-      <DialogTrigger asChild>
-        <button
-          className={cn(
-            "x:group x:flex x:flex-col x:rounded-lg x:border x:border-border/50 x:bg-secondary x:p-4 x:text-left x:transition-all x:hover:border-primary x:hover:bg-primary/10",
-            className,
-          )}
-          {...props}
-        >
-          <div className="x:flex x:w-full x:items-center x:justify-between x:gap-2">
-            <div className="x:flex x:items-center x:gap-2">
-              <LabelIcon className="x:group-hover:text-primary" />
-              <div className="x:text-lg x:group-hover:text-primary">
-                {label}
-              </div>
-            </div>
-            <LuArrowRight className="x:hidden x:animate-in x:fade-in x:spin-in-90 x:group-hover:block" />
-          </div>
-          <div className="x:text-sm x:text-muted-foreground">{description}</div>
-        </button>
-      </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Apply Plugin Preset</DialogTitle>
-        </DialogHeader>
-        Are you sure you want to apply the &quot;{label}&quot; preset?
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DialogClose>
-          <DialogClose
-            asChild
-            onClick={() => {
-              mutation.mutate((draft) => {
-                draft.plugins = config;
-              });
-              toast({
-                description: `✅ Preset "${label}" applied successfully!`,
-              });
-              onComplete();
-            }}
-          >
-            <Button>Apply</Button>
-          </DialogClose>
+          <Button onClick={applyPreset}>Apply</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

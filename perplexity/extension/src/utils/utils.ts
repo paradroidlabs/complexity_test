@@ -1,5 +1,6 @@
 import { MatchPattern } from "@webext-core/match-patterns";
 
+import { APP_CONFIG } from "@/app.config";
 import type { MaybePromise } from "@/types/utils.types";
 import { errorWrapper } from "@/utils/error-wrapper";
 
@@ -212,7 +213,10 @@ export const whereAmI = (() => {
     library: [new MatchPattern(`${hostnameGlob}/library*`)],
     thread: [new MatchPattern(`${hostnameGlob}/search/*`)],
     page: [new MatchPattern(`${hostnameGlob}/page/*`)],
-    settings: [new MatchPattern(`${hostnameGlob}/account*`)],
+    settings: [
+      new MatchPattern(`${hostnameGlob}/account*`),
+      new MatchPattern(`${hostnameGlob}/settings*`),
+    ],
     same_origin: [new MatchPattern(`${hostnameGlob}/*`)],
   };
 
@@ -291,6 +295,18 @@ export const isExtensionContext = () => {
 export const isInContentScript = () => {
   return whereAmI() !== "unknown";
 };
+
+export function isBackgroundScript() {
+  if (APP_CONFIG.BROWSER === "chrome") {
+    return (
+      typeof chrome !== "undefined" &&
+      chrome.tabs !== undefined &&
+      typeof document === "undefined"
+    );
+  }
+
+  return chrome.extension.getBackgroundPage() === window;
+}
 
 export async function injectMainWorldScript({
   url,
@@ -540,4 +556,17 @@ export function waitUntil(params: {
       resolve();
     }, timeout);
   });
+}
+
+export function isSubArray(arr1: string[], arr2: string[]) {
+  if (arr1.length > arr2.length) return false;
+
+  let j = 0;
+  for (let i = 0; i < arr2.length && j < arr1.length; i++) {
+    if (arr1[j] === arr2[i]) {
+      j++;
+    }
+  }
+
+  return j === arr1.length;
 }

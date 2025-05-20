@@ -44,7 +44,7 @@ const selectTriggerVariants = cva(
     variants: {
       variant: {
         default:
-          "x:bg-buttonBackground x:hover:text-muted-foreground x:focus:outline-none x:active:scale-95",
+          "x:bg-primary-foreground x:hover:text-muted-foreground x:focus:outline-none x:active:scale-95",
         ghost:
           "x:text-center x:text-muted-foreground x:hover:bg-primary-foreground x:hover:text-foreground x:active:scale-95",
         noStyle: "",

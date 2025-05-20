@@ -23,6 +23,7 @@ This project uses automatic imports via unimport. The following dependencies are
   - `sleep`
   - `isMainWorldContext`
   - `isExtensionContext`
+  - `invariant`
   
 - From `src/data/i18next.ts`: 
   - `t`

@@ -32,8 +32,8 @@ const APP_CONFIG = {
       "https://*.perplexity.ai/api/*",
       "https://*.labs.perplexity.ai/*",
       "https://*.docs.perplexity.ai/*",
-      "https://*.perplexity.ai/hub/*",
-      "https://*.perplexity.ai/changelog/*",
+      "https://*.perplexity.ai/hub*",
+      "https://*.perplexity.ai/changelog*",
     ],
   },
 };

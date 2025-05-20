@@ -4,7 +4,6 @@ import { LuExternalLink, LuChevronDown, LuChevronRight } from "react-icons/lu";
 import { NavLink, useMatch } from "react-router-dom";
 
 import SponsorDialogWrapper from "@/components/SponsorDialogWrapper";
-import { MobileSidebarContext } from "@/entrypoints/options-page/components/sidebar/MobileWrapper";
 import { type NavItem } from "@/entrypoints/options-page/components/sidebar/nav-items";
 import { useOptionsPageSidebarStore } from "@/entrypoints/options-page/components/sidebar/store";
 import Version from "@/entrypoints/options-page/components/sidebar/Version";
@@ -20,7 +19,6 @@ const NavItemComponent = ({
   const { icon: Icon, label, path, children, expanded: defaultExpanded } = item;
   const [expanded, setExpanded] = useState(defaultExpanded || false);
   const hasChildren = children && children.length > 0;
-  const { setIsOpen } = use(MobileSidebarContext);
 
   const isActiveEnd = useMatch({
     path: path,
@@ -32,14 +30,11 @@ const NavItemComponent = ({
       <div className="x:flex x:w-full">
         <NavLink
           to={path}
-          onClick={() => {
-            if (!hasChildren) setIsOpen(false);
-          }}
           {...navItemProps}
           data-active-end={isActiveEnd != null}
           className={({ isActive }) =>
             cn(
-              "x:mb-1 x:flex x:flex-1 x:items-center x:rounded-md x:p-2 x:px-4 x:text-sm x:font-medium x:transition-all x:active:scale-95",
+              "x:mb-1 x:flex x:flex-1 x:items-center x:rounded-xl x:p-2 x:px-4 x:text-sm x:font-medium x:transition-all x:active:scale-95",
               {
                 "x:bg-primary-foreground x:text-primary":
                   isActive && isActiveEnd,
@@ -90,8 +85,6 @@ const NavItemComponent = ({
 export default function Sidebar() {
   const navItems = useOptionsPageSidebarStore((store) => store.navItems);
 
-  const { setIsOpen } = use(MobileSidebarContext);
-
   return (
     <div className="x:sticky x:top-0 x:flex x:h-full x:flex-col x:justify-between x:md:h-screen">
       <div className="x:overflow-y-auto x:p-4 x:px-2">
@@ -105,12 +98,7 @@ export default function Sidebar() {
         <SidebarUpdateAnnouncer />
 
         <SponsorDialogWrapper>
-          <div
-            className="x:group x:relative x:w-full x:cursor-pointer x:rounded-md x:border x:border-border/50 x:bg-secondary x:p-4 x:text-sm x:font-medium x:shadow-lg x:transition-all x:hover:scale-105 x:hover:border-primary x:hover:bg-primary/10 x:md:text-balance"
-            onClick={() => {
-              setIsOpen(false);
-            }}
-          >
+          <div className="x:group x:relative x:w-full x:cursor-pointer x:rounded-xl x:border x:border-border/50 x:bg-secondary x:p-4 x:text-sm x:font-medium x:shadow-lg x:transition-all x:hover:scale-105 x:hover:border-primary x:hover:bg-primary/10 x:md:text-balance">
             <Trans
               i18nKey="sidebar.supporterMessage"
               components={{

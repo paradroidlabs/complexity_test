@@ -11,7 +11,6 @@ const basePermissionsDetails: Record<
   string,
   {
     permissions?: chrome.runtime.ManifestPermissions[];
-    hostPermissions?: string[];
     title: string;
     description: React.ReactNode;
     icon: ComponentType<SVGProps<SVGSVGElement>>;
@@ -60,10 +59,7 @@ export default function BasePermissions() {
 
       <div className="x:space-y-3 x:md:space-y-4">
         {Object.entries(basePermissionsDetails).map(
-          ([
-            key,
-            { title, permissions, hostPermissions, description, icon: Icon },
-          ]) => {
+          ([key, { title, permissions, description, icon: Icon }]) => {
             const isGranted = permissions?.every((p) =>
               grantedPermissions.has(p),
             );
@@ -95,7 +91,6 @@ export default function BasePermissions() {
                         onClick={() =>
                           handleGrantPermission({
                             permissions: permissions ?? [],
-                            hostPermissions,
                           })
                         }
                       >

@@ -1,5 +1,4 @@
 import { APP_CONFIG } from "@/app.config";
-import type { PluginId } from "@/data/plugin-registry/types";
 import { queryClient } from "@/data/query-client";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { getRemoteResource } from "@/services/cplx-api/remote-resources/utils";
@@ -11,6 +10,7 @@ import {
 } from "@/services/cplx-api/types";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { featureCompatResourceConfig } from "@/services/plugins-states/index.remote-resources";
+import type { PluginsStates } from "@/services/plugins-states/types";
 import {
   initializePluginStates,
   getEnableStates,
@@ -30,12 +30,12 @@ export class PluginsStatesService {
     return getRemoteResource(featureCompatResourceConfig);
   }
 
-  static cachedEnableStates: Record<PluginId, boolean> | null = null;
+  static cachedEnableStates: PluginsStates | null = null;
 
   static getEnableStatesCachedSync(params?: {
     featureCompat: FeatureCompatibility;
     cplxVersions: CplxVersions;
-  }): Record<PluginId, boolean> {
+  }): PluginsStates {
     invariant(
       isInContentScript(),
       "This method can ONLY be used in content script",

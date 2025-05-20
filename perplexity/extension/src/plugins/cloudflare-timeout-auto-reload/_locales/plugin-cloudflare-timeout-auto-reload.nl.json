@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sessie verlopen",
+      "sessionTimeoutDescription": "Je sessie is verlopen (waarschijnlijk door Cloudflare)",
+      "reload": "Herladen",
+      "dismiss": "Sluiten"
+    }
+  }
+} 

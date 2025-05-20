@@ -11,7 +11,3 @@ body#__next {
 
   @apply x:font-sans;
 }
-
-* {
-  @apply x:border-border/50;
-}

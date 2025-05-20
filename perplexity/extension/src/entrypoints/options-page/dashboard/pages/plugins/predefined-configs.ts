@@ -43,6 +43,8 @@ export const ALL_PLUGINS: ExtensionSettings["plugins"] = produce(
         "thread:customThreadContainerWidth",
         "queryBox:spacesThreadsForceWritingMode",
         "incognitoByDefault",
+        "cloudflareTimeoutAutoReload",
+        "betterSidebar",
       ];
 
       if (excludedPlugins.includes(pluginIdKey)) return;

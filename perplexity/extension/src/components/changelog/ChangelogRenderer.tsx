@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from "react";
+import type { HTMLAttributes } from "react";
 
 import { ChangelogContextAwareImageComponent } from "@/components/changelog/components/ChangelogContextAwareImageComponent";
 import { ChangelogHeadingComponent } from "@/components/changelog/components/ChangelogHeadingComponent";
@@ -17,7 +17,7 @@ export default function ChangelogRenderer({
   changelog: string;
 } & HTMLAttributes<HTMLDivElement>) {
   const changelogComponents = {
-    div: (props: { children: ReactNode; className?: string }) => {
+    div: (props) => {
       if (props.className === "changelog-section") {
         return (
           <ChangelogSectionComponent>

@@ -3,6 +3,12 @@ import { z } from "zod";
 import { definePlugin } from "@/data/plugin-registry/utils";
 import { getPlatform } from "@/hooks/usePlatformDetection";
 
+declare module "@/data/plugin-registry/types" {
+  interface PluginsSettingsRegistry {
+    commandMenu: z.infer<typeof schema>;
+  }
+}
+
 const schema = z.object({
   enabled: z.boolean(),
   keybindings: z.object({
@@ -12,12 +18,6 @@ const schema = z.object({
     toggleSidecar: z.array(z.string()),
   }),
 });
-
-declare module "@/data/plugin-registry/types" {
-  interface PluginsSettingsRegistry {
-    commandMenu: z.infer<typeof schema>;
-  }
-}
 
 export default definePlugin({
   manifest: {

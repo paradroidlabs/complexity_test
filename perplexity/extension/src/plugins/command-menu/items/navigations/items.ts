@@ -75,7 +75,7 @@ export const getRawItems = (): NavigationCommandItemProps[] => [
     icon: LuSettings,
     title: t("plugin-command-menu:commandMenu.navigation.settings"),
     value: "settings",
-    url: "/settings",
+    url: "/account/details",
   }),
   createNavigationItem({
     icon: PplxLabs,

@@ -59,17 +59,12 @@ export function ThreadToc() {
       <div
         ref={containerRef}
         id="thread-toc-container"
-        className={cn(
-          "x:fixed x:top-(--panel-top)",
-          "x:w-(--panel-width)",
-          "x:transition-all x:animate-in x:fade-in",
-          {
-            "x:left-(--panel-left)": !isFloating,
-            "x:right-3 x:rounded-md x:border x:border-border/50 x:bg-secondary x:shadow-lg x:md:right-8":
-              isFloating,
-            "x:hidden": isFloating && !isOpen,
-          },
-        )}
+        className={cn("x:fixed x:top-(--panel-top)", "x:w-(--panel-width)", {
+          "x:left-(--panel-left)": !isFloating,
+          "x:right-3 x:rounded-md x:border x:border-border/50 x:bg-secondary x:shadow-lg x:md:right-8":
+            isFloating,
+          "x:hidden": isFloating && !isOpen,
+        })}
         style={
           {
             ["--panel-width"]: `${PANEL_WIDTH}px`,

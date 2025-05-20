@@ -13,6 +13,10 @@ export default function useExtensionUpdate() {
     const currentVersion = APP_CONFIG.VERSION;
     const latestVersion = versions.latest;
 
+    if (!semver.valid(currentVersion) || !semver.valid(latestVersion)) {
+      return false;
+    }
+
     return semver.gt(latestVersion, currentVersion);
   }, [versions]);
 

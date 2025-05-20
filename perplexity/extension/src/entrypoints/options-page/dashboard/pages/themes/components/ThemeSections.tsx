@@ -55,7 +55,7 @@ function MobileThemeSections({
 
   return (
     <Tabs defaultValue={defaultTab}>
-      <TabsList className="x:mx-auto x:w-fit x:justify-center x:border x:bg-secondary">
+      <TabsList className="x:mx-auto x:w-full x:max-w-fit x:flex-nowrap x:overflow-x-auto x:border x:bg-secondary x:*:whitespace-nowrap">
         {localThemes.length > 0 && (
           <TabTrigger value="local">Local Themes</TabTrigger>
         )}

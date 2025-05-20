@@ -26,7 +26,8 @@ export default tseslint.config({
       {
         type: "entrypoint",
         mode: "full",
-        pattern: ["src/entrypoints/**/*"],
+        capture: ["entrypointName"],
+        pattern: ["src/entrypoints/*/**/*"],
       },
       {
         type: "plugin-core",
@@ -38,6 +39,12 @@ export default tseslint.config({
         mode: "full",
         capture: ["pluginName"],
         pattern: ["src/plugins/*/**/*.public.*"],
+      },
+      {
+        type: "plugin-settings-ui",
+        mode: "full",
+        capture: ["pluginName"],
+        pattern: ["src/plugins/*/**/settings-ui.tsx"],
       },
       {
         type: "plugin",
@@ -87,6 +94,19 @@ export default tseslint.config({
           {
             from: "plugin-public-exports",
             allow: [["plugin", { pluginName: "${from.pluginName}" }]],
+          },
+          {
+            from: "plugin-settings-ui",
+            allow: [
+              "shared",
+              "plugin-core",
+              "plugin-public-exports",
+              ["plugin", { pluginName: "${from.pluginName}" }],
+              ["entrypoint", { entrypointName: "options-page" }],
+            ],
+            disallow: [
+              ["plugin-public-exports", { pluginName: "${from.pluginName}" }],
+            ],
           },
         ],
       },

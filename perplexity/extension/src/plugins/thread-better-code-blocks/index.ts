@@ -3,17 +3,17 @@ import { z } from "zod";
 import { definePlugin } from "@/data/plugin-registry/utils";
 import { BetterCodeBlockGlobalOptionsSchema } from "@/plugins/thread-better-code-blocks/types";
 
-const schema = z
-  .object({
-    enabled: z.boolean(),
-  })
-  .merge(BetterCodeBlockGlobalOptionsSchema);
-
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
     "thread:betterCodeBlocks": z.infer<typeof schema>;
   }
 }
+
+const schema = z
+  .object({
+    enabled: z.boolean(),
+  })
+  .merge(BetterCodeBlockGlobalOptionsSchema);
 
 export default definePlugin({
   manifest: {

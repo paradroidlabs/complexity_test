@@ -39,8 +39,9 @@ export const baseManifest: ExtendedManifestV3Export = {
     "unlimitedStorage",
     "contextMenus",
     "declarativeNetRequestWithHostAccess",
+    "scripting",
   ],
-  optional_permissions: [],
+  optional_permissions: ["webNavigation"],
 
   host_permissions: [
     ...APP_CONFIG["perplexity-ai"].globalMatches,

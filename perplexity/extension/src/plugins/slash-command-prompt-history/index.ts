@@ -3,6 +3,12 @@ import { z } from "zod";
 import { definePlugin } from "@/data/plugin-registry/utils";
 import { SlashCommandMenuTabShortcutSchema } from "@/plugins/slash-command/shortcuts.types.public";
 
+declare module "@/data/plugin-registry/types" {
+  interface PluginsSettingsRegistry {
+    "queryBox:slashCommandMenu:promptHistory": z.infer<typeof schema>;
+  }
+}
+
 const schema = z.object({
   enabled: z.boolean(),
   shortcut: SlashCommandMenuTabShortcutSchema,
@@ -11,12 +17,6 @@ const schema = z.object({
     onNavigation: z.boolean(),
   }),
 });
-
-declare module "@/data/plugin-registry/types" {
-  interface PluginsSettingsRegistry {
-    "queryBox:slashCommandMenu:promptHistory": z.infer<typeof schema>;
-  }
-}
 
 export default definePlugin({
   manifest: {

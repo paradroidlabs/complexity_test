@@ -23,6 +23,7 @@ export function withPluginsGuard<P extends object>(
   options: WithPluginsGuardOptions,
 ) {
   const {
+    requiredPermissions,
     dependentPluginIds,
     location,
     desktopOnly,
@@ -42,6 +43,7 @@ export function withPluginsGuard<P extends object>(
   function WithPluginsGuard(props: P) {
     return (
       <CsUiPluginsGuard
+        requiredPermissions={requiredPermissions}
         dependentPluginIds={dependentPluginIds}
         location={location}
         desktopOnly={desktopOnly}

@@ -1,10 +1,8 @@
 import { Portal } from "@ark-ui/react/portal";
 import { Tooltip as ArkTooltip } from "@ark-ui/react/tooltip";
-import React from "react";
+import React, { type ComponentProps } from "react";
 
-type TooltipContext = {
-  positioning: ArkTooltip.RootProps["positioning"];
-};
+type TooltipContext = ComponentProps<typeof ArkTooltip.Root>;
 
 const TooltipContext = createContext<TooltipContext>({
   positioning: {
@@ -17,17 +15,14 @@ const TooltipContextProvider = TooltipContext.Provider;
 export function TooltipRoot({ positioning, ...props }: ArkTooltip.RootProps) {
   return (
     <TooltipContextProvider value={{ positioning }}>
-      <ArkTooltip.Root
-        unmountOnExit={false}
-        lazyMount={true}
-        positioning={positioning}
-        {...props}
-      />
+      <ArkTooltip.Root unmountOnExit={false} lazyMount={true} {...props} />
     </TooltipContextProvider>
   );
 }
 
-export function TooltipTrigger({ ...props }: ArkTooltip.TriggerProps) {
+export function TooltipTrigger({
+  ...props
+}: ComponentProps<typeof ArkTooltip.Trigger>) {
   return (
     <ArkTooltip.Context>
       {({ setOpen }) => (
@@ -41,7 +36,7 @@ export function TooltipContent({
   className,
   portal,
   ...props
-}: ArkTooltip.ContentProps & {
+}: ComponentProps<typeof ArkTooltip.Content> & {
   portal: boolean;
 }) {
   const { positioning } = use(TooltipContext);
@@ -61,8 +56,8 @@ export function TooltipContent({
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",
-            "x:data-[state=open]:data-[placement^=bottom]:slide-in-from-top-1/2 x:data-[state=open]:data-[placement^=left]:slide-in-from-right-1/2",
-            "x:data-[state=open]:data-[placement^=right]:slide-in-from-left-1/2 x:data-[state=open]:data-[placement^=top]:slide-in-from-bottom-1/2",
+            "x:data-[state=open]:data-[placement^=bottom]:slide-in-from-top-2 x:data-[state=open]:data-[placement^=left]:slide-in-from-right-2",
+            "x:data-[state=open]:data-[placement^=right]:slide-in-from-left-2 x:data-[state=open]:data-[placement^=top]:slide-in-from-bottom-2",
             "x:data-[placement^=bottom]:origin-top x:data-[placement^=left]:origin-right",
             "x:data-[placement^=right]:origin-left x:data-[placement^=top]:origin-bottom",
             className,

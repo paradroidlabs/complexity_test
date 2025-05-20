@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "セッションタイムアウト",
+      "sessionTimeoutDescription": "セッションの有効期限が切れました（おそらくCloudflareが原因です）",
+      "reload": "再読み込み",
+      "dismiss": "閉じる"
+    }
+  }
+} 

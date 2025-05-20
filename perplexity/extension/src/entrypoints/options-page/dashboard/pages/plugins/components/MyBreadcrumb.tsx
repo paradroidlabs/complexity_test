@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import {
   Breadcrumb,
@@ -49,20 +49,27 @@ export default function MyBreadcrumb({ navItems }: BreadcrumbProps) {
           </BreadcrumbLink>
         </BreadcrumbItem>
 
-        {breadcrumbItems.map((item, index) => (
-          <Fragment key={item.path}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              {index === breadcrumbItems.length - 1 ? (
-                <BreadcrumbPage>{item.label}</BreadcrumbPage>
-              ) : (
-                <BreadcrumbLink href={`#/${item.path}`}>
-                  {item.label}
-                </BreadcrumbLink>
-              )}
-            </BreadcrumbItem>
-          </Fragment>
-        ))}
+        {breadcrumbItems.map((item, index) => {
+          const link = breadcrumbItems
+            .slice(0, index + 1)
+            .map((item) => item.path)
+            .join("/");
+
+          return (
+            <Fragment key={item.path}>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                {index === breadcrumbItems.length - 1 ? (
+                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                ) : (
+                  <BreadcrumbLink asChild>
+                    <Link to={link}>{item.label}</Link>
+                  </BreadcrumbLink>
+                )}
+              </BreadcrumbItem>
+            </Fragment>
+          );
+        })}
       </BreadcrumbList>
     </Breadcrumb>
   );

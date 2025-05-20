@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Λήξη συνεδρίας",
+      "sessionTimeoutDescription": "Η συνεδρία σας έληξε (πιθανότατα λόγω Cloudflare)",
+      "reload": "Επαναφόρτωση",
+      "dismiss": "Κλείσιμο"
+    }
+  }
+} 

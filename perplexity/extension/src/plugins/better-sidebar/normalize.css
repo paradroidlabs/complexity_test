@@ -1,0 +1,19 @@
+@reference "../../assets/index.css";
+
+#better-sidebar-container:not(:empty) + .group\/sidebar {
+  display: none;
+
+  & + [class^="erp"][style^="padding"] {
+    @apply x:md:pl-2!;
+  }
+}
+
+body[cplx-better-sidebar-state="collapsed"] {
+  &[location="thread"] .h-headerHeight {
+    @apply x:md:pl-12;
+  }
+
+  &[location="page"] .sticky.top-0.z-10 {
+    @apply x:md:pl-12;
+  }
+}

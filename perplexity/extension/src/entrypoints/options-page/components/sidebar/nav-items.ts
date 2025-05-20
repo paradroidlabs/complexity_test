@@ -21,13 +21,13 @@ export const defaultNavItems: NavItem[] = [
     path: "/themes",
   },
   {
-    icon: LuSettings,
-    label: "Settings",
-    path: "/settings",
-  },
-  {
     icon: LuFileText,
     label: "Release Notes",
     path: "/release-notes",
+  },
+  {
+    icon: LuSettings,
+    label: "Settings",
+    path: "/settings",
   },
 ];

@@ -54,7 +54,7 @@ export default function CommandContent() {
         <TabsList
           className={cn(
             PPLX_SCROLLBAR_CLASSES,
-            "x:flex-col x:justify-start x:overflow-x-hidden x:overflow-y-auto x:rounded-none x:border-l x:bg-secondary x:p-0 x:transition-all x:empty:hidden x:dark:bg-background",
+            "x:flex-col x:justify-start x:overflow-x-hidden x:overflow-y-auto x:rounded-none x:border-l x:border-border/50 x:bg-secondary x:p-0 x:transition-all x:empty:hidden x:dark:bg-background",
           )}
         >
           <PromptHistorySlashCommandMenuTabTrigger />

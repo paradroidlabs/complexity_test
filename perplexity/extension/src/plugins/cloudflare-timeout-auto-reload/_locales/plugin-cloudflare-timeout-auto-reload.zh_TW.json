@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "會話逾時",
+      "sessionTimeoutDescription": "您的會話已逾時（很可能是由於Cloudflare）",
+      "reload": "重新載入",
+      "dismiss": "關閉"
+    }
+  }
+} 

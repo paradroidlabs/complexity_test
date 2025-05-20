@@ -175,7 +175,7 @@ export function isVersionedRemoteResource(
 ): resourceConfig is VersionedRemoteResourceReturnType<any> {
   return (
     typeof resourceConfig === "object" &&
-    resourceConfig !== null &&
+    resourceConfig != null &&
     "isVersioned" in resourceConfig &&
     resourceConfig.isVersioned === true
   );

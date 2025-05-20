@@ -2,17 +2,17 @@ import { z } from "zod";
 
 import { definePlugin } from "@/data/plugin-registry/utils";
 
-const schema = z.object({
-  enabled: z.boolean(),
-  respectDefaultSpaceModel: z.boolean(),
-  changeTimezone: z.boolean(),
-});
-
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
     "queryBox:languageModelSelector": z.infer<typeof schema>;
   }
 }
+
+const schema = z.object({
+  enabled: z.boolean(),
+  respectDefaultSpaceModel: z.boolean(),
+  changeTimezone: z.boolean(),
+});
 
 export default definePlugin({
   manifest: {

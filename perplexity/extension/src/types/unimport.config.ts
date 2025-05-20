@@ -16,7 +16,12 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
     },
     {
       from: normalizePath("src/utils/utils.ts"),
-      imports: ["sleep", "isMainWorldContext", "isExtensionContext"],
+      imports: [
+        "sleep",
+        "isMainWorldContext",
+        "isExtensionContext",
+        "invariant",
+      ],
     },
     {
       from: normalizePath("src/data/i18next.ts"),

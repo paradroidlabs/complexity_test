@@ -18,7 +18,7 @@ export function parseQuery(searchParams: URLSearchParams): ParsedQuery | null {
   const query = searchParams.get("q");
   const model = searchParams.get("model");
   const focusModes = searchParams.get("focus")?.split(",") ?? [];
-  const isIncognito = searchParams.get("incognito") !== null;
+  const isIncognito = searchParams.get("incognito") != null;
 
   return { query, model, focusModes, isIncognito };
 }

@@ -14,7 +14,6 @@ export default function useCdnRemoteResourcesInvalidator({
 
   const { data: remoteResourcesCacheBuster } = useQuery({
     ...cplxApiQueries.cacheBuster.detail(),
-    refetchInterval: 1000 * 60 * 30,
   });
 
   useEffect(() => {

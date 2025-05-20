@@ -24,6 +24,7 @@ import {
   checkIncognito,
   checkLocation,
   checkBrowser,
+  checkRequiredPermissions,
 } from "@/plugins/_core/plugins-guard/guards";
 import { usePluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
 import { ExtensionSettingsService } from "@/services/extension-settings";
@@ -78,9 +79,18 @@ function CsUiPluginsGuardError({
 }
 
 function useGuardConditions(props: CsUiPluginsGuardProps) {
-  const { currentLocation, hasActiveSub, isLoggedIn, isMobile, isOrgMember } =
-    usePluginGuardsStore();
+  const {
+    currentLocation,
+    hasActiveSub,
+    isLoggedIn,
+    isMobile,
+    isOrgMember,
+    grantedPermissions,
+  } = usePluginGuardsStore();
 
+  const hasRequiredPermissions = checkRequiredPermissions(props, {
+    grantedPermissions,
+  });
   const pluginsStates = PluginsStatesService.getEnableStatesCachedSync();
   const isIncognito = usePplxIncognitoMode();
 
@@ -101,6 +111,7 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
   const browserValid = checkBrowser(props);
 
   return {
+    hasRequiredPermissions,
     deviceValid,
     authValid,
     accountValid,
@@ -151,6 +162,7 @@ export default function CsUiPluginsGuard(
   }, [retryCount]);
 
   const {
+    hasRequiredPermissions,
     deviceValid,
     authValid,
     accountValid,
@@ -171,6 +183,7 @@ export default function CsUiPluginsGuard(
     props.additionalCheck?.(additionalCheckParams) ?? true;
 
   const allConditionsMet = [
+    hasRequiredPermissions,
     deviceValid,
     authValid,
     accountValid,

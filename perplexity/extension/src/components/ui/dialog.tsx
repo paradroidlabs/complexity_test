@@ -20,7 +20,7 @@ export function DialogOverlay({
   return (
     <ArkDialog.Backdrop
       className={cn(
-        "x:fixed x:inset-0 x:z-50 x:bg-black/80",
+        "x:fixed x:inset-0 x:z-50 x:bg-black/60",
         "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
         "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
         className,
@@ -53,14 +53,14 @@ export function DialogContent({
             "custom-scrollbar x:fixed x:top-[50%] x:left-[50%] x:z-50 x:flex x:max-h-[95vh] x:w-full x:max-w-lg x:flex-col x:overflow-y-auto x:fill-mode-forwards",
             "x:translate-x-[-50%] x:translate-y-[-50%] x:gap-4 x:border x:border-border/50 x:bg-background x:p-6 x:shadow-lg x:duration-200",
             "x:max-h-[95vh] x:data-[state=closed]:hidden x:data-[state=closed]:animate-out x:data-[state=open]:fade-in-0",
-            "x:sm:rounded-lg",
+            "x:sm:rounded-xl",
             className,
           )}
           {...props}
         >
           {children}
           {closeButton && (
-            <DialogClose className="x:absolute x:top-4 x:right-4 x:rounded-sm x:opacity-70 x:ring-offset-background x:transition-opacity x:hover:opacity-100 x:focus:ring-2 x:focus:ring-ring x:focus:ring-offset-2 x:focus:outline-none x:disabled:pointer-events-none x:data-[state=open]:bg-primary-foreground x:data-[state=open]:text-muted-foreground">
+            <DialogClose className="x:absolute x:top-4 x:right-4 x:rounded-xl x:opacity-70 x:ring-offset-background x:transition-opacity x:hover:opacity-100 x:focus:ring-2 x:focus:ring-ring x:focus:ring-offset-2 x:focus:outline-none x:disabled:pointer-events-none x:data-[state=open]:bg-primary-foreground x:data-[state=open]:text-muted-foreground">
               <X className="x:h-4 x:w-4" />
               <span className="x:sr-only">Close</span>
             </DialogClose>

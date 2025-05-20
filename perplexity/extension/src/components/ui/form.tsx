@@ -12,7 +12,7 @@ import {
 
 import { Label } from "@/components/ui/label";
 
-export const Form = FormProvider;
+export { FormProvider };
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,

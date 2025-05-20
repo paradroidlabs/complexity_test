@@ -11,7 +11,7 @@ import { safeMerge } from "@/utils/safe-merge";
 import { invariant, isInContentScript } from "@/utils/utils";
 
 export class ExtensionSettingsService {
-  static instance = storage.defineItem<ExtensionSettings>("local:settings", {
+  static storageItem = storage.defineItem<ExtensionSettings>("local:settings", {
     init: () => DEFAULT_EXTENSION_SETTINGS,
     fallback: DEFAULT_EXTENSION_SETTINGS,
     version: 3,
@@ -31,7 +31,7 @@ export class ExtensionSettingsService {
       "This method is not allowed to call more than once in a content script",
     );
 
-    const value = await ExtensionSettingsService.instance.getValue();
+    const value = await ExtensionSettingsService.storageItem.getValue();
 
     const validationResult = ExtensionSettingsSchema.safeParse(value);
 
@@ -41,12 +41,12 @@ export class ExtensionSettingsService {
       const merged = safeMerge(
         ExtensionSettingsSchema,
         value,
-        ExtensionSettingsService.instance.fallback,
+        ExtensionSettingsService.storageItem.fallback,
       );
 
       ExtensionSettingsService.cachedValue = merged;
 
-      await ExtensionSettingsService.instance.setValue(merged);
+      await ExtensionSettingsService.storageItem.setValue(merged);
 
       return merged;
     }
@@ -67,7 +67,7 @@ export class ExtensionSettingsService {
       "This method is only allowed in content scripts",
     );
 
-    return await ExtensionSettingsService.instance.getValue();
+    return await ExtensionSettingsService.storageItem.getValue();
   }
 
   public static get safeCachedSync(): ExtensionSettings | null {
@@ -103,7 +103,7 @@ export class ExtensionSettingsService {
       updater,
     );
 
-    await ExtensionSettingsService.instance.setValue(newSettings);
+    await ExtensionSettingsService.storageItem.setValue(newSettings);
 
     return newSettings;
   }
@@ -112,8 +112,8 @@ export class ExtensionSettingsService {
    * Resets the extension settings to default values
    */
   public static async reset() {
-    await ExtensionSettingsService.instance.setValue(
-      ExtensionSettingsService.instance.fallback,
+    await ExtensionSettingsService.storageItem.setValue(
+      ExtensionSettingsService.storageItem.fallback,
     );
   }
 }

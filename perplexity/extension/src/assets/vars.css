@@ -27,8 +27,6 @@
   --input: oklch(88.3% 0.012 106.646);
   --ring: oklch(55.14% 0.0857 208.54);
 
-  --button-background: oklch(92.97% 0.0068 106.52);
-
   --radius: 0.5rem;
 }
 
@@ -60,6 +58,4 @@
   --border: oklch(37.08% 0.0027 228.85);
   --input: oklch(37.08% 0.0027 228.85);
   --ring: oklch(71.56% 0.1183 209.17);
-
-  --button-background: oklch(30.26% 0.0026 197.03);
 }

@@ -16,7 +16,7 @@ import vitePluginForceRestartOnChanges from "./vite-plugins/vite-plugin-force-re
 import vitePluginReloadOnDynamicallyInjectedStyleChanges from "./vite-plugins/vite-plugin-reload-on-dynamically-injected-style-changes";
 import viteTouchGlobalCss from "./vite-plugins/vite-plugin-touch-global-css";
 import viteMoveHtmlPlugin from "./vite-plugins/vite-plugin-move-html";
-import viteRemoveStaticCssFromManifest from "./vite-plugins/vite-plugin-remove-static-css-from-manifest";
+// import viteRemoveStaticCssFromManifest from "./vite-plugins/vite-plugin-remove-static-css-from-manifest";
 
 export default defineConfig(() => ({
   base: "./",
@@ -67,7 +67,7 @@ export default defineConfig(() => ({
         dest: "options.html",
       },
     ]),
-    viteRemoveStaticCssFromManifest(),
+    // viteRemoveStaticCssFromManifest(),
   ],
 
   resolve: {

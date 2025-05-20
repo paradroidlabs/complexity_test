@@ -2,16 +2,16 @@ import { z } from "zod";
 
 import { definePlugin } from "@/data/plugin-registry/utils";
 
-const schema = z.object({
-  enabled: z.boolean(),
-  value: z.number(),
-});
-
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
     "thread:customThreadContainerWidth": z.infer<typeof schema>;
   }
 }
+
+const schema = z.object({
+  enabled: z.boolean(),
+  value: z.number(),
+});
 
 export default definePlugin({
   manifest: {

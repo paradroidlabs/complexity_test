@@ -10,6 +10,7 @@ import { APP_CONFIG } from "@/app.config";
 import { getQueryCacheService } from "@/data/query-client/indexed-db";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
+import { isSubArray } from "@/utils/utils";
 
 export type QueryCacheEntry = {
   key: string;
@@ -83,16 +84,18 @@ function shouldDehydrateQuery(query: Query) {
 
   const includes = [
     cplxApiQueries.all(),
-    pplxApiQueries.spaces.detail().queryKey,
+    pplxApiQueries.spaces.all(),
     pplxApiQueries.threads.infinite.detail({
-      searchTerm: "",
       initialPageParam: 0,
+      searchTerm: "",
     }).queryKey,
-  ];
+  ] as unknown as any[][];
 
-  return includes.some(
-    (query) => Array.isArray(queryKey) && queryKey[0] === query[0],
+  const result = includes.some(
+    (query) => Array.isArray(queryKey) && isSubArray(query, queryKey),
   );
+
+  return result;
 }
 
 export async function removeCachedRemoteResources({

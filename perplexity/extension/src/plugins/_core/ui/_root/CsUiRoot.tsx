@@ -9,6 +9,8 @@ import HomepageComponents from "@/plugins/_core/ui/route-groups/Home";
 import SettingsComponents from "@/plugins/_core/ui/route-groups/Settings";
 import SpacesPageComponents from "@/plugins/_core/ui/route-groups/SpacesPage";
 import ThreadComponents from "@/plugins/_core/ui/route-groups/Thread";
+import BetterSidebarWrapper from "@/plugins/better-sidebar/Wrapper";
+import CloudflareTimeoutActionDialogWrapper from "@/plugins/cloudflare-timeout-auto-reload/Wrapper";
 import CommandMenuWrapper from "@/plugins/command-menu/Wrapper";
 import { SlashCommandMenu } from "@/plugins/slash-command/SlashCommandMenu";
 
@@ -22,6 +24,8 @@ const { PostUpdateReleaseNotesDialog } = lazily(
 export default function CsUiRoot() {
   return (
     <>
+      <BetterSidebarWrapper />
+
       <HomepageComponents />
 
       <ThreadComponents />
@@ -37,6 +41,8 @@ export default function CsUiRoot() {
       <CommandMenuWrapper />
 
       <SlashCommandMenu />
+
+      <CloudflareTimeoutActionDialogWrapper />
 
       <CsUiPluginsGuard
         desktopOnly

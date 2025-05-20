@@ -4,6 +4,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 
 type SidebarDomObserverStoreType = {
   $wrapper: JQuery<HTMLElement> | null;
+  $mobileTrigger: JQuery<HTMLElement> | null;
   resetStore: () => void;
 };
 
@@ -13,9 +14,11 @@ export const sidebarDomObserverStore =
       immer(
         (set): SidebarDomObserverStoreType => ({
           $wrapper: null,
+          $mobileTrigger: null,
           resetStore: () => {
             set({
               $wrapper: null,
+              $mobileTrigger: null,
             });
           },
         }),

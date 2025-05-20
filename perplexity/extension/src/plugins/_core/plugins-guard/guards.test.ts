@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
 
-import type { PluginId } from "@/data/plugin-registry/types";
 import {
   checkDeviceType,
   checkAuthStatus,
@@ -12,6 +11,7 @@ import {
   type GuardConditions,
   type GuardCheckParams,
 } from "@/plugins/_core/plugins-guard/guards";
+import type { PluginsStates } from "@/services/plugins-states/types";
 
 // Mock APP_CONFIG
 vi.mock("@/app.config", () => ({
@@ -114,7 +114,7 @@ describe("Guard Functions", () => {
     it("should return true when no dependencies", () => {
       const conditions: GuardConditions = {};
       const params: Pick<GuardCheckParams, "pluginsStates"> = {
-        pluginsStates: {} as Record<PluginId, boolean>,
+        pluginsStates: {} as PluginsStates,
       };
       expect(checkPluginDependencies(conditions, params)).toBe(true);
     });
@@ -126,7 +126,7 @@ describe("Guard Functions", () => {
       const params: Pick<GuardCheckParams, "pluginsStates"> = {
         pluginsStates: {
           "queryBox:languageModelSelector": false,
-        } as Record<PluginId, boolean>,
+        } as PluginsStates,
       };
       expect(checkPluginDependencies(conditions, params)).toBe(false);
     });

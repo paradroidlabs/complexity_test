@@ -1,3 +1,5 @@
+import { invariant } from "@/utils/utils";
+
 export const ThreadMessageContext = createContext<{
   messageBlockIndex: number;
 }>({
@@ -19,13 +21,12 @@ export function ThreadMessageToolbarContextProvider({
 }
 
 export function useThreadMessageContext() {
-  const context = useContext(ThreadMessageContext);
+  const context = use(ThreadMessageContext);
 
-  if (!context) {
-    throw new Error(
-      "useThreadMessageContext must be used within a ThreadMessageContextProvider",
-    );
-  }
+  invariant(
+    context != null,
+    "useThreadMessageContext must be used within a ThreadMessageContextProvider",
+  );
 
   return context;
 }

@@ -7,11 +7,13 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Switch } from "@/components/ui/switch";
+import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
 import {
   OPTIONAL_PERMISSIONS,
   OPTIONAL_PERMISSIONS_DETAILS,
-} from "@/data/extension-permissions";
+} from "@/services/extension-permissions/permissions";
 import { useExtensionPermissions } from "@/services/extension-permissions/useExtensionPermissions";
+import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
 export default function ManagePermissionsDialogWrapper({
   children,
@@ -19,10 +21,17 @@ export default function ManagePermissionsDialogWrapper({
   children: React.ReactNode;
 }) {
   const {
-    query: { data: grandtedPermissions },
+    query: { data: grantedPermissions },
     handleGrantPermission,
     handleRevokePermission,
   } = useExtensionPermissions();
+
+  const { pluginsStates } = usePluginsStates();
+  const { settings } = useExtensionSettings();
+
+  if (grantedPermissions == null) {
+    return null;
+  }
 
   return (
     <Dialog>
@@ -35,40 +44,57 @@ export default function ManagePermissionsDialogWrapper({
             features may be disabled without the necessary permissions.
           </DialogDescription>
           {OPTIONAL_PERMISSIONS.length > 0 ? (
-            OPTIONAL_PERMISSIONS.map((permission) => (
-              <div
-                key={permission}
-                className="x:!mt-4 x:flex x:flex-col x:gap-2"
-              >
-                <Switch
-                  className="x:items-start x:text-muted-foreground"
-                  textLabel={
-                    <div className="x:flex x:flex-col">
-                      <div>
-                        {/* @ts-expect-error - We don't have any optional perms for now */}
-                        {OPTIONAL_PERMISSIONS_DETAILS[permission]?.title}
+            OPTIONAL_PERMISSIONS.map((permission) => {
+              const activePlugins = OPTIONAL_PERMISSIONS_DETAILS[
+                permission
+              ]?.dependantPlugins.filter(
+                (plugin) =>
+                  !pluginsStates[plugin.id].isOnMaintenance &&
+                  !pluginsStates[plugin.id].isOutdated &&
+                  settings?.plugins[plugin.id]?.enabled,
+              );
+
+              return (
+                <div
+                  key={permission}
+                  className="x:!mt-4 x:flex x:flex-col x:gap-2"
+                >
+                  <Switch
+                    textLabel={
+                      <div className="x:flex x:flex-col">
+                        <div className="x:text-lg x:font-medium x:text-primary">
+                          {permission}
+                        </div>
                       </div>
-                      <div className="x:text-sm x:text-muted-foreground">
-                        {/* @ts-expect-error - We don't have any optional perms for now */}
-                        {OPTIONAL_PERMISSIONS_DETAILS[permission]?.description}
-                      </div>
-                    </div>
-                  }
-                  checked={grandtedPermissions?.permissions?.includes(
-                    permission,
-                  )}
-                  onCheckedChange={() => {
-                    if (
-                      grandtedPermissions?.permissions?.includes(permission)
-                    ) {
-                      handleRevokePermission({ permissions: [permission] });
-                    } else {
-                      handleGrantPermission({ permissions: [permission] });
                     }
-                  }}
-                />
-              </div>
-            ))
+                    checked={grantedPermissions.permissions?.includes(
+                      permission,
+                    )}
+                    onCheckedChange={() => {
+                      if (
+                        grantedPermissions.permissions?.includes(permission)
+                      ) {
+                        handleRevokePermission({ permissions: [permission] });
+                      } else {
+                        handleGrantPermission({ permissions: [permission] });
+                      }
+                    }}
+                  />
+                  {activePlugins && (
+                    <div className="x:ml-14">
+                      <span
+                        className={"x:text-lg x:font-medium x:text-primary"}
+                      >
+                        {activePlugins.length}{" "}
+                      </span>
+                      <span className="x:text-muted-foreground">
+                        plugin(s) is currently using this permission
+                      </span>
+                    </div>
+                  )}
+                </div>
+              );
+            })
           ) : (
             <div className="x:mx-auto x:block x:py-16 x:text-muted-foreground x:italic">
               You&apos;re all set!

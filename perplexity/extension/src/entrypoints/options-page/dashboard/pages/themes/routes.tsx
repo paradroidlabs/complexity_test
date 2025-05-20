@@ -37,7 +37,17 @@ export const ThemesPageRoutes: RouteObject[] = [
     children: [
       {
         index: true,
-        loader: () => redirect("/themes"),
+        loader: async ({ params }) => {
+          const { themeId } = params;
+
+          if (!themeId) return redirect("/themes");
+
+          const localTheme = await getLocalThemesService().get(themeId);
+
+          if (!localTheme) return redirect("/themes");
+
+          return redirect(`/themes/${themeId}/edit`);
+        },
       },
       {
         path: "edit",
@@ -51,7 +61,7 @@ export const ThemesPageRoutes: RouteObject[] = [
             (theme) => theme.id === themeId,
           );
 
-          if (builtInTheme) return builtInTheme;
+          if (builtInTheme) return redirect("/themes");
 
           const localTheme = await getLocalThemesService().get(themeId);
 

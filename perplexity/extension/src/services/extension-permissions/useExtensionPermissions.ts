@@ -2,22 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 
 import { queryClient } from "@/data/query-client";
 import { extensionPermissionsQueries } from "@/services/extension-permissions/query-keys";
+import {
+  requestPermissions,
+  revokePermissions,
+} from "@/services/extension-permissions/utils";
 
 export function useExtensionPermissions() {
   const query = useQuery(extensionPermissionsQueries.permissions.detail());
 
   const handleGrantPermission = ({
     permissions,
-    hostPermissions,
   }: {
     permissions: chrome.runtime.ManifestPermissions[];
-    hostPermissions?: string[];
   }) => {
-    chrome.permissions
-      .request({
-        permissions,
-        origins: hostPermissions,
-      })
+    requestPermissions(permissions)
       .then(() => {
         queryClient.invalidateQueries({
           queryKey: extensionPermissionsQueries.permissions.all(),
@@ -30,13 +28,10 @@ export function useExtensionPermissions() {
 
   const handleRevokePermission = ({
     permissions,
-    hostPermissions,
   }: {
     permissions: chrome.runtime.ManifestPermissions[];
-    hostPermissions?: string[];
   }) => {
-    chrome.permissions
-      .remove({ permissions, origins: hostPermissions })
+    revokePermissions(permissions)
       .then(() => {
         queryClient.invalidateQueries({
           queryKey: extensionPermissionsQueries.permissions.all(),

@@ -5,6 +5,7 @@ import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { pluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
+import { getPermissions } from "@/services/extension-permissions/utils";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { whereAmI } from "@/utils/utils";
 
@@ -18,7 +19,9 @@ export default function loader() {
   asyncLoaderRegistry.register({
     id: "store:pluginGuards",
     dependencies: [],
-    loader: () => {
+    loader: async () => {
+      // pluginGuardsStore.subscribe((state) => console.log(state));
+
       pluginGuardsStore.setState((state) => {
         state.currentLocation = whereAmI();
       });
@@ -84,7 +87,12 @@ export default function loader() {
         },
       );
 
-      // pluginGuardsStore.subscribe((state) => console.log(state));
+      const grantedPermissions = (await getPermissions()).permissions;
+      if (grantedPermissions) {
+        pluginGuardsStore.setState((draft) => {
+          draft.grantedPermissions = grantedPermissions;
+        });
+      }
     },
   });
 }

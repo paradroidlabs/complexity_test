@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Čas relace vypršel",
+      "sessionTimeoutDescription": "Vaše relace vypršela (pravděpodobně kvůli Cloudflare)",
+      "reload": "Znovu načíst",
+      "dismiss": "Zavřít"
+    }
+  }
+} 

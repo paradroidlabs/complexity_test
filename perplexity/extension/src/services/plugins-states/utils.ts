@@ -4,24 +4,25 @@ import { PluginRegistry } from "@/data/plugin-registry/index";
 import type { PluginId } from "@/data/plugin-registry/types";
 import type { FeatureCompatibility } from "@/services/cplx-api/types";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
+import type { PluginsStates } from "@/services/plugins-states/types";
 
-export type PluginState = {
+export type PluginStateDetailed = {
   isOutdated: boolean;
   isOnMaintenance: boolean; // if no publicly available newer version
 };
 
-export type PluginsStates = Record<PluginId, PluginState>;
+export type PluginsStatesDetailed = Record<PluginId, PluginStateDetailed>;
 
-export const initializePluginStates = (): PluginsStates => {
+export const initializePluginStates = (): PluginsStatesDetailed => {
   return (Object.keys(PluginRegistry.manifests) as PluginId[]).reduce(
     (acc, pluginId) => ({
       ...acc,
       [pluginId]: {
         isOutdated: false,
         isOnMaintenance: false,
-      } satisfies PluginState,
+      } satisfies PluginStateDetailed,
     }),
-    {} as PluginsStates,
+    {} as PluginsStatesDetailed,
   );
 };
 
@@ -42,11 +43,11 @@ export const isUpdateAvail = (
 };
 
 export const updatePluginStatesWithFeatureCompat = (
-  pluginsStates: PluginsStates,
+  pluginsStates: PluginsStatesDetailed,
   featureCompat: FeatureCompatibility | undefined,
   currentVersion: string,
   latestAvailableVersion: string | undefined,
-): PluginsStates => {
+): PluginsStatesDetailed => {
   if (!featureCompat) return pluginsStates;
 
   return Object.keys(pluginsStates).reduce(
@@ -73,9 +74,9 @@ export const updatePluginStatesWithFeatureCompat = (
 };
 
 export const getEnableStates = (
-  pluginsStates: PluginsStates,
+  pluginsStates: PluginsStatesDetailed,
   localEnableStates: ExtensionSettings["plugins"],
-): Record<PluginId, boolean> => {
+): PluginsStates => {
   return Object.keys(pluginsStates).reduce(
     (acc, pluginId) => ({
       ...acc,
@@ -84,13 +85,13 @@ export const getEnableStates = (
         !isPluginLockedDown(pluginsStates, pluginId as PluginId) &&
         localEnableStates[pluginId as PluginId].enabled,
     }),
-    {} as Record<PluginId, boolean>,
+    {} as PluginsStates,
   );
 };
 
 function areAllDependenciesAvailable(
   pluginId: PluginId,
-  pluginsStates: PluginsStates,
+  pluginsStates: PluginsStatesDetailed,
 ) {
   if (!PluginRegistry.manifests[pluginId]?.dependentPlugins) return true;
 
@@ -101,7 +102,10 @@ function areAllDependenciesAvailable(
   );
 }
 
-function isPluginLockedDown(pluginsStates: PluginsStates, pluginId: PluginId) {
+function isPluginLockedDown(
+  pluginsStates: PluginsStatesDetailed,
+  pluginId: PluginId,
+) {
   return (
     pluginsStates[pluginId].isOutdated ||
     pluginsStates[pluginId].isOnMaintenance

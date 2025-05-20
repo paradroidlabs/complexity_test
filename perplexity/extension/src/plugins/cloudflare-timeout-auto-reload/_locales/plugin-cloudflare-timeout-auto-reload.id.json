@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sesi berakhir",
+      "sessionTimeoutDescription": "Sesi Anda telah berakhir (kemungkinan besar karena Cloudflare)",
+      "reload": "Muat Ulang",
+      "dismiss": "Tutup"
+    }
+  }
+} 

@@ -5,6 +5,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 import type { whereAmI } from "@/utils/utils";
 
 type PluginGuardsStoreType = {
+  grantedPermissions: chrome.runtime.ManifestPermissions[];
   currentLocation: ReturnType<typeof whereAmI>;
   isMobile: boolean;
   isLoggedIn: boolean;
@@ -16,6 +17,7 @@ export const pluginGuardsStore = createWithEqualityFn<PluginGuardsStoreType>()(
   subscribeWithSelector(
     immer(
       (): PluginGuardsStoreType => ({
+        grantedPermissions: [],
         currentLocation: "unknown",
         isMobile: false,
         isLoggedIn: false,

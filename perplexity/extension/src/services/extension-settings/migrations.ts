@@ -1,6 +1,7 @@
 import { produce } from "immer";
 import omit from "lodash/omit";
 
+import { APP_CONFIG } from "@/app.config";
 import { DEFAULT_EXTENSION_SETTINGS } from "@/services/extension-settings/defaults";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
 import { errorWrapper } from "@/utils/error-wrapper";
@@ -11,14 +12,15 @@ export const migrations = {
       const oldFlatSchema = await chrome.storage.local.get();
 
       const newSchema = transfromFlatSchema(oldFlatSchema);
-
       await chrome.storage.local.clear();
 
       return newSchema;
     })();
 
     if (error) {
-      console.error("Error migrating v2 schema", error);
+      if (APP_CONFIG.IS_DEV) {
+        console.error("Error migrating v2 schema", error);
+      }
 
       return DEFAULT_EXTENSION_SETTINGS;
     }
@@ -37,7 +39,9 @@ export const migrations = {
     })();
 
     if (error) {
-      console.error("Error migrating Command Menu keybindings", error);
+      if (APP_CONFIG.IS_DEV) {
+        console.error("Error migrating Command Menu keybindings", error);
+      }
 
       return oldSettings;
     }
@@ -51,13 +55,22 @@ export const migrations = {
 export function transfromFlatSchema(
   oldFlatSchema: Record<string, any>,
 ): ExtensionSettings {
-  return {
+  if (oldFlatSchema.plugins == null) {
+    return DEFAULT_EXTENSION_SETTINGS;
+  }
+
+  const newSchema = {
     ...omit(oldFlatSchema, "settings", "settings$"),
     plugins: {
       ...oldFlatSchema.plugins,
-      "queryBox:rawTextPaste": {
-        ...oldFlatSchema.plugins["queryBox:noFileCreationOnPaste"],
-      },
     },
   } as ExtensionSettings;
+
+  if (oldFlatSchema.plugins["queryBox:noFileCreationOnPaste"] != null) {
+    newSchema.plugins["queryBox:rawTextPaste"] = {
+      ...oldFlatSchema.plugins["queryBox:noFileCreationOnPaste"],
+    };
+  }
+
+  return newSchema;
 }

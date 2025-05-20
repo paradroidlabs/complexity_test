@@ -37,6 +37,14 @@ export type PluginManifest = {
   dependentDomObservers?: CoreDomObserverId[];
   dependentMainWorldCorePlugins?: MainWorldCorePluginId[];
   dependentPlugins?: PluginId[];
+  requiredPermissions?: {
+    permission: chrome.runtime.ManifestPermissions;
+    rationale: string;
+  }[];
+  optionalPermissions?: {
+    permission: chrome.runtime.ManifestPermissions;
+    rationale: string;
+  }[];
 };
 
 export type TypedPluginManifest<T extends PluginId> = Omit<

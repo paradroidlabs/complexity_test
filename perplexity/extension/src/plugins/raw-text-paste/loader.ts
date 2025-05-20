@@ -7,9 +7,7 @@ import { ExtensionSettingsService } from "@/services/extension-settings";
 
 const OBSERVER_ID = "raw-text-paste";
 
-function noFileCreationOnPaste(
-  queryBoxes: QueryBoxesDomObserverStoreType["main"],
-) {
+function rawTextPaste(queryBoxes: QueryBoxesDomObserverStoreType["main"]) {
   const settings =
     ExtensionSettingsService.cachedSync.plugins["queryBox:rawTextPaste"];
 
@@ -40,13 +38,13 @@ function noFileCreationOnPaste(
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
-    "plugin:queryBox:noFileCreationOnPaste": void;
+    "plugin:queryBox:rawTextPaste": void;
   }
 }
 
 export default function loader() {
   asyncLoaderRegistry.register({
-    id: "plugin:queryBox:noFileCreationOnPaste",
+    id: "plugin:queryBox:rawTextPaste",
     dependencies: ["cache:pluginsStates"],
     loader: ({ "cache:pluginsStates": pluginsStates }) => {
       if (!pluginsStates["queryBox:rawTextPaste"]) return;
@@ -57,7 +55,7 @@ export default function loader() {
           followUp: store.followUp,
         }),
         ({ main, followUp }) => {
-          noFileCreationOnPaste({
+          rawTextPaste({
             ...main,
             ...followUp,
           });

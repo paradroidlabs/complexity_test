@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Session expirée",
+      "sessionTimeoutDescription": "Votre session a expiré (très probablement à cause de Cloudflare)",
+      "reload": "Recharger",
+      "dismiss": "Fermer"
+    }
+  }
+} 

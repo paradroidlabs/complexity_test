@@ -73,9 +73,9 @@ export const MirroredCodeBlockContextProvider = memo(
     const [store] = useState(() => createStore(storeValue));
 
     return (
-      <MirroredCodeBlockContext.Provider value={store}>
+      <MirroredCodeBlockContext value={store}>
         {children}
-      </MirroredCodeBlockContext.Provider>
+      </MirroredCodeBlockContext>
     );
   },
 );

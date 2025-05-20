@@ -1,6 +1,7 @@
 import { APP_CONFIG } from "@/app.config";
 import type { PluginId } from "@/data/plugin-registry/types";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
+import type { PluginsStates } from "@/services/plugins-states/types";
 import type { whereAmI } from "@/utils/utils";
 
 export type GuardConditions = {
@@ -12,6 +13,7 @@ export type GuardConditions = {
   allowIncognito?: boolean;
   allowedAccountTypes?: ("free" | "pro" | "enterprise")[][];
   browser?: ("chrome" | "firefox")[];
+  requiredPermissions?: chrome.runtime.ManifestPermissions[];
 };
 
 export type GuardCheckParams = {
@@ -21,8 +23,19 @@ export type GuardCheckParams = {
   hasActiveSub: boolean;
   currentLocation: ReturnType<typeof whereAmI>;
   isIncognito: boolean;
-  pluginsStates: Record<PluginId, boolean>;
+  pluginsStates: PluginsStates;
+  grantedPermissions: chrome.runtime.ManifestPermissions[];
 };
+
+export function checkRequiredPermissions(
+  { requiredPermissions }: GuardConditions,
+  { grantedPermissions }: Pick<GuardCheckParams, "grantedPermissions">,
+): boolean {
+  if (!requiredPermissions || !requiredPermissions?.length) return true;
+  return requiredPermissions.every((permission) =>
+    grantedPermissions.includes(permission),
+  );
+}
 
 export function checkDeviceType(
   { desktopOnly, mobileOnly }: GuardConditions,
@@ -98,7 +111,7 @@ export function checkBrowser({ browser }: GuardConditions): boolean {
 }
 
 export type AdditionalCheckParams = GuardConditions & {
-  pluginsStates: Record<PluginId, boolean>;
+  pluginsStates: PluginsStates;
   settings: ExtensionSettings;
 };
 

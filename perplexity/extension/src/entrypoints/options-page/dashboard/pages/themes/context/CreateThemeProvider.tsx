@@ -3,22 +3,30 @@ import type { DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
+import {
+  ThemeFormContext,
+  type ThemeFormContextType,
+} from "@/entrypoints/options-page/dashboard/pages/themes/context/ThemeFormContext";
 import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/hooks/useBaseThemeForm";
 import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
 import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
 
-const initialValues: DeepRequired<ThemeFormValues> = {
-  title: "Untitled Theme",
-  fonts: { ui: "", mono: "" },
-  accentColor: "",
-  enhanceThreadTypography: false,
-  customCss: "",
+type CreateThemeProviderProps = {
+  children: React.ReactNode;
 };
 
-export function useThemeForm() {
-  const { form, generateThemeData } = useBaseThemeForm(initialValues);
-
+export function CreateThemeProvider({ children }: CreateThemeProviderProps) {
   const navigate = useNavigate();
+
+  const initialValues: DeepRequired<ThemeFormValues> = {
+    title: "Untitled Theme",
+    fonts: { ui: "", mono: "" },
+    accentColor: "",
+    enhanceThreadTypography: false,
+    customCss: "",
+  };
+
+  const { form, generateThemeData } = useBaseThemeForm(initialValues);
 
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ["customTheme", "create"],
@@ -49,9 +57,13 @@ export function useThemeForm() {
 
   const onSubmit = form.handleSubmit((data) => mutateAsync(data));
 
-  return {
+  const value: ThemeFormContextType = {
     form,
     isPending,
     onSubmit,
+    submitText: "Create Theme",
+    footer: null,
   };
+
+  return <ThemeFormContext value={value}>{children}</ThemeFormContext>;
 }

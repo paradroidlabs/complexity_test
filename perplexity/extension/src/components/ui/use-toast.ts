@@ -1,4 +1,4 @@
-import * as React from "react";
+import type * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "@/components/ui/toast";
 
@@ -175,9 +175,9 @@ export function toast({ ...props }: Toast) {
 }
 
 export function useToast() {
-  const [state, setState] = React.useState<State>(memoryState);
+  const [state, setState] = useState<State>(memoryState);
 
-  React.useEffect(
+  useEffect(
     function () {
       listeners.push(setState);
       return function () {

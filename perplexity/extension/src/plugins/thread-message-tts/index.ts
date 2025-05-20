@@ -3,16 +3,16 @@ import { z } from "zod";
 import { definePlugin } from "@/data/plugin-registry/utils";
 import { TtsVoiceSchema } from "@/plugins/thread-message-tts/types";
 
-const schema = z.object({
-  enabled: z.boolean(),
-  voice: TtsVoiceSchema,
-});
-
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
     "thread:messageTts": z.infer<typeof schema>;
   }
 }
+
+const schema = z.object({
+  enabled: z.boolean(),
+  voice: TtsVoiceSchema,
+});
 
 export default definePlugin({
   manifest: {

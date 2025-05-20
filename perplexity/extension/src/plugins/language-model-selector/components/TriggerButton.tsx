@@ -1,7 +1,6 @@
 import { FaShuffle } from "react-icons/fa6";
 import { LuCpu } from "react-icons/lu";
 
-import FaAtom from "@/components/icons/FaAtom";
 import Tooltip from "@/components/Tooltip";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
@@ -27,7 +26,6 @@ export default function BetterLanguageModelSelectorTriggerButton() {
 
   const Icon = useMemo(() => {
     if (selectedLanguageModel === "pplx_pro") return FaShuffle;
-    if (isDeepResearchLanguageModelCode(selectedLanguageModel)) return FaAtom;
 
     return modelInfo?.provider != null
       ? (PplxLanguageModelsService.icons?.[modelInfo.provider] ?? LuCpu)
@@ -40,11 +38,11 @@ export default function BetterLanguageModelSelectorTriggerButton() {
     >
       <div
         className={cn(
-          "x:flex x:h-8 x:items-center x:justify-center x:gap-2 x:rounded-lg x:border x:border-transparent x:bg-buttonBackground x:px-2.5 x:text-sm x:font-medium x:text-foreground x:transition-all x:active:scale-95",
+          "x:flex x:h-8 x:items-center x:justify-center x:gap-2 x:rounded-lg x:border x:border-border/50 x:bg-primary-foreground x:px-2.5 x:text-sm x:font-medium x:text-foreground x:transition-all x:active:scale-95",
           {
             "x:border-primary/30 x:bg-primary/10 x:text-primary":
               isDeepResearchModel,
-            "x:border-border/50 x:hover:bg-primary-foreground x:hover:text-foreground":
+            "x:hover:bg-primary-foreground x:hover:text-foreground":
               !isDeepResearchModel,
           },
         )}

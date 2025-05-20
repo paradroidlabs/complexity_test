@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sitzung abgelaufen",
+      "sessionTimeoutDescription": "Ihre Sitzung ist abgelaufen (höchstwahrscheinlich wegen Cloudflare)",
+      "reload": "Neu laden",
+      "dismiss": "Schließen"
+    }
+  }
+} 

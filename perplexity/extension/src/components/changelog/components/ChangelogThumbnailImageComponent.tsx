@@ -12,7 +12,7 @@ export function ChangelogThumbnailImageComponent({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="x:aspect-square x:max-w-[120px] x:min-w-[100px] x:flex-grow x:cursor-pointer x:overflow-hidden x:rounded-md x:border x:border-border/50 x:md:max-w-[200px] x:md:min-w-[150px]">
+        <div className="x:aspect-square x:max-w-[120px] x:min-w-[100px] x:flex-grow x:cursor-pointer x:overflow-hidden x:rounded-xl x:border x:border-border/50 x:md:max-w-[200px] x:md:min-w-[150px]">
           <img
             src={src}
             alt={alt}

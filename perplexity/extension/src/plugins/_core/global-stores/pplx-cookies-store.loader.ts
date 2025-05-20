@@ -42,7 +42,7 @@ export function parseCookies() {
         value: cookieValue,
       };
     })
-    .filter((cookie): cookie is Cookie => cookie !== null);
+    .filter((cookie): cookie is Cookie => cookie != null);
 
   const prevCookies = pplxCookiesStore.getState().cookies;
 

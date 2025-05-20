@@ -3,6 +3,12 @@ import { z } from "zod";
 import { definePlugin } from "@/data/plugin-registry/utils";
 import { getPlatform } from "@/hooks/usePlatformDetection";
 
+declare module "@/data/plugin-registry/types" {
+  interface PluginsSettingsRegistry {
+    zenMode: z.infer<typeof schema>;
+  }
+}
+
 const schema = z.object({
   enabled: z.boolean(),
   persistent: z.boolean(),
@@ -10,12 +16,6 @@ const schema = z.object({
   alwaysHideRelatedQuestions: z.boolean(),
   hotkey: z.array(z.string()),
 });
-
-declare module "@/data/plugin-registry/types" {
-  interface PluginsSettingsRegistry {
-    zenMode: z.infer<typeof schema>;
-  }
-}
 
 export default definePlugin({
   manifest: {

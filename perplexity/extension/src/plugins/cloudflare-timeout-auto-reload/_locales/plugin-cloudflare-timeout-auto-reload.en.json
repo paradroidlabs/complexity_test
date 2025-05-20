@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Session timeout",
+      "sessionTimeoutDescription": "Your session has been timed out (most likely due to Cloudflare)",
+      "reload": "Reload",
+      "dismiss": "Dismiss"
+    }
+  }
+}

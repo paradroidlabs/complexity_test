@@ -35,7 +35,7 @@ export default function SpacesThreadsForceWritingModePluginSettingsUi() {
         </div>
         <div>
           <div>
-            <span>Valid values for </span>
+            <span>Available values for </span>
             <InlineCode>&#123;focus&#125;</InlineCode>{" "}
             <span>(separated by commas)</span>:
           </div>
@@ -45,7 +45,7 @@ export default function SpacesThreadsForceWritingModePluginSettingsUi() {
           <InlineCode className="x:ml-1">scholar</InlineCode>
         </div>
         <div>
-          <span>Valid values for </span>
+          <span>Available values for </span>
           <InlineCode>&#123;model&#125;</InlineCode>:
           <div className="x:mt-1 x:ml-8 x:flex x:flex-col x:gap-2">
             {PplxLanguageModelsService.allModels.map((model) => (

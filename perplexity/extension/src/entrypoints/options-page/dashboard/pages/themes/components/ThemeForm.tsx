@@ -1,9 +1,8 @@
-import type { UseFormReturn } from "react-hook-form";
 import { LuLoaderCircle } from "react-icons/lu";
 
 import { Button } from "@/components/ui/button";
 import {
-  Form,
+  FormProvider,
   FormControl,
   FormDescription,
   FormField,
@@ -15,25 +14,14 @@ import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { ColorInput } from "@/entrypoints/options-page/dashboard/pages/themes/components/ColorInput";
-import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
+import { useThemeFormContext } from "@/entrypoints/options-page/dashboard/pages/themes/context";
 
-type ThemeFormProps = {
-  form: UseFormReturn<ThemeFormValues>;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  isPending: boolean;
-  submitText: string;
-  footer?: React.ReactNode;
-};
+export function ThemeForm() {
+  const { form, onSubmit, isPending, submitText, footer } =
+    useThemeFormContext();
 
-export function ThemeForm({
-  form,
-  onSubmit,
-  isPending,
-  submitText,
-  footer,
-}: ThemeFormProps) {
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form className="x:space-y-6" onSubmit={onSubmit}>
         <FormField
           control={form.control}
@@ -178,6 +166,6 @@ export function ThemeForm({
           </Button>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 }

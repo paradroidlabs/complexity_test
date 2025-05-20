@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Munkamenet lejárt",
+      "sessionTimeoutDescription": "A munkamenet lejárt (valószínűleg a Cloudflare miatt)",
+      "reload": "Újratöltés",
+      "dismiss": "Bezárás"
+    }
+  }
+} 

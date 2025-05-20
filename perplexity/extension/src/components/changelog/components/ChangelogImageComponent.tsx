@@ -9,7 +9,7 @@ export function ChangelogImageComponent({
     <img
       src={src}
       alt={alt}
-      className="x:rounded-md x:border x:border-border/50"
+      className="x:rounded-xl x:border x:border-border/50"
     />
   );
 }

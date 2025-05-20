@@ -2,7 +2,6 @@ import { settingsPageDomObserverStore } from "@/plugins/_core/dom-observers/sett
 import { isInternalNodeExists } from "@/plugins/_core/dom-observers/utils";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
-// TODO: test this
 export function findSidebar() {
   const existingSidebar =
     settingsPageDomObserverStore.getState().$sidebarWrapper?.[0];

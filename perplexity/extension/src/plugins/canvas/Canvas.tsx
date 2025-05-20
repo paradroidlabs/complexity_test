@@ -31,7 +31,7 @@ export function Canvas() {
     messageBlockIndex: selectedCodeBlockLocation?.messageBlockIndex,
     codeBlockIndex: selectedCodeBlockLocation?.codeBlockIndex,
   });
-  const isCanvasOpen = selectedCodeBlockLocation !== null;
+  const isCanvasOpen = selectedCodeBlockLocation != null;
   const isCanvasListOpen = useCanvasStore((state) => state.isCanvasListOpen);
 
   useInsertCss({

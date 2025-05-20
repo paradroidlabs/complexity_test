@@ -37,19 +37,17 @@ function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
 
   return (
     <Tabs defaultValue={categories[0]} activationMode="automatic">
-      <div className="x:w-full x:overflow-x-auto x:rounded-lg x:border x:bg-secondary">
-        <TabsList className="x:flex x:w-full x:max-w-full x:flex-nowrap">
-          {categories.map((category) => (
-            <TabTrigger
-              key={category}
-              value={category}
-              className="x:whitespace-nowrap"
-            >
-              {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
-            </TabTrigger>
-          ))}
-        </TabsList>
-      </div>
+      <TabsList className="x:mx-auto x:flex x:w-full x:max-w-fit x:flex-nowrap x:overflow-x-auto x:rounded-lg x:border x:bg-secondary">
+        {categories.map((category) => (
+          <TabTrigger
+            key={category}
+            value={category}
+            className="x:whitespace-nowrap"
+          >
+            {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
+          </TabTrigger>
+        ))}
+      </TabsList>
       {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
         <TabContent key={category} value={category} className="x:mt-4">
           <PluginsGrid pluginIds={pluginIds} />

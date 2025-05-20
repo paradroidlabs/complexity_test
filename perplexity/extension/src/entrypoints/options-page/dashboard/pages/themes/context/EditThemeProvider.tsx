@@ -3,12 +3,26 @@ import type { DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
+import {
+  ThemeFormContext,
+  useThemeFormContext,
+  type ThemeFormContextType,
+} from "@/entrypoints/options-page/dashboard/pages/themes/context/ThemeFormContext";
 import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/hooks/useBaseThemeForm";
+import { DeleteButton } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/components/DeleteButton";
 import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
+import { updateRegistry } from "@/plugins/_core/custom-theme/instant-css-background-watchdog";
 import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
 import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
-export function useThemeForm(theme: Theme) {
+type EditThemeProviderProps = {
+  children: React.ReactNode;
+  theme: Theme;
+};
+
+export function EditThemeProvider({ children, theme }: EditThemeProviderProps) {
+  const navigate = useNavigate();
+
   const initialValues: DeepRequired<ThemeFormValues> = {
     title: theme.title,
     fonts: {
@@ -19,8 +33,6 @@ export function useThemeForm(theme: Theme) {
     enhanceThreadTypography: theme.config?.enhanceThreadTypography ?? false,
     customCss: theme.config?.customCss ?? "",
   };
-
-  const navigate = useNavigate();
 
   const { form, generateThemeData } = useBaseThemeForm(initialValues);
 
@@ -53,33 +65,53 @@ export function useThemeForm(theme: Theme) {
     },
   });
 
-  const { mutateAsync: deleteTheme, isPending: isDeleting } = useMutation({
-    mutationKey: ["customTheme", "delete", theme.id],
-    mutationFn: async () => {
-      await getLocalThemesService().delete(theme.id);
-    },
-    onSuccess: () => {
-      navigate("..");
-      toast({
-        title: "✅ Theme deleted",
-        description: "Your theme has been deleted successfully",
-      });
-    },
-    onError: (error: Error) => {
-      toast({
-        title: "❌ Failed to delete theme",
-        description: error.message,
-      });
-    },
+  const { mutateAsync: deleteThemeMutation, isPending: isDeleting } =
+    useMutation({
+      mutationKey: ["customTheme", "delete", theme.id],
+      mutationFn: async () => {
+        await getLocalThemesService().delete(theme.id);
+      },
+      onSuccess: () => {
+        navigate("..");
+        toast({
+          title: "✅ Theme deleted",
+          description: "Your theme has been deleted successfully",
+        });
+      },
+      onError: (error: Error) => {
+        toast({
+          title: "❌ Failed to delete theme",
+          description: error.message,
+        });
+      },
+    });
+
+  const onSubmit = form.handleSubmit((data) => {
+    mutateAsync(data);
+    updateRegistry();
   });
 
-  const onSubmit = form.handleSubmit((data) => mutateAsync(data));
+  const deleteTheme = () => deleteThemeMutation();
 
-  return {
+  const value: ThemeFormContextType = {
     form,
     isPending,
     onSubmit,
     deleteTheme,
     isDeleting,
+    submitText: "Save Changes",
+    footer: <DeleteButtonWrapper />,
   };
+
+  return <ThemeFormContext value={value}>{children}</ThemeFormContext>;
+}
+
+function DeleteButtonWrapper() {
+  const { deleteTheme, isDeleting } = useThemeFormContext();
+
+  if (!deleteTheme || isDeleting === undefined) {
+    return null;
+  }
+
+  return <DeleteButton isDeleting={isDeleting} onDelete={deleteTheme} />;
 }

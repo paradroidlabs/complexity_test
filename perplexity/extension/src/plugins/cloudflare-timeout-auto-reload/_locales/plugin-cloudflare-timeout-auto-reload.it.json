@@ -1,0 +1,10 @@
+{
+  "cloudflareTimeoutAutoReload": {
+    "actionDialog": {
+      "sessionTimeoutTitle": "Sessione scaduta",
+      "sessionTimeoutDescription": "La tua sessione è scaduta (probabilmente a causa di Cloudflare)",
+      "reload": "Ricarica",
+      "dismiss": "Chiudi"
+    }
+  }
+} 

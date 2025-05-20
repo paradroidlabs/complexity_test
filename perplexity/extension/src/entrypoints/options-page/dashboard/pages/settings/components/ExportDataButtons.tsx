@@ -17,8 +17,8 @@ export default function ExportDataButtons() {
     return JSON.stringify(
       {
         settings: {
-          settings: await ExtensionSettingsService.instance.getValue(),
-          settings$: await ExtensionSettingsService.instance.getMeta(),
+          settings: await ExtensionSettingsService.storageItem.getValue(),
+          settings$: await ExtensionSettingsService.storageItem.getMeta(),
         } as ExtensionData["settings"],
         db: await indexedDb.exportAll(),
       } satisfies ExtensionData,

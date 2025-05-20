@@ -7,6 +7,7 @@ import {
 
 import DeepSeek from "@/components/icons/DeepSeek";
 import FaAtom from "@/components/icons/FaAtom";
+import PplxDeeperResearch from "@/components/icons/PplxDeeperResearch";
 import XAiIcon from "@/components/icons/XAiIcon";
 import type { LanguageModelProvider } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
@@ -20,6 +21,7 @@ export const languageModelProviderIcons: Record<
   xAI: XAiIcon,
   Perplexity: SiPerplexity,
   PerplexityDeepResearch: FaAtom,
+  PerplexityLabs: PplxDeeperResearch,
   Google: SiGooglegemini,
   DeepSeek: DeepSeek,
 };

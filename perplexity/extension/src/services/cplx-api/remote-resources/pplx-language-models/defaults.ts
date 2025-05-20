@@ -1,6 +1,6 @@
 export const pplxLocalLanguageModels = [
   {
-    label: "Claude 3.7 Sonnet",
+    label: "Claude 4 Sonnet",
     shortLabel: "Sonnet",
     code: "claude2",
     provider: "Anthropic",
@@ -9,7 +9,7 @@ export const pplxLocalLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Claude 3.7 Sonnet",
+    label: "Claude 4 Sonnet",
     shortLabel: "Sonnet Thinking",
     code: "claude37sonnetthinking",
     provider: "Anthropic",
@@ -72,10 +72,10 @@ export const pplxLocalLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Deeper Research",
-    shortLabel: "Deeper Research",
+    label: "Labs",
+    shortLabel: "Labs",
     code: "pplx_beta",
-    provider: "PerplexityDeepResearch",
+    provider: "PerplexityLabs",
     limitKey: "pplx_beta_limit",
     type: "deepResearch",
     hideFromList: false,

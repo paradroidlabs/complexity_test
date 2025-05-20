@@ -1,6 +1,7 @@
 import type { BridgeMessage } from "webext-bridge";
 
 import type { MaybePromise } from "@/types/utils.types";
+import type { InstantCss, InstantCssSettings } from "@/services/instant-css";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface EventHandlers {}
