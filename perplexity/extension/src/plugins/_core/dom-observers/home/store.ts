@@ -4,7 +4,6 @@ import { createWithEqualityFn } from "zustand/traditional";
 
 type HomeDomObserverStoreType = {
   $slogan: JQuery<HTMLElement> | null;
-  $bottomBar: JQuery<HTMLElement> | null;
   resetStore: () => void;
 };
 
@@ -14,11 +13,9 @@ export const homeDomObserverStore =
       immer(
         (set): HomeDomObserverStoreType => ({
           $slogan: null,
-          $bottomBar: null,
           resetStore: () => {
             set({
               $slogan: null,
-              $bottomBar: null,
             });
           },
         }),

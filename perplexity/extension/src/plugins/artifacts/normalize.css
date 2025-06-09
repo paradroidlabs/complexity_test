@@ -3,7 +3,7 @@
 body {
   &[data-cplx-artifact-active-panel] {
     /* the "Help" floating button */
-    .bottom-md.right-md.m-sm.fixed.hidden.md\:block {
+    .bottom-md.right-md.m-sm.fixed.hidden.lg\:block {
       display: none;
     }
 

@@ -17,7 +17,7 @@ type CopyButtonProps = {
   hasSources: boolean;
 };
 
-type CopyOptions = "default" | "without-citations";
+type CopyOptions = "with-citations" | "without-citations";
 
 const CopyButton = memo(function CopyButton({
   messageBlockIndex,
@@ -53,7 +53,7 @@ const CopyButton = memo(function CopyButton({
       unmountOnExit
       positioning={{ placement: "bottom-end" }}
       onSelect={({ value }) => {
-        handleCopy((value as CopyOptions) === "default");
+        handleCopy((value as CopyOptions) === "with-citations");
       }}
     >
       <Tooltip content={t("plugin-better-copy-buttons.tooltip")}>
@@ -68,7 +68,7 @@ const CopyButton = memo(function CopyButton({
       {hasSources && (
         <DropdownMenuContent className="x:font-medium">
           <DropdownMenuItem
-            value={"default" satisfies CopyOptions}
+            value={"with-citations" satisfies CopyOptions}
             className="x:flex x:items-center x:gap-2"
           >
             <FaMarkdown className="x:size-4" />

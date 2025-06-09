@@ -5,6 +5,7 @@ import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observe
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import type { ThreadMessageApiResponse } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
+import { dualClipboardPut } from "@/utils/clipboard-utils";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { ThreadExport } from "@/utils/thread-export";
 import { parseUrl } from "@/utils/utils";
@@ -122,11 +123,13 @@ async function copyMessageWithCitations({
   );
 
   if (content.webResults != null && content.webResults.length) {
-    navigator.clipboard.writeText(
-      `${cleanAnswer}\n\nCitations:\n${ThreadExport.formatWebResults(content.webResults)}`,
-    );
+    dualClipboardPut({
+      markdown: `${cleanAnswer}\n\nCitations:\n${ThreadExport.formatWebResults(content.webResults)}`,
+    });
   } else {
-    navigator.clipboard.writeText(cleanAnswer);
+    dualClipboardPut({
+      markdown: cleanAnswer,
+    });
   }
 }
 
@@ -173,7 +176,7 @@ async function copyContent({
   });
 
   const [, error] = await errorWrapper(() =>
-    navigator.clipboard.writeText(message),
+    dualClipboardPut({ markdown: message }),
   )();
 
   if (error) {

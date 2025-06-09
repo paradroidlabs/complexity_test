@@ -20,23 +20,3 @@ export function findSlogan() {
     $slogan,
   });
 }
-
-export function findBottomBar() {
-  const $bottomBar = $(DomSelectorsService.cachedSync.HOME.BOTTOM_BAR);
-
-  if (
-    homeDomObserverStore.getState().$bottomBar != null &&
-    (!$bottomBar.length ||
-      $bottomBar.internalComponentAttr() ===
-        DomSelectorsService.internalAttributes.HOME.BOTTOM_BAR)
-  )
-    return;
-
-  $bottomBar.internalComponentAttr(
-    DomSelectorsService.internalAttributes.HOME.BOTTOM_BAR,
-  );
-
-  homeDomObserverStore.setState({
-    $bottomBar,
-  });
-}

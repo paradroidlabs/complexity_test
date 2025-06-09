@@ -121,7 +121,6 @@ export const INTERNAL_ATTRIBUTES = {
     SLOGAN: "home-slogan",
     BOTTOM_BAR: "home-bottom-bar",
     LANGUAGE_SELECTOR: "home-language-selector",
-    SPONSOR_HOME_LINK_CONTAINER: "sponsor-home-link-container",
   },
   THREAD: {
     NAVBAR: "thread-navbar",

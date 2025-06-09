@@ -5,10 +5,7 @@ import {
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
-import {
-  findBottomBar,
-  findSlogan,
-} from "@/plugins/_core/dom-observers/home/utils";
+import { findSlogan } from "@/plugins/_core/dom-observers/home/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { whereAmI } from "@/utils/utils";
 
@@ -67,10 +64,6 @@ function observeHome(location: ReturnType<typeof whereAmI>) {
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
         { callback: findSlogan, id: createTaskId("home", "slogan") },
-        {
-          callback: findBottomBar,
-          id: createTaskId("home", "bottomBar"),
-        },
       ]),
   });
 }
