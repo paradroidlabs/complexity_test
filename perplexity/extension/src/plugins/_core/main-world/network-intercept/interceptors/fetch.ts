@@ -1,5 +1,7 @@
 import { sendMessage } from "webext-bridge/window";
 
+import { errorWrapper } from "@/utils/error-wrapper";
+
 export function initFetchInterceptor() {
   const originalFetch = window.fetch;
 
@@ -8,7 +10,13 @@ export function initFetchInterceptor() {
       return originalFetch.call(window, input, init);
     }
 
-    const modifiedBody = await interceptRequest(input, init.body);
+    const [modifiedBody, error] = await errorWrapper(() =>
+      interceptRequest(input, init.body as string),
+    )();
+
+    if (error) {
+      return originalFetch.call(window, input, init);
+    }
 
     if (modifiedBody === "") {
       return new Response("", { status: 200 });
