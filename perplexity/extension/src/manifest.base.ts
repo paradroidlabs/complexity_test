@@ -3,12 +3,7 @@ import type { ManifestV3Export } from "@crxjs/vite-plugin";
 import { APP_CONFIG } from "./app.config";
 import packageData from ".././package.json";
 
-export type PlainManifest = Exclude<
-  Exclude<ManifestV3Export, Promise<any>>,
-  (...args: any[]) => any
->;
-
-export type ExtendedManifestV3Export = PlainManifest & {
+export type ExtendedManifestV3Export = ManifestV3Export & {
   optional_host_permissions: string[];
 };
 

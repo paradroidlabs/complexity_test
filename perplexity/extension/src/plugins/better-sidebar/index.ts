@@ -15,6 +15,7 @@ const schema = z.object({
 
 export default definePlugin({
   manifest: {
+    devOnly: true,
     id: "betterSidebar",
     settingsUiRouteSegment: "better-sidebar",
     title: "Better Sidebar",

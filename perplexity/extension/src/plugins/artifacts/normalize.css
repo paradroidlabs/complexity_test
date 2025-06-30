@@ -22,6 +22,10 @@ body {
       @apply x:xl:w-[500px];
     }
   }
+
+  .shadow-\[0_1px_8px_2px_oklch\(var\(--text-color-100\)\/0\.1\)\,0_36px_16px_36px_oklch\(var\(--background-color-100\)\)\] {
+    box-shadow: none !important;
+  }
 }
 
 body {

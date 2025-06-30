@@ -28,7 +28,7 @@ export function insertText(textarea: HTMLTextAreaElement, text: string): void {
 
 export function deleteSelectedText(textarea: HTMLTextAreaElement): void {
   textarea.focus();
-  document.execCommand("insertText", false, "");
+  document.execCommand("delete", false, "");
 }
 
 export function getWordAtCaret(textarea: HTMLTextAreaElement) {

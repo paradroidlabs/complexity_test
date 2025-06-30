@@ -39,6 +39,8 @@ export class PluginRegistry {
 
     invariant(params != null, `Plugin "${path}" has no definition`);
 
+    if (params.manifest.devOnly) continue;
+
     (PluginRegistry.manifests[params.manifest.id] as TypedPluginManifest<
       keyof PluginsSettingsRegistry
     >) = params.manifest;

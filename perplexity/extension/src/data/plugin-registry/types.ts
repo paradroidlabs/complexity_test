@@ -27,6 +27,7 @@ export type PluginsSettingsSchema = {
 };
 
 export type PluginManifest = {
+  devOnly?: boolean;
   id: PluginId;
   settingsUiRouteSegment: string;
   title: string;
