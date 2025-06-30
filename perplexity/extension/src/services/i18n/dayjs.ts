@@ -56,6 +56,8 @@ export async function initializeDayjsLocale() {
     "el-GR": () => import("dayjs/locale/el"),
     "ro-RO": () => import("dayjs/locale/ro"),
     "id-ID": () => import("dayjs/locale/id"),
+    "bn-BD": () => import("dayjs/locale/bn"),
+    "ru-RU": () => import("dayjs/locale/ru"),
   };
 
   await importsMap[language as SupportedLangs]?.();

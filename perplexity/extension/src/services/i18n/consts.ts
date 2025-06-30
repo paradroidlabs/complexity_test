@@ -21,6 +21,8 @@ export const supportedLangs = [
   "el-GR",
   "ro-RO",
   "id-ID",
+  "bn-BD",
+  "ru-RU",
 ] as const;
 
 export type SupportedLangs = (typeof supportedLangs)[number];
@@ -48,6 +50,8 @@ export const dayjsLocaleImportNamesMap = {
   "el-GR": "el",
   "ro-RO": "ro",
   "id-ID": "id",
+  "bn-BD": "bn",
+  "ru-RU": "ru",
 } as const satisfies Record<SupportedLangs, string>;
 
 export const commonLocalesLazyGlob = import.meta.glob("@/_locales/*.*.ts", {

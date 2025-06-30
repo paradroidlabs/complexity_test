@@ -32,6 +32,8 @@ index.ts (DO NOT TOUCH THIS FILE!)
 {namespace}.fr-FR.ts
 {namespace}.es-ES.ts
 {namespace}.cs-CZ.ts
+{namespace}.bn-BD.ts
+{namespace}.ru-RU.ts
 ```
 
 ## Output Instructions

@@ -1,9 +1,9 @@
 import type { LanguageMessages } from "@complexity/i18n";
 
 export default {
-  action: "Экспорт",
+  action: "Экспортировать",
   format: {
-    label: "Выбрать формат",
+    label: "Выберите формат",
     placeholder: "Выберите формат",
   },
   includeCitations: "Включить цитаты",
