@@ -140,7 +140,11 @@ async function copyMessageWithoutCitations({
   messageBlockIndex: number;
   fetchFn: FetchFn;
 }) {
-  return copyContent({ messageBlockIndex, fetchFn, withCitations: false });
+  copyContent({
+    messageBlockIndex,
+    fetchFn,
+    withCitations: false,
+  });
 }
 
 async function copyThreadWithCitations({ fetchFn }: { fetchFn: FetchFn }) {

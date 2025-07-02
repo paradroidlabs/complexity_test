@@ -155,15 +155,23 @@ export class ThreadExport {
     includeCitations: boolean;
     messageIndex?: number;
   }) {
+    const removeFollowupLinks = (text: string): string => {
+      return text.replace(/\[(.*?)\]\(pplx:\/\/action\/followup\)/g, "$1");
+    };
+
+    // Export a single message if messageIndex is provided
     if (messageIndex != null && threadJSON[messageIndex] != null) {
-      return ThreadExport.exportMessage({
+      const exportedMessage = ThreadExport.exportMessage({
         message: threadJSON[messageIndex],
         includeCitations,
         includeQuery: false,
       });
+
+      return removeFollowupLinks(exportedMessage);
     }
 
-    return threadJSON
+    // Export the entire thread
+    const exportedThread = threadJSON
       .map((message) =>
         ThreadExport.exportMessage({
           message,
@@ -171,5 +179,7 @@ export class ThreadExport {
         }),
       )
       .join("  \n---  \n\n\n");
+
+    return removeFollowupLinks(exportedThread);
   }
 }
