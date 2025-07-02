@@ -66,11 +66,5 @@ export function transfromFlatSchema(
     },
   } as ExtensionSettings;
 
-  if (oldFlatSchema.plugins["queryBox:noFileCreationOnPaste"] != null) {
-    newSchema.plugins["queryBox:rawTextPaste"] = {
-      ...oldFlatSchema.plugins["queryBox:noFileCreationOnPaste"],
-    };
-  }
-
   return newSchema;
 }

@@ -21,7 +21,6 @@ export const POWER_USER: ExtensionSettings["plugins"] = produce(
     draft["queryBox:languageModelSelector"].enabled = true;
     draft["slashCommand"].enabled = true;
     draft["promptHistory"].enabled = true;
-    draft["queryBox:rawTextPaste"].enabled = true;
     draft["commandMenu"].enabled = true;
     draft["thread:toc"].enabled = true;
     draft["thread:exportThread"].enabled = true;

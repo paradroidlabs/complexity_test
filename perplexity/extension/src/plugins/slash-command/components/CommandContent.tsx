@@ -24,6 +24,8 @@ export default function CommandContent() {
     (store) => store.activeContentTab,
   );
 
+  // TODO: refactor tab -> page, similar to command menu
+
   return (
     <PopoverContent
       ref={contentRef}
@@ -51,14 +53,14 @@ export default function CommandContent() {
         <div className="x:max-h-[calc(var(--available-height)-50px)] x:w-full x:*:h-full">
           <PromptHistorySlashCommandMenuTabContent />
         </div>
-        <TabsList
+        {/* <TabsList
           className={cn(
             PPLX_SCROLLBAR_CLASSES,
             "x:flex-col x:justify-start x:overflow-x-hidden x:overflow-y-auto x:rounded-none x:border-l x:border-border/50 x:bg-secondary x:p-0 x:transition-all x:empty:hidden x:dark:bg-background",
           )}
         >
           <PromptHistorySlashCommandMenuTabTrigger />
-        </TabsList>
+        </TabsList> */}
       </Tabs>
     </PopoverContent>
   );

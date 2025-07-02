@@ -155,6 +155,8 @@ export function getActiveQueryBox({ type }: { type?: QueryBoxType } = {}) {
     .first();
 }
 
-export function isContentEditable(textbox: HTMLElement) {
-  return textbox.isContentEditable;
+export function isLexical(textbox: HTMLElement) {
+  return (
+    textbox.isContentEditable && textbox.hasAttribute("data-lexical-editor")
+  );
 }

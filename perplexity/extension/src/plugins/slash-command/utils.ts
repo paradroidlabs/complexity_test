@@ -30,12 +30,6 @@ function isEditQueryBoxTextbox(
   );
 }
 
-function createTextboxContentActions(
-  target: HTMLElement,
-): AnchorSlice["anchor"]["contentActions"] {
-  return createTextboxAdapter(target);
-}
-
 function createAnchorData(
   target: HTMLElement,
   anchorElement: HTMLElement,
@@ -53,7 +47,7 @@ function createAnchorData(
       hideWhenDetached: true,
       getAnchorRect: () => anchorElement.getBoundingClientRect(),
     },
-    contentActions: createTextboxContentActions(target),
+    contentActions: createTextboxAdapter(target),
   };
 }
 

@@ -1,7 +1,6 @@
 {
   "name": "pplx-ext",
-  "version": "2.0.0",
-  "prerelease": "1",
+  "version": "2.0.1",
   "author": "pnd280",
   "dependencies": {
     "@ark-ui/react": "^5.15.4",
@@ -39,6 +38,7 @@
     "immer": "^10.1.1",
     "jquery": "^3.7.1",
     "js-base64": "^3.7.7",
+    "lexical": "^0.32.1",
     "lodash": "^4.17.21",
     "lz-string": "^1.5.0",
     "nanoid": "^5.1.5",

@@ -1,5 +1,5 @@
 import {
-  SiAnthropic,
+  SiClaude,
   SiGooglegemini,
   SiOpenai,
   SiPerplexity,
@@ -16,7 +16,7 @@ export const languageModelProviderIcons: Record<
   React.ElementType
 > &
   Record<string, React.ElementType> = {
-  Anthropic: SiAnthropic,
+  Anthropic: SiClaude,
   OpenAI: SiOpenai,
   xAI: XAiIcon,
   Perplexity: SiPerplexity,

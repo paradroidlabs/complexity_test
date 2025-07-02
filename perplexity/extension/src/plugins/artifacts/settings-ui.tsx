@@ -26,7 +26,7 @@ export default function ArtifactsPluginSettingsUi() {
             For the AI to acknowledge the ability to use Artifacts, you need to
             use this{" "}
             <a
-              href="https://cdn.cplx.app/prompts/artifacts-instruction-claude.md"
+              href="https://cdn.cplx.app/prompts/artifacts-instruction.md"
               target="_blank"
               rel="noopener noreferrer"
               className="x:text-primary x:hover:underline"

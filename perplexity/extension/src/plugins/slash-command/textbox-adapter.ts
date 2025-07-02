@@ -1,29 +1,30 @@
-import { isContentEditable } from "@/plugins/_core/ui/groups/query-box/utils";
-import * as contenteditableUtils from "@/utils/contenteditable-utils";
+import { isLexical } from "@/plugins/_core/ui/groups/query-box/utils";
+import { slashCommandMenuStore } from "@/plugins/slash-command/store";
+import * as lexicalUtils from "@/utils/lexical-utils";
 import * as textareaUtils from "@/utils/textarea-utils";
 import { UiUtils } from "@/utils/ui-utils";
 
-type TextboxUtils = typeof contenteditableUtils | typeof textareaUtils;
+type TextboxUtils = typeof lexicalUtils | typeof textareaUtils;
 
 function getUtils(element: HTMLElement): TextboxUtils {
-  return isContentEditable(element) ? contenteditableUtils : textareaUtils;
+  return isLexical(element) ? lexicalUtils : textareaUtils;
 }
 
 export function createTextboxAdapter(element: HTMLElement) {
   const utils = getUtils(element);
 
   const scrollIntoCaretView = () => {
-    if (isContentEditable(element)) {
-      contenteditableUtils.scrollIntoCaretView(element);
+    if (isLexical(element)) {
+      lexicalUtils.scrollIntoCaretView(element);
     } else {
       UiUtils.scrollIntoCaretView(element as HTMLTextAreaElement);
     }
   };
 
   const deleteSelectedText = () => {
-    if (isContentEditable(element)) {
+    if (isLexical(element)) {
       requestAnimationFrame(() => {
-        contenteditableUtils.deleteSelectedText(element);
+        lexicalUtils.deleteSelectedText(element);
       });
     } else {
       textareaUtils.deleteSelectedText(element as HTMLTextAreaElement);
@@ -31,9 +32,23 @@ export function createTextboxAdapter(element: HTMLElement) {
   };
 
   const getTextLength = () => {
-    return isContentEditable(element)
-      ? (element.textContent?.length ?? 0)
+    return isLexical(element)
+      ? (element.innerText?.replace(/^\n\s/, "").length ?? 0)
       : (element as HTMLTextAreaElement).value.length;
+  };
+
+  const insertText = (text: string) => {
+    if (isLexical(element)) {
+      utils.insertText(
+        element as HTMLTextAreaElement,
+        text,
+        slashCommandMenuStore.getState().bufferTextCaretPosition ?? undefined,
+      );
+    } else {
+      utils.insertText(element as HTMLTextAreaElement, text);
+    }
+
+    scrollIntoCaretView();
   };
 
   return {
@@ -46,10 +61,7 @@ export function createTextboxAdapter(element: HTMLElement) {
     },
     getWordAtCaret: () => utils.getWordAtCaret(element as any),
     getSelectedText: () => utils.getSelection(element as any),
-    insertText: (text: string) => {
-      utils.insertText(element as any, text);
-      scrollIntoCaretView();
-    },
+    insertText,
     deleteTriggerPhrase: () => {
       const { start, end } = utils.getWordAtCaret(element as any);
       utils.setSelection(element as any, start, end);

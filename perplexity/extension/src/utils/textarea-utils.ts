@@ -21,7 +21,11 @@ export function getSelection(textarea: HTMLTextAreaElement): TextboxSelection {
   };
 }
 
-export function insertText(textarea: HTMLTextAreaElement, text: string): void {
+export function insertText(
+  textarea: HTMLTextAreaElement,
+  text: string,
+  _position?: number,
+): void {
   textarea.focus();
   document.execCommand("insertText", false, text);
 }
