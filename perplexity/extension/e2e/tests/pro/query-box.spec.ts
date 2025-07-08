@@ -2,7 +2,6 @@ import { expect } from "@playwright/test";
 
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import { sleep } from "@/utils/utils";
 import { HomePage } from "~/e2e/pages/home.page";
 import { test } from "~/e2e/tests/pro/context.fixtures";
 
@@ -44,18 +43,11 @@ test.describe("Query box", () => {
       await languageModelSelector.click();
 
       const claudeOption = page
-        .locator(`text=${PplxLanguageModelsService.allModels?.[1]?.label}`)
+        .locator(
+          `text=${PplxLanguageModelsService.allModels?.search?.[1]?.label}`,
+        )
         .first();
       await claudeOption.click();
-
-      await sleep(2000);
-
-      await languageModelSelector.click();
-
-      const gpt4oOption = page
-        .locator(`text=${PplxLanguageModelsService.allModels?.[0]?.label}`)
-        .first();
-      await gpt4oOption.click();
     });
   });
 });

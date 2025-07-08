@@ -31,7 +31,7 @@ export function Toaster({
         return (
           <Toast
             key={id}
-            className={cn("x:mt-2 x:w-max x:font-sans", className)}
+            className={cn("x:w-max x:font-sans", className)}
             {...props}
           >
             <div className="x:grid x:gap-1">

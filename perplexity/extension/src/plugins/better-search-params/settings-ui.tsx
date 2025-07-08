@@ -48,12 +48,15 @@ export default function SpacesThreadsForceWritingModePluginSettingsUi() {
           <span>Available values for </span>
           <InlineCode>&#123;model&#125;</InlineCode>:
           <div className="x:mt-1 x:ml-8 x:flex x:flex-col x:gap-2">
-            {PplxLanguageModelsService.allModels.map((model) => (
-              <div key={model.code}>
-                <span>{model.label}</span>
-                <InlineCode className="x:ml-1">{model.code}</InlineCode>
-              </div>
-            ))}
+            {Object.values(PplxLanguageModelsService.allModels)
+              .flat()
+              .filter((model) => !model.isMax && model.label !== "Auto")
+              .map((model) => (
+                <div key={model.code}>
+                  <span>{model.label}</span>
+                  <InlineCode className="x:ml-1">{model.code}</InlineCode>
+                </div>
+              ))}
           </div>
         </div>
       </div>

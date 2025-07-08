@@ -13,6 +13,7 @@ export type PplxWebResult = {
   snippet: string;
 };
 
+// TODO: load models from remote config
 export class ThreadExport {
   private static extractQuery(message: ThreadMessageApiResponse) {
     return message.query_str;
@@ -49,8 +50,9 @@ export class ThreadExport {
 
   private static getModelName(displayModel: string): string {
     return (
-      pplxLocalLanguageModels.find((model) => model.code === displayModel)
-        ?.label || displayModel
+      Object.values(pplxLocalLanguageModels)
+        .flat()
+        .find((model) => model.code === displayModel)?.label || displayModel
     );
   }
 

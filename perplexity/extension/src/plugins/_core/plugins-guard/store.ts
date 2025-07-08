@@ -2,6 +2,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
+import type { PplxSubTier } from "@/plugins/_core/plugins-guard/guards";
 import type { whereAmI } from "@/utils/utils";
 
 type PluginGuardsStoreType = {
@@ -11,6 +12,7 @@ type PluginGuardsStoreType = {
   isLoggedIn: boolean;
   isOrgMember: boolean;
   hasActiveSub: boolean;
+  subTier: PplxSubTier | null;
 };
 
 export const pluginGuardsStore = createWithEqualityFn<PluginGuardsStoreType>()(
@@ -23,6 +25,7 @@ export const pluginGuardsStore = createWithEqualityFn<PluginGuardsStoreType>()(
         isLoggedIn: false,
         isOrgMember: false,
         hasActiveSub: false,
+        subTier: null,
       }),
     ),
   ),

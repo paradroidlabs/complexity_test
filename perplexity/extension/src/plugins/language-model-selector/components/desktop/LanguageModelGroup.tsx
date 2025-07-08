@@ -11,21 +11,10 @@ import { SelectItem, SelectGroup, SelectLabel } from "@/components/ui/select";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { useModelLimits } from "@/plugins/language-model-selector/hooks/useModelLimits";
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
-import type {
-  LanguageModelCode,
-  LanguageModelProvider,
-} from "@/services/cplx-api/remote-resources/pplx-language-models/types";
-
-type LanguageModel = {
-  code: LanguageModelCode;
-  label: string;
-  provider: LanguageModelProvider;
-  description?: string;
-  hideFromList?: boolean;
-};
+import type { LanguageModel } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 type LanguageModelGroupProps = {
-  title: string;
+  title: ReactNode;
   models: LanguageModel[];
   tooltipPlacement?: "left" | "right";
   titleTooltip?: ReactNode;
@@ -65,18 +54,13 @@ export default function LanguageModelGroup({
           </LabelComp>
         </Tooltip>
       ) : (
-        <LabelComp className="x:font-mono x:whitespace-nowrap x:uppercase">
+        <LabelComp className="x:flex x:items-center x:gap-1 x:font-mono x:whitespace-nowrap x:uppercase">
           {title}
         </LabelComp>
       )}
 
       {models.map((model) => {
-        if (model.hideFromList) return null;
-
-        const Icon =
-          PplxLanguageModelsService.icons[
-            model.provider as keyof typeof PplxLanguageModelsService.icons
-          ] ?? LuCpu;
+        const Icon = PplxLanguageModelsService.icons[model.icon] ?? LuCpu;
 
         const modelLimit =
           modelsLimits[model.code as keyof typeof modelsLimits];
@@ -92,9 +76,7 @@ export default function LanguageModelGroup({
                 )
               : "";
 
-        const tooltipContent = model.description
-          ? `${limit} ${model.description}`
-          : limit;
+        const tooltipContent = limit;
 
         return (
           <Tooltip

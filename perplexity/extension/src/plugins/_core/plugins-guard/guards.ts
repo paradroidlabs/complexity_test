@@ -4,6 +4,13 @@ import type { ExtensionSettings } from "@/services/extension-settings/types";
 import type { PluginsStates } from "@/services/plugins-states/types";
 import type { whereAmI } from "@/utils/utils";
 
+const PPLX_SUB_TIER_ENUM = {
+  pro: 1,
+  max: 2,
+} as const;
+
+export type PplxSubTier = keyof typeof PPLX_SUB_TIER_ENUM;
+
 export type GuardConditions = {
   dependentPluginIds?: PluginId[];
   location?: ReturnType<typeof whereAmI>[];
@@ -11,7 +18,8 @@ export type GuardConditions = {
   mobileOnly?: boolean;
   requiresLoggedIn?: boolean;
   allowIncognito?: boolean;
-  allowedAccountTypes?: ("free" | "pro" | "enterprise")[][];
+  mustHaveActiveSub?: boolean;
+  leastTier?: PplxSubTier;
   browser?: ("chrome" | "firefox")[];
   requiredPermissions?: chrome.runtime.ManifestPermissions[];
 };
@@ -21,6 +29,7 @@ export type GuardCheckParams = {
   isLoggedIn: boolean;
   isOrgMember: boolean;
   hasActiveSub: boolean;
+  subTier: PplxSubTier | null;
   currentLocation: ReturnType<typeof whereAmI>;
   isIncognito: boolean;
   pluginsStates: PluginsStates;
@@ -54,28 +63,27 @@ export function checkAuthStatus(
   return true;
 }
 
-export function checkAccountTypes(
-  { allowedAccountTypes }: GuardConditions,
-  params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember" | "isLoggedIn">,
+export function checkPplxSubStatus(
+  { mustHaveActiveSub, leastTier }: GuardConditions,
+  {
+    isLoggedIn,
+    hasActiveSub,
+    subTier,
+  }: Pick<
+    GuardCheckParams,
+    "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
+  >,
 ): boolean {
-  if (!allowedAccountTypes || !allowedAccountTypes?.length) return true;
+  if (!mustHaveActiveSub) return true;
 
-  const accountStatus: ("free" | "pro" | "enterprise")[] = [];
+  if (!isLoggedIn || !hasActiveSub) return false;
 
-  if (params.isOrgMember) accountStatus.push("enterprise");
+  if (leastTier && subTier) {
+    if (PPLX_SUB_TIER_ENUM[subTier] < PPLX_SUB_TIER_ENUM[leastTier])
+      return false;
+  }
 
-  accountStatus.push(params.hasActiveSub ? "pro" : "free");
-
-  return allowedAccountTypes.some((accountType) => {
-    if (accountType.includes("pro") && !params.isLoggedIn) return false;
-
-    const sameLength = accountType.length === accountStatus.length;
-    const sameStatus = accountType.every((status) =>
-      accountStatus.includes(status),
-    );
-
-    return sameLength && sameStatus;
-  });
+  return true;
 }
 
 export function checkPluginDependencies(

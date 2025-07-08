@@ -1,48 +1,41 @@
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import type {
-  AutoLanguageModelCode,
-  DeepResearchLanguageModelCode,
-  FastLanguageModelCode,
+  LabsLanguageModelCode,
   LanguageModel,
-  ReasoningLanguageModelCode,
+  ResearchLanguageModelCode,
+  SearchLanguageModelCode,
 } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 export function isLanguageModelCode(
   value: string,
 ): value is LanguageModel["code"] {
-  return PplxLanguageModelsService.allModels.some(
+  return (
+    isSearchLanguageModelCode(value) ||
+    isResearchLanguageModelCode(value) ||
+    isLabsLanguageModelCode(value)
+  );
+}
+
+export function isSearchLanguageModelCode(
+  value: string,
+): value is SearchLanguageModelCode {
+  return PplxLanguageModelsService.allModels.search.some(
     (model) => model.code === value,
   );
 }
 
-export function isReasoningLanguageModelCode(
+export function isResearchLanguageModelCode(
   value: string,
-): value is ReasoningLanguageModelCode {
-  return PplxLanguageModelsService.reasoningModels.some(
+): value is ResearchLanguageModelCode {
+  return PplxLanguageModelsService.allModels.research.some(
     (model) => model.code === value,
   );
 }
 
-export function isFastLanguageModelCode(
+export function isLabsLanguageModelCode(
   value: string,
-): value is FastLanguageModelCode {
-  return PplxLanguageModelsService.fastModels.some(
-    (model) => model.code === value,
-  );
-}
-
-export function isDeepResearchLanguageModelCode(
-  value: string,
-): value is DeepResearchLanguageModelCode {
-  return PplxLanguageModelsService.deepResearchModels.some(
-    (model) => model.code === value,
-  );
-}
-
-export function isAutoLanguageModelCode(
-  value: string,
-): value is AutoLanguageModelCode {
-  return PplxLanguageModelsService.autoModels.some(
+): value is LabsLanguageModelCode {
+  return PplxLanguageModelsService.allModels.labs.some(
     (model) => model.code === value,
   );
 }

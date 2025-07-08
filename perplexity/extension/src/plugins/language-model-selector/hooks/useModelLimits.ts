@@ -22,9 +22,11 @@ export function useModelLimits() {
 
   useEffect(() => {
     setModelsLimits((draft) => {
-      PplxLanguageModelsService.allModels.forEach((model) => {
-        draft[model.code] = getModelLimit(model);
-      });
+      Object.values(PplxLanguageModelsService.allModels)
+        .flat()
+        .forEach((model) => {
+          draft[model.code] = getModelLimit(model);
+        });
     });
   }, [data, getModelLimit, setModelsLimits]);
 

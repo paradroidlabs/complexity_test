@@ -13,6 +13,11 @@ export const ExtensionSettingsSchema = z.object({
   showPostUpdateReleaseNotesPopup: z.boolean(),
   isPostUpdateReleaseNotesPopupDismissed: z.boolean(),
   devMode: z.boolean(),
+  devTools: z
+    .object({
+      overrideSubscriptionTier: z.enum(["pro", "max"]).optional(),
+    })
+    .optional(),
 });
 
 export type ExtensionSettings = z.infer<typeof ExtensionSettingsSchema>;

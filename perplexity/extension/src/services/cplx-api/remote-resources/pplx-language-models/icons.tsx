@@ -1,3 +1,4 @@
+import { FaShuffle } from "react-icons/fa6";
 import {
   SiClaude,
   SiGooglegemini,
@@ -6,22 +7,33 @@ import {
 } from "react-icons/si";
 
 import DeepSeek from "@/components/icons/DeepSeek";
-import FaAtom from "@/components/icons/FaAtom";
-import PplxDeeperResearch from "@/components/icons/PplxDeeperResearch";
+import PplxLabsResearch from "@/components/icons/PplxLabsResearch";
+import PplxResearch from "@/components/icons/PplxResearch";
+import PplxSearch from "@/components/icons/PplxSearch";
 import XAiIcon from "@/components/icons/XAiIcon";
-import type { LanguageModelProvider } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
+import type {
+  LanguageModelIcon,
+  LanguageModelType,
+} from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
-export const languageModelProviderIcons: Record<
-  LanguageModelProvider,
-  React.ElementType
-> &
+export const languageModelIcons: Record<LanguageModelIcon, React.ElementType> &
   Record<string, React.ElementType> = {
-  Anthropic: SiClaude,
-  OpenAI: SiOpenai,
-  xAI: XAiIcon,
-  Perplexity: SiPerplexity,
-  PerplexityDeepResearch: FaAtom,
-  PerplexityLabs: PplxDeeperResearch,
-  Google: SiGooglegemini,
-  DeepSeek: DeepSeek,
+  claude: SiClaude,
+  openai: SiOpenai,
+  xai: XAiIcon,
+  perplexity: SiPerplexity,
+  gemini: SiGooglegemini,
+  deepseek: DeepSeek,
+  auto: FaShuffle,
+  labs: PplxLabsResearch,
+  research: PplxResearch,
+};
+
+export const languageModelTypeIcons: Record<
+  LanguageModelType,
+  React.ElementType
+> = {
+  search: PplxSearch,
+  research: PplxResearch,
+  labs: PplxLabsResearch,
 };

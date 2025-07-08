@@ -10,7 +10,8 @@ const ImageGenModelSelectorWrapper = withPluginsGuard(ImageGenModelSelector, {
   dependentPluginIds: ["imageGenModelSelector"],
   desktopOnly: true,
   requiresLoggedIn: true,
-  allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
+  mustHaveActiveSub: true,
+  leastTier: "pro",
 });
 
 export default ImageGenModelSelectorWrapper;

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from "vitest";
 import {
   checkDeviceType,
   checkAuthStatus,
-  checkAccountTypes,
+  checkPplxSubStatus,
   checkPluginDependencies,
   checkLocation,
   checkIncognito,
@@ -65,48 +65,81 @@ describe("Guard Functions", () => {
     });
   });
 
-  describe("checkAccountTypes", () => {
-    it("should return true when no account type restrictions", () => {
+  describe("checkPplxSubStatus", () => {
+    it("should return true when no subscription restrictions", () => {
       const conditions: GuardConditions = {};
       const params: Pick<
         GuardCheckParams,
-        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
       > = {
         hasActiveSub: false,
         isOrgMember: false,
         isLoggedIn: true,
+        subTier: null,
       };
-      expect(checkAccountTypes(conditions, params)).toBe(true);
+      expect(checkPplxSubStatus(conditions, params)).toBe(true);
     });
 
-    it("should return false for org member when enterprise not allowed", () => {
-      const conditions: GuardConditions = {
-        allowedAccountTypes: [["free"], ["pro"]],
-      };
+    it("should return false when subscription required but user has none", () => {
+      const conditions: GuardConditions = { mustHaveActiveSub: true };
       const params: Pick<
         GuardCheckParams,
-        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
+      > = {
+        hasActiveSub: false,
+        isOrgMember: false,
+        isLoggedIn: true,
+        subTier: null,
+      };
+      expect(checkPplxSubStatus(conditions, params)).toBe(false);
+    });
+
+    it("should return true when subscription required and user has one", () => {
+      const conditions: GuardConditions = { mustHaveActiveSub: true };
+      const params: Pick<
+        GuardCheckParams,
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
       > = {
         hasActiveSub: true,
-        isOrgMember: true,
+        isOrgMember: false,
         isLoggedIn: true,
+        subTier: "pro",
       };
-      expect(checkAccountTypes(conditions, params)).toBe(false);
+      expect(checkPplxSubStatus(conditions, params)).toBe(true);
     });
 
-    it("should return false for free user when free not allowed", () => {
+    it("should return false when minimum tier is not met", () => {
       const conditions: GuardConditions = {
-        allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
+        mustHaveActiveSub: true,
+        leastTier: "max",
       };
       const params: Pick<
         GuardCheckParams,
-        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
       > = {
-        hasActiveSub: false,
+        hasActiveSub: true,
         isOrgMember: false,
         isLoggedIn: true,
+        subTier: "pro",
       };
-      expect(checkAccountTypes(conditions, params)).toBe(false);
+      expect(checkPplxSubStatus(conditions, params)).toBe(false);
+    });
+
+    it("should return true when minimum tier is met", () => {
+      const conditions: GuardConditions = {
+        mustHaveActiveSub: true,
+        leastTier: "max",
+      };
+      const params: Pick<
+        GuardCheckParams,
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn" | "subTier"
+      > = {
+        hasActiveSub: true,
+        isOrgMember: false,
+        isLoggedIn: true,
+        subTier: "max",
+      };
+      expect(checkPplxSubStatus(conditions, params)).toBe(true);
     });
   });
 

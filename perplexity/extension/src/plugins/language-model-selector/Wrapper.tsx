@@ -10,7 +10,8 @@ const BetterLanguageModelSelectorWrapper = withPluginsGuard(
   LanguageModelSelector,
   {
     dependentPluginIds: ["queryBox:languageModelSelector"],
-    allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
+    mustHaveActiveSub: true,
+    leastTier: "pro",
   },
 );
 

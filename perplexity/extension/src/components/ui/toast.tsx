@@ -21,7 +21,7 @@ export function ToastViewport({
 }
 
 const toastVariants = cva(
-  "x:group x:pointer-events-auto x:relative x:flex x:!w-full x:items-center x:justify-between x:space-x-4 x:overflow-hidden x:rounded-md x:border x:p-6 x:pr-8 x:shadow-lg x:transition-all x:data-[state=closed]:animate-out x:data-[state=closed]:fade-out-80 x:data-[state=closed]:slide-out-to-right-full x:data-[state=open]:animate-in x:data-[state=open]:slide-in-from-top-full x:data-[swipe=cancel]:translate-x-0 x:data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] x:data-[swipe=end]:animate-out x:data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] x:data-[swipe=move]:transition-none x:data-[state=open]:sm:slide-in-from-top-full",
+  "x:group x:pointer-events-auto x:relative x:flex x:!w-full x:items-center x:justify-between x:space-x-4 x:overflow-hidden x:rounded-md x:border x:p-4 x:pr-6 x:shadow-lg x:transition-all x:data-[state=closed]:animate-out x:data-[state=closed]:fade-out-80 x:data-[state=closed]:slide-out-to-right-full x:data-[state=open]:animate-in x:data-[state=open]:slide-in-from-top-full x:data-[swipe=cancel]:translate-x-0 x:data-[swipe=end]:translate-x-[var(--radix-toast-swipe-end-x)] x:data-[swipe=end]:animate-out x:data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] x:data-[swipe=move]:transition-none x:data-[state=open]:sm:slide-in-from-top-full",
   {
     variants: {
       variant: {

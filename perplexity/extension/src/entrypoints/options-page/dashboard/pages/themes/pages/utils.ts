@@ -19,6 +19,7 @@ export function generateDarkModeColorOverrides({
   return `
 :root[data-color-scheme="dark"] {
   --hydra-350: ${color100};
+  --altana-350: ${color100};
   --teal-200: ${color200};
   --pale-blue-200: ${paleColor200};
 

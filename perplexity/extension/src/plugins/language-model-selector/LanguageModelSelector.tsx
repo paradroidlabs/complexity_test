@@ -10,7 +10,7 @@ import DesktopContent from "@/plugins/language-model-selector/components/desktop
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import { getSelectItems } from "@/plugins/language-model-selector/utils";
 import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
@@ -114,20 +114,4 @@ function useRegisterGlobalCss() {
     subscriberId: `${subscriberId}#${store.type}`,
     subscribe: true,
   });
-}
-
-function getSelectItems() {
-  const modelItems = [
-    ...PplxLanguageModelsService.fastModels,
-    ...PplxLanguageModelsService.reasoningModels,
-    ...PplxLanguageModelsService.deepResearchModels,
-    PplxLanguageModelsService.localModels.find(
-      (model) => model.code === "pplx_pro",
-    )!,
-  ].map((model) => ({
-    id: model.code,
-    label: model.label,
-  }));
-
-  return modelItems;
 }

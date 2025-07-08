@@ -30,7 +30,8 @@ export function withPluginsGuard<P extends object>(
     mobileOnly,
     requiresLoggedIn,
     allowIncognito,
-    allowedAccountTypes,
+    mustHaveActiveSub,
+    leastTier,
     browser,
     additionalCheck,
     onNotSatisfiedAllConditions,
@@ -50,7 +51,8 @@ export function withPluginsGuard<P extends object>(
         mobileOnly={mobileOnly}
         requiresLoggedIn={requiresLoggedIn}
         allowIncognito={allowIncognito}
-        allowedAccountTypes={allowedAccountTypes}
+        mustHaveActiveSub={mustHaveActiveSub}
+        leastTier={leastTier}
         browser={browser}
         additionalCheck={additionalCheck}
         fallback={fallback}

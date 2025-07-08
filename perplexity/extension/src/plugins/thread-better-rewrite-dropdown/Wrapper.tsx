@@ -17,7 +17,8 @@ const ThreadBetterRewriteDropdownWrapper = withPluginsGuard(
       "thread:betterRewriteDropdowns",
     ],
     requiresLoggedIn: true,
-    allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
+    mustHaveActiveSub: true,
+    leastTier: "pro",
   },
 );
 

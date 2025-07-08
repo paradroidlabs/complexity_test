@@ -1,9 +1,13 @@
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { SelectContent } from "@/components/ui/select";
-import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
+import { usePluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/desktop/LanguageModelGroup";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import {
+  getAdvancedStandaloneModels,
+  getModelsByType,
+} from "@/plugins/language-model-selector/utils";
+import { languageModelTypeIcons } from "@/services/cplx-api/remote-resources/pplx-language-models/icons";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export default function DesktopContent() {
@@ -15,6 +19,13 @@ export default function DesktopContent() {
 
   const Comp = component === "dropdown" ? DropdownMenuContent : SelectContent;
 
+  const subTier = usePluginGuardsStore((store) => store.subTier);
+
+  const searchModels = useMemo(() => getModelsByType("search"), []);
+  const researchModels = useMemo(() => getModelsByType("research"), []);
+  const labsModels = useMemo(() => getModelsByType("labs"), []);
+  const advancedModels = useMemo(() => getAdvancedStandaloneModels(), []);
+
   return (
     <Comp
       className={cn(
@@ -22,28 +33,53 @@ export default function DesktopContent() {
         "x:flex x:max-h-[calc(var(--available-height))] x:items-start x:justify-between x:gap-2 x:overflow-y-auto x:p-2",
       )}
     >
-      <div>
-        <div className="x:flex x:items-start x:justify-between x:gap-2">
-          <LanguageModelGroup
-            title="Standard"
-            models={PplxLanguageModelsService.fastModels}
-            tooltipPlacement="left"
-          />
+      <div className="x:flex x:items-start x:justify-between x:gap-2">
+        <LanguageModelGroup
+          title={
+            subTier === "max" ? (
+              <div className="x:flex x:items-center x:gap-1">
+                <languageModelTypeIcons.search className="x:size-4" />
+                <span>Search</span>
+              </div>
+            ) : (
+              <span>Standard</span>
+            )
+          }
+          models={searchModels}
+          tooltipPlacement="left"
+        />
+        {subTier === "max" && (
           <div className="x:flex x:flex-col x:gap-1">
             <LanguageModelGroup
-              title="Reasoning"
-              models={PplxLanguageModelsService.reasoningModels}
+              title={
+                <div className="x:flex x:items-center x:gap-1">
+                  <languageModelTypeIcons.research className="x:size-4" />
+                  <span>Research</span>
+                </div>
+              }
+              models={researchModels}
               tooltipPlacement="right"
             />
             <LanguageModelGroup
-              title="Research"
-              models={PplxLanguageModelsService.deepResearchModels}
+              title={
+                <div className="x:flex x:items-center x:gap-1">
+                  <languageModelTypeIcons.labs className="x:size-4" />
+                  <span>Labs</span>
+                </div>
+              }
+              models={labsModels}
               tooltipPlacement="right"
             />
           </div>
-        </div>
-        <div className="x:mx-auto x:my-2 x:h-px x:w-full x:bg-border/50" />
-        <AutoModeOption />
+        )}
+
+        {subTier === "pro" && (
+          <LanguageModelGroup
+            title={<span>Advanced</span>}
+            models={advancedModels}
+            tooltipPlacement="right"
+          />
+        )}
       </div>
     </Comp>
   );

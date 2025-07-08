@@ -19,7 +19,7 @@ import {
   type AdditionalCheckFn,
   checkDeviceType,
   checkAuthStatus,
-  checkAccountTypes,
+  checkPplxSubStatus,
   checkPluginDependencies,
   checkIncognito,
   checkLocation,
@@ -86,6 +86,7 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
     isMobile,
     isOrgMember,
     grantedPermissions,
+    subTier,
   } = usePluginGuardsStore();
 
   const hasRequiredPermissions = checkRequiredPermissions(props, {
@@ -96,10 +97,11 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
 
   const deviceValid = checkDeviceType(props, { isMobile });
   const authValid = checkAuthStatus(props, { isLoggedIn });
-  const accountValid = checkAccountTypes(props, {
+  const accountValid = checkPplxSubStatus(props, {
     hasActiveSub,
     isOrgMember,
     isLoggedIn,
+    subTier,
   });
   const dependenciesValid = checkPluginDependencies(props, {
     pluginsStates,

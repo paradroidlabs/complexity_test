@@ -14,6 +14,11 @@ export type MozManifest = ExtendedManifestV3Export & {
     service_worker?: never;
     type: "classic" | "module";
   };
+  commands: {
+    _execute_action: {
+      description?: string;
+    };
+  };
 };
 
 const defineMozManifest = defineManifest as unknown as (
@@ -31,6 +36,11 @@ export default defineMozManifest(
     draft.background = {
       scripts: ["src/entrypoints/background/index.ts"],
       type: "module",
+    };
+    draft.commands = {
+      _execute_action: {
+        description: "Activate the extension",
+      },
     };
   }),
 );

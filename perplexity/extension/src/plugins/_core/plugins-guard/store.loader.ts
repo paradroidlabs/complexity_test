@@ -18,8 +18,8 @@ declare module "@/plugins/_core/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "store:pluginGuards",
-    dependencies: [],
-    loader: async () => {
+    dependencies: ["cache:extensionSettings"],
+    loader: async ({ "cache:extensionSettings": extensionSettings }) => {
       // pluginGuardsStore.subscribe((state) => console.log(state));
 
       pluginGuardsStore.setState((state) => {
@@ -54,7 +54,23 @@ export default function loader() {
 
         pluginGuardsStore.setState((state) => {
           state.isLoggedIn = Object.keys(data.data).length > 0;
-          state.hasActiveSub = data.data.subscription_status !== "none";
+          const hasActiveSub = data.data.subscription_status !== "none";
+
+          state.hasActiveSub = hasActiveSub;
+
+          if (hasActiveSub) {
+            if (
+              extensionSettings.devMode &&
+              extensionSettings.devTools?.overrideSubscriptionTier
+            ) {
+              state.subTier =
+                extensionSettings.devTools.overrideSubscriptionTier;
+              return;
+            }
+
+            state.subTier =
+              data.data.subscription_tier === "max" ? "max" : "pro";
+          }
         });
       });
 

@@ -1,8 +1,8 @@
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { pplxLocalLanguageModels } from "@/services/cplx-api/remote-resources/pplx-language-models/defaults";
-import { languageModelProviderIcons } from "@/services/cplx-api/remote-resources/pplx-language-models/icons";
+import { languageModelIcons } from "@/services/cplx-api/remote-resources/pplx-language-models/icons";
 import { pplxLanguageModelsResourceConfig } from "@/services/cplx-api/remote-resources/pplx-language-models/index.remote-resources";
-import { type LanguageModel } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
+import { type LanguageModelsList } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 import { getRemoteResource } from "@/services/cplx-api/remote-resources/utils";
 
 export class PplxLanguageModelsService {
@@ -17,35 +17,10 @@ export class PplxLanguageModelsService {
     return getRemoteResource(pplxLanguageModelsResourceConfig);
   }
 
-  static localModels = pplxLocalLanguageModels;
+  static localModels: LanguageModelsList =
+    pplxLocalLanguageModels as unknown as LanguageModelsList;
 
-  static allModels: LanguageModel[] = [
-    ...PplxLanguageModelsService.localModels,
-  ];
+  static allModels: LanguageModelsList = PplxLanguageModelsService.localModels;
 
-  static fastModels: LanguageModel[] = (() => {
-    return PplxLanguageModelsService.allModels.filter(
-      (model) => !model.hideFromList && model.type === "fast",
-    );
-  })();
-
-  static reasoningModels: LanguageModel[] = (() => {
-    return PplxLanguageModelsService.allModels.filter(
-      (model) => !model.hideFromList && model.type === "reasoning",
-    );
-  })();
-
-  static deepResearchModels: LanguageModel[] = (() => {
-    return PplxLanguageModelsService.allModels.filter(
-      (model) => !model.hideFromList && model.type === "deepResearch",
-    );
-  })();
-
-  static autoModels: LanguageModel[] = (() => {
-    return PplxLanguageModelsService.allModels.filter(
-      (model) => !model.hideFromList && model.type === "auto",
-    );
-  })();
-
-  static icons = languageModelProviderIcons;
+  static icons = languageModelIcons;
 }

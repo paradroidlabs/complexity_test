@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function PplxDeeperResearch({
+export default function PplxLabsResearch({
   ...props
 }: SVGProps<SVGSVGElement>) {
   return (
