@@ -56,9 +56,9 @@ export function validateZipFile(extVersion: string, browser: string): string {
   }
 }
 
-export function md5sum(filePath: string): string {
+export function getHash(filePath: string): string {
   try {
-    const hash = crypto.createHash("md5");
+    const hash = crypto.createHash("sha256");
     const data = fs.readFileSync(filePath);
     hash.update(data);
     return hash.digest("hex");

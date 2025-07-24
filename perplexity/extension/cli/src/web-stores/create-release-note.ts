@@ -11,7 +11,7 @@ import inquirer from "inquirer";
 import { execAsync, getRootPath } from "@/utils";
 import {
   getExtensionVersion,
-  md5sum,
+  getHash,
   getArtifactPath,
 } from "@/web-stores/utils";
 
@@ -148,10 +148,10 @@ function generateFooter(
     const footerTemplate = fs.readFileSync(FOOTER_TEMPLATE_PATH, "utf8");
 
     const crxHash = crxExists
-      ? md5sum(getArtifactPath("chrome", version))
+      ? getHash(getArtifactPath("chrome", version))
       : "File not available";
     const xpiHash = xpiExists
-      ? md5sum(getArtifactPath("firefox", version))
+      ? getHash(getArtifactPath("firefox", version))
       : "File not available";
 
     return footerTemplate

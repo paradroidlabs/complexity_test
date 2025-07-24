@@ -1,9 +1,9 @@
 
 
-## Checksum
+---
 
 The attached files are digitally signed by the Chrome Web Store and Mozilla Add-ons. **DO NOT** install from untrusted sources!
-| | md5 hash |
+| | checksum |
 |---|---|
-| CRX | `$CRX_HASH` |
-| XPI | `$XPI_HASH` |
+| CRX | `sha256:$CRX_HASH` |
+| XPI | `sha256:$XPI_HASH` |
