@@ -1,7 +1,7 @@
 import { Tabs, TabContent, TabsList, TabTrigger } from "@/components/ui/tabs";
+import type { Theme } from "@/data/dashboard/themes/theme.types";
 import ThemeCard from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/ThemeCard";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 type ThemeSectionsProps = {
   builtInThemes: Theme[];

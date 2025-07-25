@@ -2,7 +2,7 @@ body {
   &[location="thread"] {
     /* Message Block Dividers */
     [data-cplx-component="message-block"] {
-      .border-b.pb-lg:last-child {
+      .border-b.md\:pb-12.max-w-threadContentWidth {
         border-bottom-color: --alpha(var(--ring) / 30%);
       }
 
@@ -27,9 +27,4 @@ body {
   }
 
   font-variant-ligatures: none;
-
-  [data-cplx-component]::selection {
-    color: var(--primary);
-    background-color: oklch(var(--teal-200) / 0.1);
-  }
 }

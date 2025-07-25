@@ -1,47 +1,76 @@
-import { hexToOklchString } from "@/entrypoints/options-page/dashboard/pages/themes/pages/utils";
+import { FaPalette } from "react-icons/fa6";
+
+import { Badge } from "@/components/ui/badge";
 import {
-  SVG_FEATURED_BANNERS,
-  ThemeBanner,
-} from "@/plugins/_core/custom-theme/themes/svg-featured-banners";
-import type { BuiltInThemeId } from "@/plugins/_core/custom-theme/themes/theme-registry";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
+  cometColors,
+  cplxColors,
+} from "@/data/dashboard/themes/built-in-colors";
+import type { Theme } from "@/data/dashboard/themes/theme.types";
 
 type ThemeCardBannerProps = {
   theme: Theme;
 };
 
 export default function ThemeCardBanner({ theme }: ThemeCardBannerProps) {
+  const colors = getBannerColors(theme);
+
   return (
-    <div className="x:size-full x:transition-transform x:duration-500 x:group-hover:scale-110">
-      <BannerContent theme={theme} />
+    <div className="x:size-full x:transition-transform x:duration-500">
+      {colors ? <ColorBanner colors={colors} /> : <DefaultBanner />}
     </div>
   );
 }
 
-function BannerContent({ theme }: { theme: Theme }) {
-  if (theme.featuredImage) {
-    return (
-      <img
-        src={theme.featuredImage}
-        alt={theme.title}
-        className="x:size-full x:object-cover"
-      />
+function getBannerColors(theme: Theme): string[] | null {
+  const selection = theme.config?.accentColorSelection;
+
+  if (!selection) return null;
+
+  if (selection === "built-in") {
+    const color = [...cplxColors, ...cometColors].find(
+      (c) => c.value === theme.config?.builtInAccentColor,
     );
+
+    if (!color) return null;
+
+    return [color.color.light.super200, color.color.dark.super200];
   }
 
-  const svgBanner = SVG_FEATURED_BANNERS[theme.id as BuiltInThemeId];
-
-  if (svgBanner != null) {
-    return <div className="x:h-full x:w-full">{svgBanner}</div>;
+  if (selection === "custom") {
+    return theme.displayBannerColors;
   }
 
+  return null;
+}
+
+function ColorBanner({ colors }: { colors: string[] }) {
   return (
-    <ThemeBanner
-      color={
-        theme.config?.accentColor
-          ? `oklch(${hexToOklchString(theme.config.accentColor)})`
-          : undefined
-      }
-    />
+    <div className="x:relative x:flex x:size-full">
+      {colors.map((color, index) => (
+        <div className="x:relative x:size-full">
+          <div
+            key={index}
+            className="x:size-full"
+            style={{ backgroundColor: `oklch(${color})` }}
+          />
+          <Badge
+            className={cn(
+              "x:absolute x:top-1/2 x:-translate-y-1/2 x:bg-background/50 x:text-foreground",
+              index === 0 ? "x:right-2" : "x:left-2",
+            )}
+          >
+            {index === 0 ? "Light" : "Dark"}
+          </Badge>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function DefaultBanner() {
+  return (
+    <div className="x:flex x:size-full x:items-center x:justify-center x:border-b x:border-border/50 x:text-muted-foreground">
+      <FaPalette className="x:size-10" />
+    </div>
   );
 }

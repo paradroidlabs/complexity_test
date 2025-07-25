@@ -178,3 +178,15 @@ export function SelectItem({
     </ArkSelect.Context>
   );
 }
+
+export function SelectSeparator({
+  className,
+  ...props
+}: ComponentProps<"div">) {
+  return (
+    <div
+      className={cn("x:-mx-1 x:my-1 x:h-px x:bg-muted", className)}
+      {...props}
+    />
+  );
+}

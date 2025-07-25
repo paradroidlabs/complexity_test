@@ -13,7 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
-import { ColorInput } from "@/entrypoints/options-page/dashboard/pages/themes/components/ColorInput";
+import { ColorInput } from "@/entrypoints/options-page/dashboard/pages/themes/components/color-input";
 import { useThemeFormContext } from "@/entrypoints/options-page/dashboard/pages/themes/context";
 
 export function ThemeForm() {
@@ -29,7 +29,7 @@ export function ThemeForm() {
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel className="x:text-lg">Title</FormLabel>
               <FormControl>
                 <Input placeholder="Enter theme title" {...field} />
               </FormControl>
@@ -38,8 +38,31 @@ export function ThemeForm() {
           )}
         />
 
+        <FormField
+          control={form.control}
+          disabled={isPending}
+          name="accentColor"
+          render={({ field }) => (
+            <FormItem>
+              <FormControl>
+                <FormItem>
+                  <FormLabel className="x:text-lg">Accent Color</FormLabel>
+                  <FormControl>
+                    <ColorInput
+                      disabled={field.disabled}
+                      value={field.value}
+                      onChange={field.onChange}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
         <FormItem>
-          <FormLabel>Font Families</FormLabel>
+          <FormLabel className="x:text-lg">Font Families</FormLabel>
           <div className="x:grid x:grid-cols-2 x:gap-4">
             <FormField
               control={form.control}
@@ -85,31 +108,14 @@ export function ThemeForm() {
 
         <FormField
           control={form.control}
-          disabled={isPending}
-          name="accentColor"
-          render={({ field }) => (
-            <FormItem>
-              <FormControl>
-                <ColorInput
-                  disabled={field.disabled}
-                  value={field.value}
-                  label="Primary Color (only affects Dark Mode)"
-                  description="Complexity will generate complementary shades based on provided color"
-                  onChange={field.onChange}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-
-        <FormField
-          control={form.control}
           name="enhanceThreadTypography"
           disabled={isPending}
           render={({ field }) => (
             <FormItem className="x:flex x:flex-row x:items-center x:justify-between">
               <div className="x:space-y-0.5">
-                <FormLabel>Enhance Typography (in Threads)</FormLabel>
+                <FormLabel className="x:text-lg">
+                  Enhance Typography (in Threads)
+                </FormLabel>
                 <FormDescription>
                   Emphasizes headings, bold text, make inline code more
                   readable, and remove font ligatures.
@@ -130,9 +136,9 @@ export function ThemeForm() {
           control={form.control}
           disabled={isPending}
           name="customCss"
-          render={({ field }) => (
+          render={({ field, fieldState }) => (
             <FormItem>
-              <FormLabel>Advanced: CSS</FormLabel>
+              <FormLabel className="x:text-lg">Advanced: CSS</FormLabel>
               <FormControl>
                 <Textarea
                   placeholder="Enter custom CSS rules"
@@ -141,7 +147,8 @@ export function ThemeForm() {
                 />
               </FormControl>
               <FormDescription>
-                Add custom CSS rules to further customize your theme
+                Use with caution, badly written CSS can severely affect the
+                performance of the page.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -153,9 +160,7 @@ export function ThemeForm() {
           <Button
             type="submit"
             disabled={
-              isPending ||
-              !form.formState.isDirty ||
-              Object.keys(form.formState.errors).length > 0
+              isPending || Object.keys(form.formState.errors).length > 0
             }
           >
             {isPending ? (

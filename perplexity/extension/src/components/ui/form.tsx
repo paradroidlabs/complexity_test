@@ -85,7 +85,7 @@ export function FormLabel({
 
   return (
     <Label
-      className={cn(error && "x:text-destructive", className)}
+      className={cn("x:block", error && "x:text-destructive", className)}
       htmlFor={formItemId}
       {...props}
     />

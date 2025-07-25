@@ -38,9 +38,9 @@ export default function ArtifactsPluginSettingsUi() {
             to follow the specified syntaxes.
           </p>
           <p className="x:text-muted-foreground">
-            <span className="x:text-foreground x:underline">Otherwise</span>,
-            Complexity will show a &quot;Render in Artifacts&quot; button on the
-            header of applicable code blocks.
+            <span className="x:text-foreground x:underline">Otherwise</span>, A
+            &quot;Render in Artifacts&quot; button on the header of applicable
+            code blocks will be shown.
           </p>
           <div className="x:mt-6">
             <table className="x:w-full x:border-collapse x:rounded-lg x:border x:border-border">

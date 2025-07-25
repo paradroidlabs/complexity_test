@@ -9,7 +9,7 @@ import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { cn } from "@/utils/cn";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
-export function ReleaseNotesPage() {
+export function IndexPage() {
   const { loadedVersions, hasMore, loadNextVersions, changelogQueries } =
     useVersionPagination();
 

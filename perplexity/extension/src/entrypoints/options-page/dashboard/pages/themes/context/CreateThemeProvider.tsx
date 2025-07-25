@@ -3,13 +3,13 @@ import type { DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
+import type { ThemeFormValues } from "@/data/dashboard/themes/theme.types";
 import {
   ThemeFormContext,
   type ThemeFormContextType,
 } from "@/entrypoints/options-page/dashboard/pages/themes/context/ThemeFormContext";
 import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/hooks/useBaseThemeForm";
 import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
-import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
 
 type CreateThemeProviderProps = {
   children: React.ReactNode;
@@ -22,6 +22,8 @@ export function CreateThemeProvider({ children }: CreateThemeProviderProps) {
     title: "Untitled Theme",
     fonts: { ui: "", mono: "" },
     accentColor: "",
+    builtInAccentColor: "cplx-blue",
+    accentColorSelection: "built-in",
     enhanceThreadTypography: false,
     customCss: "",
   };
@@ -34,7 +36,6 @@ export function CreateThemeProvider({ children }: CreateThemeProviderProps) {
       const themeData = await generateThemeData(data);
       const savedThemeId = await getLocalThemesService().add({
         id: `${Date.now()}-${data.title.toLowerCase().replace(/ /g, "-")}`,
-        author: "local",
         config: data,
         ...themeData,
       });

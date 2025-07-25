@@ -1,9 +1,9 @@
 import { LuChevronLeft } from "react-icons/lu";
 import { Link, useLoaderData } from "react-router-dom";
 
+import type { Theme } from "@/data/dashboard/themes/theme.types";
 import { ThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeForm";
 import { EditThemeProvider } from "@/entrypoints/options-page/dashboard/pages/themes/context";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import { invariant } from "@/utils/utils";
 
 export function EditThemePage() {

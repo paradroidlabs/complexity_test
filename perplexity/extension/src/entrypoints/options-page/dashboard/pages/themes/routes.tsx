@@ -4,7 +4,7 @@ import { redirect } from "react-router-dom";
 
 import Page from "@/entrypoints/options-page/components/Page";
 import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
-import { BUILTIN_THEME_REGISTRY } from "@/plugins/_core/custom-theme/themes/theme-registry";
+import { BUILTIN_THEME_REGISTRY } from "@/data/dashboard/themes/built-in-themes";
 
 const { CreateThemePage } = lazily(
   () =>
@@ -75,6 +75,6 @@ export const ThemesPageRoutes: RouteObject[] = [
   },
   {
     index: true,
-    element: <Page title="Custom Themes" page={ThemesListing} />,
+    element: <Page title="Themes" page={ThemesListing} />,
   },
 ];

@@ -8,7 +8,7 @@ import { PLUGIN_SETTINGS_UIS } from "@/entrypoints/options-page/dashboard/pages/
 import PluginSettingsModal from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsModal";
 import PluginSettingsPage from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsPage";
 import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
-import PluginsListing from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsListing";
+import { default as PluginsListing } from "@/entrypoints/options-page/dashboard/pages/plugins/IndexPage";
 import useClearLocationState from "@/hooks/useClearLocationState";
 import useClearSearchParams from "@/hooks/useClearSearchParams";
 

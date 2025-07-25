@@ -1,32 +1,43 @@
 import type { Oklch } from "culori";
 import { oklch } from "culori";
+import dedent from "dedent";
 
 type ColorPalette = {
-  color100: string;
-  color200: string;
-  paleColor200: string;
+  light: {
+    super100: string;
+    super200: string;
+  };
+  dark: {
+    super100: string;
+    super200: string;
+  };
 };
 
-export function generateDarkModeColorOverrides({
-  color100,
-  color200,
-  paleColor200,
-}: ColorPalette) {
-  if (!color100 || !color200 || !paleColor200) {
-    return "";
-  }
+export function generateAccentColorOverrides({ light, dark }: ColorPalette) {
+  invariant(light.super100, "light.super100 is required");
+  invariant(light.super200, "light.super200 is required");
+  invariant(dark.super100, "dark.super100 is required");
+  invariant(dark.super200, "dark.super200 is required");
 
-  return `
-:root[data-color-scheme="dark"] {
-  --hydra-350: ${color100};
-  --altana-350: ${color100};
-  --teal-200: ${color200};
-  --pale-blue-200: ${paleColor200};
+  return dedent`
+    body {
+      --background-super-color-100: ${light.super100};
+      --background-super-color-200: ${light.super200};
+      --dark-background-super-color-100: ${dark.super100};
+      --dark-background-super-color-200: ${dark.super200};
 
-  --primary: oklch(${color100});
-  --ring: oklch(${color100});
-}
-`;
+      --primary: oklch(${light.super200});
+      --ring: oklch(${light.super200});
+    }
+
+    :root[data-color-scheme="dark"] body {
+        --primary: oklch(${dark.super200});
+        --ring: oklch(${dark.super200});
+
+        --background-super-color-100: var(--dark-background-super-color-100);
+        --background-super-color-200: var(--dark-background-super-color-200);
+      }
+  `;
 }
 
 type FontOverridesOptions = {
@@ -42,40 +53,44 @@ export function generateUiFontsOverrides({
     return "";
   }
 
-  return `
-body {
-  ${uiFont ? `--font-fk-grotesk: "${uiFont}";` : ""}
-  ${uiFont ? `--font-fk-grotesk-neue: "${uiFont}";` : ""}
-  ${monoFont ? `--font-berkeley-mono: "${monoFont}";` : ""}
+  return dedent`
+    body {
+      ${uiFont ? `--font-fk-grotesk: "${uiFont}";` : ""}
+      ${uiFont ? `--font-fk-grotesk-neue: "${uiFont}";` : ""}
+      ${monoFont ? `--font-berkeley-mono: "${monoFont}";` : ""}
+    }
+  `;
 }
-`;
-}
 
-export function generatePalette(baseColorHex: string): ColorPalette {
-  const base = oklch(baseColorHex);
+export function generatePalette(baseHex: string): ColorPalette {
+  const baseOklch = oklch(baseHex);
 
-  if (!base) throw new Error("Invalid color");
-
-  // reduce lightness and increase chroma
-  const color200 = {
-    ...base,
-    l: base.l * 0.877,
-    c: base.c * 1.398,
-    h: base.h != null ? base.h * 1.0047 : undefined,
-  };
-
-  // significantly reduce lightness and chroma
-  const paleColor200 = {
-    ...base,
-    l: base.l * 0.408,
-    c: base.c * 0.284,
-    h: base.h != null ? base.h + 2.22 : undefined,
-  };
+  invariant(baseOklch, "Invalid color");
 
   return {
-    color100: formatOklch(base),
-    color200: formatOklch(color200),
-    paleColor200: formatOklch(paleColor200),
+    light: {
+      super100: formatOklch({
+        ...baseOklch,
+        l: Math.min(0.95, baseOklch.l + 0.25),
+        c: baseOklch.c * 0.3,
+      }),
+      super200: formatOklch({
+        ...baseOklch,
+        c: baseOklch.c || 0,
+      }),
+    },
+    dark: {
+      super100: formatOklch({
+        ...baseOklch,
+        l: Math.max(0.3, baseOklch.l - 0.15),
+        c: (baseOklch.c || 0) * 0.9,
+      }),
+      super200: formatOklch({
+        ...baseOklch,
+        l: Math.max(0.7, baseOklch.l + 0.1),
+        c: (baseOklch.c || 0) * 0.8,
+      }),
+    },
   };
 }
 

@@ -1,19 +1,14 @@
 import {
   Card,
-  CardContent,
   CardHeader,
   CardTitle,
   CardDescription,
   CardFooter,
 } from "@/components/ui/card";
-import {
-  ColorSchemeBadge,
-  CompatibilityBadge,
-} from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/Badges";
+import type { Theme } from "@/data/dashboard/themes/theme.types";
 import ThemeCardBanner from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/Banner";
 import DisableThemeButton from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/DisableThemeButton";
 import ThemeCardEditButton from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/EditThemeButton";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
 type ThemeCardProps = {
@@ -48,23 +43,6 @@ export default function ThemeCard({ theme, type }: ThemeCardProps) {
         <CardTitle className="x:text-lg">{theme.title}</CardTitle>
         <CardDescription>{theme.description}</CardDescription>
       </CardHeader>
-
-      <CardContent className="x:grow">
-        <div className="x:flex x:flex-wrap x:gap-2">
-          {theme.colorScheme?.includes("light") && (
-            <ColorSchemeBadge type="light" />
-          )}
-          {theme.colorScheme?.includes("dark") && (
-            <ColorSchemeBadge type="dark" />
-          )}
-          {theme.compatibleWith?.includes("desktop") && (
-            <CompatibilityBadge type="desktop" />
-          )}
-          {theme.compatibleWith?.includes("mobile") && (
-            <CompatibilityBadge type="mobile" />
-          )}
-        </div>
-      </CardContent>
 
       <CardFooter className="x:flex x:flex-row x:justify-end x:gap-2">
         <DisableThemeButton theme={theme} />

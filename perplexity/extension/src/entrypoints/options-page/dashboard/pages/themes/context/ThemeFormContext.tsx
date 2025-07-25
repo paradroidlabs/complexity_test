@@ -1,6 +1,6 @@
 import type { UseFormReturn } from "react-hook-form";
 
-import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
+import type { ThemeFormValues } from "@/data/dashboard/themes/theme.types";
 
 export type ThemeFormContextType = {
   form: UseFormReturn<ThemeFormValues>;

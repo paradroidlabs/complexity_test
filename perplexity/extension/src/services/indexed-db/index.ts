@@ -1,8 +1,9 @@
 import { Dexie, type Table } from "dexie";
 
 import type { ExtensionData } from "@/data/dashboard/extension-data.types";
+import { legacyThemeMigration } from "@/data/dashboard/themes/migration";
+import type { Theme } from "@/data/dashboard/themes/theme.types";
 import type { QueryCacheEntry } from "@/data/query-client/utils";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 import type { PromptHistory } from "@/plugins/prompt-history/index.public";
 import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/index.public";
 
@@ -19,6 +20,10 @@ export class IndexedDbService extends Dexie {
       themes: "&id, title, author",
       betterCodeBlocks: "&language",
       promptHistory: "&id, prompt, createdAt",
+    });
+
+    this.version(7).upgrade((tx) => {
+      return tx.table("themes").toCollection().modify(legacyThemeMigration);
     });
   }
 

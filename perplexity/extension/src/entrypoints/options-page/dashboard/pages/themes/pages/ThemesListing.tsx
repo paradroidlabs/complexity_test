@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ThemeSections } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeSections";
 import { useLocalThemes } from "@/plugins/_core/custom-theme/indexed-db/useLocalThemes";
-import { BUILTIN_THEME_REGISTRY } from "@/plugins/_core/custom-theme/themes/theme-registry";
+import { BUILTIN_THEME_REGISTRY } from "@/data/dashboard/themes/built-in-themes";
 
 export function ThemesListing() {
   const navigate = useNavigate();
@@ -17,9 +17,9 @@ export function ThemesListing() {
     <div className="x:space-y-6">
       <div className="x:flex x:flex-wrap x:items-center x:justify-between x:gap-4">
         <div>
-          <h1 className="x:mb-2 x:text-2xl x:font-bold">Custom Themes</h1>
+          <h1 className="x:mb-2 x:text-2xl x:font-bold">Themes</h1>
           <p className="x:text-muted-foreground">
-            Customize your Perplexity interface
+            Customize your Perplexity appearance
           </p>
         </div>
         <Button

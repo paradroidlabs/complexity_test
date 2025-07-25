@@ -1,8 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import type { DeepRequired } from "react-hook-form";
+import { type DeepRequired } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { toast } from "@/components/ui/use-toast";
+import type {
+  Theme,
+  ThemeFormValues,
+} from "@/data/dashboard/themes/theme.types";
 import {
   ThemeFormContext,
   useThemeFormContext,
@@ -12,8 +16,6 @@ import { useBaseThemeForm } from "@/entrypoints/options-page/dashboard/pages/the
 import { DeleteButton } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/components/DeleteButton";
 import { getLocalThemesService } from "@/plugins/_core/custom-theme/indexed-db";
 import { updateRegistry } from "@/plugins/_core/custom-theme/instant-css-background-watchdog";
-import type { ThemeFormValues } from "@/plugins/_core/custom-theme/theme-form.types";
-import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
 
 type EditThemeProviderProps = {
   children: React.ReactNode;
@@ -30,6 +32,8 @@ export function EditThemeProvider({ children, theme }: EditThemeProviderProps) {
       mono: theme.config?.fonts?.mono ?? "",
     },
     accentColor: theme.config?.accentColor ?? "",
+    builtInAccentColor: theme.config?.builtInAccentColor ?? "cplx-blue",
+    accentColorSelection: theme.config?.accentColorSelection ?? "built-in",
     enhanceThreadTypography: theme.config?.enhanceThreadTypography ?? false,
     customCss: theme.config?.customCss ?? "",
   };

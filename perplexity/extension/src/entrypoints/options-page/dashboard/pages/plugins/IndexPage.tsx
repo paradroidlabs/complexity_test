@@ -6,7 +6,7 @@ import { usePluginCategories } from "@/entrypoints/options-page/dashboard/pages/
 import { usePluginFilters } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginFilters";
 import PluginsEnableSet from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsEnableSet";
 
-export default function PluginsListing() {
+export default function IndexPage() {
   const { filters } = usePluginFilters();
 
   const filteredPluginIds = useFilteredPlugins({

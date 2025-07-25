@@ -22,6 +22,7 @@ export default tseslint.config(
             "src/types/**/*",
             "src/utils/**/*",
             "src/data/**/*",
+            "src/**/index.public.ts",
           ],
         },
         {

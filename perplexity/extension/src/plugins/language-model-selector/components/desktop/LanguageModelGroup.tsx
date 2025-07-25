@@ -40,6 +40,11 @@ export default function LanguageModelGroup({
 
   if (models.length === 0) return null;
 
+  const reasoningModels = models.filter((model) => model.isReasoning);
+  const fastModels = models.filter((model) => !model.isReasoning);
+
+  const showDivider = reasoningModels.length > 0 && fastModels.length > 0;
+
   return (
     <GroupComp className="x:m-0 x:p-0">
       {titleTooltip != null ? (
@@ -59,48 +64,53 @@ export default function LanguageModelGroup({
         </LabelComp>
       )}
 
-      {models.map((model) => {
-        const Icon = PplxLanguageModelsService.icons[model.icon] ?? LuCpu;
+      {fastModels.map((model) => renderModelItem(model))}
 
-        const modelLimit =
-          modelsLimits[model.code as keyof typeof modelsLimits];
-        const limit =
-          modelLimit === Infinity
-            ? t(
-                "plugin-model-selectors.languageModelSelector.usesLeft.unlimited",
-              )
-            : typeof modelLimit === "number"
-              ? t(
-                  "plugin-model-selectors.languageModelSelector.usesLeft.limited",
-                  { count: modelLimit },
-                )
-              : "";
+      {showDivider && (
+        <div className="x:mx-2 x:my-2 x:flex x:items-center x:gap-2 x:text-xs x:text-muted-foreground">
+          <div>Reasoning</div>
+          <div className="x:h-[0.5px] x:w-full x:bg-border/75" />
+        </div>
+      )}
 
-        const tooltipContent = limit;
-
-        return (
-          <Tooltip
-            key={model.code}
-            content={
-              <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
-            }
-            disabled={
-              modelsLimits[model.code as keyof typeof modelsLimits] == null
-            }
-            positioning={{ placement: tooltipPlacement, gutter: 10 }}
-          >
-            <ItemComp
-              key={model.code}
-              item={model.code}
-              value={model.code}
-              className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
-            >
-              <Icon className="x:size-4" />
-              <span className="x:truncate">{model.label}</span>
-            </ItemComp>
-          </Tooltip>
-        );
-      })}
+      {reasoningModels.map((model) => renderModelItem(model))}
     </GroupComp>
   );
+
+  function renderModelItem(model: LanguageModel) {
+    const Icon = PplxLanguageModelsService.icons[model.icon] ?? LuCpu;
+
+    const modelLimit = modelsLimits[model.code as keyof typeof modelsLimits];
+    const limit =
+      modelLimit === Infinity
+        ? t("plugin-model-selectors.languageModelSelector.usesLeft.unlimited")
+        : typeof modelLimit === "number"
+          ? t("plugin-model-selectors.languageModelSelector.usesLeft.limited", {
+              count: modelLimit,
+            })
+          : "";
+
+    const tooltipContent = limit;
+
+    return (
+      <Tooltip
+        key={model.code}
+        content={
+          <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
+        }
+        disabled={modelsLimits[model.code as keyof typeof modelsLimits] == null}
+        positioning={{ placement: tooltipPlacement, gutter: 10 }}
+      >
+        <ItemComp
+          key={model.code}
+          item={model.code}
+          value={model.code}
+          className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
+        >
+          <Icon className="x:size-4" />
+          <span className="x:truncate">{model.label}</span>
+        </ItemComp>
+      </Tooltip>
+    );
+  }
 }

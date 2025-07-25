@@ -1,0 +1,17 @@
+body {
+  --background-super-color-100: 95% 0.042 285.6;
+  --background-super-color-200: 73.59% 0.141 285.6;
+  --dark-background-super-color-100: 58.59% 0.127 285.6;
+  --dark-background-super-color-200: 83.59% 0.113 285.6;
+
+  --primary: oklch(73.59% 0.141 285.6);
+  --ring: oklch(73.59% 0.141 285.6);
+}
+
+:root[data-color-scheme="dark"] body {
+  --primary: oklch(83.59% 0.113 285.6);
+  --ring: oklch(83.59% 0.113 285.6);
+
+  --background-super-color-100: var(--dark-background-super-color-100);
+  --background-super-color-200: var(--dark-background-super-color-200);
+}

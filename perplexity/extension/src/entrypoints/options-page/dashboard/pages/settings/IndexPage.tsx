@@ -5,7 +5,7 @@ import SupportSection from "@/entrypoints/options-page/dashboard/pages/settings/
 import TroubleshootingSection from "@/entrypoints/options-page/dashboard/pages/settings/sections/TroubleshootingSection";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
-export function SettingsPage() {
+export function IndexPage() {
   const { settings } = useExtensionSettings();
 
   return (

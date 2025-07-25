@@ -1,11 +1,10 @@
 import type { StateCreator } from "zustand";
 
-import type { UISlice } from "@/plugins/artifacts/store/slices/ui/types";
-
 import type { ArtifactStateSlice } from "@/plugins/artifacts/store/slices/artifact-state/types";
 import type { BlocksSlice } from "@/plugins/artifacts/store/slices/blocks/types";
 import type { PreviewSlice } from "@/plugins/artifacts/store/slices/preview/types";
 import type { SelectionSlice } from "@/plugins/artifacts/store/slices/selection/types";
+import type { UISlice } from "@/plugins/artifacts/store/slices/ui/types";
 
 export type ArtifactsStoreType = UISlice &
   BlocksSlice &

@@ -7,7 +7,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import Page from "@/entrypoints/options-page/components/Page";
 import ErrorPage from "@/entrypoints/options-page/dashboard/pages/ErrorPage";
 import NotFoundPage from "@/entrypoints/options-page/dashboard/pages/NotFoundPage";
-import { PluginRoutes } from "@/entrypoints/options-page/dashboard/pages/plugins/routes";
+import { PluginPageRoutes } from "@/entrypoints/options-page/dashboard/pages/plugins/routes";
 import { ThemesPageRoutes } from "@/entrypoints/options-page/dashboard/pages/themes/routes";
 
 const { Playground } = lazily(
@@ -18,10 +18,10 @@ const { Dashboard } = lazily(
   () => import("@/entrypoints/options-page/dashboard/Dashboard"),
 );
 
-const { ReleaseNotesPage } = lazily(
+const { IndexPage: ReleaseNotesPage } = lazily(
   () =>
     import(
-      "@/entrypoints/options-page/dashboard/pages/release-notes/ReleaseNotesPage"
+      "@/entrypoints/options-page/dashboard/pages/release-notes/IndexPage"
     ),
 );
 
@@ -32,9 +32,8 @@ const { DirectReleaseNotesPage } = lazily(
     ),
 );
 
-const { SettingsPage } = lazily(
-  () =>
-    import("@/entrypoints/options-page/dashboard/pages/settings/SettingsPage"),
+const { IndexPage: SettingsPage } = lazily(
+  () => import("@/entrypoints/options-page/dashboard/pages/settings/IndexPage"),
 );
 
 const { Onboarding } = lazily(
@@ -54,7 +53,7 @@ export const router: ReturnType<typeof createHashRouter> = createHashRouter([
         children: [
           {
             path: "plugins/*",
-            element: <Page title="Plugins" page={PluginRoutes} />,
+            element: <Page title="Plugins" page={PluginPageRoutes} />,
           },
           {
             path: "themes",
