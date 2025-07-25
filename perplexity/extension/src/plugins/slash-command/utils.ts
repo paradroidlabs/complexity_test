@@ -1,17 +1,23 @@
 import type { AnchorSlice } from "@/plugins/slash-command/store/slices/anchor";
 import { createTextboxAdapter } from "@/plugins/slash-command/textbox-adapter";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { whereAmI } from "@/utils/utils";
 
 function mightBeTextbox(target: HTMLElement): boolean {
-  const tagName = target.tagName.toLowerCase();
-  const isContentEditable = target.isContentEditable;
-  return tagName === "textarea" || isContentEditable;
+  return (
+    target.tagName.toLowerCase() === "textarea" || target.isContentEditable
+  );
 }
 
 function isQueryBoxTextbox(
   target: HTMLElement,
 ): target is HTMLTextAreaElement | (HTMLElement & { isContentEditable: true }) {
   if (!mightBeTextbox(target)) return false;
+
+  if (
+    target.matches(DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.EDIT_QUERY)
+  )
+    return false;
 
   return Object.entries(DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX).some(
     ([_, selector]) => target.matches(selector),
@@ -26,18 +32,23 @@ function isEditQueryBoxTextbox(
   return target.matches(
     `${DomSelectorsService.cplxAttribute(
       DomSelectorsService.internalAttributes.THREAD.MESSAGE.QUERY,
-    )} textarea`,
+    )} ${DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.EDIT_QUERY}`,
   );
 }
 
 function createAnchorData(
   target: HTMLElement,
   anchorElement: HTMLElement,
-  options: {
-    placement: "bottom-start" | "bottom";
-    gutter: number;
-  },
-) {
+  options: Pick<
+    NonNullable<AnchorSlice["anchor"]["positioningOptions"]>,
+    "placement" | "gutter"
+  >,
+): {
+  element: HTMLElement;
+  inputField: HTMLElement;
+  positioningOptions: NonNullable<AnchorSlice["anchor"]["positioningOptions"]>;
+  contentActions: ReturnType<typeof createTextboxAdapter>;
+} {
   return {
     element: anchorElement,
     inputField: target,
@@ -64,16 +75,20 @@ export function getAnchor(
 
     if (!anchor) return null;
 
+    const isHomePageTextbox = (
+      ["home", "collection"] as ReturnType<typeof whereAmI>[]
+    ).includes(whereAmI());
+
     return createAnchorData(target, anchor, {
-      placement: "bottom-start",
       gutter: 5,
+      placement: isHomePageTextbox ? "bottom" : "top",
     });
   }
 
   if (isEditQueryBoxTextbox(target)) {
     return createAnchorData(target, target, {
-      placement: "bottom",
       gutter: 10,
+      placement: "bottom",
     });
   }
 

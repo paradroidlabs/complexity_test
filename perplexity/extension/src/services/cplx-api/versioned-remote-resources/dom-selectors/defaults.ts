@@ -87,7 +87,8 @@ export const DOM_SELECTORS: DomSelectors = {
       MAIN: "#ask-input",
       SPACE: "#ask-input",
       FOLLOW_UP: "#ask-input",
-      ARBITRARY: "#ask-input",
+      EDIT_QUERY: "div[contenteditable='true'][role='textbox']:not([id])",
+      ARBITRARY: "#ask-input,div[contenteditable='true'][role='textbox']",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:

@@ -74,6 +74,7 @@ export const DomSelectorsSchema = z.object({
       MAIN: z.string(),
       SPACE: z.string(),
       FOLLOW_UP: z.string(),
+      EDIT_QUERY: z.string(),
       ARBITRARY: z.string(),
     }),
     ATTACH_BUTTON: z.string(),

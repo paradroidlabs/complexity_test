@@ -53,7 +53,7 @@ export function HoverCardContent({
       <ArkHoverCard.Positioner>
         <ArkHoverCard.Content
           className={cn(
-            "x:bg-hoverCard x:text-hoverCard-foreground x:z-50 x:w-max x:rounded-md x:border x:border-border/50 x:bg-popover x:p-4 x:shadow-md x:focus-visible:outline-none",
+            "x:bg-hoverCard x:z-50 x:w-max x:rounded-xl x:border x:border-border/50 x:bg-popover x:p-4 x:text-foreground x:shadow-md x:focus-visible:outline-none",
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",

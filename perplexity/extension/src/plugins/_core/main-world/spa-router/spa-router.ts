@@ -69,11 +69,7 @@ const dispatchRouteChange = (function () {
         "content-script",
       );
 
-      console.log("waiting for route change complete", fullUrl);
-
       await waitForRouteChangeComplete(whereAmI(fullUrl));
-
-      console.log("route change complete", fullUrl);
 
       if (fullUrl !== lastDispatchedUrl) {
         console.warn(

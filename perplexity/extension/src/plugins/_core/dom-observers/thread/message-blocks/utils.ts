@@ -154,7 +154,9 @@ function getMessageBlockStates({
 
   $wrapper.attr("data-inflight", isInFlight ? "true" : "false");
 
-  const isEditingQuery = $query.find("textarea").length > 0;
+  const isEditingQuery =
+    $query.find(DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.EDIT_QUERY)
+      .length > 0;
 
   const isReadOnly = (() => {
     const existingReadOnlyAttr = $wrapper.attr("data-read-only");

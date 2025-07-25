@@ -45,15 +45,15 @@ export function MessageMetrics() {
         </div>
       </HoverCardTrigger>
       {metrics && (
-        <HoverCardContent className="x:text-xs">
+        <HoverCardContent>
           <div className="x:my-1 x:grid x:grid-cols-2 x:gap-x-3 x:gap-y-1">
             <div className="x:text-muted-foreground">
-              {t("common.misc.words")}:
+              {t("common.misc.words")}
             </div>
             <div className="x:text-right">{metrics.wordCount}</div>
 
             <div className="x:text-muted-foreground">
-              {t("common.misc.characters")}:
+              {t("common.misc.characters")}
             </div>
             <div className="x:text-right">{metrics.characterCount}</div>
 
