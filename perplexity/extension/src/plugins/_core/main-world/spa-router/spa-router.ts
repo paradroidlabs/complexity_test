@@ -15,32 +15,32 @@ export function proxySpaRouter() {
 
   history.pushState = function (...args) {
     const result = originalPushState.apply(this, args);
-    window.dispatchEvent(new Event("spa-router:route-change"));
-    window.dispatchEvent(new Event("spa-router:history:pushState"));
+    window.dispatchEvent(new Event("spaRouter:route-change"));
+    window.dispatchEvent(new Event("spaRouter:history:pushState"));
     return result;
   };
 
   history.replaceState = function (...args) {
     const result = originalReplaceState.apply(this, args);
-    window.dispatchEvent(new Event("spa-router:route-change"));
-    window.dispatchEvent(new Event("spa-router:history:replaceState"));
+    window.dispatchEvent(new Event("spaRouter:route-change"));
+    window.dispatchEvent(new Event("spaRouter:history:replaceState"));
     return result;
   };
 
   window.addEventListener("popstate", () => {
-    window.dispatchEvent(new Event("spa-router:route-change"));
-    window.dispatchEvent(new Event("spa-router:history:popstate"));
+    window.dispatchEvent(new Event("spaRouter:route-change"));
+    window.dispatchEvent(new Event("spaRouter:history:popstate"));
   });
 
-  window.addEventListener("spa-router:history:pushState", () => {
+  window.addEventListener("spaRouter:history:pushState", () => {
     dispatchRouteChange({ trigger: "push", newUrl: window.location.href });
   });
 
-  window.addEventListener("spa-router:history:replaceState", () => {
+  window.addEventListener("spaRouter:history:replaceState", () => {
     dispatchRouteChange({ trigger: "replace", newUrl: window.location.href });
   });
 
-  window.addEventListener("spa-router:history:popstate", () => {
+  window.addEventListener("spaRouter:history:popstate", () => {
     dispatchRouteChange({ trigger: "pop", newUrl: window.location.href });
   });
 
@@ -64,7 +64,7 @@ const dispatchRouteChange = (function () {
       lastDispatchedUrl = fullUrl;
 
       sendMessage(
-        "spa-router:route-change",
+        "spaRouter:route-change",
         { state: "pending", trigger, newUrl: fullUrl },
         "content-script",
       );
@@ -80,7 +80,7 @@ const dispatchRouteChange = (function () {
       }
 
       sendMessage(
-        "spa-router:route-change",
+        "spaRouter:route-change",
         { state: "complete", trigger, newUrl: fullUrl },
         "content-script",
       );

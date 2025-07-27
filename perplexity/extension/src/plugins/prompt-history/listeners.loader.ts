@@ -22,7 +22,7 @@ export default function loader() {
       )
         return;
 
-      window.addEventListener("spa-router:route-change", () => {
+      window.addEventListener("spaRouter:route-change", () => {
         handlePromptSave({ url: window.location.pathname, type: "soft" });
       });
 

@@ -25,7 +25,7 @@ export default function loader() {
             }
 
             switch (data.type) {
-              case "network-intercept:webSocketEvent": {
+              case "networkIntercept:webSocketEvent": {
                 const wsMessage = parseWebSocketData(data.payload.data);
                 const payload = wsMessage.payload;
 
@@ -45,13 +45,13 @@ export default function loader() {
 
                 return skip();
               }
-              case "network-intercept:fetchEvent": {
+              case "networkIntercept:fetchEvent": {
                 if (data.payload.url.includes("browser-intake-datadoghq")) {
                   stopPropagation("");
                 }
                 break;
               }
-              case "network-intercept:beaconEvent": {
+              case "networkIntercept:beaconEvent": {
                 if (
                   data.payload.url ===
                   "https://www.perplexity.ai/rest/event/analytics"

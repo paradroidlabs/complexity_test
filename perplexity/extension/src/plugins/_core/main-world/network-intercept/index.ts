@@ -20,8 +20,8 @@ initBeaconInterceptor();
 
 declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
-    "network-intercept:isInitialized": () => true;
+    "networkIntercept:isInitialized": () => true;
   }
 }
 
-onMessage("network-intercept:isInitialized", () => true);
+onMessage("networkIntercept:isInitialized", () => true);

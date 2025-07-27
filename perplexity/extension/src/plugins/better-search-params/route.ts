@@ -30,7 +30,7 @@ export const betterSearchParamsRouterRoute: RouteObject = {
       waitUntil({
         condition: async () => {
           return sendMessage(
-            "network-intercept:isInitialized",
+            "networkIntercept:isInitialized",
             undefined,
             "window",
           );

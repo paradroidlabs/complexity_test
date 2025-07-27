@@ -36,10 +36,10 @@ export default function loader() {
             id: "force-change-language-model",
             middlewareFn({ data, skip }) {
               const isWSSend =
-                data.type === "network-intercept:webSocketEvent" &&
+                data.type === "networkIntercept:webSocketEvent" &&
                 data.event === "send";
               const isSSESend =
-                data.type === "network-intercept:fetchEvent" &&
+                data.type === "networkIntercept:fetchEvent" &&
                 data.event === "request";
 
               if (!isWSSend && !isSSESend) {

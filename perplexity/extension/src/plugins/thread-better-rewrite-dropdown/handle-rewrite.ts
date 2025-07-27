@@ -19,11 +19,10 @@ export const handleRewrite = ({
     id: "instant-rewrite-model-change",
     middlewareFn({ data, skip }) {
       const isWSSend =
-        data.type === "network-intercept:webSocketEvent" &&
+        data.type === "networkIntercept:webSocketEvent" &&
         data.event === "send";
       const isSSESend =
-        data.type === "network-intercept:fetchEvent" &&
-        data.event === "request";
+        data.type === "networkIntercept:fetchEvent" && data.event === "request";
 
       if (!isWSSend && !isSSESend) {
         return skip();

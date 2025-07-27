@@ -19,7 +19,7 @@ function proxyWebSocketInstance(instance: WebSocket) {
   instance.onmessage = (event: MessageEvent) => {
     if (typeof event.data === "string") {
       sendMessage(
-        "network-intercept:webSocketEvent",
+        "networkIntercept:webSocketEvent",
         {
           event: "message",
           payload: {
@@ -43,7 +43,7 @@ function passivelyCaptureWebSocket() {
 
     if (typeof data === "string") {
       const resp = await sendMessage(
-        "network-intercept:webSocketEvent",
+        "networkIntercept:webSocketEvent",
         {
           event: "send",
           payload: {

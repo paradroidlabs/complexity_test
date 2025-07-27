@@ -25,7 +25,7 @@ export default function loader() {
           id: "invalidate-pplx-user-settings",
           middlewareFn({ data, skip }) {
             const isSSEResponse =
-              data.type === "network-intercept:fetchEvent" &&
+              data.type === "networkIntercept:fetchEvent" &&
               data.event === "response";
 
             if (!isSSEResponse) {

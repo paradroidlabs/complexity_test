@@ -10,16 +10,14 @@ import type {
 } from "@/plugins/_core/main-world/network-intercept/listeners.types";
 
 export type InterceptorsEvents = {
-  "network-intercept:webSocketEvent": (
+  "networkIntercept:webSocketEvent": (
     event: WebSocketEventData,
   ) => WebSocketEventData["payload"];
-  "network-intercept:xhrEvent": (
-    event: XhrEventData,
-  ) => XhrEventData["payload"];
-  "network-intercept:fetchEvent": (
+  "networkIntercept:xhrEvent": (event: XhrEventData) => XhrEventData["payload"];
+  "networkIntercept:fetchEvent": (
     event: FetchEventData,
   ) => FetchEventData["payload"];
-  "network-intercept:beaconEvent": (
+  "networkIntercept:beaconEvent": (
     event: BeaconEventData,
   ) => BeaconEventData["payload"];
 };
@@ -33,13 +31,13 @@ onlyExtensionGuard();
 
 function setupInterceptorsListeners() {
   onMessage(
-    "network-intercept:webSocketEvent",
+    "networkIntercept:webSocketEvent",
     async ({ data: { event, payload } }) => {
       // console.log("%cwebSocketEvent", "color: blue", { event, payload });
 
       const newPayload =
         await networkInterceptMiddlewareManager.executeMiddlewares({
-          data: { type: "network-intercept:webSocketEvent", event, payload },
+          data: { type: "networkIntercept:webSocketEvent", event, payload },
         });
 
       return newPayload.payload;
@@ -47,13 +45,13 @@ function setupInterceptorsListeners() {
   );
 
   onMessage(
-    "network-intercept:xhrEvent",
+    "networkIntercept:xhrEvent",
     async ({ data: { event, payload } }) => {
       // console.log("%cxhrEvent", "color: green", { event, payload });
 
       const newPayload =
         await networkInterceptMiddlewareManager.executeMiddlewares({
-          data: { type: "network-intercept:xhrEvent", event, payload },
+          data: { type: "networkIntercept:xhrEvent", event, payload },
         });
 
       return newPayload.payload;
@@ -61,13 +59,13 @@ function setupInterceptorsListeners() {
   );
 
   onMessage(
-    "network-intercept:fetchEvent",
+    "networkIntercept:fetchEvent",
     async ({ data: { event, payload } }) => {
       // console.log("%cfetchEvent", "color: red", { event, payload });
 
       const newPayload =
         await networkInterceptMiddlewareManager.executeMiddlewares({
-          data: { type: "network-intercept:fetchEvent", event, payload },
+          data: { type: "networkIntercept:fetchEvent", event, payload },
         });
 
       return newPayload.payload;
@@ -75,7 +73,7 @@ function setupInterceptorsListeners() {
   );
 
   onMessage(
-    "network-intercept:beaconEvent",
+    "networkIntercept:beaconEvent",
     async ({ data: { event, payload } }) => {
       // console.log("%cbeaconEvent", "color: purple", { event, payload });
 
@@ -83,7 +81,7 @@ function setupInterceptorsListeners() {
 
       const newPayload =
         await networkInterceptMiddlewareManager.executeMiddlewares({
-          data: { type: "network-intercept:beaconEvent", event, payload },
+          data: { type: "networkIntercept:beaconEvent", event, payload },
         });
 
       return newPayload.payload;

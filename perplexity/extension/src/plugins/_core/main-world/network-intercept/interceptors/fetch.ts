@@ -37,7 +37,7 @@ export function initFetchInterceptor() {
 
 async function interceptRequest(input: RequestInfo | URL, body: string) {
   const resp = await sendMessage(
-    "network-intercept:fetchEvent",
+    "networkIntercept:fetchEvent",
     {
       event: "request",
       payload: {
@@ -122,7 +122,7 @@ async function handleRegularResponse(response: Response, url: string) {
 
 async function notifyContentScript(url: string, status: number, data: string) {
   await sendMessage(
-    "network-intercept:fetchEvent",
+    "networkIntercept:fetchEvent",
     {
       event: "response",
       payload: { url, status, data },

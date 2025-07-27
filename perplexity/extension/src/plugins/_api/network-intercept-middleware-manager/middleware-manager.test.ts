@@ -145,7 +145,7 @@ describe("middlewareManager", () => {
       networkInterceptMiddlewareManager.addMiddleware(middleware2);
 
       const testData: MiddlewareData = {
-        type: "network-intercept:fetchEvent",
+        type: "networkIntercept:fetchEvent",
         event: "request",
         payload: {
           url: "https://test.com",
@@ -181,7 +181,7 @@ describe("middlewareManager", () => {
       networkInterceptMiddlewareManager.addMiddleware(middleware2);
 
       const testData: MiddlewareData = {
-        type: "network-intercept:fetchEvent",
+        type: "networkIntercept:fetchEvent",
         event: "request",
         payload: {
           url: "https://test.com",
@@ -206,7 +206,7 @@ describe("middlewareManager", () => {
       networkInterceptMiddlewareManager.addMiddleware(middleware);
 
       const testData: MiddlewareData = {
-        type: "network-intercept:fetchEvent",
+        type: "networkIntercept:fetchEvent",
         event: "request",
         payload: {
           url: "https://test.com",
@@ -234,7 +234,7 @@ describe("middlewareManager", () => {
       networkInterceptMiddlewareManager.addMiddleware(middleware);
 
       const testData: MiddlewareData = {
-        type: "network-intercept:fetchEvent",
+        type: "networkIntercept:fetchEvent",
         event: "request",
         payload: {
           url: "https://test.com",
@@ -262,7 +262,7 @@ describe("middlewareManager", () => {
       networkInterceptMiddlewareManager.addMiddleware(middleware);
 
       const testData: MiddlewareData = {
-        type: "network-intercept:fetchEvent",
+        type: "networkIntercept:fetchEvent",
         event: "request",
         payload: {
           url: "https://test.com",

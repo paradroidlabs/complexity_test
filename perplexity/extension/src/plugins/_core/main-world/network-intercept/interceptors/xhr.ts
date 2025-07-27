@@ -20,7 +20,7 @@ export function initXhrInterceptor() {
     xhr.send = async function (data) {
       if (typeof data === "string") {
         const resp = await sendMessage(
-          "network-intercept:xhrEvent",
+          "networkIntercept:xhrEvent",
           {
             event: "request",
             payload: {
@@ -45,7 +45,7 @@ export function initXhrInterceptor() {
 
     xhr.addEventListener("load", function () {
       sendMessage(
-        "network-intercept:xhrEvent",
+        "networkIntercept:xhrEvent",
         {
           event: "response",
           payload: {

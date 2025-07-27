@@ -14,7 +14,7 @@ export function initBeaconInterceptor() {
 
     const handleData = (stringData: string) => {
       sendMessage(
-        "network-intercept:beaconEvent",
+        "networkIntercept:beaconEvent",
         {
           event: "request",
           payload: { url: urlString, data: stringData },
@@ -35,7 +35,7 @@ export function initBeaconInterceptor() {
 
           const result = originalSendBeacon.call(navigator, url, data);
           sendMessage(
-            "network-intercept:beaconEvent",
+            "networkIntercept:beaconEvent",
             {
               event: "response",
               payload: {
@@ -49,7 +49,7 @@ export function initBeaconInterceptor() {
         .catch(() => {
           const result = originalSendBeacon.call(navigator, url, data);
           sendMessage(
-            "network-intercept:beaconEvent",
+            "networkIntercept:beaconEvent",
             {
               event: "response",
               payload: {

@@ -12,7 +12,7 @@ import { isInContentScript } from "@/utils/utils";
 
 declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
-    "spa-router:route-change": (params: {
+    "spaRouter:route-change": (params: {
       state: "pending" | "complete";
       trigger: RouterEvent;
       newUrl: string;
@@ -24,7 +24,7 @@ onlyExtensionGuard();
 
 function setupSpaRouterDispatchListeners() {
   onMessage(
-    "spa-router:route-change",
+    "spaRouter:route-change",
     ({ data: { state, trigger, newUrl } }) => {
       spaRouterStore.setState({ state, url: newUrl, trigger });
     },

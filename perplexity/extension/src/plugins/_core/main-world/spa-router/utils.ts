@@ -43,7 +43,7 @@ export async function softNavigate(url: string) {
     window.history.pushState({}, "", url);
   } else {
     const { sendMessage } = await import("webext-bridge/content-script");
-    sendMessage("spa-router:push", { url }, "window");
+    sendMessage("spaRouter:push", { url }, "window");
   }
 }
 
@@ -52,6 +52,6 @@ export async function openInNewTab(url: string) {
     window.open(url, "_blank");
   } else {
     const { sendMessage } = await import("webext-bridge/content-script");
-    sendMessage("spa-router:openInNewTab", { url }, "window");
+    sendMessage("spaRouter:openInNewTab", { url }, "window");
   }
 }
