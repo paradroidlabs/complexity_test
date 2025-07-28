@@ -5,10 +5,6 @@ import { Toaster } from "@/components/Toaster";
 import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
 import { QueryBoxComponents } from "@/plugins/_core/ui/groups/query-box/Wrapper";
 import SidebarComponents from "@/plugins/_core/ui/groups/Sidebar";
-import HomepageComponents from "@/plugins/_core/ui/route-groups/Home";
-import SettingsComponents from "@/plugins/_core/ui/route-groups/Settings";
-import SpacesPageComponents from "@/plugins/_core/ui/route-groups/SpacesPage";
-import ThreadComponents from "@/plugins/_core/ui/route-groups/Thread";
 import BetterSidebarWrapper from "@/plugins/better-sidebar/Wrapper";
 import CloudflareTimeoutActionDialogWrapper from "@/plugins/cloudflare-timeout-auto-reload/Wrapper";
 import CommandMenuWrapper from "@/plugins/command-menu/Wrapper";
@@ -20,15 +16,30 @@ const { ExtensionContextInvalidationWatchdog } = lazily(
 const { PostUpdateReleaseNotesDialog } = lazily(
   () => import("@/components/PostUpdateReleaseNotesDialog"),
 );
+const { HomepageComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/Home"),
+);
+const { SettingsComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/Settings"),
+);
+const { SpacesPageComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/SpacesPage"),
+);
+const { ThreadComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/Thread"),
+);
+const { ThreadCometAssistantComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/ThreadCometAssistant"),
+);
 
 export default function CsUiRoot() {
   return (
     <>
-      <BetterSidebarWrapper />
-
       <HomepageComponents />
 
       <ThreadComponents />
+
+      <ThreadCometAssistantComponents />
 
       <SidebarComponents />
 
@@ -36,9 +47,15 @@ export default function CsUiRoot() {
 
       <SettingsComponents />
 
+      <BetterSidebarWrapper />
+
       <QueryBoxComponents />
 
-      <CommandMenuWrapper />
+      <CsUiPluginsGuard
+        excludeLocation={["comet_assistant_home", "thread_comet_assistant"]}
+      >
+        <CommandMenuWrapper />
+      </CsUiPluginsGuard>
 
       <SlashCommandMenu />
 

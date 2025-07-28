@@ -199,8 +199,11 @@ export const whereAmI = (() => {
 
   const patternMap = {
     home: [new MatchPattern(`${hostnameGlob}/`)],
+    comet_assistant_home: [
+      new MatchPattern(`${hostnameGlob}/sidecar`),
+      new MatchPattern(`${hostnameGlob}/sidecar/`),
+    ],
     comet_ntp: [new MatchPattern(`${hostnameGlob}/b/home*`)],
-    comet_assistant: [new MatchPattern(`${hostnameGlob}/sidecar*`)],
     discover: [new MatchPattern(`${hostnameGlob}/discover*`)],
     collections_page: [
       new MatchPattern(`${hostnameGlob}/spaces`),
@@ -214,6 +217,9 @@ export const whereAmI = (() => {
     ],
     library: [new MatchPattern(`${hostnameGlob}/library*`)],
     thread: [new MatchPattern(`${hostnameGlob}/search/*`)],
+    thread_comet_assistant: [
+      new MatchPattern(`${hostnameGlob}/sidecar/search/*`),
+    ],
     page: [new MatchPattern(`${hostnameGlob}/page/*`)],
     settings: [
       new MatchPattern(`${hostnameGlob}/account*`),

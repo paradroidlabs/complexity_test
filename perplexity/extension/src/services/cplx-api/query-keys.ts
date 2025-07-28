@@ -61,4 +61,13 @@ export const cplxApiQueries = {
         queryFn: () => CplxApiService.fetchSoftCacheBuster(),
       }),
   },
+
+  psa: {
+    all: () => [...cplxApiQueries.all(), "psa"] as const,
+    detail: () =>
+      queryOptions({
+        queryKey: [...cplxApiQueries.psa.all()] as const,
+        queryFn: () => CplxApiService.fetchPsa(),
+      }),
+  },
 };

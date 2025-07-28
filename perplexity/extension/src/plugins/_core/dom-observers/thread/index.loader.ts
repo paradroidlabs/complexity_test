@@ -80,34 +80,51 @@ function cleanup() {
 function observeThread(location: ReturnType<typeof whereAmI>) {
   cleanup();
 
-  if (location !== "thread") return;
-
-  DomObserver.create(createDomObserverId("thread"), {
-    target: document.body,
-    config: { childList: true, subtree: true },
-    onMutation: () => {
-      CallbackQueue.getInstance().enqueueArray([
-        {
-          id: createTaskId("thread", "pageWrapper"),
-          callback: findPageWrapper,
-        },
-        {
-          id: createTaskId("thread", "wrapper"),
-          callback: findWrapper,
-        },
-        {
-          id: createTaskId("thread", "navbar"),
-          callback: findNavbar,
-        },
-        {
-          id: createTaskId("thread", "popper"),
-          callback: findPopper,
-        },
-        {
-          id: createTaskId("thread", "navbarOverflowMenuButton"),
-          callback: findNavbarOverflowMenuButtonWrapper,
-        },
-      ]);
-    },
-  });
+  if (location === "thread") {
+    DomObserver.create(createDomObserverId("thread"), {
+      target: document.body,
+      config: { childList: true, subtree: true },
+      onMutation: () => {
+        CallbackQueue.getInstance().enqueueArray([
+          {
+            id: createTaskId("thread", "pageWrapper"),
+            callback: findPageWrapper,
+          },
+          {
+            id: createTaskId("thread", "wrapper"),
+            callback: findWrapper,
+          },
+          {
+            id: createTaskId("thread", "navbar"),
+            callback: findNavbar,
+          },
+          {
+            id: createTaskId("thread", "popper"),
+            callback: findPopper,
+          },
+          {
+            id: createTaskId("thread", "navbarOverflowMenuButton"),
+            callback: findNavbarOverflowMenuButtonWrapper,
+          },
+        ]);
+      },
+    });
+  } else if (location === "thread_comet_assistant") {
+    DomObserver.create(createDomObserverId("thread"), {
+      target: document.body,
+      config: { childList: true, subtree: true },
+      onMutation: () => {
+        CallbackQueue.getInstance().enqueueArray([
+          {
+            id: createTaskId("thread", "pageWrapper"),
+            callback: findPageWrapper,
+          },
+          {
+            id: createTaskId("thread", "wrapper"),
+            callback: findWrapper,
+          },
+        ]);
+      },
+    });
+  }
 }

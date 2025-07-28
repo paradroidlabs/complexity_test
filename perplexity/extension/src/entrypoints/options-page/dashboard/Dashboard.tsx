@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
 import LoadingOverlay from "@/components/LoadingOverlay";
+import Psa from "@/entrypoints/options-page/components/Psa";
 import DesktopSidebarWrapper from "@/entrypoints/options-page/components/sidebar/DesktopWrapper";
 import MobileSidebarWrapper from "@/entrypoints/options-page/components/sidebar/MobileWrapper";
 import Sidebar from "@/entrypoints/options-page/components/sidebar/Sidebar";
@@ -19,10 +20,13 @@ export function Dashboard() {
         <Sidebar />
       </SidebarWrapper>
 
-      <main className="x:mx-auto x:mt-11 x:min-h-[100dvh] x:w-full x:max-w-[1800px] x:p-4 x:md:mt-0">
-        <Suspense fallback={<LoadingOverlay />}>
-          <Outlet />
-        </Suspense>
+      <main className="x:mx-auto x:mt-11 x:min-h-[100dvh] x:w-full x:max-w-[1800px] x:md:mt-0">
+        <Psa />
+        <div className="x:p-4">
+          <Suspense fallback={<LoadingOverlay />}>
+            <Outlet />
+          </Suspense>
+        </div>
       </main>
     </div>
   );

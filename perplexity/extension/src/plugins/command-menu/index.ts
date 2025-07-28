@@ -38,7 +38,7 @@ export default definePlugin({
           getPlatform() === "mac" ? "i" : "k",
         ],
         threadsSearch: [Key.Alt, "t"],
-        spacesSearch: [Key.Alt, "s"],
+        spacesSearch: [Key.Alt, "y"],
         toggleSidecar: [getPlatform() === "mac" ? Key.Meta : Key.Control, "e"],
       },
       enabled: false,

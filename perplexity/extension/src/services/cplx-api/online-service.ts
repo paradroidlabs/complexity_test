@@ -75,4 +75,12 @@ export class CplxApiOnlineService implements ICplxApiService {
       }).toString(),
     );
   }
+
+  async fetchPsa() {
+    return fetchTextResource(
+      getUrl({
+        path: "/assets/psa.md",
+      }).toString(),
+    );
+  }
 }

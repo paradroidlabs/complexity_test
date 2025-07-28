@@ -19,7 +19,7 @@ export default definePlugin({
     title: "Better Rewrite Dropdowns",
     description: "A better dropdown for rewriting messages",
     categories: ["thread"],
-    tags: ["ui", "pplxPro"],
+    tags: ["deprecated", "ui", "pplxPro"],
     dependentDomObservers: ["thread:messageBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
     dependentPlugins: ["queryBox:languageModelSelector"],

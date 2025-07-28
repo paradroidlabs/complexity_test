@@ -14,6 +14,7 @@ export type PplxSubTier = keyof typeof PPLX_SUB_TIER_ENUM;
 export type GuardConditions = {
   dependentPluginIds?: PluginId[];
   location?: ReturnType<typeof whereAmI>[];
+  excludeLocation?: ReturnType<typeof whereAmI>[];
   desktopOnly?: boolean;
   mobileOnly?: boolean;
   requiresLoggedIn?: boolean;
@@ -96,13 +97,32 @@ export function checkPluginDependencies(
 }
 
 export function checkLocation(
-  { location }: GuardConditions,
+  { location, excludeLocation }: GuardConditions,
   { currentLocation }: Pick<GuardCheckParams, "currentLocation">,
 ): boolean {
-  if (!location || !location?.length) return true;
+  if (!location && !excludeLocation) return true;
+
+  invariant(
+    !(
+      Array.isArray(location) &&
+      location.length > 0 &&
+      Array.isArray(excludeLocation) &&
+      excludeLocation.length > 0
+    ),
+    "location and excludeLocation cannot be used together",
+  );
+
   if (currentLocation === undefined) return false;
 
-  return location.some((loc) => loc === currentLocation);
+  if (Array.isArray(location) && location.length > 0) {
+    return location.includes(currentLocation);
+  }
+
+  if (Array.isArray(excludeLocation) && excludeLocation.length > 0) {
+    return !excludeLocation.includes(currentLocation);
+  }
+
+  return true;
 }
 
 export function checkIncognito(

@@ -2,6 +2,7 @@ type DomObserverPrefix =
   | "home"
   | "queryBoxes"
   | "thread"
+  | "threadCometAssistant"
   | "sidebar"
   | "spacesPage"
   | "settingsPage"

@@ -9,34 +9,14 @@ const { default: ThreadQueryHoverContainerExtraButtonsWrapper } = lazily(
   () =>
     import("@/plugins/_core/ui/groups/thread-query-hover-container/Wrapper"),
 );
-const { default: ArtifactsWrapper } = lazily(
-  () => import("@/plugins/artifacts/Wrapper"),
-);
-const { default: ExportThreadWrapper } = lazily(
-  () => import("@/plugins/export-thread/Wrapper"),
-);
-const { default: ImageGenModelSelectorWrapper } = lazily(
-  () => import("@/plugins/image-gen-popover/Wrapper"),
-);
 const { default: BetterCodeBlocksWrapper } = lazily(
   () => import("@/plugins/thread-better-code-blocks/Wrapper"),
 );
-const { default: ThreadTocWrapper } = lazily(
-  () => import("@/plugins/thread-toc/Wrapper"),
-);
 
-export function ThreadComponents() {
+export function ThreadCometAssistantComponents() {
   return (
-    <CsUiPluginsGuard location={["thread"]}>
-      <ImageGenModelSelectorWrapper />
-
-      <ArtifactsWrapper />
-
+    <CsUiPluginsGuard location={["thread_comet_assistant"]}>
       <BetterCodeBlocksWrapper />
-
-      <ThreadTocWrapper />
-
-      <ExportThreadWrapper />
 
       <ThreadQueryHoverContainerExtraButtonsWrapper />
 

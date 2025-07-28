@@ -1,6 +1,7 @@
 import React from "react";
 import { LuX } from "react-icons/lu";
 
+import { useEvent } from "@/hooks/useEvent";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
 import TocItem from "@/plugins/thread-toc/TocItem";
@@ -34,8 +35,8 @@ export function ThreadToc() {
   const { position, isOverflowing } = usePanelPosition() ?? {};
   const { top, left } = position ?? {};
 
-  const handleToggleOpen = useCallback(() => setIsOpen(true), []);
-  const handleToggleClose = useCallback(() => setIsOpen(false), []);
+  const handleToggleOpen = useEvent(() => setIsOpen(true));
+  const handleToggleClose = useEvent(() => setIsOpen(false));
 
   const shouldShowToc = tocItems.length > 1 && !!position;
 

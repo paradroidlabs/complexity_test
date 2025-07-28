@@ -9,19 +9,20 @@ export default async function loader() {
   if (!(await InstantCssService.hasPermissions())) return;
 
   const cometPages: ReturnType<typeof whereAmI>[] = [
-    "comet_assistant",
+    "comet_assistant_home",
     "comet_ntp",
+    "thread_comet_assistant",
   ];
 
   if (!cometPages.includes(whereAmI())) return;
 
-  const isInjected = document.documentElement.style.getPropertyValue(
-    "--cplx-instant-css-injected",
-  );
+  const isInjected = getComputedStyle(
+    document.documentElement,
+  ).getPropertyValue("--cplx-instant-css-injected");
 
   if (isInjected) return;
 
   console.log("[Instant CSS] Not injected, manual injection requested");
 
-  sendMessage("bg:instantCss:requestInjection", undefined, "background");
+  await sendMessage("bg:instantCss:requestInjection", undefined, "background");
 }

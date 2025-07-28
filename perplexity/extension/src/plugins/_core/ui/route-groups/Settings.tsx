@@ -6,7 +6,7 @@ const { SettingsDashboardLink } = lazily(
   () => import("@/components/SettingsDashboardLink"),
 );
 
-export default function SettingsComponents() {
+export function SettingsComponents() {
   return (
     <CsUiPluginsGuard location={["settings"]}>
       <SettingsDashboardLink />

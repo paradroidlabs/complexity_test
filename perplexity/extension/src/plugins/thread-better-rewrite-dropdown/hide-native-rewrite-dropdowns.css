@@ -1,5 +1,5 @@
 [data-cplx-component="message-block-bottom-bar"]
   > :first-child
-  > div:last-child:has(svg.tabler-icon-repeat) {
+  > div:nth-last-child(2):has(svg.tabler-icon-repeat) {
   display: none;
 }

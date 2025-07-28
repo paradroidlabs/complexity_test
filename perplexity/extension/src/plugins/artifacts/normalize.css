@@ -2,6 +2,12 @@
 
 body {
   &[data-cplx-artifact-active-panel] {
+    /* Hide bottom bar buttons' labels */
+    [data-cplx-component="message-block-bottom-bar"]
+      .text-align-center.relative.truncate.leading-loose.-mb-px {
+      display: none;
+    }
+
     /* the "Help" floating button */
     .bottom-md.right-md.m-sm.fixed.hidden.lg\:block {
       display: none;
@@ -63,4 +69,10 @@ body {
       }
     }
   }
+}
+
+:root[data-erp="tab"]
+  body[data-cplx-artifact-active-panel="artifact"]
+  #cplx-artifact {
+  @apply x:xl:h-[calc(100dvh-var(--header-height))];
 }

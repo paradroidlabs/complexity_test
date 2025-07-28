@@ -10,7 +10,6 @@ export const ESSENTIALS_ONLY: ExtensionSettings["plugins"] = produce(
     draft["thread:toc"].enabled = true;
     draft["thread:exportThread"].enabled = true;
     draft["thread:betterMessageCopyButtons"].enabled = true;
-    draft["imageGenModelSelector"].enabled = true;
   },
 );
 
@@ -24,7 +23,6 @@ export const POWER_USER: ExtensionSettings["plugins"] = produce(
     draft["thread:exportThread"].enabled = true;
     draft["thread:betterMessageCopyButtons"].enabled = true;
     draft["thread:dragAndDropFileToUploadInThread"].enabled = true;
-    draft["imageGenModelSelector"].enabled = true;
     draft["zenMode"].enabled = true;
   },
 );
@@ -37,6 +35,8 @@ export const ALL_PLUGINS: ExtensionSettings["plugins"] = produce(
 
       const excludedPlugins: PluginId[] = [
         "queryBox:languageModelSelector",
+        "thread:betterRewriteDropdowns",
+        "imageGenModelSelector",
         "queryBox:submitOnCtrlEnter",
         "thread:customThreadContainerWidth",
         "queryBox:spacesThreadsForceWritingMode",

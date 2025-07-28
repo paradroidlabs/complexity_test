@@ -15,8 +15,7 @@ export default function loader() {
     id: "store:colorScheme",
     dependencies: ["cache:extensionSettings"],
     loader: () => {
-      const currentColorScheme = getCookie("colorScheme");
-      $("html").attr("data-color-scheme", currentColorScheme);
+      $("html").attr("data-color-scheme", getCurrentColorScheme());
 
       DomObserver.create(createDomObserverId("misc", "colorScheme"), {
         target: $("html")[0]!,
@@ -35,4 +34,16 @@ export default function loader() {
       });
     },
   });
+}
+
+function getCurrentColorScheme(): "dark" | "light" {
+  const cookieSetting = getCookie("colorScheme");
+
+  if (cookieSetting !== "dark" && cookieSetting !== "light") {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
+
+  return cookieSetting;
 }

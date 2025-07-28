@@ -9,22 +9,23 @@ export const DOM_SELECTORS: DomSelectors = {
   PAGE_CHILD_WRAPPER: ".h-\\[100dvh\\] > [class^=erp][style^=padding]",
   SIDEBAR: {
     WRAPPER: ".group\\/sidebar",
-    MOBILE_TRIGGER: ".h-headerHeight button:has(svg.tabler-icon-menu-2)",
+    MOBILE_TRIGGER:
+      ".h-headerHeight.absolute button:has(svg.tabler-icon-menu-2)",
   },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
-    NAVBAR: ".h-headerHeight",
+    NAVBAR: ".h-headerHeight.absolute",
     PAGE_WRAPPER: ".h-\\[100dvh\\] > .max-h-screen",
-    WRAPPER: ".h-headerHeight + div",
+    WRAPPER: ".h-headerHeight.absolute + div",
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.h-headerHeight + div > div > div[class=""]`,
-        BRANCHED: `.h-headerHeight + div > div > div[class=""]`,
+        NORMAL: `.h-headerHeight.absolute + div > div > div[class=""]`,
+        BRANCHED: `.h-headerHeight.absolute + div > div > div[class=""]`,
       },
       MOBILE: {
-        NORMAL: `.h-headerHeight + div div.erp-sidecar\\:pb-0`,
-        BRANCHED: `.h-headerHeight + div div.erp-sidecar\\:pb-0`,
+        NORMAL: `.h-headerHeight.absolute + div div.erp-sidecar\\:pb-0`,
+        BRANCHED: `.h-headerHeight.absolute + div div.erp-sidecar\\:pb-0`,
       },
     },
     MESSAGE: {
@@ -38,7 +39,7 @@ export const DOM_SELECTORS: DomSelectors = {
       QUERY_HOVER_CONTAINER_CHILD: {
         EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
       },
-      STICKY_HEADER: ".h-headerHeight",
+      STICKY_HEADER: ".h-headerHeight.absolute",
       SOURCES: ".gap-sm.grid.grid-cols-4.md\\:px-0",
       ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
@@ -107,7 +108,7 @@ export const DOM_SELECTORS: DomSelectors = {
       BACK_BUTTON: ".mb-3.ml-2.flex.items-center.gap-2",
     },
   },
-  STICKY_NAVBAR: ".h-headerHeight",
+  STICKY_NAVBAR: ".h-headerHeight.absolute",
   SICKY_NAVBAR_CHILD: {
     THREAD_TITLE_WRAPPER:
       ".hidden.max-w-md.grow.items-center.justify-center.gap-x-xs.text-center.md\\:flex",

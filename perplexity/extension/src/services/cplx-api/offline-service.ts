@@ -31,4 +31,8 @@ export class CplxApiOfflineService implements ICplxApiService {
   async fetchSoftCacheBuster(): Promise<string> {
     throw new Error("Not available in offline mode");
   }
+
+  async fetchPsa(): Promise<string> {
+    throw new Error("Not available in offline mode");
+  }
 }
